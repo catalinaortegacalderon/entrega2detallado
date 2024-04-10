@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\catal\\Desktop\\Fire-Emblem (nueva version)\\Fire-Emblem\\Fire-Emblem.csproj",
+      "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem\\Fire-Emblem.csproj",
       "projectName": "Fire-Emblem",
-      "projectPath": "C:\\Users\\catal\\Desktop\\Fire-Emblem (nueva version)\\Fire-Emblem\\Fire-Emblem.csproj",
+      "projectPath": "C:\\Users\\catal\\Desktop\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem\\Fire-Emblem.csproj",
       "packagesPath": "C:\\Users\\catal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\catal\\Desktop\\Fire-Emblem (nueva version)\\Fire-Emblem\\obj\\",
+      "outputPath": "C:\\Users\\catal\\Desktop\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\catal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -51,8 +51,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\catal\\Desktop\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
-              "projectPath": "C:\\Users\\catal\\Desktop\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj"
+            "C:\\Users\\catal\\Desktop\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
+              "projectPath": "C:\\Users\\catal\\Desktop\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj"
             }
           }
         }
