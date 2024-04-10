@@ -13,6 +13,8 @@ public class Unidad
     public int spd;
     public int def;
     public int res;
+    // Habilidaddes de la unidad
+    public Habilidades[] habilidades = new Habilidades[2];
     
     public  void Setear_valores(string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res)
     {

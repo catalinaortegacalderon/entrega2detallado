@@ -70,7 +70,7 @@ public class Game
 
                 _view.WriteLine("Round " + juego_actual.ronda_actual + ": " + juego_actual.jugadores[0].unidades[valor1].nombre
                                 +" (Player 1) comienza");
-
+                
                 //ataque
                 nombre_perdedor2 = juego_actual.atacar(1, _view, valor1, valor2);
                 juego_actual.jugador_actual = 1;
@@ -227,7 +227,7 @@ public class Game
             {
                 // obtener nombre unidad
                 string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                string nombre = nuevo_string[0]; 
+                string nombre = nuevo_string[0];
                 string myJson = File.ReadAllText("characters.json");
                 var players = JsonSerializer.Deserialize<List<Unidad_Json>>(myJson);
                 foreach(var player in players)
@@ -237,6 +237,32 @@ public class Game
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
                             Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd), Convert.ToInt32(player.Def), Convert.ToInt32(player.Res));
                     }
+                // agregar habilidades a la unidad
+                if (nuevo_string.Length > 1)
+                {
+                    string stringHabilidades = nuevo_string[1];
+                    string[] listadeHabilidades =
+                        stringHabilidades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    int contador_habilidades = 0;
+                    foreach (string habilidad in listadeHabilidades)
+                    {
+                        //buscar una forma mas eficiente de hacer esto
+                        if (habilidad == "Speed +5")
+                        {
+                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                                .habilidades[contador_habilidades] = new SpeedMas5();
+                        }
+                        if (habilidad == "Resolve")
+                        {
+                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                                .habilidades[contador_habilidades] = new Resolve();
+                        }
+                        Console.WriteLine(habilidad);
+                        Console.WriteLine("imprimiendo habilidades");
+                        contador_habilidades++;
+
+                    }
+                }
                 contadores_unidades[jugador_actual]++;
             }
         }
