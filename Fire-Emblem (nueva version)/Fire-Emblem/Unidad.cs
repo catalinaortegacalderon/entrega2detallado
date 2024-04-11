@@ -10,17 +10,14 @@ public class Unidad
     public string nombre;
     public string arma;
     public string genero;
-    // Stats
     public int hp_max;
     public int hp_actual;
     public int attk;
     public int spd;
     public int def;
     public int res;
-    // Habilidaddes de la unidad
+    // esto es para poder recorrer todas las habiliades sin que se caiga el programa, seran reemplazadas por instancias reales
     public Habilidad[] habilidades = new Habilidad[2];
-    // esto es para poder recorrer todas las habiliades sin que se caiga el programa
-    // seran reemplazadas por instancias reales
 
     
     public  void Setear_valores(string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
@@ -28,7 +25,6 @@ public class Unidad
         this.nombre = nombre;
         this.arma = arma;
         this.genero = genero;
-        // Stats
         this.hp_max = hp_max;
         this.hp_actual = hp_actual;
         this.attk = attk;
@@ -36,12 +32,13 @@ public class Unidad
         this.def = def;
         this.res = res;
         this.view = view;
-        this.habilidades[0] = new Habilidad(this.view);
-        this.habilidades[1] = new Habilidad(this.view);
+        this.habilidades[0] = new HabilidadVacia(this.view);
+        this.habilidades[1] = new HabilidadVacia(this.view);
     }
 
     public Unidad()
     {
+        // Si una unidad es vacía, su nombre es vacío
         this.nombre = "";
     }
 }

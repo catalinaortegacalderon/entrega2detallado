@@ -27,6 +27,25 @@ public class Habilidad
     }
 }
 
+public class HabilidadVacia : Habilidad
+{
+    public HabilidadVacia(View view) : base(view)
+    {
+    }
+
+    public override bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        return false;
+    }
+    
+    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        return;
+    }
+}
+
+
+
 public class FairFight : Habilidad
 {
     public FairFight(View view) : base(view)

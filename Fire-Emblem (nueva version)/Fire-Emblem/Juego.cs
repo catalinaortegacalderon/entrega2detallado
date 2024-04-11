@@ -25,7 +25,6 @@ public class Juego
         {
             return "";
         }
-        //view es para hacer los outputs
         // EL NUMERO DE ATAQUE PUEDE SER 1-2-3 DEPENDIENDO SI ES ATAQUE, CONTRAATAQUE O FOLLOWUP
         // follow up lo hace el que tiene 5 puntos mas de speed que el otro
         bool imprimir = false;
@@ -110,9 +109,6 @@ public class Juego
         {
             // imrpimir
             int ataque = jugadores[1].calcular_atque(imprimir, view, unidad2, jugadores[0].unidades[unidad1]);
-            
-            
-            
             // activando habilidades atacante (jugador 2)
             foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
             {
@@ -122,7 +118,6 @@ public class Juego
                 }
                     
             }
-            
             //activando habilidades defensor ( jugador 1)
             foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
             {
@@ -132,7 +127,6 @@ public class Juego
                 }
                     
             }
-            
             // recalcular ataque sin imprimir
             ataque = jugadores[1].calcular_atque(false, view, unidad2, jugadores[0].unidades[unidad1]);
             
