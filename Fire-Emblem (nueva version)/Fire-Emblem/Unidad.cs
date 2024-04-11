@@ -32,13 +32,13 @@ public class Unidad
         this.def = def;
         this.res = res;
         this.view = view;
-        this.habilidades[0] = new HabilidadVacia(this.view);
-        this.habilidades[1] = new HabilidadVacia(this.view);
     }
 
     public Unidad()
     {
         // Si una unidad es vacía, su nombre es vacío
         this.nombre = "";
+        this.habilidades[0] = new HabilidadVacia(this.view);
+        this.habilidades[1] = new HabilidadVacia(this.view);
     }
 }

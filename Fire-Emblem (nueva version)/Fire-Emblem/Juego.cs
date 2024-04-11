@@ -57,7 +57,6 @@ public class Juego
                 {
                     habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
                 }
-                    
             }
             
             //me faltan las anulaciones
