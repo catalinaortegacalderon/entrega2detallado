@@ -9,7 +9,7 @@ public class Habilidades
 {
     public View view;
 
-    public void Habilidades(View view)
+    public Habilidades(View view)
     {
         this.view = view;
 
@@ -29,6 +29,9 @@ public class Habilidades
 
 public class FairFight : Habilidades
 {
+    public FairFight(View view) : base(view)
+    {
+    }
     
     public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
@@ -38,6 +41,9 @@ public class FairFight : Habilidades
 
 public class Resolve : Habilidades
 {
+    public Resolve(View view) : base(view)
+    {
+    }
     // Si el HP de la unidad est´a al 75% o menos al inicio del combate, otorga Def/Res+7
     public override bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
@@ -59,6 +65,9 @@ public class Resolve : Habilidades
 
 public class SpeedMas5 : Habilidades
 {
+    public SpeedMas5(View view) : base(view)
+    {
+    }
     
     public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {

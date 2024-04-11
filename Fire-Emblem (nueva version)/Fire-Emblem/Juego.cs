@@ -36,7 +36,35 @@ public class Juego
         if (jugador_actual == 0)
         {
             // PRIMER JUGADOR ATACA AL SEGUNDO
+            // aca imprimo, tal vez pasarlo al true de antes    
             int ataque = jugadores[0].calcular_atque(imprimir, view, unidad1, jugadores[1].unidades[unidad2]);
+            //primero activar habilidades
+            // revisar si son ambas, o solo el jugador atacante
+            
+            // activando habilidades atacante (primer jugador)
+            //foreach ( Habilidades habilidad in jugadores[0].unidades[unidad1].habilidades)
+            //{
+            //    if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
+            //    {
+            //        habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
+            //    }
+            //        
+            //}
+            
+            // activando habilidades defensor (segundo jugador)
+            //foreach ( Habilidades habilidad in jugadores[1].unidades[unidad2].habilidades)
+            //{
+            //    if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
+            //    {
+            //        habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
+            //    }
+                    
+            //}
+            
+            //me faltan las anulaciones
+                
+            // recalcular ataque con los cambios    
+            ataque = jugadores[0].calcular_atque(false, view, unidad1, jugadores[1].unidades[unidad2]);
             view.WriteLine(jugadores[0].unidades[unidad1].nombre +
                            " ataca a " +
                            jugadores[1].unidades[unidad2].nombre + " con "+

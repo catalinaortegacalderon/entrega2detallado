@@ -235,7 +235,8 @@ public class Game
                     {
                         unidades[jugador_actual][contadores_unidades[jugador_actual]].Setear_valores(player.Name,
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
-                            Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd), Convert.ToInt32(player.Def), Convert.ToInt32(player.Res));
+                            Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd), Convert.ToInt32(player.Def), Convert.ToInt32(player.Res),
+                            view);
                     }
                 // agregar habilidades a la unidad
                 if (nuevo_string.Length > 1)
@@ -257,10 +258,7 @@ public class Game
                             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                                 .habilidades[contador_habilidades] = new Resolve(view);
                         }
-                        Console.WriteLine(habilidad);
-                        Console.WriteLine("imprimiendo habilidades");
                         contador_habilidades++;
-
                     }
                 }
                 contadores_unidades[jugador_actual]++;
