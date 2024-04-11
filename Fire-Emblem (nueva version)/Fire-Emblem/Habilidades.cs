@@ -1,19 +1,26 @@
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
+using Fire_Emblem_View;
 
 namespace Fire_Emblem;
 
 // clase base, las otras heredaran de esta
 public class Habilidades
 {
-    public Unidad unidadDueñaDeLaHabilidad;
-    public virtual bool ChequearCondiciones(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    public View view;
+
+    public void Habilidades(View view)
+    {
+        this.view = view;
+
+    }
+    public virtual bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         // si no hay condiciones se retorna true y no se sobreescribe este método
         return true;
     }
 
-    public virtual void aplicar_cambios(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         //sobreescribir
         return;
@@ -23,43 +30,42 @@ public class Habilidades
 public class FairFight : Habilidades
 {
     
-    public virtual void aplicar_cambios(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        if (duenoHabilidadAtacando)
-        {
-            
-        }
         return;
     }
 }
 
 public class Resolve : Habilidades
 {
-    public override bool ChequearCondiciones(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    // Si el HP de la unidad est´a al 75% o menos al inicio del combate, otorga Def/Res+7
+    public override bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        // si no hay condiciones se retorna true y no se sobreescribe este método
-        return true;
+        if (unidadPropia.hp_actual <= unidadPropia.hp_max * 0.75)
+        {
+            return true;
+        }
+        return false;
     }
     
-    public virtual void aplicar_cambios(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        //sobreescribir
-        return;
+        unidadPropia.def = unidadPropia.def + 7;
+        unidadPropia.res = unidadPropia.res + 7;
+        this.view.WriteLine( unidadPropia.nombre+ " obtiene Def+7");
+        this.view.WriteLine( unidadPropia.nombre+ " obtiene Res+7");
     }
 }
 
 public class SpeedMas5 : Habilidades
 {
-    public override bool ChequearCondiciones(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
-    {
-        // si no hay condiciones se retorna true y no se sobreescribe este método
-        return true;
-    }
     
-    public virtual void aplicar_cambios(Unidad unidadAtacante, Unidad unidadDefensora, bool duenoHabilidadAtacando)
+    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         //sobreescribir
-        return;
+        unidadPropia.spd = unidadPropia.spd + 5;
+        this.view.WriteLine( unidadPropia.nombre+ " obtiene Spd+5");
+
     }
 }
 

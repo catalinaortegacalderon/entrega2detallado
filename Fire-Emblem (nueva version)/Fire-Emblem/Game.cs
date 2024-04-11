@@ -34,7 +34,7 @@ public class Game
             return;
         }
         // construir juego
-        Juego juego_actual = Construir_Juego(archivos[input]);
+        Juego juego_actual = Construir_Juego(archivos[input], _view);
         
         while (juego_actual.terminado == false)
         {
@@ -203,7 +203,7 @@ public class Game
     
     // ojo que hay harto codigo repetido en juego valido y consruir juego tal vez dejar solo una funcion
     
-    public Juego Construir_Juego(string archivo)
+    public Juego Construir_Juego(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;
@@ -250,12 +250,12 @@ public class Game
                         if (habilidad == "Speed +5")
                         {
                             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                                .habilidades[contador_habilidades] = new SpeedMas5();
+                                .habilidades[contador_habilidades] = new SpeedMas5(view);
                         }
                         if (habilidad == "Resolve")
                         {
                             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                                .habilidades[contador_habilidades] = new Resolve();
+                                .habilidades[contador_habilidades] = new Resolve(view);
                         }
                         Console.WriteLine(habilidad);
                         Console.WriteLine("imprimiendo habilidades");
