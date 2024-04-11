@@ -5,20 +5,14 @@ public class Game
 {
     private View _view;
     private string _teamsFolder;
-    
     public Game(View view, string teamsFolder)
     {
         _view = view;
         _teamsFolder = teamsFolder;
     }
-
     public void Play()
     {
-        //throw new NotImplementedException();
-        
         _view.WriteLine("Elige un archivo para cargar los equipos");
-        
-        // para imprimir los file names se usó la ayuda de la ia "gemini"
         string[] archivos = Directory.GetFiles(_teamsFolder);
         int contador = 0;
         foreach (string archivo in archivos)
@@ -26,7 +20,6 @@ public class Game
             _view.WriteLine( contador + ": " + Path.GetFileName(archivo));
             contador++;
         }
-        //string inpu2 = _view.ReadLine();
         int input = Convert.ToInt32(_view.ReadLine());
         if( Juego_Valido(archivos[input]) == false)
         {
@@ -35,7 +28,6 @@ public class Game
         }
         // construir juego
         Juego juego_actual = Construir_Juego(archivos[input], _view);
-        
         while (juego_actual.terminado == false)
         {
             // si pierde el jugador 0
@@ -44,7 +36,7 @@ public class Game
             string nombre_perdedor2 = "";
             if (juego_actual.jugador_actual == 0)
             {
-                //ESTA ATACANDO EL PRIMER JUGADOR
+                // esta atacando el primer jugador
                 int contador1 = 0;
                 int contador2 = 0;
                 _view.WriteLine("Player 1 selecciona una opción");
@@ -60,17 +52,19 @@ public class Game
                 _view.WriteLine("Player 2 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
                 {
+                    Console.WriteLine("pase por 3");
+                    Console.WriteLine("imprimiendo nombre de las unidades");
+                    Console.WriteLine(unidad.nombre);
                     if (unidad.nombre != "")
                     {
+                        Console.WriteLine("pase por 3 dentro");
                         _view.WriteLine(contador2 + ": " +unidad.nombre);
                         contador2++;
                     }
                 }
                 int valor2 = Convert.ToInt32(_view.ReadLine());
-
                 _view.WriteLine("Round " + juego_actual.ronda_actual + ": " + juego_actual.jugadores[0].unidades[valor1].nombre
                                 +" (Player 1) comienza");
-                
                 //ataque
                 nombre_perdedor2 = juego_actual.atacar(1, _view, valor1, valor2);
                 juego_actual.jugador_actual = 1;
@@ -91,7 +85,6 @@ public class Game
                 {
                     _view.WriteLine("Ninguna unidad puede hacer un follow up");
                 }
-                
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
@@ -107,7 +100,6 @@ public class Game
                                     " (0) : " + juego_actual.jugadores[1].unidades[valor2].nombre+ 
                                     " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual+ 
                                     ")");
-                    
                 }
                 else
                 {
@@ -115,9 +107,7 @@ public class Game
                                     " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual+
                                     ") : " + nombre_perdedor2+ 
                                     " (0)");
-                    
                 }
-                    
                 juego_actual.jugador_actual = 1;
             }
             else
@@ -128,8 +118,10 @@ public class Game
                 _view.WriteLine("Player 2 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
                 {
+                    Console.WriteLine("pase por 1");
                     if (unidad.nombre != "")
                     {
+                        Console.WriteLine("pase por 1 dentro");
                         _view.WriteLine(contador2 + ": " +unidad.nombre);
                         contador2++;
                     }
@@ -138,8 +130,10 @@ public class Game
                 _view.WriteLine("Player 1 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[0].unidades)
                 {
+                    Console.WriteLine("pase por 2");
                     if (unidad.nombre != "")
                     {
+                        Console.WriteLine("pase por  2 dentro");
                         _view.WriteLine(contador1 + ": " + unidad.nombre);
                         contador1++;
                     }
@@ -228,16 +222,26 @@ public class Game
                 // obtener nombre unidad
                 string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                 string nombre = nuevo_string[0];
+                Console.WriteLine("imprimiendo nombre");
+                Console.WriteLine(nombre);
                 string myJson = File.ReadAllText("characters.json");
                 var players = JsonSerializer.Deserialize<List<Unidad_Json>>(myJson);
-                foreach(var player in players)
+                Console.WriteLine("imrpimiendo jugador actual");
+                Console.WriteLine(jugador_actual);
+                foreach (var player in players)
+                {
+                    Console.WriteLine(player.Name);
                     if (nombre == player.Name)
                     {
+                        Console.WriteLine("pase por nombre == player name");
                         unidades[jugador_actual][contadores_unidades[jugador_actual]].Setear_valores(player.Name,
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
-                            Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd), Convert.ToInt32(player.Def), Convert.ToInt32(player.Res),
+                            Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd),
+                            Convert.ToInt32(player.Def), Convert.ToInt32(player.Res),
                             view);
                     }
+                }
+
                 // agregar habilidades a la unidad
                 if (nuevo_string.Length > 1)
                 {
@@ -273,11 +277,6 @@ public class Game
     
     public bool Juego_Valido(string archivo)
     {
-        //un equipo es inv´alido cuando tiene unidades repetidas, LISTO
-        //una unidad con m´as de dos habilidades, LISTO
-        // una unidad con habilidades repetidas,
-        // equipos vac´ ıos o LISTO 
-        // equipos de m´as de 3 unidades. LISTO
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;
         contadores_unidades[1] = 0;
