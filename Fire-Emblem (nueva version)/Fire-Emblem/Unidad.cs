@@ -18,7 +18,7 @@ public class Unidad
     public int def;
     public int res;
     // Habilidaddes de la unidad
-    public Habilidades[] habilidades = new Habilidades[2];
+    public Habilidad[] habilidades = new Habilidad[2];
     // esto es para poder recorrer todas las habiliades sin que se caiga el programa
     // seran reemplazadas por instancias reales
 
@@ -36,8 +36,8 @@ public class Unidad
         this.def = def;
         this.res = res;
         this.view = view;
-        this.habilidades[0] = new Habilidades(this.view);
-        this.habilidades[0] = new Habilidades(this.view);
+        this.habilidades[0] = new Habilidad(this.view);
+        this.habilidades[1] = new Habilidad(this.view);
     }
 
     public Unidad()

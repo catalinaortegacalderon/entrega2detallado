@@ -5,11 +5,11 @@ using Fire_Emblem_View;
 namespace Fire_Emblem;
 
 // clase base, las otras heredaran de esta
-public class Habilidades
+public class Habilidad
 {
     public View view;
 
-    public Habilidades(View view)
+    public Habilidad(View view)
     {
         this.view = view;
 
@@ -27,7 +27,7 @@ public class Habilidades
     }
 }
 
-public class FairFight : Habilidades
+public class FairFight : Habilidad
 {
     public FairFight(View view) : base(view)
     {
@@ -39,7 +39,7 @@ public class FairFight : Habilidades
     }
 }
 
-public class Resolve : Habilidades
+public class Resolve : Habilidad
 {
     public Resolve(View view) : base(view)
     {
@@ -63,7 +63,7 @@ public class Resolve : Habilidades
     }
 }
 
-public class SpeedMas5 : Habilidades
+public class SpeedMas5 : Habilidad
 {
     public SpeedMas5(View view) : base(view)
     {

@@ -42,24 +42,24 @@ public class Juego
             // revisar si son ambas, o solo el jugador atacante
             
             // activando habilidades atacante (primer jugador)
-            //foreach ( Habilidades habilidad in jugadores[0].unidades[unidad1].habilidades)
-            //{
-            //    if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
-            //    {
-            //        habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
-            //    }
-            //        
-            //}
-            
-            // activando habilidades defensor (segundo jugador)
-            //foreach ( Habilidades habilidad in jugadores[1].unidades[unidad2].habilidades)
-            //{
-            //    if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
-            //    {
-            //        habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
-            //    }
+            foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
+            {
+                if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
+                {
+                    habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
+                }
                     
-            //}
+            }
+            
+             //activando habilidades defensor (segundo jugador)
+            foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
+            {
+                if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
+                {
+                    habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
+                }
+                    
+            }
             
             //me faltan las anulaciones
                 
@@ -108,7 +108,34 @@ public class Juego
         // si el jugador que ataca es el 2
         else
         {
+            // imrpimir
             int ataque = jugadores[1].calcular_atque(imprimir, view, unidad2, jugadores[0].unidades[unidad1]);
+            
+            
+            
+            // activando habilidades atacante (jugador 2)
+            foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
+            {
+                if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
+                {
+                    habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
+                }
+                    
+            }
+            
+            //activando habilidades defensor ( jugador 1)
+            foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
+            {
+                if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
+                {
+                    habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
+                }
+                    
+            }
+            
+            // recalcular ataque sin imprimir
+            ataque = jugadores[1].calcular_atque(false, view, unidad2, jugadores[0].unidades[unidad1]);
+            
             view.WriteLine(jugadores[1].unidades[unidad2].nombre +
                            " ataca a " +
                            jugadores[0].unidades[unidad1].nombre + " con "+
