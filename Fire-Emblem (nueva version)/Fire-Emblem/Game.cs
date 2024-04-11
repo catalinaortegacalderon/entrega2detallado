@@ -221,7 +221,7 @@ public class Game
             {
                 // obtener nombre unidad
                 string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                string nombre = nuevo_string[0];
+                string nombre = nuevo_string[0].Replace(" ", "");
                 Console.WriteLine("imprimiendo nombre");
                 Console.WriteLine(nombre);
                 string myJson = File.ReadAllText("characters.json");

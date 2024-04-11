@@ -43,8 +43,10 @@ public class Juego
             // activando habilidades atacante (primer jugador)
             foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
             {
+                Console.WriteLine("pase por a");
                 if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
                 {
+                    Console.WriteLine("pase por b");
                     habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
                 }
                     
@@ -53,8 +55,10 @@ public class Juego
              //activando habilidades defensor (segundo jugador)
             foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
             {
+                Console.WriteLine("pase por c");
                 if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
                 {
+                    Console.WriteLine("pase por d");
                     habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
                 }
             }

@@ -86,12 +86,14 @@ public class SpeedMas5 : Habilidad
 {
     public SpeedMas5(View view) : base(view)
     {
+        Console.WriteLine("cree speed mas 5");
     }
     
     public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         //sobreescribir
         unidadPropia.spd = unidadPropia.spd + 5;
+        Console.WriteLine("paso por donde quiero");
         this.view.WriteLine( unidadPropia.nombre+ " obtiene Spd+5");
 
     }
