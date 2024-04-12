@@ -222,7 +222,6 @@ public class Game
             _view.WriteLine("Archivo de equipos no válido");
             return true;
         }
-
         return false;
     }
 

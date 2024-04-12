@@ -50,12 +50,12 @@ public class Juego
                 foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
                 {
                     Console.WriteLine("pase por a");
-                    habilidad.AplicarHabilidades(jugadores[0].unidades[unidad1], jugadores[1].unidades[unidad2], true)
+                    habilidad.AplicarHabilidades(jugadores[0].unidades[unidad1], jugadores[1].unidades[unidad2], true);
                 }
                 //activando habilidades defensor (segundo jugador)
                 foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
                 {
-                    habilidad.AplicarHabilidades(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false)
+                    habilidad.AplicarHabilidades(jugadores[1].unidades[unidad2], jugadores[0].unidades[unidad1], false);
                 }
             }
             
@@ -160,4 +160,3 @@ public class Juego
         }
         
     }
-}

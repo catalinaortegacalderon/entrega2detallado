@@ -16,9 +16,16 @@ public class SiempreVerdad : Condicion
     }
 }
 
-public class HpPropioMenorAUnValor : Condicion
+public class HpPropioMenorA75 : Condicion
 {
-    
+    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadPropia.hp_actual <= unidadPropia.hp_max * 0.75)
+        {
+            return true;
+        }
+        return false;
+    }
     
 }
 
