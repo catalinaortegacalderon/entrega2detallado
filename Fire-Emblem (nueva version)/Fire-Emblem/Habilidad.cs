@@ -35,7 +35,11 @@ namespace Fire_Emblem;
     {
         public HabilidadVacia(View view) : base(view)
         {
+            this.condiciones = new Condicion[] { };
+            this.efectos = new Efecto[] { };
+            
         }
+        
     }
 
     // preocuparse de definir condiciones y efectos
