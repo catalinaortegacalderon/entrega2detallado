@@ -19,7 +19,7 @@ namespace Fire_Emblem;
             this.view = view;
         }
 
-        public virtual void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+        public void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
         {
             // si no hay condiciones (habilidad vacia)
             if (this.condiciones.Length == 0) return;
@@ -41,7 +41,11 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[] { new SiempreVerdad() };
             this.efectos = new Efecto[] { new EfectoVacio(view) };
         }
-        
+
+        public void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+        {
+            return;
+        }
     }
 
     // preocuparse de definir condiciones y efectos

@@ -10,6 +10,8 @@ public class Juego
     public int ganador = -1;
     public string ultima_unidad_perdida = "";
     public bool ronda_terminada = false;
+    
+    
     public Juego(Jugador jugador1, Jugador jugador2)
     {
         this.jugador_actual = 0;
@@ -17,6 +19,8 @@ public class Juego
         this.jugadores[1] = jugador2;
         this.terminado = false;
     }
+    
+    
     public string atacar(int numero_ataque, View view, int unidad1, int unidad2)
     {
         string nombre_perdedor = "";
