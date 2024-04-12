@@ -5,9 +5,12 @@ using Fire_Emblem_View;
 namespace Fire_Emblem;
 
 // clase base, las otras heredaran de esta
-public class Habilidad
+public abstract class Habilidad
 {
     public View view;
+    // si se cumple la condicion i se aplica el efecto i
+    public Condicion[] condiciones;
+    public Efecto[] efectos;
 
     public Habilidad(View view)
     {
@@ -24,6 +27,17 @@ public class Habilidad
     {
         //sobreescribir
         return;
+    }
+
+    public virtual void AplicarHabilidades()
+    {
+        for (int i = 0; i < this.condiciones.Length; i++)
+        {
+            if (this.condiciones[i].Verificar())
+            {
+                this.efectos[i].Aplicar();
+            }
+        }
     }
 }
 
@@ -73,7 +87,7 @@ public class Resolve : Habilidad
         return false;
     }
     
-    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    public virtual void aplicarCambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         unidadPropia.def = unidadPropia.def + 7;
         unidadPropia.res = unidadPropia.res + 7;
