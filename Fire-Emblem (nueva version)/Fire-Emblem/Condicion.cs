@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 
 public class Condicion
 {
-    public virtual bool Verificar()
+    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         return true;
     }
@@ -10,10 +10,16 @@ public class Condicion
 
 public class SiempreVerdad : Condicion
 {
-    public virtual bool Verificar()
+    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         return true;
     }
+}
+
+public class HpPropioMenorAUnValor : Condicion
+{
+    
+    
 }
 
 

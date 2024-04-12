@@ -58,7 +58,7 @@ public class Jugador
             }
             wtb = 0.8;
         }
-        int atk_unidad = this.unidades[numero_unidad].attk;
+        int atk_unidad = this.unidades[numero_unidad].attk + this.unidades[numero_unidad].BonusActivos.attk;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }
 }

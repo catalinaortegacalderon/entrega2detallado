@@ -17,25 +17,13 @@ public abstract class Habilidad
         this.view = view;
 
     }
-    public virtual bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-    {
-        // si no hay condiciones se retorna true y no se sobreescribe este método
-        return true;
-    }
-
-    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-    {
-        //sobreescribir
-        return;
-    }
-
-    public virtual void AplicarHabilidades()
+    public virtual void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         for (int i = 0; i < this.condiciones.Length; i++)
         {
-            if (this.condiciones[i].Verificar())
+            if (this.condiciones[i].Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando))
             {
-                this.efectos[i].Aplicar();
+                this.efectos[i].Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando);
             }
         }
     }
@@ -46,16 +34,7 @@ public class HabilidadVacia : Habilidad
     public HabilidadVacia(View view) : base(view)
     {
     }
-
-    public override bool ChequearCondiciones(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-    {
-        return false;
-    }
     
-    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-    {
-        return;
-    }
 }
 
 
@@ -66,10 +45,6 @@ public class FairFight : Habilidad
     {
     }
     
-    public virtual void aplicar_cambios(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-    {
-        return;
-    }
 }
 
 public class Resolve : Habilidad

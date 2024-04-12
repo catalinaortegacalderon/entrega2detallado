@@ -16,9 +16,10 @@ public class Unidad
     public int spd;
     public int def;
     public int res;
+    public BonusActivos BonusActivos = new BonusActivos();
+    
     // esto es para poder recorrer todas las habiliades sin que se caiga el programa, seran reemplazadas por instancias reales
     public Habilidad[] habilidades = new Habilidad[2];
-
     
     public  void Setear_valores(string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
     {

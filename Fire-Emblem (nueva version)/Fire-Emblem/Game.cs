@@ -15,23 +15,8 @@ public class Game
 
     public void Play()
     {
-        _view.WriteLine("Elige un archivo para cargar los equipos");
-        string[] archivos = Directory.GetFiles(_teamsFolder);
-        int contador = 0;
-        foreach (string archivo in archivos)
-        {
-            _view.WriteLine(contador + ": " + Path.GetFileName(archivo));
-            contador++;
-        }
-
-        int input = Convert.ToInt32(_view.ReadLine());
-        if (Funciones.Juego_Valido(archivos[input]) == false)
-        {
-            _view.WriteLine("Archivo de equipos no válido");
-            return;
-        }
-
-        // construir juego
+        if (CargarEquipos(out var archivos, out var input)) return;
+        
         Juego juego_actual = Funciones.Construir_Juego(archivos[input], _view);
         while (juego_actual.terminado == false)
         {
@@ -166,8 +151,8 @@ public class Game
                 nombre_perdedor2 = juego_actual.atacar(2, _view, valor1, valor2);
                 // followup
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                    juego_actual.jugadores[1].unidades[valor2].spd >=
-                    5 + juego_actual.jugadores[0].unidades[valor1].spd)
+                    juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd >=
+                    5 + juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
                 {
                     juego_actual.jugador_actual = 1;
                     nombre_perdedor1 = juego_actual.atacar(3, _view, valor1, valor2);
@@ -218,6 +203,27 @@ public class Game
         }
 
         _view.WriteLine("Player " + (juego_actual.ganador + 1) + " ganó");
+    }
+
+    private bool CargarEquipos(out string[] archivos, out int input)
+    {
+        _view.WriteLine("Elige un archivo para cargar los equipos");
+        archivos = Directory.GetFiles(_teamsFolder);
+        int contador = 0;
+        foreach (string archivo in archivos)
+        {
+            _view.WriteLine(contador + ": " + Path.GetFileName(archivo));
+            contador++;
+        }
+
+        input = Convert.ToInt32(_view.ReadLine());
+        if (Funciones.Juego_Valido(archivos[input]) == false)
+        {
+            _view.WriteLine("Archivo de equipos no válido");
+            return true;
+        }
+
+        return false;
     }
 
     // ojo que hay harto codigo repetido en juego valido y consruir juego tal vez dejar solo una funcion

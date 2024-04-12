@@ -28,40 +28,37 @@ public class Juego
         // EL NUMERO DE ATAQUE PUEDE SER 1-2-3 DEPENDIENDO SI ES ATAQUE, CONTRAATAQUE O FOLLOWUP
         // follow up lo hace el que tiene 5 puntos mas de speed que el otro
         bool imprimir = false;
+        int ataque;
         if (numero_ataque == 1)
         {
+            //imrpimo ventaja y luego activo habilidades
             imprimir = true;
+            
         }
         if (jugador_actual == 0)
         {
             // PRIMER JUGADOR ATACA AL SEGUNDO
             // aca imprimo, tal vez pasarlo al true de antes    
-            int ataque = jugadores[0].calcular_atque(imprimir, view, unidad1, jugadores[1].unidades[unidad2]);
+            //int ataque = jugadores[0].calcular_atque(imprimir, view, unidad1, jugadores[1].unidades[unidad2]);
             //primero activar habilidades
             // revisar si son ambas, o solo el jugador atacante
-            
-            // activando habilidades atacante (primer jugador)
-            foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
+
+            ataque = jugadores[0].calcular_atque(imprimir, view, unidad1, jugadores[1].unidades[unidad2]);
+            if (numero_ataque == 1)
             {
-                Console.WriteLine("pase por a");
-                if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
+                // activando habilidades atacante (primer jugador)
+                foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
                 {
-                    Console.WriteLine("pase por b");
-                    habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
+                    Console.WriteLine("pase por a");
+                    habilidad.AplicarHabilidades(jugadores[0].unidades[unidad1], jugadores[1].unidades[unidad2], true)
                 }
-                    
-            }
-            
-             //activando habilidades defensor (segundo jugador)
-            foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
-            {
-                Console.WriteLine("pase por c");
-                if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
+                //activando habilidades defensor (segundo jugador)
+                foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
                 {
-                    Console.WriteLine("pase por d");
-                    habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
+                    habilidad.AplicarHabilidades(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false)
                 }
             }
+            
             
             //me faltan las anulaciones
                 
@@ -111,25 +108,14 @@ public class Juego
         else
         {
             // imrpimir
-            int ataque = jugadores[1].calcular_atque(imprimir, view, unidad2, jugadores[0].unidades[unidad1]);
+            ataque = jugadores[1].calcular_atque(imprimir, view, unidad2, jugadores[0].unidades[unidad1]);
             // activando habilidades atacante (jugador 2)
-            foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
+            if (numero_ataque == 1)
             {
-                if (habilidad.ChequearCondiciones(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false))
-                {
-                    habilidad.aplicar_cambios(jugadores[1].unidades[unidad2],jugadores[0].unidades[unidad1],false);
-                }
-                    
+                // aplicar habilidades
+
             }
-            //activando habilidades defensor ( jugador 1)
-            foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
-            {
-                if (habilidad.ChequearCondiciones(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true))
-                {
-                    habilidad.aplicar_cambios(jugadores[0].unidades[unidad1],jugadores[1].unidades[unidad2],true);
-                }
-                    
-            }
+        }
             // recalcular ataque sin imprimir
             ataque = jugadores[1].calcular_atque(false, view, unidad2, jugadores[0].unidades[unidad1]);
             
