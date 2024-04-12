@@ -29,4 +29,14 @@ public class HpPropioMenorA75 : Condicion
     
 }
 
+public class UnidadIniciaCombate : Condicion
+{
+    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (atacando) return true;
+        return false;
+    }
+    
+}
+
 

@@ -1,58 +1,77 @@
+using System.Runtime.CompilerServices;
+
 namespace Fire_Emblem;
 using System; 
 using Fire_Emblem_View;
 
 
-    public class Efecto
-    {
-        protected View view; // permitir acceso desde clases hijas
-        public Efecto(View view)
-        {
-            this.view = view;
-        }
+public class Efecto
+{
+    protected int cantidad; // Este parámetro será accedido por algunas clases solamente, no repetir código
+    protected View view; // Permitir acceso desde clases hijas
 
-        public virtual void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-        {
-            return;
-        }
+    public Efecto(View view)
+    {
+        this.view = view;
     }
 
-    public class AumentarSpdEn5 : Efecto
+    public virtual void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        public AumentarSpdEn5(View view) : base(view)
-        {
-        }
+        return;
+    }
+}
 
-        public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-        {
-            unidadPropia.spd = unidadPropia.BonusActivos.spd + 5;
-            Console.WriteLine("paso por donde quiero");
-            this.view.WriteLine(unidadPropia.nombre + " obtiene Spd+5");
-        }
+public class EfectoVacio : Efecto
+{
+    public EfectoVacio(View view) : base(view)
+    {
     }
 
-    public class AumentarDefEn7 : Efecto
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        public AumentarDefEn7(View view) : base(view)
-        {
-        }
+        return;
+    }
+}
 
-        public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-        {
-            unidadPropia.def = unidadPropia.BonusActivos.def + 7;
-            this.view.WriteLine(unidadPropia.nombre + " obtiene Def+7");
-        }
+public class AumentarSpd : Efecto
+{
+    public AumentarSpd(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
     }
 
-    public class AumentarResEn7 : Efecto
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        public AumentarResEn7(View view) : base(view)
-        {
-        }
-
-        public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
-        {
-            unidadPropia.res = unidadPropia.BonusActivos.res + 7;
-            this.view.WriteLine(unidadPropia.nombre + " obtiene Res+7");
-        }
+        unidadPropia.spd = unidadPropia.BonusActivos.spd + this.cantidad;
+        Console.WriteLine("Paso por donde quiero");
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Spd+" + this.cantidad);
     }
+}
+
+public class AumentarDef : Efecto
+{
+    public AumentarDef(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadPropia.def = unidadPropia.BonusActivos.def + this.cantidad;
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Def+" + this.cantidad);
+    }
+}
+
+public class AumentarRes : Efecto
+{
+    public AumentarRes(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadPropia.res = unidadPropia.BonusActivos.res + this.cantidad;
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Res+" + this.cantidad);
+    }
+}

@@ -18,11 +18,11 @@ public class Jugador
         float def_o_res_rival;
         if (arma_atac == "Magic")
         {
-            def_o_res_rival = unidad_contincante.res;
+            def_o_res_rival = unidad_contincante.res + unidad_contincante.BonusActivos.res;
         }
         else
         {
-            def_o_res_rival = unidad_contincante.def;
+            def_o_res_rival = unidad_contincante.def + unidad_contincante.BonusActivos.def;
         }
         double wtb;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic"

@@ -95,18 +95,12 @@ public class Funciones
                 // obtener nombre unidad
                 string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                 string nombre = nuevo_string[0].Replace(" ", "");
-                Console.WriteLine("imprimiendo nombre");
-                Console.WriteLine(nombre);
                 string myJson = File.ReadAllText("characters.json");
                 var players = JsonSerializer.Deserialize<List<Unidad_Json>>(myJson);
-                Console.WriteLine("imrpimiendo jugador actual");
-                Console.WriteLine(jugador_actual);
                 foreach (var player in players)
                 {
-                    Console.WriteLine(player.Name);
                     if (nombre == player.Name)
                     {
-                        Console.WriteLine("pase por nombre == player name");
                         unidades[jugador_actual][contadores_unidades[jugador_actual]].Setear_valores(player.Name,
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
                             Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd),
@@ -135,6 +129,11 @@ public class Funciones
                         {
                             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                                 .habilidades[contador_habilidades] = new Resolve(view);
+                        }
+                        if (habilidad == "Armored Blow")
+                        {
+                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                                .habilidades[contador_habilidades] = new ArmoredBlow(view);
                         }
 
                         contador_habilidades++;

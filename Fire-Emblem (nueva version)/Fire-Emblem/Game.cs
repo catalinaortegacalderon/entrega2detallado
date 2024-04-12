@@ -43,12 +43,11 @@ public class Game
                 _view.WriteLine("Player 2 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
                 {
-                    Console.WriteLine("pase por 3");
-                    Console.WriteLine("imprimiendo nombre de las unidades");
-                    Console.WriteLine(unidad.nombre);
+                    //Console.WriteLine("pase por 3");
+                    //Console.WriteLine("imprimiendo nombre de las unidades");
+                    //Console.WriteLine(unidad.nombre);
                     if (unidad.nombre != "")
                     {
-                        Console.WriteLine("pase por 3 dentro");
                         _view.WriteLine(contador2 + ": " + unidad.nombre);
                         contador2++;
                     }
@@ -117,10 +116,8 @@ public class Game
                 _view.WriteLine("Player 2 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
                 {
-                    Console.WriteLine("pase por 1");
                     if (unidad.nombre != "")
                     {
-                        Console.WriteLine("pase por 1 dentro");
                         _view.WriteLine(contador2 + ": " + unidad.nombre);
                         contador2++;
                     }
@@ -130,10 +127,8 @@ public class Game
                 _view.WriteLine("Player 1 selecciona una opción");
                 foreach (Unidad unidad in juego_actual.jugadores[0].unidades)
                 {
-                    Console.WriteLine("pase por 2");
                     if (unidad.nombre != "")
                     {
-                        Console.WriteLine("pase por  2 dentro");
                         _view.WriteLine(contador1 + ": " + unidad.nombre);
                         contador1++;
                     }
@@ -168,6 +163,13 @@ public class Game
                 {
                     _view.WriteLine("Ninguna unidad puede hacer un follow up");
                 }
+                
+                // resetear bonus
+                juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
+                juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
+                                
+
+                
 
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")

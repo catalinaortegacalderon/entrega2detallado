@@ -21,6 +21,8 @@ namespace Fire_Emblem;
 
         public virtual void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
         {
+            // si no hay condiciones (habilidad vacia)
+            if (this.condiciones.Length == 0) return;
             for (int i = 0; i < this.condiciones.Length; i++)
             {
                 if (this.condiciones[i].Verificar(unidadPropia, unidadRival, atacando))
@@ -35,9 +37,9 @@ namespace Fire_Emblem;
     {
         public HabilidadVacia(View view) : base(view)
         {
-            this.condiciones = new Condicion[] { };
-            this.efectos = new Efecto[] { };
-            
+            this.view = view;
+            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.efectos = new Efecto[] { new EfectoVacio(view) };
         }
         
     }
@@ -66,7 +68,17 @@ namespace Fire_Emblem;
         {
             this.view = view;
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new AumentarSpdEn5(view) };
+            this.efectos = new Efecto[] { new AumentarSpd(view, 5) };
+        }
+    }
+
+    public class ArmoredBlow : Habilidad
+    {
+        public ArmoredBlow(View view) : base(view)
+        {
+            this.view = view;
+            this.condiciones = new Condicion[] { new UnidadIniciaCombate() };
+            this.efectos = new Efecto[] { new AumentarDef(view, 8) };
         }
     }
 
