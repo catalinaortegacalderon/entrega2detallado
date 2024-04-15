@@ -142,26 +142,31 @@ public class Funciones
                     .habilidades[contador_habilidades] = new SpeedMas5(view);
             }
 
-            if (habilidad == "Resolve")
+            else if (habilidad == "Resolve")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new Resolve(view);
             }
-            if (habilidad == "Armored Blow")
+            else if (habilidad == "Armored Blow")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new ArmoredBlow(view);
             }
 
-            if (habilidad == "Fair Fight")
+            else if (habilidad == "Fair Fight")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new FairFight(view);
             }
-            if (habilidad == "Atk/Def +5")
+            else if (habilidad == "Atk/Def +5")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new AtkAndDefMas5(view);
+            }
+            else if (habilidad == "Atk/Res +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new AtkAndResMas5(view);
             }
             contador_habilidades++;
         }

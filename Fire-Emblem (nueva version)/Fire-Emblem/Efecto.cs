@@ -33,9 +33,9 @@ public class EfectoVacio : Efecto
     }
 }
 
-public class AumentarSpd : Efecto
+public class CambiarSpdEn : Efecto
 {
-    public AumentarSpd(View view, int cantidad) : base(view)
+    public CambiarSpdEn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -44,49 +44,53 @@ public class AumentarSpd : Efecto
     {
         unidadPropia.spd = unidadPropia.BonusActivos.spd + this.cantidad;
         Console.WriteLine("Paso por donde quiero");
-        this.view.WriteLine(unidadPropia.nombre + " obtiene Spd+" + this.cantidad);
+        string signo = (this.cantidad > 0) ? "+" :  "-";
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Spd" + signo + this.cantidad);
     }
 }
 
-public class AumentarDef : Efecto
+public class CambiarDefEn : Efecto
 {
-    public AumentarDef(View view, int cantidad) : base(view)
+    public CambiarDefEn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
+        string signo = (this.cantidad > 0) ? "+" :  "-";
         unidadPropia.BonusActivos.def = unidadPropia.BonusActivos.def + this.cantidad;
-        this.view.WriteLine(unidadPropia.nombre + " obtiene Def+" + this.cantidad);
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Def" + signo + this.cantidad);
     }
 }
 
-public class AumentarRes : Efecto
+public class CambiarResEn : Efecto
 {
-    public AumentarRes(View view, int cantidad) : base(view)
+    public CambiarResEn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
+        string signo = (this.cantidad > 0) ? "+" :  "-";
         unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.res + this.cantidad;
-        this.view.WriteLine(unidadPropia.nombre + " obtiene Res+" + this.cantidad);
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Res" + signo + this.cantidad);
     }
 }
 
-public class AumentarAtk : Efecto
+public class CambiarAtkEn : Efecto
 {
-    public AumentarAtk(View view, int cantidad) : base(view)
+    public CambiarAtkEn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
+        string signo = (this.cantidad > 0) ? "+" :  "-";
         unidadPropia.BonusActivos.attk = unidadPropia.BonusActivos.attk + this.cantidad;
-        this.view.WriteLine(unidadPropia.nombre + " obtiene Atk+" + this.cantidad);
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Atk" + signo + this.cantidad);
     }
 }
 

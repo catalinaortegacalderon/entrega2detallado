@@ -64,12 +64,12 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[2];
             // revisar esto
-            this.condiciones[0] = new UnidadIniciaCombate(); // Definir la condición adecuada
-            this.condiciones[1] = new UnidadIniciaCombate(); // Definir la condición adecuada
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.condiciones[1] = new UnidadIniciaCombate();
 
             this.efectos = new Efecto[2];
-            this.efectos[0] = new AumentarAtk(this.view, 6); // Definir el efecto adecuado
-            this.efectos[1] = new AumentarAtkRival(this.view, 6); // Definir el efecto adecuado
+            this.efectos[0] = new CambiarAtkEn(this.view, 6);
+            this.efectos[1] = new AumentarAtkRival(this.view, 6);
         }
     }
 
@@ -77,6 +77,13 @@ namespace Fire_Emblem;
     {
         public Resolve(View view) : base(view)
         {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.75); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.75);
+
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarDefEn(this.view, 7); 
+            this.efectos[1] = new CambiarResEn(this.view, 7); 
         }
     }
 
@@ -86,7 +93,7 @@ namespace Fire_Emblem;
         {
             this.view = view;
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new AumentarSpd(view, 5) };
+            this.efectos = new Efecto[] { new CambiarSpdEn(view, 5) };
         }
     }
 
@@ -97,7 +104,7 @@ namespace Fire_Emblem;
             Console.WriteLine("pase por constructor de armored blow");
             this.view = view;
             this.condiciones = new Condicion[] { new UnidadIniciaCombate() };
-            this.efectos = new Efecto[] { new AumentarDef(view, 8) };
+            this.efectos = new Efecto[] { new CambiarDefEn(view, 8) };
         }
     }
 
@@ -107,13 +114,28 @@ namespace Fire_Emblem;
         public AtkAndDefMas5(View view) : base(view)
         {
             this.condiciones = new Condicion[2];
-            // revisar esto
-            this.condiciones[0] = new SiempreVerdad(); // Definir la condición adecuada
-            this.condiciones[1] = new SiempreVerdad(); // Definir la condición adecuada
+            this.condiciones[0] = new SiempreVerdad(); 
+            this.condiciones[1] = new SiempreVerdad(); 
 
             this.efectos = new Efecto[2];
-            this.efectos[0] = new AumentarAtk(this.view, 5); // Definir el efecto adecuado
-            this.efectos[1] = new AumentarDef(this.view, 5); // Definir el efecto adecuado
+            this.efectos[0] = new CambiarAtkEn(this.view, 5); 
+            this.efectos[1] = new CambiarDefEn(this.view, 5);
+            
+        }
+    }
+
+    public class AtkAndResMas5 : Habilidad
+    {
+        public AtkAndResMas5(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new SiempreVerdad(); 
+            this.condiciones[1] = new SiempreVerdad(); 
+
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarAtkEn(this.view, 5); 
+            this.efectos[1] = new CambiarResEn(this.view, 5);
+            
         }
     }
 

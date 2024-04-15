@@ -2,6 +2,7 @@ namespace Fire_Emblem;
 
 public class Condicion
 {
+    protected double valorMultiusoCondicion;
     public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         return true;
@@ -16,11 +17,15 @@ public class SiempreVerdad : Condicion
     }
 }
 
-public class HpPropioMenorA75 : Condicion
+public class HpPropioMenorAUnValor : Condicion
 {
+    public HpPropioMenorAUnValor(double cantidad) : base()
+    {
+        this.valorMultiusoCondicion = cantidad;
+    }
     public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        if (unidadPropia.hp_actual <= unidadPropia.hp_max * 0.75)
+        if (unidadPropia.hp_actual <= unidadPropia.hp_max * this.valorMultiusoCondicion)
         {
             return true;
         }
