@@ -22,6 +22,9 @@ public class Jugador
         }
         else
         {
+            Console.WriteLine("imrpimiendo def y bonus contrincante");
+            Console.WriteLine(unidad_contincante.def);
+            Console.WriteLine(unidad_contincante.BonusActivos.def);
             def_o_res_rival = unidad_contincante.def + unidad_contincante.BonusActivos.def;
         }
         double wtb;

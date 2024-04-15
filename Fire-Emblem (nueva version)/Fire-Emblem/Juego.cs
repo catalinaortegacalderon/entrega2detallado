@@ -50,16 +50,20 @@ public class Juego
             ataque = jugadores[0].calcular_atque(imprimir, view, unidad1, jugadores[1].unidades[unidad2]);
             if (numero_ataque == 1)
             {
+                Console.WriteLine("pasando por 1");
                 // activando habilidades atacante (primer jugador)
+                Console.WriteLine("pasando por a");
                 foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
                 {
                     habilidad.AplicarHabilidades(jugadores[0].unidades[unidad1], jugadores[1].unidades[unidad2], true);
                 }
+                Console.WriteLine("pasando por b");
                 //activando habilidades defensor (segundo jugador)
                 foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
                 {
                     habilidad.AplicarHabilidades(jugadores[1].unidades[unidad2], jugadores[0].unidades[unidad1], false);
                 }
+                Console.WriteLine("pasando por c");
             }
             
             
@@ -115,7 +119,19 @@ public class Juego
             // activando habilidades atacante (jugador 2)
             if (numero_ataque == 1)
             {
+                Console.WriteLine("pasando por 2");
                 // aplicar habilidades
+                //activando habilidades atacante (segundo jugador)
+                foreach ( Habilidad habilidad in jugadores[1].unidades[unidad2].habilidades)
+                {
+                    habilidad.AplicarHabilidades(jugadores[1].unidades[unidad2], jugadores[0].unidades[unidad1], true);
+                }
+                
+                // activando habilidades defensor (primer jugador)
+                foreach ( Habilidad habilidad in jugadores[0].unidades[unidad1].habilidades)
+                {
+                    habilidad.AplicarHabilidades(jugadores[0].unidades[unidad1], jugadores[1].unidades[unidad2], false);
+                }
 
             }
         }

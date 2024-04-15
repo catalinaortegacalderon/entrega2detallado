@@ -57,7 +57,7 @@ public class AumentarDef : Efecto
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadPropia.def = unidadPropia.BonusActivos.def + this.cantidad;
+        unidadPropia.BonusActivos.def = unidadPropia.BonusActivos.def + this.cantidad;
         this.view.WriteLine(unidadPropia.nombre + " obtiene Def+" + this.cantidad);
     }
 }
@@ -71,7 +71,36 @@ public class AumentarRes : Efecto
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadPropia.res = unidadPropia.BonusActivos.res + this.cantidad;
+        unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.res + this.cantidad;
         this.view.WriteLine(unidadPropia.nombre + " obtiene Res+" + this.cantidad);
+    }
+}
+
+public class AumentarAtk : Efecto
+{
+    public AumentarAtk(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.attk + this.cantidad;
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Attk+" + this.cantidad);
+    }
+}
+
+public class AumentarAtkRival : Efecto
+{
+    public AumentarAtkRival(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadRival.BonusActivos.attk  = unidadRival.BonusActivos.attk + this.cantidad;
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Attk+" + this.cantidad);
     }
 }

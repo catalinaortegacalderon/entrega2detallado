@@ -112,32 +112,7 @@ public class Funciones
                 // agregar habilidades a la unidad
                 if (nuevo_string.Length > 1)
                 {
-                    string stringHabilidades = nuevo_string[1];
-                    string[] listadeHabilidades =
-                        stringHabilidades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                    int contador_habilidades = 0;
-                    foreach (string habilidad in listadeHabilidades)
-                    {
-                        //buscar una forma mas eficiente de hacer esto
-                        if (habilidad == "Speed +5")
-                        {
-                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                                .habilidades[contador_habilidades] = new SpeedMas5(view);
-                        }
-
-                        if (habilidad == "Resolve")
-                        {
-                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                                .habilidades[contador_habilidades] = new Resolve(view);
-                        }
-                        if (habilidad == "Armored Blow")
-                        {
-                            unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                                .habilidades[contador_habilidades] = new ArmoredBlow(view);
-                        }
-
-                        contador_habilidades++;
-                    }
+                    InstanciarHabilidades(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
                 }
 
                 contadores_unidades[jugador_actual]++;
@@ -149,5 +124,40 @@ public class Funciones
         Juego nuevo_juego = new Juego(jugador1, jugador2);
 
         return nuevo_juego;
+    }
+
+    private static void InstanciarHabilidades(View view, string[] nuevo_string, Unidad[][] unidades, int jugador_actual,
+        int[] contadores_unidades)
+    {
+        string stringHabilidades = nuevo_string[1];
+        string[] listadeHabilidades =
+            stringHabilidades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        int contador_habilidades = 0;
+        foreach (string habilidad in listadeHabilidades)
+        {
+            //buscar una forma mas eficiente de hacer esto
+            if (habilidad == "Speed +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SpeedMas5(view);
+            }
+
+            if (habilidad == "Resolve")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new Resolve(view);
+            }
+            if (habilidad == "Armored Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new ArmoredBlow(view);
+            }
+            if (habilidad == "Fair Fight")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new FairFight(view);
+            }
+            contador_habilidades++;
+        }
     }
 }

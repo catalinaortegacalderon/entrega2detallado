@@ -10,7 +10,7 @@ public class Condicion
 
 public class SiempreVerdad : Condicion
 {
-    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         return true;
     }
@@ -18,7 +18,7 @@ public class SiempreVerdad : Condicion
 
 public class HpPropioMenorA75 : Condicion
 {
-    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         if (unidadPropia.hp_actual <= unidadPropia.hp_max * 0.75)
         {
@@ -31,8 +31,10 @@ public class HpPropioMenorA75 : Condicion
 
 public class UnidadIniciaCombate : Condicion
 {
-    public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
+        Console.WriteLine("paso por el foco, imrpimiendo atacando");
+        Console.WriteLine(atacando);
         if (atacando) return true;
         return false;
     }

@@ -81,6 +81,10 @@ public class Game
                 {
                     _view.WriteLine("Ninguna unidad puede hacer un follow up");
                 }
+                
+                // resetear bonus
+                juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
+                juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
 
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
@@ -168,9 +172,7 @@ public class Game
                 juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
                 juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
                                 
-
                 
-
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
