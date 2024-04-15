@@ -140,3 +140,25 @@ namespace Fire_Emblem;
     }
 
 
+    public class AttackMas6 : Habilidad
+    {
+        public AttackMas6(View view) : base(view)
+        {
+            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.efectos = new Efecto[] { new CambiarAtkEn(view, 6) };
+        }
+    }
+
+    public class BracingBlow : Habilidad
+    {
+        public BracingBlow(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.condiciones[1] = new UnidadIniciaCombate();
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarDefEn(this.view, 6);
+            this.efectos[1] = new CambiarResEn(this.view, 6);
+        }
+    }
+

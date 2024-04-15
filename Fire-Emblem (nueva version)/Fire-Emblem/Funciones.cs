@@ -168,6 +168,16 @@ public class Funciones
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new AtkAndResMas5(view);
             }
+            else if (habilidad == "Attack +6")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new AttackMas6(view);
+            }
+            else if (habilidad == "Bracing Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BracingBlow(view);
+            }
             contador_habilidades++;
         }
     }
