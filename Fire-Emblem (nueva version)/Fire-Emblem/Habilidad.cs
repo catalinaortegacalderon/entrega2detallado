@@ -102,4 +102,19 @@ namespace Fire_Emblem;
     }
 
 
+    public class AtkAndDefMas5 : Habilidad
+    {
+        public AtkAndDefMas5(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            // revisar esto
+            this.condiciones[0] = new SiempreVerdad(); // Definir la condición adecuada
+            this.condiciones[1] = new SiempreVerdad(); // Definir la condición adecuada
+
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new AumentarAtk(this.view, 5); // Definir el efecto adecuado
+            this.efectos[1] = new AumentarDef(this.view, 5); // Definir el efecto adecuado
+        }
+    }
+
 

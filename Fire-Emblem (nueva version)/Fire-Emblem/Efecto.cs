@@ -85,8 +85,8 @@ public class AumentarAtk : Efecto
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.attk + this.cantidad;
-        this.view.WriteLine(unidadPropia.nombre + " obtiene Attk+" + this.cantidad);
+        unidadPropia.BonusActivos.attk = unidadPropia.BonusActivos.attk + this.cantidad;
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Atk+" + this.cantidad);
     }
 }
 
@@ -101,6 +101,6 @@ public class AumentarAtkRival : Efecto
     {
         unidadRival.BonusActivos.attk  = unidadRival.BonusActivos.attk + this.cantidad;
         // ver si se imprime aca
-        this.view.WriteLine(unidadRival.nombre + " obtiene Attk+" + this.cantidad);
+        this.view.WriteLine(unidadRival.nombre + " obtiene Atk+" + this.cantidad);
     }
 }

@@ -152,10 +152,16 @@ public class Funciones
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new ArmoredBlow(view);
             }
+
             if (habilidad == "Fair Fight")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new FairFight(view);
+            }
+            if (habilidad == "Atk/Def +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new AtkAndDefMas5(view);
             }
             contador_habilidades++;
         }
