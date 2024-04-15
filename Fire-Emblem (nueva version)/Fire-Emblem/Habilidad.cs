@@ -330,3 +330,81 @@ namespace Fire_Emblem;
         }
     }
 
+    public class BrazenAtkSpd : Habilidad
+    {
+        public BrazenAtkSpd(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
+            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
+        }
+    }
+
+    public class BrazenAtkDef : Habilidad
+    {
+        public BrazenAtkDef(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
+            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+        }
+    }
+
+    public class BrazenAtkRes : Habilidad
+    {
+        public BrazenAtkRes(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
+            this.efectos[0] = new CambiarResEn(this.view, 10); 
+        }
+    }
+
+    public class BrazenSpdDef : Habilidad
+    {
+        public BrazenSpdDef(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarSpdEn(this.view, 10); 
+            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+        }
+    }
+
+    public class BrazenSpdRes : Habilidad
+    {
+        public BrazenSpdRes(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarSpdEn(this.view, 10); 
+            this.efectos[0] = new CambiarResEn(this.view, 10); 
+        }
+    }
+
+    public class BrazenDefRes : Habilidad
+    {
+        public BrazenDefRes(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+            this.efectos[0] = new CambiarResEn(this.view, 10); 
+        }
+    }
+

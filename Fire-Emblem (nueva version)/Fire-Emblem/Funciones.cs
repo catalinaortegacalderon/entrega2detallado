@@ -249,6 +249,36 @@ public class Funciones
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new SwiftStrike(view);
             }
+            else if (habilidad == "Brazen Atk/Spd")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenAtkSpd(view);
+            }
+            else if (habilidad == "Brazen Atk/Def")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenAtkDef(view);
+            }
+            else if (habilidad == "Brazen Atk/Res")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenAtkRes(view);
+            }
+            else if (habilidad == "Brazen Spd/Def")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenSpdDef(view);
+            }
+            else if (habilidad == "Brazen Spd/Res")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenSpdRes(view);
+            }
+            else if (habilidad == "Brazen Def/Res")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new BrazenDefRes(view);
+            }
 
             
 
