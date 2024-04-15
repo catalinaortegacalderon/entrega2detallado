@@ -168,6 +168,11 @@ public class Funciones
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new AtkAndResMas5(view);
             }
+            else if (habilidad == "Spd/Res +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SpdAndResMas5(view);
+            }
             else if (habilidad == "Attack +6")
             {
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
@@ -178,6 +183,75 @@ public class Funciones
                 unidades[jugador_actual][contadores_unidades[jugador_actual]]
                     .habilidades[contador_habilidades] = new BracingBlow(view);
             }
+            
+            else if (habilidad == "Will to win")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new WillToWin(view);
+            }
+            else if (habilidad == "Tome Precision")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new TomePrecision(view);
+            }
+            else if (habilidad == "Defense +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new DefenseMas5(view);
+            }
+            else if (habilidad == "Resistance +5")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new ResistanceMas5(view);
+            }
+            else if (habilidad == "Deadly Blade")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new DeadlyBlade(view);
+            }
+            else if (habilidad == "Death Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new DeathBlow(view);
+            }
+            else if (habilidad == "Darting Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new DartingBlow(view);
+            }
+            else if (habilidad == "Warding Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new WardingBlow(view);
+            }
+            else if (habilidad == "Swift Sparrow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SwiftSparrow(view);
+            }
+            else if (habilidad == "Sturdy Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SturdyBlow(view);
+            }
+            else if (habilidad == "Mirror Strike")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new MirrorStrike(view);
+            }
+            else if (habilidad == "Steady Blow")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SteadyBlow(view);
+            }
+            else if (habilidad == "Swift Strike")
+            {
+                unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                    .habilidades[contador_habilidades] = new SwiftStrike(view);
+            }
+
+            
+
             contador_habilidades++;
         }
     }
