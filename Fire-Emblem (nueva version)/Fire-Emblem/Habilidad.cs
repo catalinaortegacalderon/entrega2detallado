@@ -339,7 +339,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
+            this.efectos[1] = new CambiarSpdEn(this.view, 10); 
         }
     }
 
@@ -352,7 +352,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+            this.efectos[1] = new CambiarDefEn(this.view, 10); 
         }
     }
 
@@ -365,7 +365,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[0] = new CambiarResEn(this.view, 10); 
+            this.efectos[1] = new CambiarResEn(this.view, 10); 
         }
     }
 
@@ -378,7 +378,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarSpdEn(this.view, 10); 
-            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+            this.efectos[1] = new CambiarDefEn(this.view, 10); 
         }
     }
 
@@ -391,7 +391,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarSpdEn(this.view, 10); 
-            this.efectos[0] = new CambiarResEn(this.view, 10); 
+            this.efectos[1] = new CambiarResEn(this.view, 10); 
         }
     }
 
@@ -404,7 +404,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Efecto[2];
             this.efectos[0] = new CambiarDefEn(this.view, 10); 
-            this.efectos[0] = new CambiarResEn(this.view, 10); 
+            this.efectos[1] = new CambiarResEn(this.view, 10); 
         }
     }
 
