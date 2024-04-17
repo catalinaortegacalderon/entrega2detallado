@@ -408,3 +408,30 @@ namespace Fire_Emblem;
         }
     }
 
+// boost heredarán de esta clase
+    public class Boost : Habilidad
+    {
+        public Boost(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new TenerHpPropioMayorAlDelRivalAumentadoEn(3); 
+            this.efectos = new Efecto[1];
+            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+        }
+    }
+
+
+    public class FireBoost : Habilidad
+    {
+        public FireBoost(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
+            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
+            this.efectos = new Efecto[2];
+            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+            this.efectos[1] = new CambiarResEn(this.view, 10); 
+        }
+    }
+
+

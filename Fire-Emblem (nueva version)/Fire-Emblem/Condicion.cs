@@ -1,9 +1,12 @@
+using System.Runtime.CompilerServices;
+
 namespace Fire_Emblem;
 
 public class Condicion
 {
     // estos son parametros utilizadas por ciertas condiciones
     protected double valorMultiusoCondicion;
+    // tal vez sacar variable anterior
     protected string arma_usada;
     public virtual bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
@@ -75,5 +78,21 @@ public class UsarCiertaArmaEIniciarCombate : Condicion
     }
     
 }
+
+public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condicion
+{
+    private int valorAAumentar;
+    public TenerHpPropioMayorAlDelRivalAumentadoEn(int cantidad) : base()
+    {
+        this.valorAAumentar = cantidad;
+    }
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadPropia.hp_actual >= unidadRival.hp_actual + this.valorAAumentar) return true;
+        return false;
+    }
+    
+}
+
 
 
