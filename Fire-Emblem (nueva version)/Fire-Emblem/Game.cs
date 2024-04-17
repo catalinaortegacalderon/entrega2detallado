@@ -143,6 +143,7 @@ public class Game
                 _view.WriteLine("Round " + juego_actual.ronda_actual + ": " +
                                 juego_actual.jugadores[1].unidades[valor2].nombre
                                 + " (Player 2) comienza");
+                
                 //ataque
                 nombre_perdedor1 = juego_actual.atacar(1, _view, valor1, valor2);
                 juego_actual.jugador_actual = 0;
@@ -171,6 +172,8 @@ public class Game
                 // resetear bonus
                 juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
                 juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
+                
+                // logs
                                 
                 
                 //mostrar hp restante de cada unidad
