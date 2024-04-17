@@ -51,6 +51,18 @@ public class UnidadIniciaCombate : Condicion
     
 }
 
+public class RivalIniciaCombate : Condicion
+{
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        Console.WriteLine("paso por el foco, imrpimiendo atacando");
+        Console.WriteLine(atacando);
+        if (atacando == false) return true;
+        return false;
+    }
+    
+}
+
 public class UsarCiertaArma : Condicion
 {
     public UsarCiertaArma(string arma) : base()
@@ -124,6 +136,16 @@ public class AtaqueEntreArmasEspecificas : Condicion
             }
         return false;
     }
+}
+
+public class OponentIsAMan: Condicion
+{
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadRival.genero == "Male") return true;
+        return false;
+    }
+    
 }
 
 

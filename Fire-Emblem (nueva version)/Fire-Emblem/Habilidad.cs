@@ -463,3 +463,50 @@ namespace Fire_Emblem;
         }
     }
 
+// penalties
+
+    public class BlindingFlash : Habilidad
+    {
+        public BlindingFlash(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeRivalsSpdIn(this.view, -4); 
+        }
+    }
+
+    public class NotQuite : Habilidad
+    {
+        public NotQuite(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new RivalIniciaCombate();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeRivalsAtkIn(this.view, -4); 
+        }
+    }
+
+    public class StunningSmile : Habilidad
+    {
+        public StunningSmile(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new OponentIsAMan();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeRivalsSpdIn(this.view, -8); 
+        }
+    }
+
+    public class DisarmingSigh : Habilidad
+    {
+        public DisarmingSigh(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new OponentIsAMan();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeRivalsAtkIn(this.view, -8); 
+        }
+    }
+
+

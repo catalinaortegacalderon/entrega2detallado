@@ -109,3 +109,51 @@ public class ChangeRivalsAtkIn : Effect
         this.view.WriteLine(unidadRival.nombre + " obtiene Atk" + signo + this.cantidad);
     }
 }
+
+public class ChangeRivalsSpdIn : Effect
+{
+    public ChangeRivalsSpdIn(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "-";
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Spd" + signo + this.cantidad);
+    }
+}
+
+public class ChangeRivalsDefIn : Effect
+{
+    public ChangeRivalsDefIn(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadRival.BonusActivos.def  = unidadRival.BonusActivos.def + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "-";
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Def" + signo + this.cantidad);
+    }
+}
+
+public class ChangeRivalsResIn : Effect
+{
+    public ChangeRivalsResIn(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadRival.BonusActivos.res  = unidadRival.BonusActivos.res + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "-";
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Res" + signo + this.cantidad);
+    }
+}
