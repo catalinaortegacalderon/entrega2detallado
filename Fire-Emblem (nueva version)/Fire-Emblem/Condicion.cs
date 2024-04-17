@@ -82,9 +82,9 @@ public class UsarCiertaArmaEIniciarCombate : Condicion
 public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condicion
 {
     private int valorAAumentar;
-    public TenerHpPropioMayorAlDelRivalAumentadoEn(int cantidad) : base()
+    public TenerHpPropioMayorAlDelRivalAumentadoEn(int valorAAumentar) : base()
     {
-        this.valorAAumentar = cantidad;
+        this.valorAAumentar = valorAAumentar;
     }
     public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
@@ -93,6 +93,39 @@ public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condicion
     }
     
 }
+
+// arreglar espaciado de aca abajo, tenia el cursor raro
+
+public class AtaqueEntreArmasEspecificas : Condicion
+{
+    
+    private string tipoDeArma1;
+    private string tipoDeArma2;
+        
+    public AtaqueEntreArmasEspecificas(string tipoDeArma1, string tipoDeArma2) : base()
+    {
+        // REVISAR ESTOS NOMBRES
+        this.tipoDeArma1 = tipoDeArma1;
+        this.tipoDeArma2 = tipoDeArma2;
+    }
+        
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        // ir agregando a medida que lo necesito
+        
+        if((tipoDeArma1 == "magia" && tipoDeArma2 == "fisica")|| (tipoDeArma2 == "magia" && tipoDeArma1 == "fisica"))
+            {
+                if (unidadPropia.arma == "magia" && (unidadRival.arma == "Bow" || unidadRival.arma == "Axe" || unidadRival.arma == "Sword" || unidadRival.arma == "Lance")){
+                    return true;
+                 }
+                if (unidadRival.arma == "magia" && (unidadPropia.arma== "Bow" || unidadPropia.arma=="Axe" || unidadPropia.arma== "Sword" || unidadPropia.arma=="Lance")){
+                    return true;
+                }
+            }
+        return false;
+    }
+}
+
 
 
 

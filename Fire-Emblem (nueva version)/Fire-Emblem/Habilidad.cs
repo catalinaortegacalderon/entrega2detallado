@@ -12,7 +12,7 @@ namespace Fire_Emblem;
         protected View view;
         // si se cumple la condición, se aplica el efecto
         protected Condicion[] condiciones;
-        protected Efecto[] efectos;
+        protected Effect[] efectos;
 
         public Habilidad(View view)
         {
@@ -47,7 +47,7 @@ namespace Fire_Emblem;
             
             //this.view = view; parece que es innecesario
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new EfectoVacio(view) };
+            this.efectos = new Effect[] { new EmptyEffect(view) };
         }
 
         public void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
@@ -67,9 +67,9 @@ namespace Fire_Emblem;
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 6);
-            this.efectos[1] = new AumentarAtkRival(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 6);
+            this.efectos[1] = new ChangeRivalsAtkIn(this.view, 6);
         }
     }
 
@@ -81,9 +81,9 @@ namespace Fire_Emblem;
             this.condiciones[0] = new HpPropioMenorAUnValor(0.75); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.75);
 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarDefEn(this.view, 7); 
-            this.efectos[1] = new CambiarResEn(this.view, 7); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeDefIn(this.view, 7); 
+            this.efectos[1] = new ChangeResIn(this.view, 7); 
         }
     }
 
@@ -93,7 +93,7 @@ namespace Fire_Emblem;
         {
             this.view = view;
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new CambiarSpdEn(view, 5) };
+            this.efectos = new Effect[] { new ChangeSpdIn(view, 5) };
         }
     }
 
@@ -104,7 +104,7 @@ namespace Fire_Emblem;
             Console.WriteLine("pase por constructor de armored blow");
             this.view = view;
             this.condiciones = new Condicion[] { new UnidadIniciaCombate() };
-            this.efectos = new Efecto[] { new CambiarDefEn(view, 8) };
+            this.efectos = new Effect[] { new ChangeDefIn(view, 8) };
         }
     }
 
@@ -117,9 +117,9 @@ namespace Fire_Emblem;
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 5); 
-            this.efectos[1] = new CambiarDefEn(this.view, 5);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 5); 
+            this.efectos[1] = new ChangeDefIn(this.view, 5);
             
         }
     }
@@ -132,9 +132,9 @@ namespace Fire_Emblem;
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 5); 
-            this.efectos[1] = new CambiarResEn(this.view, 5);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 5); 
+            this.efectos[1] = new ChangeResIn(this.view, 5);
             
         }
     }
@@ -147,9 +147,9 @@ namespace Fire_Emblem;
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarSpdEn(this.view, 5); 
-            this.efectos[1] = new CambiarResEn(this.view, 5);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 5); 
+            this.efectos[1] = new ChangeResIn(this.view, 5);
             
         }
     }
@@ -160,7 +160,7 @@ namespace Fire_Emblem;
         public AttackMas6(View view) : base(view)
         {
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new CambiarAtkEn(view, 6) };
+            this.efectos = new Effect[] { new ChangeAtkIn(view, 6) };
         }
     }
 
@@ -171,9 +171,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarDefEn(this.view, 6);
-            this.efectos[1] = new CambiarResEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeDefIn(this.view, 6);
+            this.efectos[1] = new ChangeResIn(this.view, 6);
         }
     }
 
@@ -183,8 +183,8 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.5); 
-            this.efectos = new Efecto[1];
-            this.efectos[0] = new CambiarAtkEn(this.view, 8); 
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeAtkIn(this.view, 8); 
         }
     }
 
@@ -195,9 +195,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UsarCiertaArma("magia");
             this.condiciones[1] = new UsarCiertaArma("magia");
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 6); 
-            this.efectos[1] = new CambiarSpdEn(this.view, 6); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 6); 
+            this.efectos[1] = new ChangeSpdIn(this.view, 6); 
         }
     }
 
@@ -206,7 +206,7 @@ namespace Fire_Emblem;
         public DefenseMas5(View view) : base(view)
         {
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new CambiarDefEn(view, 5) };
+            this.efectos = new Effect[] { new ChangeDefIn(view, 5) };
         }
     }
 
@@ -215,7 +215,7 @@ namespace Fire_Emblem;
         public ResistanceMas5(View view) : base(view)
         {
             this.condiciones = new Condicion[] { new SiempreVerdad() };
-            this.efectos = new Efecto[] { new CambiarResEn(view, 5) };
+            this.efectos = new Effect[] { new ChangeResIn(view, 5) };
         }
     }
 
@@ -226,9 +226,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UsarCiertaArmaEIniciarCombate("espada");
             this.condiciones[1] = new UsarCiertaArmaEIniciarCombate("espada");
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 8); 
-            this.efectos[1] = new CambiarSpdEn(this.view, 8); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 8); 
+            this.efectos[1] = new ChangeSpdIn(this.view, 8); 
         }
     }
 
@@ -238,8 +238,8 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[1];
-            this.efectos[0] = new CambiarAtkEn(this.view, 8);
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeAtkIn(this.view, 8);
         }
     }
 
@@ -249,8 +249,8 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[1];
-            this.efectos[0] = new CambiarSpdEn(this.view, 8);
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeSpdIn(this.view, 8);
         }
     }
 
@@ -260,8 +260,8 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[1];
-            this.efectos[0] = new CambiarResEn(this.view, 8);
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeResIn(this.view, 8);
         }
     }
 
@@ -272,9 +272,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 6);
-            this.efectos[1] = new CambiarSpdEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 6);
+            this.efectos[1] = new ChangeSpdIn(this.view, 6);
         }
     }
 
@@ -285,9 +285,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 6);
-            this.efectos[1] = new CambiarDefEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 6);
+            this.efectos[1] = new ChangeDefIn(this.view, 6);
         }
     }
 
@@ -298,9 +298,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 6);
-            this.efectos[1] = new CambiarResEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 6);
+            this.efectos[1] = new ChangeResIn(this.view, 6);
         }
     }
 
@@ -311,9 +311,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarSpdEn(this.view, 6);
-            this.efectos[1] = new CambiarDefEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 6);
+            this.efectos[1] = new ChangeDefIn(this.view, 6);
         }
     }
 
@@ -324,9 +324,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarSpdEn(this.view, 6);
-            this.efectos[1] = new CambiarResEn(this.view, 6);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 6);
+            this.efectos[1] = new ChangeResIn(this.view, 6);
         }
     }
 
@@ -337,9 +337,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[1] = new CambiarSpdEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[1] = new ChangeSpdIn(this.view, 10); 
         }
     }
 
@@ -350,9 +350,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[1] = new CambiarDefEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[1] = new ChangeDefIn(this.view, 10); 
         }
     }
 
@@ -363,9 +363,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarAtkEn(this.view, 10); 
-            this.efectos[1] = new CambiarResEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[1] = new ChangeResIn(this.view, 10); 
         }
     }
 
@@ -376,9 +376,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarSpdEn(this.view, 10); 
-            this.efectos[1] = new CambiarDefEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 10); 
+            this.efectos[1] = new ChangeDefIn(this.view, 10); 
         }
     }
 
@@ -389,9 +389,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarSpdEn(this.view, 10); 
-            this.efectos[1] = new CambiarResEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 10); 
+            this.efectos[1] = new ChangeResIn(this.view, 10); 
         }
     }
 
@@ -402,9 +402,9 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarDefEn(this.view, 10); 
-            this.efectos[1] = new CambiarResEn(this.view, 10); 
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeDefIn(this.view, 10); 
+            this.efectos[1] = new ChangeResIn(this.view, 10); 
         }
     }
 
@@ -415,23 +415,51 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new TenerHpPropioMayorAlDelRivalAumentadoEn(3); 
-            this.efectos = new Efecto[1];
-            this.efectos[0] = new CambiarDefEn(this.view, 10); 
+            this.efectos = new Effect[1];
         }
     }
 
 
-    public class FireBoost : Habilidad
+    public class FireBoost : Boost
     {
         public FireBoost(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
-            this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
-            this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
-            this.efectos = new Efecto[2];
-            this.efectos[0] = new CambiarDefEn(this.view, 10); 
-            this.efectos[1] = new CambiarResEn(this.view, 10); 
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
         }
     }
 
+    public class WindBoost : Boost
+    {
+        public WindBoost(View view) : base(view)
+        {
+            this.efectos[0] = new ChangeSpdIn(this.view, 10); 
+        }
+    }
+
+    public class EarthBoost : Boost
+    {
+        public EarthBoost(View view) : base(view)
+        {
+            this.efectos[0] = new ChangeDefIn(this.view, 10); 
+        }
+    }
+
+    public class WaterBoost : Boost
+    {
+        public WaterBoost(View view) : base(view)
+        {
+            this.efectos[0] = new ChangeResIn(this.view, 10); 
+        }
+    }
+
+    public class ChaosStyle : Habilidad
+    {
+        public ChaosStyle(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new AtaqueEntreArmasEspecificas("fisica", "magia");
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeSpdIn(this.view, 3); 
+        }
+    }
 

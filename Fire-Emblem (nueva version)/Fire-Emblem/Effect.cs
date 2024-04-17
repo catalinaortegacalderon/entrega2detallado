@@ -5,12 +5,12 @@ using System;
 using Fire_Emblem_View;
 
 
-public class Efecto
+public class Effect
 {
     protected int cantidad; // Este parámetro será accedido por algunas clases solamente, no repetir código
     protected View view; // Permitir acceso desde clases hijas
 
-    public Efecto(View view)
+    public Effect(View view)
     {
         this.view = view;
     }
@@ -21,9 +21,9 @@ public class Efecto
     }
 }
 
-public class EfectoVacio : Efecto
+public class EmptyEffect : Effect
 {
-    public EfectoVacio(View view) : base(view)
+    public EmptyEffect(View view) : base(view)
     {
     }
 
@@ -33,9 +33,9 @@ public class EfectoVacio : Efecto
     }
 }
 
-public class CambiarSpdEn : Efecto
+public class ChangeSpdIn : Effect
 {
-    public CambiarSpdEn(View view, int cantidad) : base(view)
+    public ChangeSpdIn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -49,9 +49,9 @@ public class CambiarSpdEn : Efecto
     }
 }
 
-public class CambiarDefEn : Efecto
+public class ChangeDefIn : Effect
 {
-    public CambiarDefEn(View view, int cantidad) : base(view)
+    public ChangeDefIn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -64,9 +64,9 @@ public class CambiarDefEn : Efecto
     }
 }
 
-public class CambiarResEn : Efecto
+public class ChangeResIn : Effect
 {
-    public CambiarResEn(View view, int cantidad) : base(view)
+    public ChangeResIn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -79,9 +79,9 @@ public class CambiarResEn : Efecto
     }
 }
 
-public class CambiarAtkEn : Efecto
+public class ChangeAtkIn : Effect
 {
-    public CambiarAtkEn(View view, int cantidad) : base(view)
+    public ChangeAtkIn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -94,9 +94,9 @@ public class CambiarAtkEn : Efecto
     }
 }
 
-public class AumentarAtkRival : Efecto
+public class ChangeRivalsAtkIn : Effect
 {
-    public AumentarAtkRival(View view, int cantidad) : base(view)
+    public ChangeRivalsAtkIn(View view, int cantidad) : base(view)
     {
         this.cantidad = cantidad;
     }
@@ -104,7 +104,8 @@ public class AumentarAtkRival : Efecto
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         unidadRival.BonusActivos.attk  = unidadRival.BonusActivos.attk + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "-";
         // ver si se imprime aca
-        this.view.WriteLine(unidadRival.nombre + " obtiene Atk+" + this.cantidad);
+        this.view.WriteLine(unidadRival.nombre + " obtiene Atk" + signo + this.cantidad);
     }
 }
