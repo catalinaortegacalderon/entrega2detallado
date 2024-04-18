@@ -309,9 +309,13 @@ public class Funciones
         }
         else if (habilidad == "Chaos Style")
         {
-            Console.WriteLine("pase por chaos style");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new ChaosStyle(view);
+        }
+        else if (habilidad == "Beorc's Blessing")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new BeorcsBlessing(view);
         }
     }
 }

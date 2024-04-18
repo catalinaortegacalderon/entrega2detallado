@@ -502,4 +502,15 @@ namespace Fire_Emblem;
         }
     }
 
+    public class BeorcsBlessing : Habilidad
+    {
+        public BeorcsBlessing(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new SiempreVerdad();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new NeutralizarBonusOponente(this.view); 
+        }
+    }
+
 

@@ -142,18 +142,33 @@ public class ChangeRivalsDefIn : Effect
     }
 }
 
-public class ChangeRivalsResIn : Effect
+public class NeutralizarBonusOponente : Effect
 {
-    public ChangeRivalsResIn(View view, int cantidad) : base(view)
+    
+    public NeutralizarBonusOponente(View view) : base(view)
     {
-        this.cantidad = cantidad;
     }
-
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadRival.BonusActivos.res  = unidadRival.BonusActivos.res + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "-";
-        // ver si se imprime aca
-        this.view.WriteLine(unidadRival.nombre + " obtiene Res" + signo + this.cantidad);
+        if (unidadRival.BonusActivos.attk > 0 )
+        {
+            unidadRival.BonusActivos.attk = 0;
+        }
+        if (unidadRival.BonusActivos.spd > 0 )
+        {
+            unidadRival.BonusActivos.spd = 0;
+        }
+        if (unidadRival.BonusActivos.def > 0 )
+        {
+            unidadRival.BonusActivos.def = 0;
+        }
+        if (unidadRival.BonusActivos.res > 0 )
+        {
+            unidadRival.BonusActivos.res = 0;
+        }
+        this.view.WriteLine("Los bonus de Atk de " + unidadRival.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los bonus de Spd de " + unidadRival.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los bonus de Def de " + unidadRival.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los bonus de Res de " + unidadRival.nombre + " fueron neutralizados");
     }
 }
