@@ -144,7 +144,13 @@ public class Funciones
     private static void HabilityConstructor(View view, Unidad[][] unidades, int jugador_actual, int[] contadores_unidades,
         string habilidad, int contador_habilidades)
     {
-        if (habilidad == "Speed +5")
+        
+        if (habilidad == "HP +15")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new HpMas15(view);
+        }
+        else if (habilidad == "Speed +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new SpeedMas5(view);

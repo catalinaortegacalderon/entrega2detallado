@@ -50,6 +50,17 @@ namespace Fire_Emblem;
         }
     }
 
+    public class HpMas15 : Habilidad
+    {
+        public HpMas15(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new SiempreVerdad();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeHPIn(this.view, 15);
+        }
+    }
+
     // preocuparse de definir condiciones y efectos
 
     public class FairFight : Habilidad

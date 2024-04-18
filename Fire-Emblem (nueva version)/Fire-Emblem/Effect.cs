@@ -33,6 +33,19 @@ public class EmptyEffect : Effect
     }
 }
 
+public class ChangeHPIn : Effect
+{
+    public ChangeHPIn(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadPropia.hp_actual = unidadPropia.hp_actual + this.cantidad;
+    }
+}
+
 public class ChangeSpdIn : Effect
 {
     public ChangeSpdIn(View view, int cantidad) : base(view)
