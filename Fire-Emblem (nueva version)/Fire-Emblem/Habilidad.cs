@@ -513,6 +513,32 @@ namespace Fire_Emblem;
         }
     }
 
+    public class Charmer : Habilidad
+    {
+        public Charmer(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
+            this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeRivalsAtkIn(this.view, -3); 
+            this.efectos[0] = new ChangeRivalsSpdIn(this.view, -3); 
+        }
+    }
+
+    public class Luna : Habilidad
+    {
+        public Luna(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
+            this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeRivalsAtkIn(this.view, -3); 
+            this.efectos[0] = new ChangeRivalsSpdIn(this.view, -3); 
+        }
+    }
+
     public class BeorcsBlessing : Habilidad
     {
         public BeorcsBlessing(View view) : base(view)

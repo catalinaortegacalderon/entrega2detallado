@@ -153,6 +153,26 @@ public class OponentIsAMan: Condicion
     
 }
 
+public class CurrentOponentIsAlsoTheLastOponent: Condicion
+{
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadRival.nombre == unidadPropia.gameLogs.LastOponentName) return true;
+        return false;
+    }
+    
+}
+
+public class FirstAtack: Condicion
+{
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadPropia.gameLogs.ataquesAcumulados == 0) return true;
+        return false;
+    }
+    
+}
+
 
 
 

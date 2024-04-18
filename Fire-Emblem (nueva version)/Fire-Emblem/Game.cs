@@ -97,6 +97,13 @@ public class Game
                                     ") : " + juego_actual.jugadores[1].unidades[valor2].nombre +
                                     " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
                                     ")");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
+                        juego_actual.jugadores[0].unidades[valor1].nombre;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
+                        juego_actual.jugadores[0].unidades[valor1].nombre;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
                 }
                 else if (nombre_perdedor1 != "")
                 {
@@ -104,6 +111,10 @@ public class Game
                                     " (0) : " + juego_actual.jugadores[1].unidades[valor2].nombre +
                                     " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
                                     ")");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName = nombre_perdedor1;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
+                    
                 }
                 else
                 {
@@ -111,6 +122,9 @@ public class Game
                                     " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
                                     ") : " + nombre_perdedor2 +
                                     " (0)");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.LastOponentName = nombre_perdedor2;
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
                 }
 
                 juego_actual.jugador_actual = 1;
@@ -190,6 +204,13 @@ public class Game
                                     ") : " + juego_actual.jugadores[0].unidades[valor1].nombre +
                                     " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
                                     ")");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
+                        juego_actual.jugadores[0].unidades[valor1].nombre;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
+                        juego_actual.jugadores[0].unidades[valor1].nombre;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
                 }
                 else if (nombre_perdedor1 != "")
                 {
@@ -198,6 +219,9 @@ public class Game
                                     " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
                                     ") : " + nombre_perdedor1 +
                                     " (0)");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName = nombre_perdedor1;
+                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
                 }
                 else
                 {
@@ -206,6 +230,9 @@ public class Game
                                     " (0) : " + juego_actual.jugadores[0].unidades[valor1].nombre +
                                     " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
                                     ")");
+                    // setear ultimo contrincante
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.LastOponentName = nombre_perdedor2;
+                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
                 }
 
                 juego_actual.jugador_actual = 0;
