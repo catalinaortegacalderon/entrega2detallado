@@ -192,7 +192,7 @@ public class Funciones
                 .habilidades[contador_habilidades] = new BracingBlow(view);
         }
             
-        else if (habilidad == "Will to win")
+        else if (habilidad == "Will to Win")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new WillToWin(view);
@@ -309,6 +309,7 @@ public class Funciones
         }
         else if (habilidad == "Chaos Style")
         {
+            Console.WriteLine("pase por chaos style");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new ChaosStyle(view);
         }

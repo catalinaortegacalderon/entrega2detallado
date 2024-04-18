@@ -17,7 +17,7 @@ public class Unidad
     public int def;
     public int res;
     public BonusActivos BonusActivos = new BonusActivos();
-    public GameLogs gameLogs = new GameLogs()
+    public GameLogs gameLogs = new GameLogs();
     
     // esto es para poder recorrer todas las habiliades sin que se caiga el programa, seran reemplazadas por instancias reales
     public Habilidad[] habilidades = new Habilidad[2];

@@ -42,7 +42,7 @@ public class ChangeSpdIn : Effect
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadPropia.spd = unidadPropia.BonusActivos.spd + this.cantidad;
+        unidadPropia.BonusActivos.spd = unidadPropia.BonusActivos.spd + this.cantidad;
         Console.WriteLine("Paso por donde quiero");
         string signo = (this.cantidad > 0) ? "+" :  "-";
         this.view.WriteLine(unidadPropia.nombre + " obtiene Spd" + signo + this.cantidad);

@@ -22,9 +22,6 @@ public class Jugador
         }
         else
         {
-            Console.WriteLine("imrpimiendo def y bonus contrincante");
-            Console.WriteLine(unidad_contincante.def);
-            Console.WriteLine(unidad_contincante.BonusActivos.def);
             def_o_res_rival = unidad_contincante.def + unidad_contincante.BonusActivos.def;
         }
         double wtb;
@@ -62,8 +59,6 @@ public class Jugador
             wtb = 0.8;
         }
         int atk_unidad = this.unidades[numero_unidad].attk + this.unidades[numero_unidad].BonusActivos.attk;
-        Console.WriteLine("imprimiendo atk unidad < 0");
-        Console.WriteLine(atk_unidad < 0);
         // ataque no puede ser negativo
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));

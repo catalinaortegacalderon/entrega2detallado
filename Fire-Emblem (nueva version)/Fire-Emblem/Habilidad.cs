@@ -23,17 +23,11 @@ namespace Fire_Emblem;
         {
             
             // si no hay condiciones (habilidad vacia)
-            Console.WriteLine("pasando por aplicar hab");
             if (this.condiciones.Length == 0) return;
             for (int i = 0; i < this.condiciones.Length; i++)
             {
-                
-                Console.WriteLine("pasando por aplicar hab1");
-                Console.WriteLine("atacando" + atacando);
                 if (this.condiciones[i].Verificar(unidadPropia, unidadRival, atacando))
                 {
-                    Console.WriteLine("pasando por aplicar hab2");
-                    Console.WriteLine("atacando" + atacando);
                     this.efectos[i].Aplicar(unidadPropia, unidadRival, atacando);
                 }
             }
@@ -101,7 +95,6 @@ namespace Fire_Emblem;
     {
         public ArmoredBlow(View view) : base(view)
         {
-            Console.WriteLine("pase por constructor de armored blow");
             this.view = view;
             this.condiciones = new Condicion[] { new UnidadIniciaCombate() };
             this.efectos = new Effect[] { new ChangeDefIn(view, 8) };
@@ -193,8 +186,8 @@ namespace Fire_Emblem;
         public TomePrecision(View view) : base(view)
         {
             this.condiciones = new Condicion[2];
-            this.condiciones[0] = new UsarCiertaArma("magia");
-            this.condiciones[1] = new UsarCiertaArma("magia");
+            this.condiciones[0] = new UsarCiertaArma("Magic");
+            this.condiciones[1] = new UsarCiertaArma("Magic");
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeAtkIn(this.view, 6); 
             this.efectos[1] = new ChangeSpdIn(this.view, 6); 
@@ -224,8 +217,8 @@ namespace Fire_Emblem;
         public DeadlyBlade(View view) : base(view)
         {
             this.condiciones = new Condicion[2];
-            this.condiciones[0] = new UsarCiertaArmaEIniciarCombate("espada");
-            this.condiciones[1] = new UsarCiertaArmaEIniciarCombate("espada");
+            this.condiciones[0] = new UsarCiertaArmaEIniciarCombate("Sword");
+            this.condiciones[1] = new UsarCiertaArmaEIniciarCombate("Sword");
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeAtkIn(this.view, 8); 
             this.efectos[1] = new ChangeSpdIn(this.view, 8); 
@@ -424,7 +417,7 @@ namespace Fire_Emblem;
     {
         public FireBoost(View view) : base(view)
         {
-            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[0] = new ChangeAtkIn(this.view, 6); 
         }
     }
 
@@ -432,7 +425,7 @@ namespace Fire_Emblem;
     {
         public WindBoost(View view) : base(view)
         {
-            this.efectos[0] = new ChangeSpdIn(this.view, 10); 
+            this.efectos[0] = new ChangeSpdIn(this.view, 6); 
         }
     }
 
@@ -440,7 +433,7 @@ namespace Fire_Emblem;
     {
         public EarthBoost(View view) : base(view)
         {
-            this.efectos[0] = new ChangeDefIn(this.view, 10); 
+            this.efectos[0] = new ChangeDefIn(this.view, 6); 
         }
     }
 
@@ -448,7 +441,7 @@ namespace Fire_Emblem;
     {
         public WaterBoost(View view) : base(view)
         {
-            this.efectos[0] = new ChangeResIn(this.view, 10); 
+            this.efectos[0] = new ChangeResIn(this.view, 6); 
         }
     }
 

@@ -43,8 +43,6 @@ public class UnidadIniciaCombate : Condicion
 {
     public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        Console.WriteLine("paso por el foco, imrpimiendo atacando");
-        Console.WriteLine(atacando);
         if (atacando) return true;
         return false;
     }
@@ -55,8 +53,6 @@ public class RivalIniciaCombate : Condicion
 {
     public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        Console.WriteLine("paso por el foco, imrpimiendo atacando");
-        Console.WriteLine(atacando);
         if (atacando == false) return true;
         return false;
     }
@@ -125,15 +121,24 @@ public class AtaqueEntreArmasEspecificas : Condicion
     {
         // ir agregando a medida que lo necesito
         
-        if((tipoDeArma1 == "magia" && tipoDeArma2 == "fisica")|| (tipoDeArma2 == "magia" && tipoDeArma1 == "fisica"))
+        Console.WriteLine("verificando");
+        
+        if(atacando && ((tipoDeArma1 == "magia" && tipoDeArma2 == "fisica")|| (tipoDeArma2 == "magia" && tipoDeArma1 == "fisica")))
             {
-                if (unidadPropia.arma == "magia" && (unidadRival.arma == "Bow" || unidadRival.arma == "Axe" || unidadRival.arma == "Sword" || unidadRival.arma == "Lance")){
+                Console.WriteLine("me meti al prifer if");
+                Console.WriteLine(unidadPropia.arma);
+                Console.WriteLine(unidadRival.arma);
+                
+                if (unidadPropia.arma == "Magic" && (unidadRival.arma == "Bow" || unidadRival.arma == "Axe" || unidadRival.arma == "Sword" || unidadRival.arma == "Lance")){
+                    Console.WriteLine("true");
                     return true;
                  }
-                if (unidadRival.arma == "magia" && (unidadPropia.arma== "Bow" || unidadPropia.arma=="Axe" || unidadPropia.arma== "Sword" || unidadPropia.arma=="Lance")){
+                if (unidadRival.arma == "Magic" && (unidadPropia.arma== "Bow" || unidadPropia.arma=="Axe" || unidadPropia.arma== "Sword" || unidadPropia.arma=="Lance")){
+                    Console.WriteLine("true");
                     return true;
                 }
             }
+        Console.WriteLine("false");
         return false;
     }
 }

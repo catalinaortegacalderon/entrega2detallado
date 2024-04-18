@@ -63,16 +63,19 @@ public class Game
                 //contraataque
                 nombre_perdedor1 = juego_actual.atacar(2, _view, valor1, valor2);
                 // followup
+                Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
+                Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
+                                            + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                    juego_actual.jugadores[1].unidades[valor2].spd >=
-                    5 + juego_actual.jugadores[0].unidades[valor1].spd)
+                    juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd >=
+                    5 + juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
                 {
                     juego_actual.jugador_actual = 1;
                     nombre_perdedor1 = juego_actual.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                         juego_actual.jugadores[1].unidades[valor2].spd + 5 <=
-                         juego_actual.jugadores[0].unidades[valor1].spd)
+                         juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + 5 <=
+                         juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
                 {
                     juego_actual.jugador_actual = 0;
                     nombre_perdedor2 = juego_actual.atacar(3, _view, valor1, valor2);
@@ -150,6 +153,9 @@ public class Game
                 //contraataque
                 nombre_perdedor2 = juego_actual.atacar(2, _view, valor1, valor2);
                 // followup
+                Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
+                Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
+                                                       + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
                     juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd >=
                     5 + juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
@@ -158,8 +164,8 @@ public class Game
                     nombre_perdedor1 = juego_actual.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                         juego_actual.jugadores[1].unidades[valor2].spd + 5 <=
-                         juego_actual.jugadores[0].unidades[valor1].spd)
+                         juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + 5 <=
+                         juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
                 {
                     juego_actual.jugador_actual = 0;
                     nombre_perdedor2 = juego_actual.atacar(3, _view, valor1, valor2);
