@@ -155,6 +155,37 @@ public class ChangeRivalsDefIn : Effect
     }
 }
 
+public class ReduceRivalsSpeedToHalf : Effect
+{
+    public ReduceRivalsSpeedToHalf(View view) : base(view)
+    {
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        int reduccion = Math.Truncate(unidadRival.spd * 0.5);
+        unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd - reduccion;
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Spd-" + reduccion);
+    }
+}
+
+public class ChangeRivalsDefIn : Effect
+{
+    public ChangeRivalsDefIn(View view, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        unidadRival.BonusActivos.def  = unidadRival.BonusActivos.def + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "-";
+        // ver si se imprime aca
+        this.view.WriteLine(unidadRival.nombre + " obtiene Def" + signo + this.cantidad);
+    }
+}
+
 public class NeutralizarBonusOponente : Effect
 {
     
