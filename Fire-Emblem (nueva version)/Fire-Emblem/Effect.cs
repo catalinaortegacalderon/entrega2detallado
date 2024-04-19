@@ -57,7 +57,7 @@ public class ChangeSpdIn : Effect
     {
         unidadPropia.BonusActivos.spd = unidadPropia.BonusActivos.spd + this.cantidad;
         Console.WriteLine("Paso por donde quiero");
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         this.view.WriteLine(unidadPropia.nombre + " obtiene Spd" + signo + this.cantidad);
     }
 }
@@ -71,7 +71,7 @@ public class ChangeDefIn : Effect
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         unidadPropia.BonusActivos.def = unidadPropia.BonusActivos.def + this.cantidad;
         this.view.WriteLine(unidadPropia.nombre + " obtiene Def" + signo + this.cantidad);
     }
@@ -86,7 +86,7 @@ public class ChangeResIn : Effect
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.res + this.cantidad;
         this.view.WriteLine(unidadPropia.nombre + " obtiene Res" + signo + this.cantidad);
     }
@@ -101,7 +101,7 @@ public class ChangeAtkIn : Effect
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         unidadPropia.BonusActivos.attk = unidadPropia.BonusActivos.attk + this.cantidad;
         this.view.WriteLine(unidadPropia.nombre + " obtiene Atk" + signo + this.cantidad);
     }
@@ -117,7 +117,7 @@ public class ChangeRivalsAtkIn : Effect
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         unidadRival.BonusActivos.attk  = unidadRival.BonusActivos.attk + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         // ver si se imprime aca
         this.view.WriteLine(unidadRival.nombre + " obtiene Atk" + signo + this.cantidad);
     }
@@ -133,7 +133,7 @@ public class ChangeRivalsSpdIn : Effect
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         // ver si se imprime aca
         this.view.WriteLine(unidadRival.nombre + " obtiene Spd" + signo + this.cantidad);
     }
@@ -149,7 +149,7 @@ public class ChangeRivalsDefIn : Effect
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
         unidadRival.BonusActivos.def  = unidadRival.BonusActivos.def + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        string signo = (this.cantidad > 0) ? "+" :  "";
         // ver si se imprime aca
         this.view.WriteLine(unidadRival.nombre + " obtiene Def" + signo + this.cantidad);
     }
