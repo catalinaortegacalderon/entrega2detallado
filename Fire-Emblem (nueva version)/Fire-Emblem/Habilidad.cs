@@ -197,8 +197,8 @@ namespace Fire_Emblem;
         public TomePrecision(View view) : base(view)
         {
             this.condiciones = new Condicion[2];
-            this.condiciones[0] = new UsarCiertaArma("Magic");
-            this.condiciones[1] = new UsarCiertaArma("Magic");
+            this.condiciones[0] = new UseCertainWeapon("Magic");
+            this.condiciones[1] = new UseCertainWeapon("Magic");
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeAtkIn(this.view, 6); 
             this.efectos[1] = new ChangeSpdIn(this.view, 6); 
@@ -228,8 +228,8 @@ namespace Fire_Emblem;
         public DeadlyBlade(View view) : base(view)
         {
             this.condiciones = new Condicion[2];
-            this.condiciones[0] = new UsarCiertaArmaEIniciarCombate("Sword");
-            this.condiciones[1] = new UsarCiertaArmaEIniciarCombate("Sword");
+            this.condiciones[0] = new UseCertainWeaponAndStartCombat("Sword");
+            this.condiciones[1] = new UseCertainWeaponAndStartCombat("Sword");
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeAtkIn(this.view, 8); 
             this.efectos[1] = new ChangeSpdIn(this.view, 8); 
@@ -575,4 +575,43 @@ namespace Fire_Emblem;
         }
     }
 
+// hibridas
 
+    public class Agility : Habilidad
+    {
+        public Agility(View view, String weapon) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new UseCertainWeapon(weapon);
+            this.condiciones[1] = new UseCertainWeapon(weapon);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeSpdIn(this.view, 12); 
+            this.efectos[1] = new ChangeAtkIn(this.view, -6); 
+        }
+    }
+
+    public class Power : Habilidad
+    {
+        public Power(View view, String weapon) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new UseCertainWeapon(weapon);
+            this.condiciones[1] = new UseCertainWeapon(weapon);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[1] = new ChangeDefIn(this.view, -10); 
+        }
+    }
+
+    public class Focus : Habilidad
+    {
+        public Focus(View view, String weapon) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new UseCertainWeapon(weapon);
+            this.condiciones[1] = new UseCertainWeapon(weapon);
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, 10); 
+            this.efectos[1] = new ChangeResIn(this.view, -10); 
+        }
+    }

@@ -59,9 +59,9 @@ public class RivalIniciaCombate : Condicion
     
 }
 
-public class UsarCiertaArma : Condicion
+public class UseCertainWeapon : Condicion
 {
-    public UsarCiertaArma(string arma) : base()
+    public UseCertainWeapon(string arma) : base()
     {
         this.arma_usada = arma;
     }
@@ -73,9 +73,9 @@ public class UsarCiertaArma : Condicion
     
 }
 
-public class UsarCiertaArmaEIniciarCombate : Condicion
+public class UseCertainWeaponAndStartCombat : Condicion
 {
-    public UsarCiertaArmaEIniciarCombate(string arma) : base()
+    public UseCertainWeaponAndStartCombat(string arma) : base()
     {
         this.arma_usada = arma;
     }

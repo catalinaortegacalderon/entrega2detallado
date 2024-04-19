@@ -363,5 +363,45 @@ public class Funciones
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new AgneasArrow(view);
         }
+        else if (habilidad == "Sword Agility")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Agility(view, "Sword");
+        }
+        else if (habilidad == "Lance Power")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Power(view, "Lance");
+        }
+        else if (habilidad == "Sword Power")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Power(view, "Sword");
+        }
+        else if (habilidad == "Bow Focus")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Focus(view, "Bow");
+        }
+        else if (habilidad == "Lance Agility")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Agility(view, "Lance");
+        }
+        else if (habilidad == "Axe Power")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Power(view, "Axe");
+        }
+        else if (habilidad == "Bow Agility")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Agility(view, "Bow");
+        }
+        else if (habilidad == "Sword Focus")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Focus(view, "Sword");
+        }
     }
 }
