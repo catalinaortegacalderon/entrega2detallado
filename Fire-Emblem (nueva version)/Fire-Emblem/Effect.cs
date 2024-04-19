@@ -155,36 +155,41 @@ public class ChangeRivalsDefIn : Effect
     }
 }
 
-public class ReduceRivalsSpeedToHalf : Effect
+public class ReduceRivalsSpdInPercentaje : Effect
 {
-    public ReduceRivalsSpeedToHalf(View view) : base(view)
+    private double reductionPercentaje;
+    public ReduceRivalsSpdInPercentaje(View view, double reduction) : base(view)
     {
+        this.reductionPercentaje = reduction;
     }
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        int reduccion = Math.Truncate(unidadRival.spd * 0.5);
-        unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd - reduccion;
+        int reduction = Convert.ToInt32(Math.Truncate(unidadRival.spd * 0.5));
+        unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd - reduction;
         // ver si se imprime aca
-        this.view.WriteLine(unidadRival.nombre + " obtiene Spd-" + reduccion);
+        this.view.WriteLine(unidadRival.nombre + " obtiene Spd-" + reduction);
     }
 }
 
-public class ChangeRivalsDefIn : Effect
+
+public class ReduceRivalsDefInPercentaje : Effect
 {
-    public ChangeRivalsDefIn(View view, int cantidad) : base(view)
+    private double reductionPercentaje;
+    public ReduceRivalsDefInPercentaje(View view, double reduction) : base(view)
     {
-        this.cantidad = cantidad;
+        this.reductionPercentaje = reduction;
     }
 
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
     {
-        unidadRival.BonusActivos.def  = unidadRival.BonusActivos.def + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "-";
+        int reduction = Convert.ToInt32(Math.Truncate(unidadRival.spd * 0.5));
+        unidadRival.BonusActivos.spd  = unidadRival.BonusActivos.spd - reduction;
         // ver si se imprime aca
-        this.view.WriteLine(unidadRival.nombre + " obtiene Def" + signo + this.cantidad);
+        this.view.WriteLine(unidadRival.nombre + " obtiene Def-" + reduction);
     }
 }
+
 
 public class NeutralizarBonusOponente : Effect
 {
@@ -214,5 +219,37 @@ public class NeutralizarBonusOponente : Effect
         this.view.WriteLine("Los bonus de Spd de " + unidadRival.nombre + " fueron neutralizados");
         this.view.WriteLine("Los bonus de Def de " + unidadRival.nombre + " fueron neutralizados");
         this.view.WriteLine("Los bonus de Res de " + unidadRival.nombre + " fueron neutralizados");
+    }
+}
+
+// TAL VEZ HACER UNO DE BONUS Y UNO DE PENALTIES PARA QUE NO SE MEZCLEN
+public class NeutralizePenalties : Effect
+{
+    
+    public NeutralizePenalties(View view) : base(view)
+    {
+    }
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadPropia.BonusActivos.attk < 0 )
+        {
+            unidadPropia.BonusActivos.attk = 0;
+        }
+        if (unidadPropia.BonusActivos.spd < 0 )
+        {
+            unidadPropia.BonusActivos.spd = 0;
+        }
+        if (unidadPropia.BonusActivos.def < 0 )
+        {
+            unidadPropia.BonusActivos.def = 0;
+        }
+        if (unidadPropia.BonusActivos.res < 0 )
+        {
+            unidadPropia.BonusActivos.res = 0;
+        }
+        this.view.WriteLine("Los penalties de Atk de " + unidadPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalties de Spd de " + unidadPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalties de Def de " + unidadPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalties de Res de " + unidadPropia.nombre + " fueron neutralizados");
     }
 }

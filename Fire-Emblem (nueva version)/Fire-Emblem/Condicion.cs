@@ -173,6 +173,16 @@ public class FirstAtack: Condicion
     
 }
 
+public class StartCombatOrFullHP: Condicion
+{
+    public override bool Verificar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (unidadPropia.hp_actual == unidadPropia.hp_max || atacando) return true;
+        return false;
+    }
+    
+}
+
 
 
 

@@ -318,10 +318,50 @@ public class Funciones
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new ChaosStyle(view);
         }
+        else if (habilidad == "Blinding Flash")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new BlindingFlash(view);
+        }
+        else if (habilidad == "Not *Quite*")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new NotQuite(view);
+        }
+        else if (habilidad == "Stunning Smile")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new StunningSmile(view);
+        }
+        else if (habilidad == "Disarming Sigh")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new DisarmingSigh(view);
+        }
+        else if (habilidad == "Charmer")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Charmer(view);
+        }
+        else if (habilidad == "Luna:")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Luna(view);
+        }
+        else if (habilidad == "Belief in Love")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new BeliefInLove(view);
+        }
         else if (habilidad == "Beorc's Blessing")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new BeorcsBlessing(view);
+        }
+        else if (habilidad == "Agnea’s Arrow")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new AgneasArrow(view);
         }
     }
 }

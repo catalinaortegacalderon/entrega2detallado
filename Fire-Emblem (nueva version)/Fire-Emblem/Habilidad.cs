@@ -534,10 +534,24 @@ namespace Fire_Emblem;
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeRivalsAtkIn(this.view, -3); 
-            this.efectos[0] = new ChangeRivalsSpdIn(this.view, -3); 
+            this.efectos[0] = new ReduceRivalsSpdInPercentaje(this.view, 0.5); 
+            this.efectos[0] = new ReduceRivalsDefInPercentaje(this.view, 0.5); 
         }
     }
+
+    public class BeliefInLove : Habilidad
+    {
+        public BeliefInLove(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new StartCombatOrFullHP();
+            this.condiciones[1] = new StartCombatOrFullHP();
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeAtkIn(this.view, -5); 
+            this.efectos[0] = new ChangeRivalsDefIn(this.view, -5); 
+        }
+    }
+
 
     public class BeorcsBlessing : Habilidad
     {
@@ -547,6 +561,17 @@ namespace Fire_Emblem;
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new NeutralizarBonusOponente(this.view); 
+        }
+    }
+
+    public class AgneasArrow : Habilidad
+    {
+        public AgneasArrow(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new SiempreVerdad();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new NeutralizePenalties(this.view); 
         }
     }
 
