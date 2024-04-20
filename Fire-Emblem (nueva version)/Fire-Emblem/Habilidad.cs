@@ -26,7 +26,7 @@ namespace Fire_Emblem;
             if (this.condiciones.Length == 0) return;
             for (int i = 0; i < this.condiciones.Length; i++)
             {
-                if (this.condiciones[i].Verificar(unidadPropia, unidadRival, atacando))
+                if (this.condiciones[i].Verify(unidadPropia, unidadRival, atacando))
                 {
                     this.efectos[i].Aplicar(unidadPropia, unidadRival, atacando);
                 }
@@ -560,7 +560,7 @@ namespace Fire_Emblem;
             this.condiciones = new Condicion[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new NeutralizarBonusOponente(this.view); 
+            this.efectos[0] = new NeutralizeOponentsBonus(this.view); 
         }
     }
 
@@ -613,5 +613,85 @@ namespace Fire_Emblem;
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeAtkIn(this.view, 10); 
             this.efectos[1] = new ChangeResIn(this.view, -10); 
+        }
+    }
+
+    public class CloseDef : Habilidad
+    {
+        public CloseDef(View view) : base(view)
+        {
+            this.condiciones = new Condicion[3];
+            this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
+            this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
+            this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeDefIn(this.view, 8); 
+            this.efectos[1] = new ChangeResIn(this.view, 8); 
+            this.efectos[2] = new NeutralizeOponentsBonus(this.view); 
+        }
+    }
+
+    public class DistantDef : Habilidad
+    {
+        public DistantDef(View view) : base(view)
+        {
+            this.condiciones = new Condicion[3];
+            this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
+            this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
+            this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeDefIn(this.view, 8); 
+            this.efectos[1] = new ChangeResIn(this.view, 8); 
+            this.efectos[2] = new NeutralizeOponentsBonus(this.view); 
+        }
+    }
+
+    public class Lull : Habilidad
+    {
+        public Lull(View view, String firstStat, String secondStat) : base(view)
+        {
+            this.condiciones = new Condicion[4];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.condiciones[3] = new SiempreVerdad();
+            this.efectos = new Effect[4];
+            this.efectos[0] = new ChangeRivalsStatsIn(this.view, firstStat, -3); 
+            this.efectos[1] = new ChangeRivalsStatsIn(this.view, secondStat, -3); 
+            this.efectos[2] = new NeutralizeOneOfOponentsBonus(this.view, firstStat); 
+            this.efectos[3] = new NeutralizeOneOfOponentsBonus(this.view, secondStat); 
+        }
+    }
+
+    public class Fort : Habilidad
+    {
+        public Fort(View view, String firstStat, String secondStat) : base(view)
+        {
+            this.condiciones = new Condicion[3];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeStatsIn(this.view, firstStat, 6); 
+            this.efectos[1] = new ChangeStatsIn(this.view, secondStat, 6); 
+            this.efectos[2] = new ChangeStatsIn(this.view, "Atk", -2); ; 
+        }
+    }
+
+//coigo repetido con el siempre verdad
+
+    public class LifeAndDeath : Habilidad
+    {
+        public LifeAndDeath(View view) : base(view)
+        {
+            this.condiciones = new Condicion[4];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.condiciones[3] = new SiempreVerdad();
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
+            this.efectos[2] = new ChangeStatsIn(this.view, "", -5); ; 
         }
     }

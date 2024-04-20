@@ -191,10 +191,10 @@ public class ReduceRivalsDefInPercentaje : Effect
 }
 
 
-public class NeutralizarBonusOponente : Effect
+public class NeutralizeOponentsBonus : Effect
 {
     
-    public NeutralizarBonusOponente(View view) : base(view)
+    public NeutralizeOponentsBonus(View view) : base(view)
     {
     }
     public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
@@ -253,3 +253,67 @@ public class NeutralizePenalties : Effect
         this.view.WriteLine("Los penalties de Res de " + unidadPropia.nombre + " fueron neutralizados");
     }
 }
+
+//  ELIMINAR CHANGEATK CHANGESPD.. DEJAR SOLO ESTO:
+
+public class ChangeStatsIn : Effect
+{
+    private String stat;
+    public ChangeStatsIn(View view, String stat, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+        this.stat = stat;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (stat=="Atk") unidadPropia.BonusActivos.attk  = unidadPropia.BonusActivos.attk + this.cantidad;
+        else if (stat == "Def") unidadPropia.BonusActivos.def = unidadPropia.BonusActivos.def + this.cantidad;
+        else if (stat == "Res") unidadPropia.BonusActivos.res = unidadPropia.BonusActivos.res + this.cantidad;
+        else if (stat == "Spd") unidadPropia.BonusActivos.spd = unidadPropia.BonusActivos.spd + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "";
+        this.view.WriteLine(unidadPropia.nombre + " obtiene " + stat + signo + this.cantidad);
+    }
+}
+
+
+public class ChangeRivalsStatsIn : Effect
+{
+    private String stat;
+    public ChangeRivalsStatsIn(View view, String stat, int cantidad) : base(view)
+    {
+        this.cantidad = cantidad;
+        this.stat = stat;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (stat=="Atk") unidadRival.BonusActivos.attk  = unidadRival.BonusActivos.attk + this.cantidad;
+        else if (stat == "Def") unidadRival.BonusActivos.def = unidadRival.BonusActivos.def + this.cantidad;
+        else if (stat == "Res") unidadRival.BonusActivos.res = unidadRival.BonusActivos.res + this.cantidad;
+        else if (stat == "Spd") unidadRival.BonusActivos.spd = unidadRival.BonusActivos.spd + this.cantidad;
+        string signo = (this.cantidad > 0) ? "+" :  "";
+        this.view.WriteLine(unidadRival.nombre + " obtiene " + stat + signo + this.cantidad);
+    }
+}
+
+public class NeutralizeOneOfOponentsBonus : Effect
+{
+    private String stat;
+    public NeutralizeOneOfOponentsBonus(View view, String stat) : base(view)
+    {
+        this.stat = stat;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        if (stat=="Atk" && unidadRival.BonusActivos.attk > 0) unidadRival.BonusActivos.attk  = 0;
+        else if (stat == "Def" && unidadRival.BonusActivos.attk > 0) unidadRival.BonusActivos.def = 0;
+        else if (stat == "Res" && unidadRival.BonusActivos.attk > 0) unidadRival.BonusActivos.res = 0;
+        else if (stat == "Spd"&& unidadRival.BonusActivos.attk > 0) unidadRival.BonusActivos.spd = 0;
+        string signo = (this.cantidad > 0) ? "+" :  "";
+        this.view.WriteLine("Los bonus de " + this.stat + " de " + unidadRival.nombre + " fueron neutralizados");
+    }
+}
+
+
