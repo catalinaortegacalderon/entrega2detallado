@@ -689,9 +689,81 @@ namespace Fire_Emblem;
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
             this.condiciones[3] = new SiempreVerdad();
-            this.efectos = new Effect[3];
+            this.efectos = new Effect[4];
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
             this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "", -5); ; 
+            this.efectos[2] = new ChangeStatsIn(this.view, "Def", -5);
+            this.efectos[3] = new ChangeStatsIn(this.view, "Res", -5);
+        }
+    }
+
+    public class SolidGround : Habilidad
+    {
+        public SolidGround(View view) : base(view)
+        {
+            this.condiciones = new Condicion[3];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 6); 
+            this.efectos[2] = new ChangeStatsIn(this.view, "Res", -5);
+        }
+    }
+
+    public class StillWater : Habilidad
+    {
+        public StillWater(View view) : base(view)
+        {
+            this.condiciones = new Condicion[3];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.efectos = new Effect[3];
+            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 6); 
+            this.efectos[2] = new ChangeStatsIn(this.view, "Def", -5);
+        }
+    }
+
+// solo revisar una condicion, cambiar esto
+    public class DragonSkin : Habilidad
+    {
+        public DragonSkin(View view) : base(view)
+        {
+            this.condiciones = new Condicion[5];
+            this.condiciones[0] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.condiciones[1] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.condiciones[2] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.condiciones[3] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.condiciones[4] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.efectos = new Effect[5];
+            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
+            this.efectos[2] = new ChangeStatsIn(this.view, "Def", 6);
+            this.efectos[3] = new ChangeStatsIn(this.view, "Res", 6);
+            this.efectos[4] = new NeutralizeOponentsBonus(view);
+        }
+    }
+
+    public class LightAndDark : Habilidad
+    {
+        public LightAndDark(View view) : base(view)
+        {
+            this.condiciones = new Condicion[6];
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
+            this.condiciones[2] = new SiempreVerdad();
+            this.condiciones[3] = new SiempreVerdad();
+            this.condiciones[4] = new SiempreVerdad();
+            this.condiciones[5] = new SiempreVerdad();
+            this.efectos = new Effect[6];
+            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -5); 
+            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Spd", -5); 
+            this.efectos[2] = new ChangeRivalsStatsIn(this.view, "Def", -5);
+            this.efectos[3] = new ChangeRivalsStatsIn(this.view, "Res", -5);
+            this.efectos[4] = new NeutralizePenalties(this.view);
+            this.efectos[5] = new NeutralizeOponentsBonus(this.view);
         }
     }

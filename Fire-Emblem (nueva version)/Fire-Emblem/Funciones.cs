@@ -425,5 +425,30 @@ public class Funciones
                 .habilidades[contador_habilidades] = new Fort(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
                 habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
+        else if (habilidad == "Life and Death")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new LifeAndDeath(view);
+        }
+        else if (habilidad == "Solid Ground")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new SolidGround(view);
+        }
+        else if (habilidad == "Still Water")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new StillWater(view);
+        }
+        else if (habilidad == "Dragonskin")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new DragonSkin(view);
+        }
+        else if (habilidad == "Light and Dark")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new LightAndDark(view);
+        }
     }
 }

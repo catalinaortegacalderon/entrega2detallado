@@ -198,6 +198,24 @@ public class OponentStartsCombatWhithWeapon: Condicion
     
 }
 
+public class RivalStartsAttackOrHasHpGreaterThan : Condicion
+{
+    private double percentaje;
+    public RivalStartsAttackOrHasHpGreaterThan(double percentage) : base()
+    {
+        this.percentaje = percentage;
+    }
+    public override bool Verify(Unidad myUnit, Unidad oponentsUnit, bool iAmAttacking)
+    {
+        if (oponentsUnit.hp_actual >= oponentsUnit.hp_max * this.percentaje)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+}
+
 
 
 
