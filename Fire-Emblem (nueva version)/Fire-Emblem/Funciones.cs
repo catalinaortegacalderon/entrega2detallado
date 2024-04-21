@@ -450,5 +450,35 @@ public class Funciones
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new LightAndDark(view);
         }
+        else if (habilidad == "Single-Minded")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new SingleMinded(view);
+        }
+        else if (habilidad == "Ignis")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Ignis(view);
+        }
+        else if (habilidad == "Perceptive")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Perceptive(view);
+        }
+        else if (habilidad == "Wrath")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Wrath(view);
+        }
+        else if (habilidad == "Soulblade")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Soulblade(view);
+        }
+        else if (habilidad == "Sandstorm")
+        {
+            unidades[jugador_actual][contadores_unidades[jugador_actual]]
+                .habilidades[contador_habilidades] = new Sandstorm(view);
+        }
     }
 }

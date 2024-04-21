@@ -6,6 +6,7 @@ public class BonusActivos
     public int spd;
     public int def;
     public int res;
+    public int atkFollowup;
 
     public BonusActivos()
     {
@@ -21,6 +22,7 @@ public class BonusActivos
         this.spd = 0;
         this.def = 0;
         this.res = 0;
+        this.atkFollowup = 0;
     }
 
 }

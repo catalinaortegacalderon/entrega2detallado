@@ -63,6 +63,11 @@ public class Game
                 //contraataque
                 nombre_perdedor1 = juego_actual.atacar(2, _view, valor1, valor2);
                 // followup
+                // SETEANDO BONUS FOLLOWUP
+
+                juego_actual.jugadores[0].unidades[valor1].BonusActivos.attk +=
+                    juego_actual.jugadores[0].unidades[valor1].BonusActivos.atkFollowup;
+                
                 Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
                 Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
                                             + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
@@ -85,7 +90,7 @@ public class Game
                     _view.WriteLine("Ninguna unidad puede hacer un follow up");
                 }
                 
-                // resetear bonus
+                // resetear bonus (tambien se resetea el followup aqui)
                 juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
                 juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
 
@@ -167,6 +172,13 @@ public class Game
                 //contraataque
                 nombre_perdedor2 = juego_actual.atacar(2, _view, valor1, valor2);
                 // followup
+                // setear bonus followup
+                
+                // SETEANDO BONUS FOLLOW UP
+
+                juego_actual.jugadores[1].unidades[valor2].BonusActivos.attk +=
+                    juego_actual.jugadores[1].unidades[valor2].BonusActivos.atkFollowup;
+                
                 Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
                 Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
                                                        + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
@@ -189,7 +201,7 @@ public class Game
                     _view.WriteLine("Ninguna unidad puede hacer un follow up");
                 }
                 
-                // resetear bonus
+                // resetear bonus, tambien se resetea bonus followup de sandstorm
                 juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
                 juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
                 

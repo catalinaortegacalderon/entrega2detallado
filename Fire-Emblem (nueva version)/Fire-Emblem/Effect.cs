@@ -316,4 +316,143 @@ public class NeutralizeOneOfOponentsBonus : Effect
     }
 }
 
+public class ChangeStatInPercentaje : Effect
+{
+    private String stat;
+    private double percentaje;
+    public ChangeStatInPercentaje(View view, String stat, Double percentaje) : base(view)
+    {
+        this.stat = stat;
+        this.percentaje = percentaje;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        int cantidad = 0;
+        if (stat == "Atk")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unidadPropia.attk * this.percentaje));
+            unidadPropia.BonusActivos.attk  += cantidad;
+            
+        }
+        else if (stat == "Def")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unidadPropia.def * this.percentaje));
+            unidadPropia.BonusActivos.def += cantidad;
+        }
+        else if (stat == "Res")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unidadPropia.res * this.percentaje));
+            unidadPropia.BonusActivos.res += cantidad;
+        }
+        else if (stat == "Spd")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unidadPropia.spd * this.percentaje));
+            unidadPropia.BonusActivos.spd += cantidad;
+        }
+        string signo = (this.percentaje > 0) ? "+" :  "";
+        this.view.WriteLine(unidadPropia.nombre + " obtiene " + stat + signo + cantidad);
+    }
+}
+
+public class ChangeStatsOnePointForEvery : Effect
+{
+    private String stat;
+    private int amount;
+    public ChangeStatsOnePointForEvery(View view, String stat, int amount) : base(view)
+    {
+        this.stat = stat;
+        this.amount = amount;
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        int cantidad = 0;
+        if (stat == "Atk")
+        {
+            double division = unidadPropia.attk / amount;
+            cantidad = Convert.ToInt32(Math.Truncate(division));
+            unidadPropia.BonusActivos.attk  += cantidad;
+            
+        }
+        else if (stat == "Def")
+        {
+            double division = unidadPropia.def / amount;
+            cantidad = Convert.ToInt32(Math.Truncate(division));
+            unidadPropia.BonusActivos.def += cantidad;
+        }
+        else if (stat == "Res")
+        {
+            double division = unidadPropia.res / amount;
+            cantidad = Convert.ToInt32(Math.Truncate(division));
+            unidadPropia.BonusActivos.res += cantidad;
+        }
+        else if (stat == "Spd")
+        {
+            double division = unidadPropia.spd / amount;
+            cantidad = Convert.ToInt32(Math.Truncate(division));
+            unidadPropia.BonusActivos.spd += cantidad;
+        }
+        this.view.WriteLine(unidadPropia.nombre + " obtiene " + stat + "+" + cantidad);
+    }
+}
+
+public class WrathEffect : Effect
+{
+    public WrathEffect(View view) : base(view)
+    {
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        int cantidad = unidadPropia.hp_max - unidadPropia.hp_actual;
+        if (cantidad > 30) cantidad = 30;
+        unidadPropia.BonusActivos.attk += cantidad;
+        unidadPropia.BonusActivos.spd += cantidad;
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Atk+" + this.cantidad);
+        this.view.WriteLine(unidadPropia.nombre + " obtiene Spd+"+ this.cantidad);
+        
+    }
+}
+
+public class SoulbladeEffect : Effect
+{
+    public SoulbladeEffect(View view) : base(view)
+    {
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        double promedioDefResDouble = (unidadRival.def + unidadRival.res) / 2;
+        int promedioDefRes = Convert.ToInt32(Math.Truncate(promedioDefResDouble));
+        int cantidadDef = promedioDefRes - unidadRival.def;
+        int cantidadRes = promedioDefRes - unidadRival.res;
+        string signoDef = (cantidadDef > 0) ? "+" :  "";
+        string signoRes = (cantidadRes > 0) ? "+" :  "";
+        unidadRival.BonusActivos.def += cantidadDef;
+        unidadRival.BonusActivos.res += cantidadRes;
+        this.view.WriteLine(unidadRival.nombre + " obtiene Def" + signoDef + this.cantidad);
+        this.view.WriteLine(unidadRival.nombre + " obtiene Res"+ signoRes + this.cantidad);
+        
+    }
+}
+
+public class SandstormEffect : Effect
+{
+    public SandstormEffect(View view) : base(view)
+    {
+    }
+
+    public override void Aplicar(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+    {
+        int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unidadPropia.def - unidadPropia.attk));
+        string signo = (cantidad > 0) ? "+" :  "";
+        unidadRival.BonusActivos.atkFollowup += cantidad;
+        this.view.WriteLine(unidadRival.nombre + " obtiene Atk" + signo + this.cantidad);
+    }
+}
+
+
+
+
 

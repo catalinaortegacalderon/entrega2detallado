@@ -767,3 +767,73 @@ namespace Fire_Emblem;
             this.efectos[5] = new NeutralizeOponentsBonus(this.view);
         }
     }
+
+    public class SingleMinded : Habilidad
+    {
+        public SingleMinded(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeAtkIn(this.view, 8); 
+        }
+    }
+
+    public class Ignis : Habilidad
+    {
+        public Ignis(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new FirstAtack();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeStatInPercentaje(this.view, "Atk", 0.5); 
+        }
+    }
+
+    public class Perceptive : Habilidad
+    {
+        public Perceptive(View view) : base(view)
+        {
+            this.condiciones = new Condicion[2];
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.efectos = new Effect[2];
+            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 12);
+            this.efectos[1] = new ChangeStatsOnePointForEvery(this.view, "Spd", 4);
+        }
+    }
+
+    public class Wrath : Habilidad
+    {
+        public Wrath(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new UnidadIniciaCombate();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new WrathEffect(this.view);
+        }
+    }
+
+    public class Soulblade : Habilidad
+    {
+        public Soulblade(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new UseCertainWeapon("Sword");
+            this.efectos = new Effect[1];
+            this.efectos[0] = new SoulbladeEffect(this.view);
+        }
+    }
+
+    public class Sandstorm : Habilidad
+    {
+        public Sandstorm(View view) : base(view)
+        {
+            this.condiciones = new Condicion[1];
+            this.condiciones[0] = new SiempreVerdad();
+            this.efectos = new Effect[1];
+            this.efectos[0] = new SandstormEffect(this.view);
+        }
+    }
+
+
