@@ -1,7 +1,7 @@
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 
-public class GameContainer
+public class GameController
 {
     public Player[] players = new Player[2];
     public int currentPlayer;
@@ -10,7 +10,7 @@ public class GameContainer
     public int winner = -1;
     public bool roundIsTerminated = false;
 
-    public GameContainer(Player jugador1, Player jugador2)
+    public GameController(Player jugador1, Player jugador2)
     {
         this.currentPlayer = 0;
         this.players[0] = jugador1;

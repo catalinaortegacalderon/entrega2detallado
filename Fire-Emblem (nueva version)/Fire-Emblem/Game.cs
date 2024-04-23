@@ -28,10 +28,10 @@ public class Game
     public void Play()
     {
         if (CargarEquipos(out var archivos, out var input)) return;
-        
-        GameContainer juego_actual = Functions.Construir_Juego(archivos[input], _view);
+        GameController juego_actual = Functions.Construir_Juego(archivos[input], _view);
         while (juego_actual.gameIsTerminated == false)
         {
+            //juego_actual.MakeAnotherRound();
             // si pierde el jugador 0
             string nombre_perdedor1 = "";
             // si pierde el jugador 1
@@ -256,7 +256,6 @@ public class Game
             juego_actual.currentRound++;
             juego_actual.roundIsTerminated = false;
         }
-
         _view.WriteLine("Player " + (juego_actual.winner + 1) + " ganó");
     }
 
@@ -439,65 +438,5 @@ public class Game
 
         return "";
     }
-
-    public int CalcularAtaque(Unit atacckingUnit, Unit defenseUnit)
-    {
-        string arma_atac = atacckingUnit.arma;
-        string arma_def = atacckingUnit.arma;
-        int def_o_res_rival;
-        if (arma_atac == "Magic") def_o_res_rival = defenseUnit.res + defenseUnit.ActiveBonusAndPenalties.res;
-        else
-        {
-            def_o_res_rival = defenseUnit.def + defenseUnit.ActiveBonusAndPenalties.def;
-        }
-
-        double wtb;
-        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow"
-            || arma_atac == "Bow") wtb = 1;
-        else if ((arma_atac == "Sword" & arma_def == "Axe") ||
-                 (arma_atac == "Lance" & arma_def == "Sword") ||
-                 (arma_atac == "Axe" & arma_def == "Lance")) wtb = 1.2;
-        else
-        {
-            wtb = 0.8;
-        }
-
-        int atk_unidad = atacckingUnit.attk + atacckingUnit.ActiveBonusAndPenalties.attk;
-        if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
-        return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
-    }
-    
-    public void ImprimirVentajas(View view, Unit atacckingUnit, Unit defenseUnit)
-    {
-        string arma_atac = atacckingUnit.arma;
-        string arma_def = atacckingUnit.arma;
-        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic"
-            || arma_def == "Bow" || arma_atac == "Bow")
-        {
-            view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        }
-        else if ((arma_atac == "Sword" & arma_def == "Axe") ||
-                 (arma_atac == "Lance" & arma_def == "Sword") ||
-                 (arma_atac == "Axe" & arma_def == "Lance"))
-        {
-            view.WriteLine(atacckingUnit.nombre + " (" +
-                           atacckingUnit.arma + ") tiene ventaja con respecto a " +
-                           defenseUnit.nombre + " (" +
-                           defenseUnit.arma + ")");
-        }
-        else
-        {
-            view.WriteLine(defenseUnit.nombre + " (" +
-                           defenseUnit.arma + ") tiene ventaja con respecto a " +
-                           atacckingUnit.nombre + " (" +
-                           atacckingUnit.arma + ")");
-        }
-    }
-
-    public void CambiarRolesAtacanteYDefensor()
-    {
-    }
-
-    // ojo que hay harto codigo repetido en juego valido y consruir juego tal vez dejar solo una funcion
     
 }

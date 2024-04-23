@@ -70,7 +70,7 @@ public class Functions
         return true;
     }
     
-    public static GameContainer Construir_Juego(string archivo, View view)
+    public static GameController Construir_Juego(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;
@@ -121,9 +121,9 @@ public class Functions
 
         Player jugador1 = new Player(contadores_unidades[0], unidades[0]);
         Player jugador2 = new Player(contadores_unidades[1], unidades[1]);
-        GameContainer newGameContainer = new GameContainer(jugador1, jugador2);
+        GameController newGameController = new GameController(jugador1, jugador2);
 
-        return newGameContainer;
+        return newGameController;
     }
 
     private static void InstanciarHabilidades(View view, string[] nuevo_string, Unit[][] unidades, int jugador_actual,
