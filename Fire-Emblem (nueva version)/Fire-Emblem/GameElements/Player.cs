@@ -5,10 +5,17 @@ public class Player
     public int amountOfUnits;
     public Unit[] units = new Unit[3];
     public String lastLooserUnit = "";
+    public Unit currentUnit;
     public Player(int amountOfUnits, Unit[] units)
     {
         this.amountOfUnits = amountOfUnits;
         this.units = units;
+    }
+
+    public void SetUnitInUse(int numberOfUnit)
+    {
+        this.currentUnit = this.units[numberOfUnit];
+
     }
     public int calcular_atque(bool imprimir, View view, int numero_unidad, Unit unitContincante)
     {

@@ -7,11 +7,11 @@ namespace Fire_Emblem;
 public class Unit
 {
     public View view;
-    public string nombre;
+    public string nombre = "";
     public string arma;
     public string genero;
     public int hp_max;
-    public int hp_actual;
+    public int hp_actual = 0;
     public int attk;
     public int spd;
     public int def;
