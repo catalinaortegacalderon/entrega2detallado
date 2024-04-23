@@ -7,54 +7,54 @@ namespace Fire_Emblem;
 
 
     // clase base, las otras heredarán de esta
-    public abstract class Habilidad
+    public abstract class Skill
     {
         protected View view;
         // si se cumple la condición, se aplica el efecto
-        protected Condicion[] condiciones;
+        protected Condition[] condiciones;
         protected Effect[] efectos;
 
-        public Habilidad(View view)
+        public Skill(View view)
         {
             this.view = view;
         }
 
-        public void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+        public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
         {
             
             // si no hay condiciones (habilidad vacia)
             if (this.condiciones.Length == 0) return;
             for (int i = 0; i < this.condiciones.Length; i++)
             {
-                if (this.condiciones[i].Verify(unidadPropia, unidadRival, atacando))
+                if (this.condiciones[i].Verify(unitPropia, OponentsUnit, atacando))
                 {
-                    this.efectos[i].Aplicar(unidadPropia, unidadRival, atacando);
+                    this.efectos[i].Aplicar(unitPropia, OponentsUnit, atacando);
                 }
             }
         }
     }
 
-    public class HabilidadVacia : Habilidad
+    public class EmptySkill : Skill
     {
-        public HabilidadVacia(View view) : base(view)
+        public EmptySkill(View view) : base(view)
         {
             
             //this.view = view; parece que es innecesario
-            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new EmptyEffect(view) };
         }
 
-        public void AplicarHabilidades(Unidad unidadPropia, Unidad unidadRival, bool atacando)
+        public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
         {
             return;
         }
     }
 
-    public class HpMas15 : Habilidad
+    public class HpMas15 : Skill
     {
         public HpMas15(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeHPIn(this.view, 15);
@@ -63,11 +63,11 @@ namespace Fire_Emblem;
 
     // preocuparse de definir condiciones y efectos
 
-    public class FairFight : Habilidad
+    public class FairFight : Skill
     {
         public FairFight(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             // revisar esto
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
@@ -78,11 +78,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Resolve : Habilidad
+    public class Resolve : Skill
     {
         public Resolve(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.75); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.75);
 
@@ -92,32 +92,32 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SpeedMas5 : Habilidad
+    public class SpeedMas5 : Skill
     {
         public SpeedMas5(View view) : base(view)
         {
             this.view = view;
-            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new ChangeSpdIn(view, 5) };
         }
     }
 
-    public class ArmoredBlow : Habilidad
+    public class ArmoredBlow : Skill
     {
         public ArmoredBlow(View view) : base(view)
         {
             this.view = view;
-            this.condiciones = new Condicion[] { new UnidadIniciaCombate() };
+            this.condiciones = new Condition[] { new UnidadIniciaCombate() };
             this.efectos = new Effect[] { new ChangeDefIn(view, 8) };
         }
     }
 
 
-    public class AtkAndDefMas5 : Habilidad
+    public class AtkAndDefMas5 : Skill
     {
         public AtkAndDefMas5(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
@@ -128,11 +128,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class AtkAndResMas5 : Habilidad
+    public class AtkAndResMas5 : Skill
     {
         public AtkAndResMas5(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
@@ -143,11 +143,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SpdAndResMas5 : Habilidad
+    public class SpdAndResMas5 : Skill
     {
         public SpdAndResMas5 (View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
@@ -159,20 +159,20 @@ namespace Fire_Emblem;
     }
 
 
-    public class AttackMas6 : Habilidad
+    public class AttackMas6 : Skill
     {
         public AttackMas6(View view) : base(view)
         {
-            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new ChangeAtkIn(view, 6) };
         }
     }
 
-    public class BracingBlow : Habilidad
+    public class BracingBlow : Skill
     {
         public BracingBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -181,22 +181,22 @@ namespace Fire_Emblem;
         }
     }
 
-    public class WillToWin : Habilidad
+    public class WillToWin : Skill
     {
         public WillToWin(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.5); 
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeAtkIn(this.view, 8); 
         }
     }
 
-    public class TomePrecision : Habilidad
+    public class TomePrecision : Skill
     {
         public TomePrecision(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon("Magic");
             this.condiciones[1] = new UseCertainWeapon("Magic");
             this.efectos = new Effect[2];
@@ -205,29 +205,29 @@ namespace Fire_Emblem;
         }
     }
 
-    public class DefenseMas5 : Habilidad
+    public class DefenseMas5 : Skill
     {
         public DefenseMas5(View view) : base(view)
         {
-            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new ChangeDefIn(view, 5) };
         }
     }
 
-    public class ResistanceMas5 : Habilidad
+    public class ResistanceMas5 : Skill
     {
         public ResistanceMas5(View view) : base(view)
         {
-            this.condiciones = new Condicion[] { new SiempreVerdad() };
+            this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new ChangeResIn(view, 5) };
         }
     }
 
-    public class DeadlyBlade : Habilidad
+    public class DeadlyBlade : Skill
     {
         public DeadlyBlade(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeaponAndStartCombat("Sword");
             this.condiciones[1] = new UseCertainWeaponAndStartCombat("Sword");
             this.efectos = new Effect[2];
@@ -236,44 +236,44 @@ namespace Fire_Emblem;
         }
     }
 
-    public class DeathBlow : Habilidad
+    public class DeathBlow : Skill
     {
         public DeathBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeAtkIn(this.view, 8);
         }
     }
 
-    public class DartingBlow : Habilidad
+    public class DartingBlow : Skill
     {
         public DartingBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeSpdIn(this.view, 8);
         }
     }
 
-    public class WardingBlow : Habilidad
+    public class WardingBlow : Skill
     {
         public WardingBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeResIn(this.view, 8);
         }
     }
 
-    public class SwiftSparrow : Habilidad
+    public class SwiftSparrow : Skill
     {
         public SwiftSparrow(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -282,11 +282,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SturdyBlow : Habilidad
+    public class SturdyBlow : Skill
     {
         public SturdyBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -295,11 +295,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class MirrorStrike : Habilidad
+    public class MirrorStrike : Skill
     {
         public MirrorStrike(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -308,11 +308,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SteadyBlow : Habilidad
+    public class SteadyBlow : Skill
     {
         public SteadyBlow(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -321,11 +321,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SwiftStrike : Habilidad
+    public class SwiftStrike : Skill
     {
         public SwiftStrike(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -334,11 +334,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenAtkSpd : Habilidad
+    public class BrazenAtkSpd : Skill
     {
         public BrazenAtkSpd(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -347,11 +347,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenAtkDef : Habilidad
+    public class BrazenAtkDef : Skill
     {
         public BrazenAtkDef(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -360,11 +360,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenAtkRes : Habilidad
+    public class BrazenAtkRes : Skill
     {
         public BrazenAtkRes(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -373,11 +373,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenSpdDef : Habilidad
+    public class BrazenSpdDef : Skill
     {
         public BrazenSpdDef(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -386,11 +386,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenSpdRes : Habilidad
+    public class BrazenSpdRes : Skill
     {
         public BrazenSpdRes(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -399,11 +399,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BrazenDefRes : Habilidad
+    public class BrazenDefRes : Skill
     {
         public BrazenDefRes(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
@@ -413,11 +413,11 @@ namespace Fire_Emblem;
     }
 
 // boost heredarán de esta clase
-    public class Boost : Habilidad
+    public class Boost : Skill
     {
         public Boost(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new TenerHpPropioMayorAlDelRivalAumentadoEn(3); 
             this.efectos = new Effect[1];
         }
@@ -456,11 +456,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class ChaosStyle : Habilidad
+    public class ChaosStyle : Skill
     {
         public ChaosStyle(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new AtaqueEntreArmasEspecificas("fisica", "magia");
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeSpdIn(this.view, 3); 
@@ -469,55 +469,55 @@ namespace Fire_Emblem;
 
 // penalties
 
-    public class BlindingFlash : Habilidad
+    public class BlindingFlash : Skill
     {
         public BlindingFlash(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeRivalsSpdIn(this.view, -4); 
         }
     }
 
-    public class NotQuite : Habilidad
+    public class NotQuite : Skill
     {
         public NotQuite(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new RivalIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeRivalsAtkIn(this.view, -4); 
         }
     }
 
-    public class StunningSmile : Habilidad
+    public class StunningSmile : Skill
     {
         public StunningSmile(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new OponentIsAMan();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeRivalsSpdIn(this.view, -8); 
         }
     }
 
-    public class DisarmingSigh : Habilidad
+    public class DisarmingSigh : Skill
     {
         public DisarmingSigh(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new OponentIsAMan();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeRivalsAtkIn(this.view, -8); 
         }
     }
 
-    public class Charmer : Habilidad
+    public class Charmer : Skill
     {
         public Charmer(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
@@ -526,11 +526,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Luna : Habilidad
+    public class Luna : Skill
     {
         public Luna(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
@@ -539,11 +539,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class BeliefInLove : Habilidad
+    public class BeliefInLove : Skill
     {
         public BeliefInLove(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new StartCombatOrFullHP();
             this.condiciones[1] = new StartCombatOrFullHP();
             this.efectos = new Effect[2];
@@ -553,22 +553,22 @@ namespace Fire_Emblem;
     }
 
 
-    public class BeorcsBlessing : Habilidad
+    public class BeorcsBlessing : Skill
     {
         public BeorcsBlessing(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new NeutralizeOponentsBonus(this.view); 
         }
     }
 
-    public class AgneasArrow : Habilidad
+    public class AgneasArrow : Skill
     {
         public AgneasArrow(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new NeutralizePenalties(this.view); 
@@ -577,11 +577,11 @@ namespace Fire_Emblem;
 
 // hibridas
 
-    public class Agility : Habilidad
+    public class Agility : Skill
     {
         public Agility(View view, String weapon) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
@@ -590,11 +590,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Power : Habilidad
+    public class Power : Skill
     {
         public Power(View view, String weapon) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
@@ -603,11 +603,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Focus : Habilidad
+    public class Focus : Skill
     {
         public Focus(View view, String weapon) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
@@ -616,11 +616,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class CloseDef : Habilidad
+    public class CloseDef : Skill
     {
         public CloseDef(View view) : base(view)
         {
-            this.condiciones = new Condicion[3];
+            this.condiciones = new Condition[3];
             this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
             this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
             this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
@@ -631,11 +631,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class DistantDef : Habilidad
+    public class DistantDef : Skill
     {
         public DistantDef(View view) : base(view)
         {
-            this.condiciones = new Condicion[3];
+            this.condiciones = new Condition[3];
             this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
             this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
             this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
@@ -646,11 +646,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Lull : Habilidad
+    public class Lull : Skill
     {
         public Lull(View view, String firstStat, String secondStat) : base(view)
         {
-            this.condiciones = new Condicion[4];
+            this.condiciones = new Condition[4];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -663,11 +663,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Fort : Habilidad
+    public class Fort : Skill
     {
         public Fort(View view, String firstStat, String secondStat) : base(view)
         {
-            this.condiciones = new Condicion[3];
+            this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -680,11 +680,11 @@ namespace Fire_Emblem;
 
 //coigo repetido con el siempre verdad
 
-    public class LifeAndDeath : Habilidad
+    public class LifeAndDeath : Skill
     {
         public LifeAndDeath(View view) : base(view)
         {
-            this.condiciones = new Condicion[4];
+            this.condiciones = new Condition[4];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -697,11 +697,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SolidGround : Habilidad
+    public class SolidGround : Skill
     {
         public SolidGround(View view) : base(view)
         {
-            this.condiciones = new Condicion[3];
+            this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -712,11 +712,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class StillWater : Habilidad
+    public class StillWater : Skill
     {
         public StillWater(View view) : base(view)
         {
-            this.condiciones = new Condicion[3];
+            this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -728,11 +728,11 @@ namespace Fire_Emblem;
     }
 
 // solo revisar una condicion, cambiar esto
-    public class DragonSkin : Habilidad
+    public class DragonSkin : Skill
     {
         public DragonSkin(View view) : base(view)
         {
-            this.condiciones = new Condicion[5];
+            this.condiciones = new Condition[5];
             this.condiciones[0] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
             this.condiciones[1] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
             this.condiciones[2] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
@@ -747,11 +747,11 @@ namespace Fire_Emblem;
         }
     }
 
-    public class LightAndDark : Habilidad
+    public class LightAndDark : Skill
     {
         public LightAndDark(View view) : base(view)
         {
-            this.condiciones = new Condicion[6];
+            this.condiciones = new Condition[6];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
@@ -768,33 +768,33 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SingleMinded : Habilidad
+    public class SingleMinded : Skill
     {
         public SingleMinded(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeAtkIn(this.view, 8); 
         }
     }
 
-    public class Ignis : Habilidad
+    public class Ignis : Skill
     {
         public Ignis(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new FirstAtack();
             this.efectos = new Effect[1];
             this.efectos[0] = new ChangeStatInPercentaje(this.view, "Atk", 0.5); 
         }
     }
 
-    public class Perceptive : Habilidad
+    public class Perceptive : Skill
     {
         public Perceptive(View view) : base(view)
         {
-            this.condiciones = new Condicion[2];
+            this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
@@ -803,33 +803,33 @@ namespace Fire_Emblem;
         }
     }
 
-    public class Wrath : Habilidad
+    public class Wrath : Skill
     {
         public Wrath(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
             this.efectos[0] = new WrathEffect(this.view);
         }
     }
 
-    public class Soulblade : Habilidad
+    public class Soulblade : Skill
     {
         public Soulblade(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UseCertainWeapon("Sword");
             this.efectos = new Effect[1];
             this.efectos[0] = new SoulbladeEffect(this.view);
         }
     }
 
-    public class Sandstorm : Habilidad
+    public class Sandstorm : Skill
     {
         public Sandstorm(View view) : base(view)
         {
-            this.condiciones = new Condicion[1];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new SandstormEffect(this.view);

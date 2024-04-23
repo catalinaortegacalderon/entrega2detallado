@@ -1,8 +1,7 @@
 namespace Fire_Emblem;
 
-public class Unidad_Json
+public class JsonUnit
 {
-    // ACA_TODO_ES_STRING_SINO_SE_CAE
     public string Name { get; set; } 
     public string Weapon { get; set; }
     public string Gender { get; set; }

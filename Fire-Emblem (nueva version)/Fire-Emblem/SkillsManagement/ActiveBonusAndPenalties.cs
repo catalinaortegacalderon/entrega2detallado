@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BonusActivos
+public class ActiveBonusAndPenalties
 {
     public int attk;
     public int spd;
@@ -8,7 +8,7 @@ public class BonusActivos
     public int res;
     public int atkFollowup;
 
-    public BonusActivos()
+    public ActiveBonusAndPenalties()
     {
         this.attk = 0;
         this.spd = 0;

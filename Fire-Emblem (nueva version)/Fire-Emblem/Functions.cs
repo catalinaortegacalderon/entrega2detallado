@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
 
-public class Funciones
+public class Functions
 {
     public static bool Juego_Valido(string archivo)
     {
@@ -70,15 +70,15 @@ public class Funciones
         return true;
     }
     
-    public static Juego Construir_Juego(string archivo, View view)
+    public static GameContainer Construir_Juego(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;
         contadores_unidades[1] = 0;
         int jugador_actual = 0;
-        Unidad[][] unidades = new Unidad[2][];
-        unidades[0] = new Unidad[] { new Unidad(), new Unidad(), new Unidad() };
-        unidades[1] = new Unidad[] { new Unidad(), new Unidad(), new Unidad() };
+        Unit[][] unidades = new Unit[2][];
+        unidades[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        unidades[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
         string[] lineas = File.ReadAllLines(archivo);
         foreach (string linea in lineas)
         {
@@ -96,7 +96,7 @@ public class Funciones
                 string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                 string nombre = nuevo_string[0].Replace(" ", "");
                 string myJson = File.ReadAllText("characters.json");
-                var players = JsonSerializer.Deserialize<List<Unidad_Json>>(myJson);
+                var players = JsonSerializer.Deserialize<List<JsonUnit>>(myJson);
                 foreach (var player in players)
                 {
                     if (nombre == player.Name)
@@ -119,14 +119,14 @@ public class Funciones
             }
         }
 
-        Jugador jugador1 = new Jugador(contadores_unidades[0], unidades[0]);
-        Jugador jugador2 = new Jugador(contadores_unidades[1], unidades[1]);
-        Juego nuevo_juego = new Juego(jugador1, jugador2);
+        Player jugador1 = new Player(contadores_unidades[0], unidades[0]);
+        Player jugador2 = new Player(contadores_unidades[1], unidades[1]);
+        GameContainer newGameContainer = new GameContainer(jugador1, jugador2);
 
-        return nuevo_juego;
+        return newGameContainer;
     }
 
-    private static void InstanciarHabilidades(View view, string[] nuevo_string, Unidad[][] unidades, int jugador_actual,
+    private static void InstanciarHabilidades(View view, string[] nuevo_string, Unit[][] unidades, int jugador_actual,
         int[] contadores_unidades)
     {
         string stringHabilidades = nuevo_string[1];
@@ -141,7 +141,7 @@ public class Funciones
         }
     }
 
-    private static void HabilityConstructor(View view, Unidad[][] unidades, int jugador_actual, int[] contadores_unidades,
+    private static void HabilityConstructor(View view, Unit[][] unidades, int jugador_actual, int[] contadores_unidades,
         string habilidad, int contador_habilidades)
     {
         

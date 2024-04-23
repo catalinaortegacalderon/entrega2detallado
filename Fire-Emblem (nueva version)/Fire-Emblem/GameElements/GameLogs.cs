@@ -3,11 +3,11 @@ namespace Fire_Emblem;
 public class GameLogs
 {
     public string LastOponentName;
-    public int ataquesAcumulados;
+    public int amountOfAttacks;
 
     public GameLogs()
     {
         this.LastOponentName = "";
-        this.ataquesAcumulados = 0;
+        this.amountOfAttacks = 0;
     }
 }

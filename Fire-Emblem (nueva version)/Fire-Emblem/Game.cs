@@ -17,20 +17,20 @@ public class Game
     {
         if (CargarEquipos(out var archivos, out var input)) return;
         
-        Juego juego_actual = Funciones.Construir_Juego(archivos[input], _view);
-        while (juego_actual.terminado == false)
+        GameContainer currentGameContainer = Functions.Construir_Juego(archivos[input], _view);
+        while (currentGameContainer.gameIsTerminated == false)
         {
             // si pierde el jugador 0
             string nombre_perdedor1 = "";
             // si pierde el jugador 1
             string nombre_perdedor2 = "";
-            if (juego_actual.jugador_actual == 0)
+            if (currentGameContainer.currentPlayer == 0)
             {
                 // esta atacando el primer jugador
                 int contador1 = 0;
                 int contador2 = 0;
                 _view.WriteLine("Player 1 selecciona una opción");
-                foreach (Unidad unidad in juego_actual.jugadores[0].unidades)
+                foreach (Unit unidad in currentGameContainer.players[0].units)
                 {
                     if (unidad.nombre != "")
                     {
@@ -38,52 +38,42 @@ public class Game
                         contador1++;
                     }
                 }
-
                 int valor1 = Convert.ToInt32(_view.ReadLine());
                 _view.WriteLine("Player 2 selecciona una opción");
-                foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
+                foreach (Unit unidad in currentGameContainer.players[1].units)
                 {
-                    //Console.WriteLine("pase por 3");
-                    //Console.WriteLine("imprimiendo nombre de las unidades");
-                    //Console.WriteLine(unidad.nombre);
                     if (unidad.nombre != "")
                     {
                         _view.WriteLine(contador2 + ": " + unidad.nombre);
                         contador2++;
                     }
                 }
-
                 int valor2 = Convert.ToInt32(_view.ReadLine());
-                _view.WriteLine("Round " + juego_actual.ronda_actual + ": " +
-                                juego_actual.jugadores[0].unidades[valor1].nombre
+                _view.WriteLine("Round " + currentGameContainer.currentRound + ": " +
+                                currentGameContainer.players[0].units[valor1].nombre
                                 + " (Player 1) comienza");
                 //ataque
-                nombre_perdedor2 = juego_actual.atacar(1, _view, valor1, valor2);
-                juego_actual.jugador_actual = 1;
+                nombre_perdedor2 = currentGameContainer.atacar(1, _view, valor1, valor2);
+                currentGameContainer.currentPlayer = 1;
                 //contraataque
-                nombre_perdedor1 = juego_actual.atacar(2, _view, valor1, valor2);
+                nombre_perdedor1 = currentGameContainer.atacar(2, _view, valor1, valor2);
                 // followup
-                // SETEANDO BONUS FOLLOWUP
-
-                juego_actual.jugadores[0].unidades[valor1].BonusActivos.attk +=
-                    juego_actual.jugadores[0].unidades[valor1].BonusActivos.atkFollowup;
-                
-                Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
-                Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
-                                            + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
+                // seteando bonus followup
+                currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.attk +=
+                    currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.atkFollowup;
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                    juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd >=
-                    5 + juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
+                    currentGameContainer.players[1].units[valor2].spd + currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.spd >=
+                    5 + currentGameContainer.players[0].units[valor1].spd + currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.spd)
                 {
-                    juego_actual.jugador_actual = 1;
-                    nombre_perdedor1 = juego_actual.atacar(3, _view, valor1, valor2);
+                    currentGameContainer.currentPlayer = 1;
+                    nombre_perdedor1 = currentGameContainer.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                         juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + 5 <=
-                         juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
+                         currentGameContainer.players[1].units[valor2].spd + currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.spd + 5 <=
+                         currentGameContainer.players[0].units[valor1].spd + currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.spd)
                 {
-                    juego_actual.jugador_actual = 0;
-                    nombre_perdedor2 = juego_actual.atacar(3, _view, valor1, valor2);
+                    currentGameContainer.currentPlayer = 0;
+                    nombre_perdedor2 = currentGameContainer.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
@@ -91,48 +81,48 @@ public class Game
                 }
                 
                 // resetear bonus (tambien se resetea el followup aqui)
-                juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
-                juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
+                currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.ReestablecerBonusACero();
+                currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.ReestablecerBonusACero();
 
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
-                    _view.WriteLine(juego_actual.jugadores[0].unidades[valor1].nombre +
-                                    " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
-                                    ") : " + juego_actual.jugadores[1].unidades[valor2].nombre +
-                                    " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
+                    _view.WriteLine(currentGameContainer.players[0].units[valor1].nombre +
+                                    " (" + currentGameContainer.players[0].units[valor1].hp_actual +
+                                    ") : " + currentGameContainer.players[1].units[valor2].nombre +
+                                    " (" + currentGameContainer.players[1].units[valor2].hp_actual +
                                     ")");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
-                        juego_actual.jugadores[0].unidades[valor1].nombre;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
-                        juego_actual.jugadores[0].unidades[valor1].nombre;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName =
+                        currentGameContainer.players[0].units[valor1].nombre;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName =
+                        currentGameContainer.players[0].units[valor1].nombre;
+                    currentGameContainer.players[1].units[valor2].gameLogs.amountOfAttacks++;
+                    currentGameContainer.players[0].units[valor1].gameLogs.amountOfAttacks++;
                 }
                 else if (nombre_perdedor1 != "")
                 {
                     _view.WriteLine(nombre_perdedor1 +
-                                    " (0) : " + juego_actual.jugadores[1].unidades[valor2].nombre +
-                                    " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
+                                    " (0) : " + currentGameContainer.players[1].units[valor2].nombre +
+                                    " (" + currentGameContainer.players[1].units[valor2].hp_actual +
                                     ")");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName = nombre_perdedor1;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName = nombre_perdedor1;
+                    currentGameContainer.players[1].units[valor2].gameLogs.amountOfAttacks++;
                     
                 }
                 else
                 {
-                    _view.WriteLine(juego_actual.jugadores[0].unidades[valor1].nombre +
-                                    " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
+                    _view.WriteLine(currentGameContainer.players[0].units[valor1].nombre +
+                                    " (" + currentGameContainer.players[0].units[valor1].hp_actual +
                                     ") : " + nombre_perdedor2 +
                                     " (0)");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.LastOponentName = nombre_perdedor2;
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[0].units[valor1].gameLogs.LastOponentName = nombre_perdedor2;
+                    currentGameContainer.players[0].units[valor1].gameLogs.amountOfAttacks++;
                 }
 
-                juego_actual.jugador_actual = 1;
+                currentGameContainer.currentPlayer = 1;
             }
             else
             {
@@ -140,7 +130,7 @@ public class Game
                 int contador1 = 0;
                 int contador2 = 0;
                 _view.WriteLine("Player 2 selecciona una opción");
-                foreach (Unidad unidad in juego_actual.jugadores[1].unidades)
+                foreach (Unit unidad in currentGameContainer.players[1].units)
                 {
                     if (unidad.nombre != "")
                     {
@@ -151,7 +141,7 @@ public class Game
 
                 int valor2 = Convert.ToInt32(_view.ReadLine());
                 _view.WriteLine("Player 1 selecciona una opción");
-                foreach (Unidad unidad in juego_actual.jugadores[0].unidades)
+                foreach (Unit unidad in currentGameContainer.players[0].units)
                 {
                     if (unidad.nombre != "")
                     {
@@ -162,39 +152,39 @@ public class Game
 
                 int valor1 = Convert.ToInt32(_view.ReadLine());
 
-                _view.WriteLine("Round " + juego_actual.ronda_actual + ": " +
-                                juego_actual.jugadores[1].unidades[valor2].nombre
+                _view.WriteLine("Round " + currentGameContainer.currentRound + ": " +
+                                currentGameContainer.players[1].units[valor2].nombre
                                 + " (Player 2) comienza");
                 
                 //ataque
-                nombre_perdedor1 = juego_actual.atacar(1, _view, valor1, valor2);
-                juego_actual.jugador_actual = 0;
+                nombre_perdedor1 = currentGameContainer.atacar(1, _view, valor1, valor2);
+                currentGameContainer.currentPlayer = 0;
                 //contraataque
-                nombre_perdedor2 = juego_actual.atacar(2, _view, valor1, valor2);
+                nombre_perdedor2 = currentGameContainer.atacar(2, _view, valor1, valor2);
                 // followup
                 // setear bonus followup
                 
                 // SETEANDO BONUS FOLLOW UP
 
-                juego_actual.jugadores[1].unidades[valor2].BonusActivos.attk +=
-                    juego_actual.jugadores[1].unidades[valor2].BonusActivos.atkFollowup;
+                currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.attk +=
+                    currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.atkFollowup;
                 
                 Console.WriteLine("IMPRIMIENDO ANTES DEL FOLLOWUP");
-                Console.WriteLine(          "UNO" +           juego_actual.jugadores[1].unidades[valor2].spd + "DOS" + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + "TRES" +
-                                                       + juego_actual.jugadores[0].unidades[valor1].spd + "CUATRO" + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd);
+                Console.WriteLine(          "UNO" +           currentGameContainer.players[1].units[valor2].spd + "DOS" + currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.spd + "TRES" +
+                                                       + currentGameContainer.players[0].units[valor1].spd + "CUATRO" + currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.spd);
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                    juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd >=
-                    5 + juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
+                    currentGameContainer.players[1].units[valor2].spd + currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.spd >=
+                    5 + currentGameContainer.players[0].units[valor1].spd + currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.spd)
                 {
-                    juego_actual.jugador_actual = 1;
-                    nombre_perdedor1 = juego_actual.atacar(3, _view, valor1, valor2);
+                    currentGameContainer.currentPlayer = 1;
+                    nombre_perdedor1 = currentGameContainer.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "" &&
-                         juego_actual.jugadores[1].unidades[valor2].spd + juego_actual.jugadores[1].unidades[valor2].BonusActivos.spd + 5 <=
-                         juego_actual.jugadores[0].unidades[valor1].spd + juego_actual.jugadores[0].unidades[valor1].BonusActivos.spd)
+                         currentGameContainer.players[1].units[valor2].spd + currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.spd + 5 <=
+                         currentGameContainer.players[0].units[valor1].spd + currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.spd)
                 {
-                    juego_actual.jugador_actual = 0;
-                    nombre_perdedor2 = juego_actual.atacar(3, _view, valor1, valor2);
+                    currentGameContainer.currentPlayer = 0;
+                    nombre_perdedor2 = currentGameContainer.atacar(3, _view, valor1, valor2);
                 }
                 else if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
@@ -202,8 +192,8 @@ public class Game
                 }
                 
                 // resetear bonus, tambien se resetea bonus followup de sandstorm
-                juego_actual.jugadores[0].unidades[valor1].BonusActivos.ReestablecerBonusACero();
-                juego_actual.jugadores[1].unidades[valor2].BonusActivos.ReestablecerBonusACero();
+                currentGameContainer.players[0].units[valor1].ActiveBonusAndPenalties.ReestablecerBonusACero();
+                currentGameContainer.players[1].units[valor2].ActiveBonusAndPenalties.ReestablecerBonusACero();
                 
                 // logs
                                 
@@ -211,50 +201,50 @@ public class Game
                 //mostrar hp restante de cada unidad
                 if (nombre_perdedor1 == "" && nombre_perdedor2 == "")
                 {
-                    _view.WriteLine(juego_actual.jugadores[1].unidades[valor2].nombre +
-                                    " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
-                                    ") : " + juego_actual.jugadores[0].unidades[valor1].nombre +
-                                    " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
+                    _view.WriteLine(currentGameContainer.players[1].units[valor2].nombre +
+                                    " (" + currentGameContainer.players[1].units[valor2].hp_actual +
+                                    ") : " + currentGameContainer.players[0].units[valor1].nombre +
+                                    " (" + currentGameContainer.players[0].units[valor1].hp_actual +
                                     ")");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
-                        juego_actual.jugadores[0].unidades[valor1].nombre;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName =
-                        juego_actual.jugadores[0].unidades[valor1].nombre;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName =
+                        currentGameContainer.players[0].units[valor1].nombre;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName =
+                        currentGameContainer.players[0].units[valor1].nombre;
+                    currentGameContainer.players[1].units[valor2].gameLogs.amountOfAttacks++;
+                    currentGameContainer.players[0].units[valor1].gameLogs.amountOfAttacks++;
                 }
                 else if (nombre_perdedor1 != "")
                 {
                     // aca perdio el jug 1
-                    _view.WriteLine(juego_actual.jugadores[1].unidades[valor2].nombre +
-                                    " (" + juego_actual.jugadores[1].unidades[valor2].hp_actual +
+                    _view.WriteLine(currentGameContainer.players[1].units[valor2].nombre +
+                                    " (" + currentGameContainer.players[1].units[valor2].hp_actual +
                                     ") : " + nombre_perdedor1 +
                                     " (0)");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.LastOponentName = nombre_perdedor1;
-                    juego_actual.jugadores[1].unidades[valor2].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[1].units[valor2].gameLogs.LastOponentName = nombre_perdedor1;
+                    currentGameContainer.players[1].units[valor2].gameLogs.amountOfAttacks++;
                 }
                 else
                 {
                     // aca perdio el jug 2
                     _view.WriteLine(nombre_perdedor2 +
-                                    " (0) : " + juego_actual.jugadores[0].unidades[valor1].nombre +
-                                    " (" + juego_actual.jugadores[0].unidades[valor1].hp_actual +
+                                    " (0) : " + currentGameContainer.players[0].units[valor1].nombre +
+                                    " (" + currentGameContainer.players[0].units[valor1].hp_actual +
                                     ")");
                     // setear ultimo contrincante
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.LastOponentName = nombre_perdedor2;
-                    juego_actual.jugadores[0].unidades[valor1].gameLogs.ataquesAcumulados++;
+                    currentGameContainer.players[0].units[valor1].gameLogs.LastOponentName = nombre_perdedor2;
+                    currentGameContainer.players[0].units[valor1].gameLogs.amountOfAttacks++;
                 }
 
-                juego_actual.jugador_actual = 0;
+                currentGameContainer.currentPlayer = 0;
             }
 
-            juego_actual.ronda_actual++;
-            juego_actual.ronda_terminada = false;
+            currentGameContainer.currentRound++;
+            currentGameContainer.roundIsTerminated = false;
         }
 
-        _view.WriteLine("Player " + (juego_actual.ganador + 1) + " ganó");
+        _view.WriteLine("Player " + (currentGameContainer.winner + 1) + " ganó");
     }
 
     private bool CargarEquipos(out string[] archivos, out int input)
@@ -269,7 +259,7 @@ public class Game
         }
 
         input = Convert.ToInt32(_view.ReadLine());
-        if (Funciones.Juego_Valido(archivos[input]) == false)
+        if (Functions.Juego_Valido(archivos[input]) == false)
         {
             _view.WriteLine("Archivo de equipos no válido");
             return true;
