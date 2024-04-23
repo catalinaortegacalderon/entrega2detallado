@@ -23,15 +23,10 @@ public class Game
         GameController juego_actual = Functions.Construir_Juego(archivos[input], _view);
         while (juego_actual.gameIsTerminated == false)
         {
-            //juego_actual.MakeAnotherRound();
-            //juego_actual.MakeAnotherRound();
-            // si pierde el jugador 0
             _player1UnitLooserName = "";
-            // si pierde el jugador 1
             _player2UnitLooserName = "";
             if (juego_actual.currentPlayer == 0)
             {
-                // esta atacando el primer jugador
                 int numberUnitOfPlayer1 = AskPlayerForTheUnitNumber(juego_actual, 0);
                 int numberUnitOfPlayer2 = AskPlayerForTheUnitNumber(juego_actual, 1);
                 _view.WriteLine("Round " + juego_actual.currentRound + ": " +
@@ -58,13 +53,6 @@ public class Game
                                     ") : " + juego_actual.players[1].units[numberUnitOfPlayer2].nombre +
                                     " (" + juego_actual.players[1].units[numberUnitOfPlayer2].hp_actual +
                                     ")");
-                    // setear ultimo contrincante
-                    juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName =
-                        juego_actual.players[0].units[numberUnitOfPlayer1].nombre;
-                    juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName =
-                        juego_actual.players[0].units[numberUnitOfPlayer1].nombre;
-                    juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.amountOfAttacks++;
-                    juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.amountOfAttacks++;
                 }
                 else if (_player1UnitLooserName != "")
                 {
@@ -72,10 +60,6 @@ public class Game
                                     " (0) : " + juego_actual.players[1].units[numberUnitOfPlayer2].nombre +
                                     " (" + juego_actual.players[1].units[numberUnitOfPlayer2].hp_actual +
                                     ")");
-                    // setear ultimo contrincante
-                    juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName = _player1UnitLooserName;
-                    juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.amountOfAttacks++;
-                    
                 }
                 else
                 {
@@ -83,10 +67,8 @@ public class Game
                                     " (" + juego_actual.players[0].units[numberUnitOfPlayer1].hp_actual +
                                     ") : " + _player2UnitLooserName +
                                     " (0)");
-                    // setear ultimo contrincante
-                    juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.LastOponentName = _player2UnitLooserName;
-                    juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.amountOfAttacks++;
                 }
+                UpdateGameLogs(juego_actual, numberUnitOfPlayer2, numberUnitOfPlayer1);
 
                 juego_actual.currentPlayer = 1;
             }
@@ -146,11 +128,8 @@ public class Game
                                     " (0) : " + juego_actual.players[0].units[numberUnitOfPlayer1].nombre +
                                     " (" + juego_actual.players[0].units[numberUnitOfPlayer1].hp_actual +
                                     ")");
-                    // setear ultimo contrincante
-                    juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.LastOponentName = _player2UnitLooserName;
-                    juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.amountOfAttacks++;
                 }
-
+                UpdateGameLogs(juego_actual, numberUnitOfPlayer2, numberUnitOfPlayer1);
                 juego_actual.currentPlayer = 0;
             }
 
@@ -159,8 +138,20 @@ public class Game
         }
         _view.WriteLine("Player " + (juego_actual.winner + 1) + " ganó");
     }
-    
 
+    private void UpdateGameLogs(GameController juego_actual, int numberUnitOfPlayer2, int numberUnitOfPlayer1)
+    {
+        if (_player1UnitLooserName == "" && _player2UnitLooserName == "")
+        {
+            juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName = juego_actual.players[0].units[numberUnitOfPlayer1].nombre;
+            juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName = juego_actual.players[0].units[numberUnitOfPlayer1].nombre;
+        }
+        else if (_player1UnitLooserName != "") juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.LastOponentName = _player1UnitLooserName;
+        else if (_player2UnitLooserName != "") juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.LastOponentName = _player2UnitLooserName;
+        juego_actual.players[1].units[numberUnitOfPlayer2].gameLogs.amountOfAttacks++;
+        juego_actual.players[0].units[numberUnitOfPlayer1].gameLogs.amountOfAttacks++;
+    }
+    
     private bool CargarEquipos(out string[] archivos, out int input)
     {
         _view.WriteLine("Elige un archivo para cargar los equipos");
