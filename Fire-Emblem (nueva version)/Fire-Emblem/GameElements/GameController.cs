@@ -11,6 +11,7 @@ public class GameController
     public bool roundIsTerminated = false;
     // arreglos: hacer variables privadas (setter y getter)
     //  ver si dejo lineas largas o con enter
+    // ver si dejo view como atributo o solo como param de funcion
     // IDEA: SOLO ATACKING PLAYER Y DEFENSE PLAYER, SACAR CURRENT PLAYER
 
     public GameController(Player jugador1, Player jugador2)
@@ -29,13 +30,13 @@ public class GameController
         {
             return "";
         }
-
         // EL NUMERO DE ATAQUE PUEDE SER 1-2-3 DEPENDIENDO SI ES ATAQUE, CONTRAATAQUE O FOLLOWUP
         // follow up lo hace el que tiene 5 puntos mas de speed que el otro
         bool imprimir = false;
-        int ataque;
+        int attackValue;
         if (numero_ataque == 1)
         {
+            
             //imrpimo ventaja y luego activo habilidades
             imprimir = true;
 
@@ -49,9 +50,12 @@ public class GameController
             //primero activar habilidades
             // revisar si son ambas, o solo el jugador atacante
 
-            ataque = players[0].calcular_atque(imprimir, view, unidad1, players[1].units[unidad2]);
+            //ataque = players[0].calcular_atque(imprimir, view, unidad1, players[1].units[unidad2]);
+            //ataque = CalcularAtaque(players[0].units[unidad1], players[1].units[unidad2]);
             if (numero_ataque == 1)
             {
+                ImprimirVentajas(view, players[0].units[unidad1], players[1].units[unidad2]);
+                
                 // activando habilidades atacante (primer jugador)
                 foreach (Skill habilidad in players[0].units[unidad1].habilidades)
                 {
@@ -66,12 +70,12 @@ public class GameController
             }
             //me faltan las anulaciones
             // recalcular ataque con los cambios    
-            ataque = players[0].calcular_atque(false, view, unidad1, players[1].units[unidad2]);
+            attackValue = CalcularAtaque(players[0].units[unidad1], players[1].units[unidad2]);
             view.WriteLine(players[0].units[unidad1].nombre +
                            " ataca a " +
                            players[1].units[unidad2].nombre + " con " +
-                           ataque + " de daño");
-            if (ataque >= players[1].units[unidad2].hp_actual)
+                           attackValue + " de daño");
+            if (attackValue >= players[1].units[unidad2].hp_actual)
             {
                 //muere esta unidad
                 nombre_perdedor = players[1].units[unidad2].nombre;
@@ -105,7 +109,7 @@ public class GameController
             }
             else
             {
-                players[1].units[unidad2].hp_actual = players[1].units[unidad2].hp_actual - ataque;
+                players[1].units[unidad2].hp_actual = players[1].units[unidad2].hp_actual - attackValue;
             }
 
             return "";
@@ -114,10 +118,11 @@ public class GameController
         else
         {
             // imrpimir
-            ataque = players[1].calcular_atque(imprimir, view, unidad2, players[0].units[unidad1]);
+            //ataque = players[1].calcular_atque(imprimir, view, unidad2, players[0].units[unidad1]);
             // activando habilidades atacante (jugador 2)
             if (numero_ataque == 1)
             {
+                ImprimirVentajas(view, players[1].units[unidad2], players[0].units[unidad1]);
                 // aplicar habilidades
                 //activando habilidades atacante (segundo jugador)
                 foreach (Skill habilidad in players[1].units[unidad2].habilidades)
@@ -135,13 +140,14 @@ public class GameController
         }
 
         // recalcular ataque sin imprimir
-        ataque = players[1].calcular_atque(false, view, unidad2, players[0].units[unidad1]);
+        //ataque = players[1].calcular_atque(false, view, unidad2, players[0].units[unidad1]);
+        attackValue = CalcularAtaque(players[1].units[unidad2], players[0].units[unidad1]);
 
         view.WriteLine(players[1].units[unidad2].nombre +
                        " ataca a " +
                        players[0].units[unidad1].nombre + " con " +
-                       ataque + " de daño");
-        if (ataque >= players[0].units[unidad1].hp_actual)
+                       attackValue + " de daño");
+        if (attackValue >= players[0].units[unidad1].hp_actual)
         {
             nombre_perdedor = players[0].units[unidad1].nombre;
             //muere esta unidad
@@ -174,7 +180,7 @@ public class GameController
         }
         else
         {
-            players[0].units[unidad1].hp_actual = players[0].units[unidad1].hp_actual - ataque;
+            players[0].units[unidad1].hp_actual = players[0].units[unidad1].hp_actual - attackValue;
         }
 
         return "";
@@ -183,7 +189,7 @@ public class GameController
     public int CalcularAtaque(Unit atacckingUnit, Unit defenseUnit)
     {
         string arma_atac = atacckingUnit.arma;
-        string arma_def = atacckingUnit.arma;
+        string arma_def = defenseUnit.arma;
         int def_o_res_rival;
         if (arma_atac == "Magic") def_o_res_rival = defenseUnit.res + defenseUnit.ActiveBonusAndPenalties.res;
         else
@@ -206,7 +212,7 @@ public class GameController
     public void ImprimirVentajas(View view, Unit atacckingUnit, Unit defenseUnit)
     {
         string arma_atac = atacckingUnit.arma;
-        string arma_def = atacckingUnit.arma;
+        string arma_def = defenseUnit.arma;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic"
             || arma_def == "Bow" || arma_atac == "Bow")
         {
