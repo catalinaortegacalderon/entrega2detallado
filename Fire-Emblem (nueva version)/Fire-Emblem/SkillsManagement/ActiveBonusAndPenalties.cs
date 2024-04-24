@@ -16,7 +16,7 @@ public class ActiveBonusAndPenalties
         this.res = 0;
     }
 
-    public void ReestablecerBonusACero()
+    public void ResetBonusToZero()
     {
         this.attk = 0;
         this.spd = 0;

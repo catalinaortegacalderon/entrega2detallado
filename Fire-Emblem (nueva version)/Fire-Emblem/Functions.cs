@@ -70,7 +70,7 @@ public class Functions
         return true;
     }
     
-    public static GameController Construir_Juego(string archivo, View view)
+    public static GameController BuildGameController(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;

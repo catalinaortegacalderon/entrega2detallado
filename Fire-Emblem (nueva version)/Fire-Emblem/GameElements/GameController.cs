@@ -4,7 +4,7 @@ using Fire_Emblem_View;
 public class GameController
 {
     public Player[] players = new Player[2];
-    public int currentPlayer;
+    public int currentAttacker;
     public bool gameIsTerminated;
     public int currentRound = 1;
     public int winner = -1;
@@ -13,7 +13,7 @@ public class GameController
 
     public GameController(Player jugador1, Player jugador2)
     {
-        this.currentPlayer = 0;
+        this.currentAttacker = 0;
         this.players[0] = jugador1;
         this.players[1] = jugador2;
         this.gameIsTerminated = false;
@@ -39,7 +39,7 @@ public class GameController
 
         }
 
-        if (currentPlayer == 0)
+        if (currentAttacker == 0)
         {
             // PRIMER JUGADOR ATACA AL SEGUNDO
             // aca imprimo, tal vez pasarlo al true de antes    
@@ -180,7 +180,7 @@ public class GameController
     }
 
 
-    public string atacar(int numero_ataque, View view, int unidad1, int unidad2)
+    public string Attack(int numero_ataque, View view, int unidad1, int unidad2)
     {
         string nombre_perdedor = "";
         //VOY A RETORNAR EL NOMBRE DE UNA UNIDAD SI ESQUE MUERE, SINO STRING VACIO
@@ -200,7 +200,7 @@ public class GameController
 
         }
 
-        if (currentPlayer == 0)
+        if (currentAttacker == 0)
         {
             // PRIMER JUGADOR ATACA AL SEGUNDO
             // aca imprimo, tal vez pasarlo al true de antes    
