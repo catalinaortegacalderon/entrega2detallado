@@ -16,7 +16,11 @@ public class Unit
     public int spd;
     public int def;
     public int res;
-    public ActiveBonusAndPenalties ActiveBonusAndPenalties = new ActiveBonusAndPenalties();
+    // tal ves todos los de aca abajo pueden ser igual
+    public ActiveBonus activeBonus = new ActiveBonus();
+    public ActivePenalties activePenalties = new ActivePenalties();
+    public ActiveBonusNeutralization activeBonusNeutralization = new ActiveBonusNeutralization();
+    public ActivePenaltiesNeutralization activePenaltiesNeutralization = new ActivePenaltiesNeutralization();
     public GameLogs gameLogs = new GameLogs();
     public Skill[] habilidades = new Skill[2];
     

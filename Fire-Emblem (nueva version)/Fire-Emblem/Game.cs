@@ -124,21 +124,29 @@ public class Game
     private void ActivateFollowupBonusOfPlayer(int playerNumber)
     {
         int numberOfThePlayersUnit  = (playerNumber == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _gameController.players[playerNumber].units[numberOfThePlayersUnit].ActiveBonusAndPenalties.attk += _gameController.players[playerNumber].units[numberOfThePlayersUnit].ActiveBonusAndPenalties.atkFollowup;
+        _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.attk += _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.atkFollowup;
     }
 
     private void Followup()
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-            _gameController.players[1].units[_currentUnitNumberOfPlayer2].spd + _gameController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonusAndPenalties.spd >=
-            5 + _gameController.players[0].units[_currentUnitNumberOfPlayer1].spd + _gameController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonusAndPenalties.spd)
+            _gameController.players[1].units[_currentUnitNumberOfPlayer2].spd 
+            + _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
+            + _gameController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd >=
+            5 + _gameController.players[0].units[_currentUnitNumberOfPlayer1].spd 
+              + _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
+              +_gameController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd)
         {
             _gameController.currentAttacker = 1;
             _currentRoundsPlayer1LooserUnitsName = _gameController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-                 _gameController.players[1].units[_currentUnitNumberOfPlayer2].spd + _gameController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonusAndPenalties.spd + 5 <=
-                 _gameController.players[0].units[_currentUnitNumberOfPlayer1].spd + _gameController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonusAndPenalties.spd)
+                 _gameController.players[1].units[_currentUnitNumberOfPlayer2].spd 
+                 + _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
+                 + _gameController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd + 5 <=
+                 _gameController.players[0].units[_currentUnitNumberOfPlayer1].spd 
+                 + _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
+                 +_gameController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd)
         {
             _gameController.currentAttacker = 0;
             _currentRoundsPlayer2LooserUnitsName = _gameController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
@@ -151,8 +159,8 @@ public class Game
     
     private void ResetUnitsBonus()
     {
-        _gameController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonusAndPenalties.ResetBonusToZero();
-        _gameController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonusAndPenalties.ResetBonusToZero();
+        _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.ResetBonusToZero();
+        _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.ResetBonusToZero();
     }
     
     private void UpdateGameLogs()

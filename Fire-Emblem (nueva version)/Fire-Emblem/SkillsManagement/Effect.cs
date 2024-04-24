@@ -46,115 +46,6 @@ public class ChangeHPIn : Effect
     }
 }
 
-public class ChangeSpdIn : Effect
-{
-    public ChangeSpdIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        unitPropia.ActiveBonusAndPenalties.spd = unitPropia.ActiveBonusAndPenalties.spd + this.cantidad;
-        Console.WriteLine("Paso por donde quiero");
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        this.view.WriteLine(unitPropia.nombre + " obtiene Spd" + signo + this.cantidad);
-    }
-}
-
-public class ChangeDefIn : Effect
-{
-    public ChangeDefIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        unitPropia.ActiveBonusAndPenalties.def = unitPropia.ActiveBonusAndPenalties.def + this.cantidad;
-        this.view.WriteLine(unitPropia.nombre + " obtiene Def" + signo + this.cantidad);
-    }
-}
-
-public class ChangeResIn : Effect
-{
-    public ChangeResIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        unitPropia.ActiveBonusAndPenalties.res = unitPropia.ActiveBonusAndPenalties.res + this.cantidad;
-        this.view.WriteLine(unitPropia.nombre + " obtiene Res" + signo + this.cantidad);
-    }
-}
-
-public class ChangeAtkIn : Effect
-{
-    public ChangeAtkIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        unitPropia.ActiveBonusAndPenalties.attk = unitPropia.ActiveBonusAndPenalties.attk + this.cantidad;
-        this.view.WriteLine(unitPropia.nombre + " obtiene Atk" + signo + this.cantidad);
-    }
-}
-
-public class ChangeRivalsAtkIn : Effect
-{
-    public ChangeRivalsAtkIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        OponentsUnit.ActiveBonusAndPenalties.attk  = OponentsUnit.ActiveBonusAndPenalties.attk + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        // ver si se imprime aca
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Atk" + signo + this.cantidad);
-    }
-}
-
-public class ChangeRivalsSpdIn : Effect
-{
-    public ChangeRivalsSpdIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        OponentsUnit.ActiveBonusAndPenalties.spd  = OponentsUnit.ActiveBonusAndPenalties.spd + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        // ver si se imprime aca
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Spd" + signo + this.cantidad);
-    }
-}
-
-public class ChangeRivalsDefIn : Effect
-{
-    public ChangeRivalsDefIn(View view, int cantidad) : base(view)
-    {
-        this.cantidad = cantidad;
-    }
-
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
-    {
-        OponentsUnit.ActiveBonusAndPenalties.def  = OponentsUnit.ActiveBonusAndPenalties.def + this.cantidad;
-        string signo = (this.cantidad > 0) ? "+" :  "";
-        // ver si se imprime aca
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Def" + signo + this.cantidad);
-    }
-}
-
 public class ReduceRivalsSpdInPercentaje : Effect
 {
     private double reductionPercentaje;
@@ -166,13 +57,11 @@ public class ReduceRivalsSpdInPercentaje : Effect
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.ActiveBonusAndPenalties.spd  = OponentsUnit.ActiveBonusAndPenalties.spd - reduction;
+        OponentsUnit.activeBonus.spd  = OponentsUnit.activeBonus.spd - reduction;
         // ver si se imprime aca
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Spd-" + reduction);
     }
 }
-
-
 public class ReduceRivalsDefInPercentaje : Effect
 {
     private double reductionPercentaje;
@@ -184,7 +73,7 @@ public class ReduceRivalsDefInPercentaje : Effect
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.ActiveBonusAndPenalties.spd  = OponentsUnit.ActiveBonusAndPenalties.spd - reduction;
+        OponentsUnit.activeBonus.spd  = OponentsUnit.activeBonus.spd - reduction;
         // ver si se imprime aca
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Def-" + reduction);
     }
@@ -199,21 +88,21 @@ public class NeutralizeOponentsBonus : Effect
     }
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (OponentsUnit.ActiveBonusAndPenalties.attk > 0 )
+        if (OponentsUnit.activeBonus.attk > 0 )
         {
-            OponentsUnit.ActiveBonusAndPenalties.attk = 0;
+            OponentsUnit.activeBonus.attk = 0;
         }
-        if (OponentsUnit.ActiveBonusAndPenalties.spd > 0 )
+        if (OponentsUnit.activeBonus.spd > 0 )
         {
-            OponentsUnit.ActiveBonusAndPenalties.spd = 0;
+            OponentsUnit.activeBonus.spd = 0;
         }
-        if (OponentsUnit.ActiveBonusAndPenalties.def > 0 )
+        if (OponentsUnit.activeBonus.def > 0 )
         {
-            OponentsUnit.ActiveBonusAndPenalties.def = 0;
+            OponentsUnit.activeBonus.def = 0;
         }
-        if (OponentsUnit.ActiveBonusAndPenalties.res > 0 )
+        if (OponentsUnit.activeBonus.res > 0 )
         {
-            OponentsUnit.ActiveBonusAndPenalties.res = 0;
+            OponentsUnit.activeBonus.res = 0;
         }
         this.view.WriteLine("Los bonus de Atk de " + OponentsUnit.nombre + " fueron neutralizados");
         this.view.WriteLine("Los bonus de Spd de " + OponentsUnit.nombre + " fueron neutralizados");
@@ -229,23 +118,25 @@ public class NeutralizePenalties : Effect
     public NeutralizePenalties(View view) : base(view)
     {
     }
+    
+    // VER SI SOLO ES CUANDO BONUS ES POSITIVO O SI ES SIEMPRE Y LO IMPRIMO SOLO CUAND HAT, TAL VEZ NEUTRALIZO ANTES DE APLICAR
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (unitPropia.ActiveBonusAndPenalties.attk < 0 )
+        if (unitPropia.activePenalties.attk < 0 )
         {
-            unitPropia.ActiveBonusAndPenalties.attk = 0;
+            unitPropia.activeBonusNeutralization.attk = 0;
         }
-        if (unitPropia.ActiveBonusAndPenalties.spd < 0 )
+        if (unitPropia.activePenalties.spd < 0 )
         {
-            unitPropia.ActiveBonusAndPenalties.spd = 0;
+            unitPropia.activeBonusNeutralization.spd = 0;
         }
-        if (unitPropia.ActiveBonusAndPenalties.def < 0 )
+        if (unitPropia.activePenalties.def < 0 )
         {
-            unitPropia.ActiveBonusAndPenalties.def = 0;
+            unitPropia.activeBonusNeutralization.def = 0;
         }
-        if (unitPropia.ActiveBonusAndPenalties.res < 0 )
+        if (unitPropia.activePenalties.res < 0 )
         {
-            unitPropia.ActiveBonusAndPenalties.res = 0;
+            unitPropia.activeBonusNeutralization.res = 0;
         }
         this.view.WriteLine("Los penalties de Atk de " + unitPropia.nombre + " fueron neutralizados");
         this.view.WriteLine("Los penalties de Spd de " + unitPropia.nombre + " fueron neutralizados");
@@ -267,10 +158,26 @@ public class ChangeStatsIn : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (stat=="Atk") unitPropia.ActiveBonusAndPenalties.attk  = unitPropia.ActiveBonusAndPenalties.attk + this.cantidad;
-        else if (stat == "Def") unitPropia.ActiveBonusAndPenalties.def = unitPropia.ActiveBonusAndPenalties.def + this.cantidad;
-        else if (stat == "Res") unitPropia.ActiveBonusAndPenalties.res = unitPropia.ActiveBonusAndPenalties.res + this.cantidad;
-        else if (stat == "Spd") unitPropia.ActiveBonusAndPenalties.spd = unitPropia.ActiveBonusAndPenalties.spd + this.cantidad;
+        if (stat == "Atk")
+        {
+            if ( cantidad > 0) unitPropia.activeBonus.attk  = unitPropia.activeBonus.attk + this.cantidad;
+            if ( cantidad < 0) unitPropia.activePenalties.attk  = unitPropia.activePenalties.attk + this.cantidad;
+        }
+        else if (stat == "Def")
+        {
+            if ( cantidad > 0) unitPropia.activeBonus.def  = unitPropia.activeBonus.def + this.cantidad;
+            if ( cantidad < 0) unitPropia.activePenalties.def  = unitPropia.activePenalties.def + this.cantidad;
+        }
+        else if (stat == "Res")
+        {
+            if ( cantidad > 0) unitPropia.activeBonus.res  = unitPropia.activeBonus.res + this.cantidad;
+            if ( cantidad < 0) unitPropia.activePenalties.res  = unitPropia.activePenalties.res + this.cantidad;
+        }
+        else if (stat == "Spd")
+        {
+            if ( cantidad > 0) unitPropia.activeBonus.spd  = unitPropia.activeBonus.spd + this.cantidad;
+            if ( cantidad < 0) unitPropia.activePenalties.spd  = unitPropia.activePenalties.spd + this.cantidad;
+        }
         string signo = (this.cantidad > 0) ? "+" :  "";
         this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + this.cantidad);
     }
@@ -288,10 +195,26 @@ public class ChangeRivalsStatsIn : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (stat=="Atk") OponentsUnit.ActiveBonusAndPenalties.attk  = OponentsUnit.ActiveBonusAndPenalties.attk + this.cantidad;
-        else if (stat == "Def") OponentsUnit.ActiveBonusAndPenalties.def = OponentsUnit.ActiveBonusAndPenalties.def + this.cantidad;
-        else if (stat == "Res") OponentsUnit.ActiveBonusAndPenalties.res = OponentsUnit.ActiveBonusAndPenalties.res + this.cantidad;
-        else if (stat == "Spd") OponentsUnit.ActiveBonusAndPenalties.spd = OponentsUnit.ActiveBonusAndPenalties.spd + this.cantidad;
+        if (stat == "Atk")
+        {
+            if ( cantidad > 0) OponentsUnit.activeBonus.attk  = OponentsUnit.activeBonus.attk + this.cantidad;
+            if ( cantidad < 0) OponentsUnit.activePenalties.attk  = OponentsUnit.activePenalties.attk + this.cantidad;
+        }
+        else if (stat == "Def")
+        {
+            if ( cantidad > 0) OponentsUnit.activeBonus.def  = OponentsUnit.activeBonus.def + this.cantidad;
+            if ( cantidad < 0) OponentsUnit.activePenalties.def  = OponentsUnit.activePenalties.def + this.cantidad;
+        }
+        else if (stat == "Res")
+        {
+            if ( cantidad > 0) OponentsUnit.activeBonus.res  = OponentsUnit.activeBonus.res + this.cantidad;
+            if ( cantidad < 0) OponentsUnit.activePenalties.res  = OponentsUnit.activePenalties.res + this.cantidad;
+        }
+        else if (stat == "Spd")
+        {
+            if ( cantidad > 0) OponentsUnit.activeBonus.spd  = OponentsUnit.activeBonus.spd + this.cantidad;
+            if ( cantidad < 0) OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd + this.cantidad;
+        }
         string signo = (this.cantidad > 0) ? "+" :  "";
         this.view.WriteLine(OponentsUnit.nombre + " obtiene " + stat + signo + this.cantidad);
     }
@@ -307,10 +230,10 @@ public class NeutralizeOneOfOponentsBonus : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (stat=="Atk" && OponentsUnit.ActiveBonusAndPenalties.attk > 0) OponentsUnit.ActiveBonusAndPenalties.attk  = 0;
-        else if (stat == "Def" && OponentsUnit.ActiveBonusAndPenalties.attk > 0) OponentsUnit.ActiveBonusAndPenalties.def = 0;
-        else if (stat == "Res" && OponentsUnit.ActiveBonusAndPenalties.attk > 0) OponentsUnit.ActiveBonusAndPenalties.res = 0;
-        else if (stat == "Spd"&& OponentsUnit.ActiveBonusAndPenalties.attk > 0) OponentsUnit.ActiveBonusAndPenalties.spd = 0;
+        if (stat=="Atk" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.attk  = 0;
+        else if (stat == "Def" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.def = 0;
+        else if (stat == "Res" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.res = 0;
+        else if (stat == "Spd"&& OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.spd = 0;
         string signo = (this.cantidad > 0) ? "+" :  "";
         this.view.WriteLine("Los bonus de " + this.stat + " de " + OponentsUnit.nombre + " fueron neutralizados");
     }
@@ -332,23 +255,23 @@ public class ChangeStatInPercentaje : Effect
         if (stat == "Atk")
         {
             cantidad = Convert.ToInt32(Math.Truncate(unitPropia.attk * this.percentaje));
-            unitPropia.ActiveBonusAndPenalties.attk  += cantidad;
+            unitPropia.activeBonus.attk  += cantidad;
             
         }
         else if (stat == "Def")
         {
             cantidad = Convert.ToInt32(Math.Truncate(unitPropia.def * this.percentaje));
-            unitPropia.ActiveBonusAndPenalties.def += cantidad;
+            unitPropia.activeBonus.def += cantidad;
         }
         else if (stat == "Res")
         {
             cantidad = Convert.ToInt32(Math.Truncate(unitPropia.res * this.percentaje));
-            unitPropia.ActiveBonusAndPenalties.res += cantidad;
+            unitPropia.activeBonus.res += cantidad;
         }
         else if (stat == "Spd")
         {
             cantidad = Convert.ToInt32(Math.Truncate(unitPropia.spd * this.percentaje));
-            unitPropia.ActiveBonusAndPenalties.spd += cantidad;
+            unitPropia.activeBonus.spd += cantidad;
         }
         string signo = (this.percentaje > 0) ? "+" :  "";
         this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad);
@@ -372,26 +295,26 @@ public class ChangeStatsOnePointForEvery : Effect
         {
             double division = unitPropia.attk / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.ActiveBonusAndPenalties.attk  += cantidad;
+            unitPropia.activeBonus.attk  += cantidad;
             
         }
         else if (stat == "Def")
         {
             double division = unitPropia.def / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.ActiveBonusAndPenalties.def += cantidad;
+            unitPropia.activeBonus.def += cantidad;
         }
         else if (stat == "Res")
         {
             double division = unitPropia.res / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.ActiveBonusAndPenalties.res += cantidad;
+            unitPropia.activeBonus.res += cantidad;
         }
         else if (stat == "Spd")
         {
             double division = unitPropia.spd / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.ActiveBonusAndPenalties.spd += cantidad;
+            unitPropia.activeBonus.spd += cantidad;
         }
         this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + "+" + cantidad);
     }
@@ -407,8 +330,8 @@ public class WrathEffect : Effect
     {
         int cantidad = unitPropia.hp_max - unitPropia.hp_actual;
         if (cantidad > 30) cantidad = 30;
-        unitPropia.ActiveBonusAndPenalties.attk += cantidad;
-        unitPropia.ActiveBonusAndPenalties.spd += cantidad;
+        unitPropia.activeBonus.attk += cantidad;
+        unitPropia.activeBonus.spd += cantidad;
         this.view.WriteLine(unitPropia.nombre + " obtiene Atk+" + this.cantidad);
         this.view.WriteLine(unitPropia.nombre + " obtiene Spd+"+ this.cantidad);
         
@@ -429,8 +352,8 @@ public class SoulbladeEffect : Effect
         int cantidadRes = promedioDefRes - OponentsUnit.res;
         string signoDef = (cantidadDef > 0) ? "+" :  "";
         string signoRes = (cantidadRes > 0) ? "+" :  "";
-        OponentsUnit.ActiveBonusAndPenalties.def += cantidadDef;
-        OponentsUnit.ActiveBonusAndPenalties.res += cantidadRes;
+        OponentsUnit.activeBonus.def += cantidadDef;
+        OponentsUnit.activeBonus.res += cantidadRes;
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Def" + signoDef + this.cantidad);
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Res"+ signoRes + this.cantidad);
         
@@ -447,7 +370,7 @@ public class SandstormEffect : Effect
     {
         int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unitPropia.def - unitPropia.attk));
         string signo = (cantidad > 0) ? "+" :  "";
-        OponentsUnit.ActiveBonusAndPenalties.atkFollowup += cantidad;
+        OponentsUnit.activeBonus.atkFollowup += cantidad;
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Atk" + signo + this.cantidad);
     }
 }

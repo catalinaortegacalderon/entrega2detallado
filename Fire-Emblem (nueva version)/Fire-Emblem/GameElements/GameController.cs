@@ -51,6 +51,14 @@ public class GameController
             ImprimirVentajas(view);
             ActivateAttackersUnitHabilities();
             ActivateDefensorsUnitHabilities();
+            //PrintBonus();
+            //PrintPenalties();
+            //PrintBonusNeutralization();
+            //PrintPenaltiesNeutralization();
+            //PrintBonus();
+            //PrintPenalties();
+            //PrintBonusNeutralization();
+            //PrintPenaltiesNeutralization();
         }
 
         attackValue = CalcularAtaque();
@@ -156,10 +164,10 @@ public class GameController
         string arma_atac = _currentAttackingUnit.arma;
         string arma_def = _currentDefensiveUnit.arma;
         int def_o_res_rival;
-        if (arma_atac == "Magic") def_o_res_rival = _currentDefensiveUnit.res + _currentDefensiveUnit.ActiveBonusAndPenalties.res;
+        if (arma_atac == "Magic") def_o_res_rival = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
         else
         {
-            def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.ActiveBonusAndPenalties.def;
+            def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
         }
         double wtb;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") wtb = 1;
@@ -169,7 +177,7 @@ public class GameController
             //como poner esto en 1 sola linea
             wtb = 0.8;
         }
-        int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.ActiveBonusAndPenalties.attk;
+        int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }
