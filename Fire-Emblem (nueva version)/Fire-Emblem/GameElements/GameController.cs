@@ -200,14 +200,19 @@ public class GameController
         {
             atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
                           _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+            // revisar esto de abajo
             _currentAttackingUnit.gameLogs.amountOfAttacks++;
         }
+        Console.WriteLine("ataque final antes de activar cambios por followup" + atk_unidad);
         if (_numeroAtaque == 3)
         {
             atk_unidad += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
-                + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenalties.attk;
+                + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+            // revisar esto de abajo
             _currentAttackingUnit.gameLogs.amountOfAttacks++;
         }
+        Console.WriteLine("ataque final " + atk_unidad);
+        Console.WriteLine("penalties atk " + _currentAttackingUnit.activePenalties.atkFollowup);
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }

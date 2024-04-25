@@ -370,7 +370,8 @@ public class SandstormEffect : Effect
     public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         Console.WriteLine("aplicando sandstrorm efect");
-        int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unitPropia.def - unitPropia.attk));
+        // CANTIDAD MAL CALCULADA, FUNCIONA TOOD EL RESTO
+        int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unitPropia.def)) - ((unitPropia.attk));
         Console.WriteLine("cantidad sanstorm effect aplicar" + cantidad);
         if (cantidad < 0) unitPropia.activePenalties.atkFollowup += cantidad;
         else
