@@ -468,6 +468,7 @@ public class Functions
         }
         else if (habilidad == "Wrath")
         {
+            Console.WriteLine("cree wraath");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new Wrath(view);
         }

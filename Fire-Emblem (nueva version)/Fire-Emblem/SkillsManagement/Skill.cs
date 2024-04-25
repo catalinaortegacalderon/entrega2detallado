@@ -808,7 +808,7 @@ namespace Fire_Emblem;
         public Wrath(View view) : base(view)
         {
             this.condiciones = new Condition[1];
-            this.condiciones[0] = new UnidadIniciaCombate();
+            this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
             this.efectos[0] = new WrathEffect(this.view);
         }

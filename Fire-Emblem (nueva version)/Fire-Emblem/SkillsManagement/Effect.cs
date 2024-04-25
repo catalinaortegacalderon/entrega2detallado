@@ -361,7 +361,10 @@ public class WrathEffect : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
+        Console.WriteLine("pase por aplicar wrath effect");
         int cantidad = unitPropia.hp_max - unitPropia.hp_actual;
+        Console.WriteLine(unitPropia.hp_max);
+        Console.WriteLine(unitPropia.hp_actual);
         if (cantidad > 30) cantidad = 30;
         unitPropia.activeBonus.attk += cantidad;
         unitPropia.activeBonus.spd += cantidad;
