@@ -513,12 +513,13 @@ namespace Fire_Emblem;
     {
         public Luna(View view) : base(view)
         {
+            Console.WriteLine("creando luna");
             this.condiciones = new Condition[2];
-            this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
-            this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
+            this.condiciones[0] = new SiempreVerdad();
+            this.condiciones[1] = new SiempreVerdad();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ReduceRivalsSpdInPercentaje(this.view, 0.5); 
-            this.efectos[1] = new ReduceRivalsDefInPercentaje(this.view, 0.5); 
+            this.efectos[0] = new ReduceRivalsDefInPercentajeForFirstAttack(this.view, 0.5); 
+            this.efectos[1] = new ReduceRivalsResInPercentajeForFirstAttack(this.view, 0.5); 
         }
     }
 

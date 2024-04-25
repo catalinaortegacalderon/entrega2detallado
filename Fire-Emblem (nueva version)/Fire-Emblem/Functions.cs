@@ -346,7 +346,7 @@ public class Functions
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .skills[contador_habilidades] = new Charmer(view);
         }
-        else if (habilidad == "Luna:")
+        else if (habilidad == "Luna")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .skills[contador_habilidades] = new Luna(view);

@@ -47,32 +47,35 @@ public class ChangeHPIn : Effect
     }
 }
 
-public class ReduceRivalsSpdInPercentaje : Effect
+public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
 {
     private double reductionPercentaje;
-    public ReduceRivalsSpdInPercentaje(View view, double reduction) : base(view)
+    public ReduceRivalsDefInPercentajeForFirstAttack(View view, double reduction) : base(view)
     {
         this.reductionPercentaje = reduction;
     }
 
     public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
+        Console.WriteLine("aplicando efecto luna def");
+        int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.def * 0.5));
+        OponentsUnit.activePenalties.defFirstAttack  -= reduction;
     }
 }
-public class ReduceRivalsDefInPercentaje : Effect
+
+public class ReduceRivalsResInPercentajeForFirstAttack : Effect
 {
     private double reductionPercentaje;
-    public ReduceRivalsDefInPercentaje(View view, double reduction) : base(view)
+    public ReduceRivalsResInPercentajeForFirstAttack(View view, double reduction) : base(view)
     {
         this.reductionPercentaje = reduction;
     }
 
     public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
+        Console.WriteLine("aplicando efecto luna res");
+        int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.res * 0.5));
+        OponentsUnit.activePenalties.resFirstAttack  -= reduction;
     }
 }
 
