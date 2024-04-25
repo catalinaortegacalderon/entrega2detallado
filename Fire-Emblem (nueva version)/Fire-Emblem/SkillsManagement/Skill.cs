@@ -522,7 +522,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -3); 
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Spd", -3); 
+            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Spd", -3); 
         }
     }
 
@@ -535,7 +535,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
             this.efectos[0] = new ReduceRivalsSpdInPercentaje(this.view, 0.5); 
-            this.efectos[0] = new ReduceRivalsDefInPercentaje(this.view, 0.5); 
+            this.efectos[1] = new ReduceRivalsDefInPercentaje(this.view, 0.5); 
         }
     }
 
@@ -548,7 +548,7 @@ namespace Fire_Emblem;
             this.condiciones[1] = new StartCombatOrFullHP();
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk", -5); 
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Def", -5); 
+            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Def", -5); 
         }
     }
 
@@ -798,7 +798,7 @@ namespace Fire_Emblem;
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
-            this.condiciones[0] = new UnidadIniciaCombate();
+            this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 12);
             this.efectos[1] = new ChangeStatsOnePointForEvery(this.view, "Spd", 4);
