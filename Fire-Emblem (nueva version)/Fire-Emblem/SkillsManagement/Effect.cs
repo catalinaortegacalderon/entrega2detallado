@@ -58,8 +58,7 @@ public class ReduceRivalsSpdInPercentaje : Effect
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
         OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
-        // ver si se imprime aca
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Spd-" + reduction);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene Spd-" + reduction);
     }
 }
 public class ReduceRivalsDefInPercentaje : Effect
@@ -74,8 +73,7 @@ public class ReduceRivalsDefInPercentaje : Effect
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
         OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
-        // ver si se imprime aca
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Def-" + reduction);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene Def-" + reduction);
     }
 }
 
@@ -95,10 +93,10 @@ public class NeutralizeOponentsBonus : Effect
             OponentsUnit.activeBonus.spd = 0; 
             OponentsUnit.activeBonus.def = 0;
             OponentsUnit.activeBonus.res = 0;
-        this.view.WriteLine("Los bonus de Atk de " + OponentsUnit.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los bonus de Spd de " + OponentsUnit.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los bonus de Def de " + OponentsUnit.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los bonus de Res de " + OponentsUnit.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los bonus de Atk de " + OponentsUnit.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los bonus de Spd de " + OponentsUnit.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los bonus de Def de " + OponentsUnit.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los bonus de Res de " + OponentsUnit.nombre + " fueron neutralizados");
     }
 }
 
@@ -129,10 +127,10 @@ public class NeutralizePenalties : Effect
         //{
             unitPropia.activePenaltiesNeutralization.res = 0;
         //}
-        this.view.WriteLine("Los penalty de Atk de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalty de Spd de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalty de Def de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalty de Res de " + unitPropia.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los penalty de Atk de " + unitPropia.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los penalty de Spd de " + unitPropia.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los penalty de Def de " + unitPropia.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los penalty de Res de " + unitPropia.nombre + " fueron neutralizados");
     }
 }
 
@@ -170,7 +168,7 @@ public class ChangeStatsIn : Effect
             if ( cantidad < 0) unitPropia.activePenalties.spd  = unitPropia.activePenalties.spd + this.cantidad;
         }
         string signo = (this.cantidad > 0) ? "+" :  "";
-        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + this.cantidad);
+        //this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + this.cantidad);
     }
 }
 
@@ -207,7 +205,7 @@ public class ChangeRivalsStatsIn : Effect
             if ( cantidad < 0) OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd + this.cantidad;
         }
         string signo = (this.cantidad > 0) ? "+" :  "";
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene " + stat + signo + this.cantidad);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene " + stat + signo + this.cantidad);
     }
 }
 
@@ -226,7 +224,7 @@ public class NeutralizeOneOfOponentsBonus : Effect
         else if (stat == "Res" ) OponentsUnit.activeBonusNeutralization.res = 0;
         else if (stat == "Spd" ) OponentsUnit.activeBonusNeutralization.spd = 0;
         string signo = (this.cantidad > 0) ? "+" :  "";
-        this.view.WriteLine("Los bonus de " + this.stat + " de " + OponentsUnit.nombre + " fueron neutralizados");
+        //this.view.WriteLine("Los bonus de " + this.stat + " de " + OponentsUnit.nombre + " fueron neutralizados");
     }
 }
 
@@ -265,7 +263,7 @@ public class ChangeStatInPercentaje : Effect
             unitPropia.activeBonus.spd += cantidad;
         }
         string signo = (this.percentaje > 0) ? "+" :  "";
-        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad);
+        //this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad);
     }
 }
 
@@ -306,7 +304,7 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
             unitPropia.activeBonus.spd += cantidad;
         }
         string signo = (this.percentaje > 0) ? "+" :  "";
-        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad +" en su primer ataque");
+        //this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad +" en su primer ataque");
     }
 }
 
@@ -351,7 +349,7 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
             unitPropia.activeBonus.spd += (cantidad + _baseIncrease);
         }
         int cantidadFinal = cantidad + _baseIncrease;
-        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + "+" + cantidadFinal);
+        //this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + "+" + cantidadFinal);
     }
 }
 
@@ -367,8 +365,8 @@ public class WrathEffect : Effect
         if (cantidad > 30) cantidad = 30;
         unitPropia.activeBonus.attk += cantidad;
         unitPropia.activeBonus.spd += cantidad;
-        this.view.WriteLine(unitPropia.nombre + " obtiene Atk+" + this.cantidad);
-        this.view.WriteLine(unitPropia.nombre + " obtiene Spd+"+ this.cantidad);
+        //this.view.WriteLine(unitPropia.nombre + " obtiene Atk+" + this.cantidad);
+        //this.view.WriteLine(unitPropia.nombre + " obtiene Spd+"+ this.cantidad);
         
     }
 }
@@ -389,8 +387,8 @@ public class SoulbladeEffect : Effect
         string signoRes = (cantidadRes > 0) ? "+" :  "";
         OponentsUnit.activeBonus.def += cantidadDef;
         OponentsUnit.activeBonus.res += cantidadRes;
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Def" + signoDef + this.cantidad);
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Res"+ signoRes + this.cantidad);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene Def" + signoDef + this.cantidad);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene Res"+ signoRes + this.cantidad);
         
     }
 }
@@ -406,7 +404,7 @@ public class SandstormEffect : Effect
         int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unitPropia.def - unitPropia.attk));
         string signo = (cantidad > 0) ? "+" :  "";
         OponentsUnit.activeBonus.atkFollowup += cantidad;
-        this.view.WriteLine(OponentsUnit.nombre + " obtiene Atk" + signo + this.cantidad);
+        //this.view.WriteLine(OponentsUnit.nombre + " obtiene Atk" + signo + this.cantidad);
     }
 }
 

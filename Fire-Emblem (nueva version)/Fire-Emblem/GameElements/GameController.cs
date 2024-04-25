@@ -53,6 +53,7 @@ public class GameController
             ImprimirVentajas(view);
             ActivateAttackersUnitHabilities();
             ActivateDefensorsUnitHabilities();
+            PrintHabilitiesInfo(view);
             //PrintBonus();
             //PrintPenalties();
             //PrintBonusNeutralization();
@@ -160,6 +161,22 @@ public class GameController
             habilidad.AplicarHabilidades(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
     }
+    
+    private void PrintHabilitiesInfo(View view)
+    {
+        SkillsPrinter.PrintBonus(view, _currentAttackingUnit);
+        SkillsPrinter.PrintPenalties(view, _currentAttackingUnit);
+        SkillsPrinter.PrintBonusNetralization(view, _currentAttackingUnit);
+        SkillsPrinter.PrintPenaltyNetralization(view, _currentAttackingUnit);
+        
+        SkillsPrinter.PrintBonus(view, _currentDefensiveUnit);
+        SkillsPrinter.PrintPenalties(view, _currentDefensiveUnit);
+        SkillsPrinter.PrintBonusNetralization(view, _currentDefensiveUnit);
+        SkillsPrinter.PrintPenaltyNetralization(view, _currentDefensiveUnit);
+        
+        
+    }
+    
 
     public int CalcularAtaque()
     {
