@@ -459,7 +459,7 @@ namespace Fire_Emblem;
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -4); 
+            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Spd", -4); 
         }
     }
 
