@@ -16,7 +16,7 @@ public class Effect
         this.view = view;
     }
 
-    public virtual void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public virtual void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         return;
     }
@@ -28,7 +28,7 @@ public class EmptyEffect : Effect
     {
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         return;
     }
@@ -41,7 +41,7 @@ public class ChangeHPIn : Effect
         this.cantidad = cantidad;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         unitPropia.currentHp = unitPropia.currentHp + this.cantidad;
     }
@@ -55,7 +55,7 @@ public class ReduceRivalsSpdInPercentaje : Effect
         this.reductionPercentaje = reduction;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
         OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
@@ -69,7 +69,7 @@ public class ReduceRivalsDefInPercentaje : Effect
         this.reductionPercentaje = reduction;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
         OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
@@ -83,7 +83,7 @@ public class NeutralizeOponentsBonus : Effect
     public NeutralizeOponentsBonus(View view) : base(view)
     {
     }
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         Console.WriteLine("aplicando efectos");
         OponentsUnit.activeBonusNeutralization.attk = 0;
@@ -103,7 +103,7 @@ public class NeutralizePenalties : Effect
     {
     }
     
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         unitPropia.activePenaltiesNeutralization.attk = 0;
         unitPropia.activePenaltiesNeutralization.spd = 0;
@@ -121,7 +121,7 @@ public class ChangeStatsIn : Effect
         this.stat = stat;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         if (stat == "Atk")
         {
@@ -156,7 +156,7 @@ public class ChangeRivalsStatsIn : Effect
         this.stat = stat;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         if (stat == "Atk")
         {
@@ -189,7 +189,7 @@ public class NeutralizeOneOfOponentsBonus : Effect
         this.stat = stat;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         if (stat=="Atk" ) OponentsUnit.activeBonusNeutralization.attk  = 0;
         else if (stat == "Def" ) OponentsUnit.activeBonusNeutralization.def = 0;
@@ -208,7 +208,7 @@ public class ChangeStatInPercentaje : Effect
         this.percentaje = percentaje;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int cantidad = 0;
         if (stat == "Atk")
@@ -246,7 +246,7 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
         this.percentaje = percentaje;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int cantidad = 0;
         if (stat == "Atk")
@@ -285,7 +285,7 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
         this._baseIncrease = baseIncrease;
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int cantidad = 0;
         if (stat == "Atk")
@@ -323,7 +323,7 @@ public class WrathEffect : Effect
     {
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int cantidad = unitPropia.hpMax - unitPropia.currentHp;
         if (cantidad > 30) cantidad = 30;
@@ -338,7 +338,7 @@ public class SoulbladeEffect : Effect
     {
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         double promedioDefResDouble = (OponentsUnit.def + OponentsUnit.res) / 2;
         int promedioDefRes = Convert.ToInt32(Math.Truncate(promedioDefResDouble));
@@ -364,10 +364,16 @@ public class SandstormEffect : Effect
     {
     }
 
-    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
+        Console.WriteLine("aplicando sandstrorm efect");
         int cantidad = Convert.ToInt32(Math.Truncate(1.5 * unitPropia.def - unitPropia.attk));
-        OponentsUnit.activeBonus.atkFollowup += cantidad;
+        Console.WriteLine("cantidad sanstorm effect aplicar" + cantidad);
+        if (cantidad < 0) unitPropia.activePenalties.atkFollowup += cantidad;
+        else
+        {
+            unitPropia.activeBonus.atkFollowup += cantidad;
+        }
     }
 }
 

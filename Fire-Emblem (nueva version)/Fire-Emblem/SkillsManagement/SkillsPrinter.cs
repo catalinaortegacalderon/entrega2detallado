@@ -9,7 +9,8 @@ public class SkillsPrinter
         if (unit.activeBonus.spd > 0) view.WriteLine(unit.name + " obtiene Spd+" + unit.activeBonus.spd);
         if (unit.activeBonus.def > 0) view.WriteLine(unit.name + " obtiene Def+" + unit.activeBonus.def);
         if (unit.activeBonus.res > 0) view.WriteLine(unit.name + " obtiene Res+" + unit.activeBonus.res);
-        if (unit.activeBonus.atkFirstAttack > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.res + " en su primer ataque");
+        if (unit.activeBonus.atkFirstAttack > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.atkFirstAttack + " en su primer ataque");
+        if (unit.activeBonus.atkFirstAttack > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.atkFollowup + " en su Follow-Up");
     }
     
     public static void PrintPenalties(View view, Unit unit)
@@ -18,6 +19,8 @@ public class SkillsPrinter
         if (unit.activePenalties.spd < 0) view.WriteLine(unit.name + " obtiene Spd" + unit.activePenalties.spd);
         if (unit.activePenalties.def < 0) view.WriteLine(unit.name + " obtiene Def" + unit.activePenalties.def);
         if (unit.activePenalties.res < 0) view.WriteLine(unit.name + " obtiene Res" + unit.activePenalties.res);
+        if (unit.activeBonus.atkFirstAttack < 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activePenalties.atkFirstAttack + " en su primer ataque");
+        if (unit.activeBonus.atkFollowup < 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activePenalties.atkFollowup + " en su Follow-Up");
     }
     
     public static void PrintBonusNetralization(View view, Unit unit)

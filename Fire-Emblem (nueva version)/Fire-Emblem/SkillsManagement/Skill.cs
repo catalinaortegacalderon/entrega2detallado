@@ -23,7 +23,7 @@ namespace Fire_Emblem;
             {
                 if (this.condiciones[i].Verify(unitPropia, OponentsUnit, atacando))
                 {
-                    this.efectos[i].Aplicar(unitPropia, OponentsUnit, atacando);
+                    this.efectos[i].ApplyEffect(unitPropia, OponentsUnit, atacando);
                 }
             }
         }
@@ -806,6 +806,7 @@ namespace Fire_Emblem;
     {
         public Sandstorm(View view) : base(view)
         {
+            Console.WriteLine("crear sandstorm");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];

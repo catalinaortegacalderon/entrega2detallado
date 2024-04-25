@@ -51,7 +51,7 @@ public class Game
         _gameController.currentAttacker = 1;
         //contraataque
         _currentRoundsPlayer1LooserUnitsName = _gameController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        ActivateFollowupBonusOfPlayer(0);
+        //ActivateFollowupBonusOfPlayer(0);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer1First();
@@ -69,7 +69,7 @@ public class Game
         _gameController.currentAttacker = 0;
         //contraataque
         _currentRoundsPlayer2LooserUnitsName = _gameController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        ActivateFollowupBonusOfPlayer(1);
+        //ActivateFollowupBonusOfPlayer(1);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer2First();
@@ -121,11 +121,11 @@ public class Game
         }
     }
     
-    private void ActivateFollowupBonusOfPlayer(int playerNumber)
-    {
-        int numberOfThePlayersUnit  = (playerNumber == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.attk += _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.atkFollowup;
-    }
+    //private void ActivateFollowupBonusOfPlayer(int playerNumber)
+    //{
+    //    int numberOfThePlayersUnit  = (playerNumber == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
+    //    _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.attk += _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.atkFollowup;
+    //}
 
     private void Followup()
     {

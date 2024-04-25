@@ -188,9 +188,17 @@ public class GameController
             wtb = 0.8;
         }
         int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+        // revisar si pongo * neutralizador ataque o * neutralizador de atk first attack...
         if (_numeroAtaque == 1)
         {
-            atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.atkFirstAttack;
+            atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
+                          _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+            _currentAttackingUnit.gameLogs.amountOfAttacks++;
+        }
+        if (_numeroAtaque == 3)
+        {
+            atk_unidad += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
+                + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenalties.attk;
             _currentAttackingUnit.gameLogs.amountOfAttacks++;
         }
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
