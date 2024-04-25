@@ -382,14 +382,23 @@ public class SoulbladeEffect : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
+        Console.WriteLine("pase por aplicar de soulblade");
         double promedioDefResDouble = (OponentsUnit.def + OponentsUnit.res) / 2;
         int promedioDefRes = Convert.ToInt32(Math.Truncate(promedioDefResDouble));
         int cantidadDef = promedioDefRes - OponentsUnit.def;
         int cantidadRes = promedioDefRes - OponentsUnit.res;
         string signoDef = (cantidadDef > 0) ? "+" :  "";
         string signoRes = (cantidadRes > 0) ? "+" :  "";
-        OponentsUnit.activeBonus.def += cantidadDef;
-        OponentsUnit.activeBonus.res += cantidadRes;
+        if (cantidadDef < 0) OponentsUnit.activePenalties.def += cantidadDef;
+        else
+        {
+            OponentsUnit.activeBonus.def += cantidadDef;
+        }    
+        if (cantidadRes < 0) OponentsUnit.activePenalties.res += cantidadRes;
+        else
+        {
+            OponentsUnit.activeBonus.res += cantidadRes;
+        }
         //this.view.WriteLine(OponentsUnit.nombre + " obtiene Def" + signoDef + this.cantidad);
         //this.view.WriteLine(OponentsUnit.nombre + " obtiene Res"+ signoRes + this.cantidad);
         
