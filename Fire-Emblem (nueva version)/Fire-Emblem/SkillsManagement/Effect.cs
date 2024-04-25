@@ -85,12 +85,13 @@ public class NeutralizeOponentsBonus : Effect
     }
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        OponentsUnit.activeBonus.attk = 0;
-        OponentsUnit.activeBonus.atkFollowup = 0; 
-        OponentsUnit.activeBonus.atkFirstAttack = 0; 
-        OponentsUnit.activeBonus.spd = 0; 
-        OponentsUnit.activeBonus.def = 0; 
-        OponentsUnit.activeBonus.res = 0;
+        Console.WriteLine("aplicando efectos");
+        OponentsUnit.activeBonusNeutralization.attk = 0;
+        OponentsUnit.activeBonusNeutralization.atkFollowup = 0; 
+        OponentsUnit.activeBonusNeutralization.atkFirstAttack = 0; 
+        OponentsUnit.activeBonusNeutralization.spd = 0; 
+        OponentsUnit.activeBonusNeutralization.def = 0; 
+        OponentsUnit.activeBonusNeutralization.res = 0;
     }
 }
 

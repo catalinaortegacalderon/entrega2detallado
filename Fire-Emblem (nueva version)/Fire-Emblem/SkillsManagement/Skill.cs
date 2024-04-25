@@ -540,6 +540,7 @@ namespace Fire_Emblem;
     {
         public BeorcsBlessing(View view) : base(view)
         {
+            Console.WriteLine("creando boercs blessing");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
