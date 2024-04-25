@@ -4,9 +4,7 @@ namespace Fire_Emblem;
 
 public class Condition
 {
-    // estos son parametros utilizadas por ciertas condiciones
     protected double valorMultiusoCondicion;
-    // tal vez sacar variable anterior
     protected string arma_usada;
     public virtual bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
@@ -30,7 +28,7 @@ public class HpPropioMenorAUnValor : Condition
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.hp_actual <= myUnit.hp_max * this.valorMultiusoCondicion)
+        if (myUnit.currentHp <= myUnit.hpMax * this.valorMultiusoCondicion)
         {
             return true;
         }
@@ -46,7 +44,6 @@ public class UnidadIniciaCombate : Condition
         if (iAmAttacking) return true;
         return false;
     }
-    
 }
 
 public class RivalIniciaCombate : Condition
@@ -56,7 +53,6 @@ public class RivalIniciaCombate : Condition
         if (iAmAttacking == false) return true;
         return false;
     }
-    
 }
 
 public class UseCertainWeapon : Condition
@@ -67,10 +63,9 @@ public class UseCertainWeapon : Condition
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.arma == this.arma_usada) return true;
+        if (myUnit.weapon == this.arma_usada) return true;
         return false;
     }
-    
 }
 
 public class UseCertainWeaponAndStartCombat : Condition
@@ -81,10 +76,9 @@ public class UseCertainWeaponAndStartCombat : Condition
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.arma == this.arma_usada && iAmAttacking) return true;
+        if (myUnit.weapon == this.arma_usada && iAmAttacking) return true;
         return false;
     }
-    
 }
 
 public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condition
@@ -95,15 +89,11 @@ public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condition
         this.valorAAumentar = valorAAumentar;
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
-    { Console.WriteLine("pase por verify kk");
-        if (myUnit.hp_actual >= oponentsUnit.hp_actual + this.valorAAumentar) return true;
-        Console.WriteLine("pase por false kk");
+    {
+        if (myUnit.currentHp >= oponentsUnit.currentHp + this.valorAAumentar) return true;
         return false;
     }
-    
 }
-
-// arreglar espaciado de aca abajo, tenia el cursor raro
 
 public class AtaqueEntreArmasEspecificas : Condition
 {
@@ -113,33 +103,23 @@ public class AtaqueEntreArmasEspecificas : Condition
         
     public AtaqueEntreArmasEspecificas(string tipoDeArma1, string tipoDeArma2) : base()
     {
-        // REVISAR ESTOS NOMBRES
         this.tipoDeArma1 = tipoDeArma1;
         this.tipoDeArma2 = tipoDeArma2;
     }
         
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        // ir agregando a medida que lo necesito
         
-        Console.WriteLine("verificando");
-        
-        if(iAmAttacking && ((tipoDeArma1 == "magia" && tipoDeArma2 == "fisica")|| (tipoDeArma2 == "magia" && tipoDeArma1 == "fisica")))
-            {
-                Console.WriteLine("me meti al prifer if");
-                Console.WriteLine(myUnit.arma);
-                Console.WriteLine(oponentsUnit.arma);
-                
-                if (myUnit.arma == "Magic" && (oponentsUnit.arma == "Bow" || oponentsUnit.arma == "Axe" || oponentsUnit.arma == "Sword" || oponentsUnit.arma == "Lance")){
-                    Console.WriteLine("true");
-                    return true;
-                 }
-                if (oponentsUnit.arma == "Magic" && (myUnit.arma== "Bow" || myUnit.arma=="Axe" || myUnit.arma== "Sword" || myUnit.arma=="Lance")){
-                    Console.WriteLine("true");
+        if( iAmAttacking && ((tipoDeArma1 == "magia" && tipoDeArma2 == "fisica")|| (tipoDeArma2 == "magia" && tipoDeArma1 == "fisica"))) 
+        { 
+                if (myUnit.weapon == "Magic" && (oponentsUnit.weapon == "Bow" || oponentsUnit.weapon == "Axe" || oponentsUnit.weapon == "Sword" || oponentsUnit.weapon == "Lance"))
+                {
                     return true;
                 }
-            }
-        Console.WriteLine("false");
+                if (oponentsUnit.weapon == "Magic" && (myUnit.weapon== "Bow" || myUnit.weapon=="Axe" || myUnit.weapon== "Sword" || myUnit.weapon=="Lance")){
+                    return true;
+                }
+        }
         return false;
     }
 }
@@ -148,7 +128,7 @@ public class OponentIsAMan: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (oponentsUnit.genero == "Male") return true;
+        if (oponentsUnit.gender == "Male") return true;
         return false;
     }
     
@@ -158,10 +138,7 @@ public class CurrentOponentIsAlsoTheLastOponent: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        Console.WriteLine("paso por verify, unit vs last oponent");
-        Console.WriteLine(oponentsUnit.nombre);
-        Console.WriteLine(myUnit.gameLogs.LastOponentName);
-        if (oponentsUnit.nombre == myUnit.gameLogs.LastOponentName) return true;
+        if (oponentsUnit.name == myUnit.gameLogs.LastOponentName) return true;
         return false;
     }
     
@@ -171,9 +148,6 @@ public class FirstAtack: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        Console.WriteLine("paso por verify first attack");
-        Console.WriteLine(myUnit.gameLogs.amountOfAttacks == 0);
-        Console.WriteLine(myUnit.gameLogs.amountOfAttacks);
         if (myUnit.gameLogs.amountOfAttacks == 0) return true;
         return false;
     }
@@ -184,7 +158,7 @@ public class StartCombatOrFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.hp_actual == myUnit.hp_max || iAmAttacking) return true;
+        if (myUnit.currentHp == myUnit.hpMax || iAmAttacking) return true;
         return false;
     }
     
@@ -199,7 +173,7 @@ public class OponentStartsCombatWhithWeapon: Condition
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (!iAmAttacking && this.weapons.Contains(oponentsUnit.arma)) return true;
+        if (!iAmAttacking && this.weapons.Contains(oponentsUnit.weapon)) return true;
         return false;
     }
     
@@ -214,13 +188,12 @@ public class RivalStartsAttackOrHasHpGreaterThan : Condition
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (oponentsUnit.hp_actual >= oponentsUnit.hp_max * this.percentaje)
+        if (oponentsUnit.currentHp >= oponentsUnit.hpMax * this.percentaje)
         {
             return true;
         }
         return false;
     }
-    
 }
 
 

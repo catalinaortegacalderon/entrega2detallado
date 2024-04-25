@@ -148,340 +148,340 @@ public class Functions
         if (habilidad == "HP +15")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new HpMas15(view);
+                .skills[contador_habilidades] = new HpMas15(view);
         }
         else if (habilidad == "Speed +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SpeedMas5(view);
+                .skills[contador_habilidades] = new SpeedMas5(view);
         }
 
         else if (habilidad == "Resolve")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Resolve(view);
+                .skills[contador_habilidades] = new Resolve(view);
         }
         else if (habilidad == "Armored Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new ArmoredBlow(view);
+                .skills[contador_habilidades] = new ArmoredBlow(view);
         }
 
         else if (habilidad == "Fair Fight")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new FairFight(view);
+                .skills[contador_habilidades] = new FairFight(view);
         }
         else if (habilidad == "Atk/Def +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new AtkAndDefMas5(view);
+                .skills[contador_habilidades] = new AtkAndDefMas5(view);
         }
         else if (habilidad == "Atk/Res +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new AtkAndResMas5(view);
+                .skills[contador_habilidades] = new AtkAndResMas5(view);
         }
         else if (habilidad == "Spd/Res +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SpdAndResMas5(view);
+                .skills[contador_habilidades] = new SpdAndResMas5(view);
         }
         else if (habilidad == "Attack +6")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new AttackMas6(view);
+                .skills[contador_habilidades] = new AttackMas6(view);
         }
         else if (habilidad == "Bracing Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BracingBlow(view);
+                .skills[contador_habilidades] = new BracingBlow(view);
         }
             
         else if (habilidad == "Will to Win")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new WillToWin(view);
+                .skills[contador_habilidades] = new WillToWin(view);
         }
         else if (habilidad == "Tome Precision")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new TomePrecision(view);
+                .skills[contador_habilidades] = new TomePrecision(view);
         }
         else if (habilidad == "Defense +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DefenseMas5(view);
+                .skills[contador_habilidades] = new DefenseMas5(view);
         }
         else if (habilidad == "Resistance +5")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new ResistanceMas5(view);
+                .skills[contador_habilidades] = new ResistanceMas5(view);
         }
         else if (habilidad == "Deadly Blade")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DeadlyBlade(view);
+                .skills[contador_habilidades] = new DeadlyBlade(view);
         }
         else if (habilidad == "Death Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DeathBlow(view);
+                .skills[contador_habilidades] = new DeathBlow(view);
         }
         else if (habilidad == "Darting Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DartingBlow(view);
+                .skills[contador_habilidades] = new DartingBlow(view);
         }
         else if (habilidad == "Warding Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new WardingBlow(view);
+                .skills[contador_habilidades] = new WardingBlow(view);
         }
         else if (habilidad == "Swift Sparrow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SwiftSparrow(view);
+                .skills[contador_habilidades] = new SwiftSparrow(view);
         }
         else if (habilidad == "Sturdy Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SturdyBlow(view);
+                .skills[contador_habilidades] = new SturdyBlow(view);
         }
         else if (habilidad == "Mirror Strike")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new MirrorStrike(view);
+                .skills[contador_habilidades] = new MirrorStrike(view);
         }
         else if (habilidad == "Steady Blow")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SteadyBlow(view);
+                .skills[contador_habilidades] = new SteadyBlow(view);
         }
         else if (habilidad == "Swift Strike")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SwiftStrike(view);
+                .skills[contador_habilidades] = new SwiftStrike(view);
         }
         else if (habilidad == "Brazen Atk/Spd")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenAtkSpd(view);
+                .skills[contador_habilidades] = new BrazenAtkSpd(view);
         }
         else if (habilidad == "Brazen Atk/Def")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenAtkDef(view);
+                .skills[contador_habilidades] = new BrazenAtkDef(view);
         }
         else if (habilidad == "Brazen Atk/Res")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenAtkRes(view);
+                .skills[contador_habilidades] = new BrazenAtkRes(view);
         }
         else if (habilidad == "Brazen Spd/Def")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenSpdDef(view);
+                .skills[contador_habilidades] = new BrazenSpdDef(view);
         }
         else if (habilidad == "Brazen Spd/Res")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenSpdRes(view);
+                .skills[contador_habilidades] = new BrazenSpdRes(view);
         }
         else if (habilidad == "Brazen Def/Res")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BrazenDefRes(view);
+                .skills[contador_habilidades] = new BrazenDefRes(view);
         }
         else if (habilidad == "Fire Boost")
         {
             Console.WriteLine("pase por functions fire boost");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new FireBoost(view);
+                .skills[contador_habilidades] = new FireBoost(view);
         }
         else if (habilidad == "Wind Boost")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new WindBoost(view);
+                .skills[contador_habilidades] = new WindBoost(view);
         }
         else if (habilidad == "Earth Boost")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new EarthBoost(view);
+                .skills[contador_habilidades] = new EarthBoost(view);
         }
         else if (habilidad == "Water Boost")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new WaterBoost(view);
+                .skills[contador_habilidades] = new WaterBoost(view);
         }
         else if (habilidad == "Chaos Style")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new ChaosStyle(view);
+                .skills[contador_habilidades] = new ChaosStyle(view);
         }
         else if (habilidad == "Blinding Flash")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BlindingFlash(view);
+                .skills[contador_habilidades] = new BlindingFlash(view);
         }
         else if (habilidad == "Not *Quite*")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new NotQuite(view);
+                .skills[contador_habilidades] = new NotQuite(view);
         }
         else if (habilidad == "Stunning Smile")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new StunningSmile(view);
+                .skills[contador_habilidades] = new StunningSmile(view);
         }
         else if (habilidad == "Disarming Sigh")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DisarmingSigh(view);
+                .skills[contador_habilidades] = new DisarmingSigh(view);
         }
         else if (habilidad == "Charmer")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Charmer(view);
+                .skills[contador_habilidades] = new Charmer(view);
         }
         else if (habilidad == "Luna:")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Luna(view);
+                .skills[contador_habilidades] = new Luna(view);
         }
         else if (habilidad == "Belief in Love")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BeliefInLove(view);
+                .skills[contador_habilidades] = new BeliefInLove(view);
         }
         else if (habilidad == "Beorc's Blessing")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new BeorcsBlessing(view);
+                .skills[contador_habilidades] = new BeorcsBlessing(view);
         }
         else if (habilidad == "Agnea's Arrow")
         {
             Console.WriteLine("creando agneas");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new AgneasArrow(view);
+                .skills[contador_habilidades] = new AgneasArrow(view);
         }
         else if (habilidad == "Sword Agility")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Agility(view, "Sword");
+                .skills[contador_habilidades] = new Agility(view, "Sword");
         }
         else if (habilidad == "Lance Power")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Power(view, "Lance");
+                .skills[contador_habilidades] = new Power(view, "Lance");
         }
         else if (habilidad == "Sword Power")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Power(view, "Sword");
+                .skills[contador_habilidades] = new Power(view, "Sword");
         }
         else if (habilidad == "Bow Focus")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Focus(view, "Bow");
+                .skills[contador_habilidades] = new Focus(view, "Bow");
         }
         else if (habilidad == "Lance Agility")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Agility(view, "Lance");
+                .skills[contador_habilidades] = new Agility(view, "Lance");
         }
         else if (habilidad == "Axe Power")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Power(view, "Axe");
+                .skills[contador_habilidades] = new Power(view, "Axe");
         }
         else if (habilidad == "Bow Agility")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Agility(view, "Bow");
+                .skills[contador_habilidades] = new Agility(view, "Bow");
         }
         else if (habilidad == "Sword Focus")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Focus(view, "Sword");
+                .skills[contador_habilidades] = new Focus(view, "Sword");
         }
         else if (habilidad == "Close Def")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new CloseDef(view);
+                .skills[contador_habilidades] = new CloseDef(view);
         }
         else if (habilidad == "Distant Def")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DistantDef(view);
+                .skills[contador_habilidades] = new DistantDef(view);
         }
         else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Lull(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                .skills[contador_habilidades] = new Lull(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
                 habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
         else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Fort(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                .skills[contador_habilidades] = new Fort(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
                 habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
         else if (habilidad == "Life and Death")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new LifeAndDeath(view);
+                .skills[contador_habilidades] = new LifeAndDeath(view);
         }
         else if (habilidad == "Solid Ground")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SolidGround(view);
+                .skills[contador_habilidades] = new SolidGround(view);
         }
         else if (habilidad == "Still Water")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new StillWater(view);
+                .skills[contador_habilidades] = new StillWater(view);
         }
         else if (habilidad == "Dragonskin")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new DragonSkin(view);
+                .skills[contador_habilidades] = new DragonSkin(view);
         }
         else if (habilidad == "Light and Dark")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new LightAndDark(view);
+                .skills[contador_habilidades] = new LightAndDark(view);
         }
         else if (habilidad == "Single-Minded")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new SingleMinded(view);
+                .skills[contador_habilidades] = new SingleMinded(view);
         }
         else if (habilidad == "Ignis")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Ignis(view);
+                .skills[contador_habilidades] = new Ignis(view);
         }
         else if (habilidad == "Perceptive")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Perceptive(view);
+                .skills[contador_habilidades] = new Perceptive(view);
         }
         else if (habilidad == "Wrath")
         {
             Console.WriteLine("cree wraath");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Wrath(view);
+                .skills[contador_habilidades] = new Wrath(view);
         }
         else if (habilidad == "Soulblade")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Soulblade(view);
+                .skills[contador_habilidades] = new Soulblade(view);
         }
         else if (habilidad == "Sandstorm")
         {
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
-                .habilidades[contador_habilidades] = new Sandstorm(view);
+                .skills[contador_habilidades] = new Sandstorm(view);
         }
     }
 }

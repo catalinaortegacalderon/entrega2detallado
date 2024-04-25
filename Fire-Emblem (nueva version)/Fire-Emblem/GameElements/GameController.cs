@@ -54,24 +54,16 @@ public class GameController
             ActivateAttackersUnitHabilities();
             ActivateDefensorsUnitHabilities();
             PrintHabilitiesInfo(view);
-            //PrintBonus();
-            //PrintPenalties();
-            //PrintBonusNeutralization();
-            //PrintPenaltiesNeutralization();
-            //PrintBonus();
-            //PrintPenalties();
-            //PrintBonusNeutralization();
-            //PrintPenaltiesNeutralization();
         }
 
         attackValue = CalcularAtaque();
-        view.WriteLine(_currentAttackingUnit.nombre + " ataca a " + _currentDefensiveUnit.nombre + " con " + attackValue + " de daño");
+        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + attackValue + " de daño");
         if (currentAttacker == 0)
         {
-            if (attackValue >= players[1].units[unidad2].hp_actual)
+            if (attackValue >= players[1].units[unidad2].currentHp)
             {
                 //muere esta unidad
-                loosersName = players[1].units[unidad2].nombre;
+                loosersName = players[1].units[unidad2].name;
                 this.roundIsTerminated = true;
                 // ERROR: LISTAS ES COPIA POR REFERENCIA
                 if (unidad2 == 0)
@@ -101,15 +93,15 @@ public class GameController
             }
             else
             {
-                players[1].units[unidad2].hp_actual = players[1].units[unidad2].hp_actual - attackValue;
+                players[1].units[unidad2].currentHp = players[1].units[unidad2].currentHp - attackValue;
             }
             return "";
         }
         else
         {
-            if (attackValue >= players[0].units[unidad1].hp_actual)
+            if (attackValue >= players[0].units[unidad1].currentHp)
             {
-                loosersName = players[0].units[unidad1].nombre;
+                loosersName = players[0].units[unidad1].name;
                 //muere esta unidad
                 this.roundIsTerminated = true;
                 if (unidad1 == 0)
@@ -140,7 +132,7 @@ public class GameController
             }
             else
             {
-                players[0].units[unidad1].hp_actual = players[0].units[unidad1].hp_actual - attackValue;
+                players[0].units[unidad1].currentHp = players[0].units[unidad1].currentHp - attackValue;
             }
 
             return "";
@@ -149,14 +141,14 @@ public class GameController
 
     private void ActivateAttackersUnitHabilities()
     {
-        foreach (Skill habilidad in _currentAttackingUnit.habilidades)
+        foreach (Skill habilidad in _currentAttackingUnit.skills)
         {
             habilidad.AplicarHabilidades(_currentAttackingUnit, _currentDefensiveUnit, true);
         }
     }
     private void ActivateDefensorsUnitHabilities()
     {
-        foreach (Skill habilidad in _currentDefensiveUnit.habilidades)
+        foreach (Skill habilidad in _currentDefensiveUnit.skills)
         {
             habilidad.AplicarHabilidades(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
@@ -180,64 +172,46 @@ public class GameController
 
     public int CalcularAtaque()
     {
-        string arma_atac = _currentAttackingUnit.arma;
-        string arma_def = _currentDefensiveUnit.arma;
+        string arma_atac = _currentAttackingUnit.weapon;
+        string arma_def = _currentDefensiveUnit.weapon;
         int def_o_res_rival;
         if (arma_atac == "Magic") def_o_res_rival = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
         else
         {
             def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
         }
-        Console.WriteLine("def o res rival");
-        Console.WriteLine(def_o_res_rival);
         double wtb;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") wtb = 1;
         else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance")) wtb = 1.2;
         else
         {
-            //como poner esto en 1 sola linea
             wtb = 0.8;
         }
         int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
-        Console.WriteLine("current attk"+ _currentAttackingUnit.attk);
-        Console.WriteLine("bonus"+ _currentAttackingUnit.activeBonus.attk);
-        Console.WriteLine("penalty"+ _currentAttackingUnit.activePenalties.attk);
-        Console.WriteLine("neutrbonus"+ _currentAttackingUnit.activeBonusNeutralization.attk);
-        Console.WriteLine("neut penalty"+ _currentAttackingUnit.activePenaltiesNeutralization.attk);
         if (_numeroAtaque == 1)
         {
-            //Console.WriteLine("pase por donde quiero, atk antes y dsps");
-            //Console.WriteLine(atk_unidad );
             atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.atkFirstAttack;
-            //Console.WriteLine(atk_unidad );
-            //llevo mal la cuenta aca con los attacks, solo estoy considerando rounds
             _currentAttackingUnit.gameLogs.amountOfAttacks++;
         }
-        else
-        {
-            Console.WriteLine("pase por donde  noquiero");
-        }
-        Console.WriteLine("atk wtb" + wtb);
-        Console.WriteLine("atk unidad" + atk_unidad);
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }
 
     public void ImprimirVentajas(View view)
     {
-        string arma_atac = _currentAttackingUnit.arma;
-        string arma_def = _currentDefensiveUnit.arma;
+        string arma_atac = _currentAttackingUnit.weapon;
+        string arma_def = _currentDefensiveUnit.weapon;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow")
         {
             view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
         }
         else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance"))
         {
-            view.WriteLine(_currentAttackingUnit.nombre + " (" + _currentAttackingUnit.arma + ") tiene ventaja con respecto a " + _currentDefensiveUnit.nombre + " (" + _currentDefensiveUnit.arma + ")");
+            view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
         }
         else
         {
-            view.WriteLine(_currentDefensiveUnit.nombre + " (" + _currentDefensiveUnit.arma + ") tiene ventaja con respecto a " + _currentAttackingUnit.nombre + " (" + _currentAttackingUnit.arma + ")");
+            view.WriteLine(_currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ")");
         }
     }
 

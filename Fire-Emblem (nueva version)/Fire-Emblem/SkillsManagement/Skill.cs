@@ -1,16 +1,13 @@
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using Fire_Emblem_View;
-//using Fire_Emblem.Fire_Emblem;
 
 namespace Fire_Emblem;
 
 
-    // clase base, las otras heredarán de esta
     public abstract class Skill
     {
         protected View view;
-        // si se cumple la condición, se aplica el efecto
         protected Condition[] condiciones;
         protected Effect[] efectos;
 
@@ -21,8 +18,6 @@ namespace Fire_Emblem;
 
         public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
         {
-            
-            // si no hay condiciones (habilidad vacia)
             if (this.condiciones.Length == 0) return;
             for (int i = 0; i < this.condiciones.Length; i++)
             {
@@ -38,12 +33,9 @@ namespace Fire_Emblem;
     {
         public EmptySkill(View view) : base(view)
         {
-            
-            //this.view = view; parece que es innecesario
             this.condiciones = new Condition[] { new SiempreVerdad() };
             this.efectos = new Effect[] { new EmptyEffect(view) };
         }
-
         public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
         {
             return;
@@ -61,17 +53,13 @@ namespace Fire_Emblem;
         }
     }
 
-    // preocuparse de definir condiciones y efectos
-
     public class FairFight : Skill
     {
         public FairFight(View view) : base(view)
         {
             this.condiciones = new Condition[2];
-            // revisar esto
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
-
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk",6);
             this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Atk", 6);
@@ -85,7 +73,6 @@ namespace Fire_Emblem;
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.75); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.75);
-
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Def", 7); 
             this.efectos[1] = new ChangeStatsIn(this.view, "Res", 7); 
@@ -120,7 +107,6 @@ namespace Fire_Emblem;
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
-
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 5); 
             this.efectos[1] = new ChangeStatsIn(this.view, "Def", 5);
@@ -150,7 +136,6 @@ namespace Fire_Emblem;
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
-
             this.efectos = new Effect[2];
             this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 5); 
             this.efectos[1] = new ChangeStatsIn(this.view, "Res", 5);
@@ -428,7 +413,6 @@ namespace Fire_Emblem;
     {
         public FireBoost(View view) : base(view)
         {
-            Console.WriteLine("creando fire boost");
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
         }
     }
@@ -467,8 +451,6 @@ namespace Fire_Emblem;
             this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 3); 
         }
     }
-
-// penalties
 
     public class BlindingFlash : Skill
     {
@@ -575,9 +557,6 @@ namespace Fire_Emblem;
             this.efectos[0] = new NeutralizePenalties(this.view); 
         }
     }
-
-// hibridas
-
     public class Agility : Skill
     {
         public Agility(View view, String weapon) : base(view)
@@ -679,8 +658,6 @@ namespace Fire_Emblem;
         }
     }
 
-//coigo repetido con el siempre verdad
-
     public class LifeAndDeath : Skill
     {
         public LifeAndDeath(View view) : base(view)
@@ -773,7 +750,6 @@ namespace Fire_Emblem;
     {
         public SingleMinded(View view) : base(view)
         {
-            Console.WriteLine("creador single minded");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[1];
@@ -785,7 +761,6 @@ namespace Fire_Emblem;
     {
         public Ignis(View view) : base(view)
         {
-            // no es en el primer ataque sino que es en ataque
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
@@ -836,5 +811,3 @@ namespace Fire_Emblem;
             this.efectos[0] = new SandstormEffect(this.view);
         }
     }
-
-
