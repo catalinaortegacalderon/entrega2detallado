@@ -648,6 +648,7 @@ namespace Fire_Emblem;
     {
         public Fort(View view, String firstStat, String secondStat) : base(view)
         {
+            Console.WriteLine("creando fort, sats son" + firstStat + secondStat);
             this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();

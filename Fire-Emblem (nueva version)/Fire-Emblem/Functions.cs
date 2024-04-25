@@ -144,6 +144,8 @@ public class Functions
     private static void HabilityConstructor(View view, Unit[][] unidades, int jugador_actual, int[] contadores_unidades,
         string habilidad, int contador_habilidades)
     {
+        Console.WriteLine(habilidad);
+        Console.WriteLine(habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0]);
         
         if (habilidad == "HP +15")
         {
@@ -421,8 +423,9 @@ public class Functions
                 .skills[contador_habilidades] = new Lull(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
                 habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
-        else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort")
+        else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
         {
+            Console.WriteLine("pase por if de fort");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .skills[contador_habilidades] = new Fort(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
                 habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
