@@ -157,6 +157,9 @@ public class CurrentOponentIsAlsoTheLastOponent: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
+        Console.WriteLine("paso por verify, unit vs last oponent");
+        Console.WriteLine(oponentsUnit.nombre);
+        Console.WriteLine(myUnit.gameLogs.LastOponentName);
         if (oponentsUnit.nombre == myUnit.gameLogs.LastOponentName) return true;
         return false;
     }

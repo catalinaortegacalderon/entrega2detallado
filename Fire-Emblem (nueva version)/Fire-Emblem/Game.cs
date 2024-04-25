@@ -180,7 +180,7 @@ public class Game
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
             _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.LastOponentName = _gameController.players[0].units[_currentUnitNumberOfPlayer1].nombre;
-            _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.LastOponentName = _gameController.players[0].units[_currentUnitNumberOfPlayer1].nombre;
+            _gameController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.LastOponentName = _gameController.players[1].units[_currentUnitNumberOfPlayer2].nombre;
         }
         else if (_currentRoundsPlayer1LooserUnitsName != "") _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.LastOponentName = _currentRoundsPlayer1LooserUnitsName;
         else if (_currentRoundsPlayer2LooserUnitsName != "") _gameController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.LastOponentName = _currentRoundsPlayer2LooserUnitsName;

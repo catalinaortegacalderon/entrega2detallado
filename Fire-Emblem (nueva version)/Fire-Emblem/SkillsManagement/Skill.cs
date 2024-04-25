@@ -772,6 +772,7 @@ namespace Fire_Emblem;
     {
         public SingleMinded(View view) : base(view)
         {
+            Console.WriteLine("creador single minded");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[1];
