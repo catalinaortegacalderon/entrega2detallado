@@ -527,10 +527,10 @@ namespace Fire_Emblem;
         public BeliefInLove(View view) : base(view)
         {
             this.condiciones = new Condition[2];
-            this.condiciones[0] = new StartCombatOrFullHP();
-            this.condiciones[1] = new StartCombatOrFullHP();
+            this.condiciones[0] = new RivalStartCombatOrFullHP();
+            this.condiciones[1] = new RivalStartCombatOrFullHP();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", -5); 
+            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -5); 
             this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Def", -5); 
         }
     }

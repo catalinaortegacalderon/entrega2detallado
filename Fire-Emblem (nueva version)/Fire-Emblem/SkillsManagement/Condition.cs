@@ -4,8 +4,7 @@ namespace Fire_Emblem;
 
 public class Condition
 {
-    protected double valorMultiusoCondicion;
-    protected string arma_usada;
+    protected string usedWeapon;
     public virtual bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
         return true;
@@ -22,13 +21,14 @@ public class SiempreVerdad : Condition
 
 public class HpPropioMenorAUnValor : Condition
 {
+    private double cantidad;
     public HpPropioMenorAUnValor(double cantidad) : base()
     {
-        this.valorMultiusoCondicion = cantidad;
+        this.cantidad = cantidad;
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.currentHp <= myUnit.hpMax * this.valorMultiusoCondicion)
+        if (myUnit.currentHp <= myUnit.hpMax * this.cantidad)
         {
             return true;
         }
@@ -59,11 +59,11 @@ public class UseCertainWeapon : Condition
 {
     public UseCertainWeapon(string arma) : base()
     {
-        this.arma_usada = arma;
+        this.usedWeapon = arma;
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.weapon == this.arma_usada) return true;
+        if (myUnit.weapon == this.usedWeapon) return true;
         return false;
     }
 }
@@ -72,11 +72,11 @@ public class UseCertainWeaponAndStartCombat : Condition
 {
     public UseCertainWeaponAndStartCombat(string arma) : base()
     {
-        this.arma_usada = arma;
+        this.usedWeapon = arma;
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.weapon == this.arma_usada && iAmAttacking) return true;
+        if (myUnit.weapon == this.usedWeapon && iAmAttacking) return true;
         return false;
     }
 }
@@ -154,11 +154,13 @@ public class FirstAtack: Condition
     
 }
 
-public class StartCombatOrFullHP: Condition
+public class RivalStartCombatOrFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.currentHp == myUnit.hpMax || iAmAttacking) return true;
+        Console.WriteLine("pase por verify de statrtcombat or full hp, belief in love");
+        if (myUnit.currentHp == myUnit.hpMax || iAmAttacking == false) return true;
+        Console.WriteLine("falso");
         return false;
     }
     
