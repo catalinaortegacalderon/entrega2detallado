@@ -428,6 +428,7 @@ namespace Fire_Emblem;
     {
         public FireBoost(View view) : base(view)
         {
+            Console.WriteLine("creando fire boost");
             this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
         }
     }

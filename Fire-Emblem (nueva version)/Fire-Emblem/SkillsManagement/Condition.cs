@@ -95,8 +95,9 @@ public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condition
         this.valorAAumentar = valorAAumentar;
     }
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
-    {
+    { Console.WriteLine("pase por verify kk");
         if (myUnit.hp_actual >= oponentsUnit.hp_actual + this.valorAAumentar) return true;
+        Console.WriteLine("pase por false kk");
         return false;
     }
     

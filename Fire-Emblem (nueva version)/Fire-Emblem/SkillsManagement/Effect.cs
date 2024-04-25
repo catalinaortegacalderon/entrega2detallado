@@ -149,6 +149,8 @@ public class ChangeStatsIn : Effect
     {
         if (stat == "Atk")
         {
+            Console.WriteLine("ESTOY APLICANDO ATAQUE");
+            Console.WriteLine("cantidad" + this.cantidad);
             if ( cantidad > 0) unitPropia.activeBonus.attk  = unitPropia.activeBonus.attk + this.cantidad;
             if ( cantidad < 0) unitPropia.activePenalties.attk  = unitPropia.activePenalties.attk + this.cantidad;
         }

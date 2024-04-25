@@ -295,6 +295,7 @@ public class Functions
         }
         else if (habilidad == "Fire Boost")
         {
+            Console.WriteLine("pase por functions fire boost");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new FireBoost(view);
         }
