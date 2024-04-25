@@ -310,14 +310,16 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
     }
 }
 
-public class ChangeStatsOnePointForEvery : Effect
+public class ChangeStatsInBasePlusOnePointForEvery : Effect
 {
     private String stat;
     private int amount;
-    public ChangeStatsOnePointForEvery(View view, String stat, int amount) : base(view)
+    private int _baseIncrease;
+    public ChangeStatsInBasePlusOnePointForEvery(View view, String stat, int baseIncrease, int amount) : base(view)
     {
         this.stat = stat;
         this.amount = amount;
+        this._baseIncrease = baseIncrease;
     }
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
@@ -327,28 +329,29 @@ public class ChangeStatsOnePointForEvery : Effect
         {
             double division = unitPropia.attk / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.activeBonus.attk  += cantidad;
+            unitPropia.activeBonus.attk  += (cantidad + _baseIncrease);
             
         }
         else if (stat == "Def")
         {
             double division = unitPropia.def / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.activeBonus.def += cantidad;
+            unitPropia.activeBonus.def += (cantidad + _baseIncrease);
         }
         else if (stat == "Res")
         {
             double division = unitPropia.res / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.activeBonus.res += cantidad;
+            unitPropia.activeBonus.res += (cantidad + _baseIncrease);
         }
         else if (stat == "Spd")
         {
             double division = unitPropia.spd / amount;
             cantidad = Convert.ToInt32(Math.Truncate(division));
-            unitPropia.activeBonus.spd += cantidad;
+            unitPropia.activeBonus.spd += (cantidad + _baseIncrease);
         }
-        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + "+" + cantidad);
+        int cantidadFinal = cantidad + _baseIncrease;
+        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + "+" + cantidadFinal);
     }
 }
 

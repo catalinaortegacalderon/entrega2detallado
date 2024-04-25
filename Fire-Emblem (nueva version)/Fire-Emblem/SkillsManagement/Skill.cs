@@ -796,12 +796,10 @@ namespace Fire_Emblem;
     {
         public Perceptive(View view) : base(view)
         {
-            this.condiciones = new Condition[2];
+            this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
-            this.condiciones[1] = new UnidadIniciaCombate();
-            this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 12);
-            this.efectos[1] = new ChangeStatsOnePointForEvery(this.view, "Spd", 4);
+            this.efectos = new Effect[1];
+            this.efectos[0] = new ChangeStatsInBasePlusOnePointForEvery(this.view, "Spd", 12, 4);
         }
     }
 
