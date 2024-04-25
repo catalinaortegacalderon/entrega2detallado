@@ -15,10 +15,10 @@ public class SkillsPrinter
     
     public static void PrintPenalties(View view, Unit unit)
     {
-        if (unit.activeBonus.attk > 0) view.WriteLine(unit.nombre + " obtiene Atk" + unit.activePenalties.attk);
-        if (unit.activeBonus.spd > 0) view.WriteLine(unit.nombre + " obtiene Spd" + unit.activePenalties.spd);
-        if (unit.activeBonus.def > 0) view.WriteLine(unit.nombre + " obtiene Def" + unit.activePenalties.def);
-        if (unit.activeBonus.res > 0) view.WriteLine(unit.nombre + " obtiene Res" + unit.activePenalties.res);
+        if (unit.activePenalties.attk < 0) view.WriteLine(unit.nombre + " obtiene Atk" + unit.activePenalties.attk);
+        if (unit.activePenalties.spd < 0) view.WriteLine(unit.nombre + " obtiene Spd" + unit.activePenalties.spd);
+        if (unit.activePenalties.def < 0) view.WriteLine(unit.nombre + " obtiene Def" + unit.activePenalties.def);
+        if (unit.activePenalties.res < 0) view.WriteLine(unit.nombre + " obtiene Res" + unit.activePenalties.res);
     }
     
     public static void PrintBonusNetralization(View view, Unit unit)
