@@ -358,8 +358,9 @@ public class Functions
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new BeorcsBlessing(view);
         }
-        else if (habilidad == "Agnea’s Arrow")
+        else if (habilidad == "Agnea's Arrow")
         {
+            Console.WriteLine("creando agneas");
             unidades[jugador_actual][contadores_unidades[jugador_actual]]
                 .habilidades[contador_habilidades] = new AgneasArrow(view);
         }

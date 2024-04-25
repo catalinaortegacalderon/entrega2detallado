@@ -784,10 +784,11 @@ namespace Fire_Emblem;
     {
         public Ignis(View view) : base(view)
         {
+            // no es en el primer ataque sino que es en ataque
             this.condiciones = new Condition[1];
-            this.condiciones[0] = new FirstAtack();
+            this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatInPercentaje(this.view, "Atk", 0.5); 
+            this.efectos[0] = new ChangeStatInPercentageOnlyForFirstAttack(this.view, "Atk", 0.5); 
         }
     }
 

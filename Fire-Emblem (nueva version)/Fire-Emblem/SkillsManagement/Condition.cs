@@ -170,6 +170,9 @@ public class FirstAtack: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
+        Console.WriteLine("paso por verify first attack");
+        Console.WriteLine(myUnit.gameLogs.amountOfAttacks == 0);
+        Console.WriteLine(myUnit.gameLogs.amountOfAttacks);
         if (myUnit.gameLogs.amountOfAttacks == 0) return true;
         return false;
     }

@@ -11,6 +11,7 @@ public class GameController
     public bool roundIsTerminated = false;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
+    private int _numeroAtaque;
     
     // arreglos: hacer variables privadas (setter y getter)
     //  ver si dejo lineas largas o con enter
@@ -30,6 +31,7 @@ public class GameController
 
     public string Attack(int numero_ataque, View view, int unidad1, int unidad2)
     {
+        _numeroAtaque = numero_ataque;
         string loosersName = "";
         if (this.gameIsTerminated || this.roundIsTerminated) return "";
         // EL NUMERO DE ATAQUE PUEDE SER 1-2-3 DEPENDIENDO SI ES ATAQUE, CONTRAATAQUE O FOLLOWUP
@@ -169,6 +171,8 @@ public class GameController
         {
             def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
         }
+        Console.WriteLine("def o res rival");
+        Console.WriteLine(def_o_res_rival);
         double wtb;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") wtb = 1;
         else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance")) wtb = 1.2;
@@ -178,6 +182,26 @@ public class GameController
             wtb = 0.8;
         }
         int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+        Console.WriteLine("current attk"+ _currentAttackingUnit.attk);
+        Console.WriteLine("bonus"+ _currentAttackingUnit.activeBonus.attk);
+        Console.WriteLine("penalty"+ _currentAttackingUnit.activePenalties.attk);
+        Console.WriteLine("neutrbonus"+ _currentAttackingUnit.activeBonusNeutralization.attk);
+        Console.WriteLine("neut penalty"+ _currentAttackingUnit.activePenaltiesNeutralization.attk);
+        if (_numeroAtaque == 1)
+        {
+            //Console.WriteLine("pase por donde quiero, atk antes y dsps");
+            //Console.WriteLine(atk_unidad );
+            atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.atkFirstAttack;
+            //Console.WriteLine(atk_unidad );
+            //llevo mal la cuenta aca con los attacks, solo estoy considerando rounds
+            _currentAttackingUnit.gameLogs.amountOfAttacks++;
+        }
+        else
+        {
+            Console.WriteLine("pase por donde  noquiero");
+        }
+        Console.WriteLine("atk wtb" + wtb);
+        Console.WriteLine("atk unidad" + atk_unidad);
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }
@@ -198,5 +222,18 @@ public class GameController
         {
             view.WriteLine(_currentDefensiveUnit.nombre + " (" + _currentDefensiveUnit.arma + ") tiene ventaja con respecto a " + _currentAttackingUnit.nombre + " (" + _currentAttackingUnit.arma + ")");
         }
+    }
+
+    public void resetAllSkills()
+    {
+        _currentDefensiveUnit.activeBonus.ResetStructureToZero();
+        _currentDefensiveUnit.activePenalties.ResetStructureToZero();
+        _currentDefensiveUnit.activeBonusNeutralization.ResetStructureToOne();
+        _currentDefensiveUnit.activePenaltiesNeutralization.ResetStructureToOne();
+        
+        _currentAttackingUnit.activeBonus.ResetStructureToZero();
+        _currentAttackingUnit.activePenalties.ResetStructureToZero();
+        _currentAttackingUnit.activeBonusNeutralization.ResetStructureToOne();
+        _currentAttackingUnit.activePenaltiesNeutralization.ResetStructureToOne();
     }
 }

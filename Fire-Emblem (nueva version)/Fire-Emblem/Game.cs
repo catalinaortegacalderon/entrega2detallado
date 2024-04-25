@@ -159,8 +159,7 @@ public class Game
     
     private void ResetUnitsBonus()
     {
-        _gameController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.ResetBonusToZero();
-        _gameController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.ResetBonusToZero();
+        _gameController.resetAllSkills();
     }
     
     private void UpdateGameLogs()
@@ -171,8 +170,14 @@ public class Game
 
     private void UpdateAttacks()
     {
-        _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.amountOfAttacks++;
-        _gameController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.amountOfAttacks++;
+        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        {
+            _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.amountOfAttacks++;
+            _gameController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.amountOfAttacks++;
+        }
+        else if (_currentRoundsPlayer1LooserUnitsName != "")
+            _gameController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.amountOfAttacks++;
+        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.amountOfAttacks++;
     }
 
     private void UpdateLastOponent()

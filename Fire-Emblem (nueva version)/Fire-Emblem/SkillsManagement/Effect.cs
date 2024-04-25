@@ -57,7 +57,7 @@ public class ReduceRivalsSpdInPercentaje : Effect
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.activeBonus.spd  = OponentsUnit.activeBonus.spd - reduction;
+        OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
         // ver si se imprime aca
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Spd-" + reduction);
     }
@@ -73,7 +73,7 @@ public class ReduceRivalsDefInPercentaje : Effect
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
         int reduction = Convert.ToInt32(Math.Truncate(OponentsUnit.spd * 0.5));
-        OponentsUnit.activeBonus.spd  = OponentsUnit.activeBonus.spd - reduction;
+        OponentsUnit.activePenalties.spd  = OponentsUnit.activePenalties.spd - reduction;
         // ver si se imprime aca
         this.view.WriteLine(OponentsUnit.nombre + " obtiene Def-" + reduction);
     }
@@ -88,22 +88,13 @@ public class NeutralizeOponentsBonus : Effect
     }
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (OponentsUnit.activeBonus.attk > 0 )
-        {
             OponentsUnit.activeBonus.attk = 0;
-        }
-        if (OponentsUnit.activeBonus.spd > 0 )
-        {
-            OponentsUnit.activeBonus.spd = 0;
-        }
-        if (OponentsUnit.activeBonus.def > 0 )
-        {
+            // revisar estos dos de abajo
+            OponentsUnit.activeBonus.atkFollowup = 0;
+            OponentsUnit.activeBonus.atkFirstAttack = 0;
+            OponentsUnit.activeBonus.spd = 0; 
             OponentsUnit.activeBonus.def = 0;
-        }
-        if (OponentsUnit.activeBonus.res > 0 )
-        {
             OponentsUnit.activeBonus.res = 0;
-        }
         this.view.WriteLine("Los bonus de Atk de " + OponentsUnit.nombre + " fueron neutralizados");
         this.view.WriteLine("Los bonus de Spd de " + OponentsUnit.nombre + " fueron neutralizados");
         this.view.WriteLine("Los bonus de Def de " + OponentsUnit.nombre + " fueron neutralizados");
@@ -122,26 +113,26 @@ public class NeutralizePenalties : Effect
     // VER SI SOLO ES CUANDO BONUS ES POSITIVO O SI ES SIEMPRE Y LO IMPRIMO SOLO CUAND HAT, TAL VEZ NEUTRALIZO ANTES DE APLICAR
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (unitPropia.activePenalties.attk < 0 )
-        {
-            unitPropia.activeBonusNeutralization.attk = 0;
-        }
-        if (unitPropia.activePenalties.spd < 0 )
-        {
-            unitPropia.activeBonusNeutralization.spd = 0;
-        }
-        if (unitPropia.activePenalties.def < 0 )
-        {
-            unitPropia.activeBonusNeutralization.def = 0;
-        }
-        if (unitPropia.activePenalties.res < 0 )
-        {
-            unitPropia.activeBonusNeutralization.res = 0;
-        }
-        this.view.WriteLine("Los penalties de Atk de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalties de Spd de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalties de Def de " + unitPropia.nombre + " fueron neutralizados");
-        this.view.WriteLine("Los penalties de Res de " + unitPropia.nombre + " fueron neutralizados");
+        //if (unitPropia.activePenalties.attk < 0 )
+        //{
+            unitPropia.activePenaltiesNeutralization.attk = 0;
+        //}
+        //if (unitPropia.activePenalties.spd < 0 )
+        //{
+            unitPropia.activePenaltiesNeutralization.spd = 0;
+        //}
+        //if (unitPropia.activePenalties.def < 0 )
+        //{
+            unitPropia.activePenaltiesNeutralization.def = 0;
+        //}
+        //if (unitPropia.activePenalties.res < 0 )
+        //{
+            unitPropia.activePenaltiesNeutralization.res = 0;
+        //}
+        this.view.WriteLine("Los penalty de Atk de " + unitPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalty de Spd de " + unitPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalty de Def de " + unitPropia.nombre + " fueron neutralizados");
+        this.view.WriteLine("Los penalty de Res de " + unitPropia.nombre + " fueron neutralizados");
     }
 }
 
@@ -230,10 +221,10 @@ public class NeutralizeOneOfOponentsBonus : Effect
 
     public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
     {
-        if (stat=="Atk" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.attk  = 0;
-        else if (stat == "Def" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.def = 0;
-        else if (stat == "Res" && OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.res = 0;
-        else if (stat == "Spd"&& OponentsUnit.activeBonus.attk > 0) OponentsUnit.activeBonusNeutralization.spd = 0;
+        if (stat=="Atk" ) OponentsUnit.activeBonusNeutralization.attk  = 0;
+        else if (stat == "Def" ) OponentsUnit.activeBonusNeutralization.def = 0;
+        else if (stat == "Res" ) OponentsUnit.activeBonusNeutralization.res = 0;
+        else if (stat == "Spd" ) OponentsUnit.activeBonusNeutralization.spd = 0;
         string signo = (this.cantidad > 0) ? "+" :  "";
         this.view.WriteLine("Los bonus de " + this.stat + " de " + OponentsUnit.nombre + " fueron neutralizados");
     }
@@ -275,6 +266,47 @@ public class ChangeStatInPercentaje : Effect
         }
         string signo = (this.percentaje > 0) ? "+" :  "";
         this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad);
+    }
+}
+
+public class ChangeStatInPercentageOnlyForFirstAttack : Effect
+{
+    private String stat;
+    private double percentaje;
+    
+    // arreglar esto, solo funciona para ataque
+    public ChangeStatInPercentageOnlyForFirstAttack(View view, String stat, Double percentaje) : base(view)
+    {
+        this.stat = stat;
+        this.percentaje = percentaje;
+    }
+
+    public override void Aplicar(Unit unitPropia, Unit OponentsUnit, bool atacando)
+    {
+        int cantidad = 0;
+        if (stat == "Atk")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unitPropia.attk * this.percentaje));
+            unitPropia.activeBonus.atkFirstAttack  += cantidad;
+            
+        }
+        else if (stat == "Def")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unitPropia.def * this.percentaje));
+            unitPropia.activeBonus.def += cantidad;
+        }
+        else if (stat == "Res")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unitPropia.res * this.percentaje));
+            unitPropia.activeBonus.res += cantidad;
+        }
+        else if (stat == "Spd")
+        {
+            cantidad = Convert.ToInt32(Math.Truncate(unitPropia.spd * this.percentaje));
+            unitPropia.activeBonus.spd += cantidad;
+        }
+        string signo = (this.percentaje > 0) ? "+" :  "";
+        this.view.WriteLine(unitPropia.nombre + " obtiene " + stat + signo + cantidad +" en su primer ataque");
     }
 }
 

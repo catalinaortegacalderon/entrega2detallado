@@ -17,10 +17,10 @@ public class Unit
     public int def;
     public int res;
     // tal ves todos los de aca abajo pueden ser igual
-    public ActiveBonus activeBonus = new ActiveBonus();
-    public ActivePenalties activePenalties = new ActivePenalties();
-    public ActiveBonusNeutralization activeBonusNeutralization = new ActiveBonusNeutralization();
-    public ActivePenaltiesNeutralization activePenaltiesNeutralization = new ActivePenaltiesNeutralization();
+    public BonusPenaltiesAndNeutralizations activeBonus = new BonusPenaltiesAndNeutralizations(0);
+    public BonusPenaltiesAndNeutralizations activePenalties = new BonusPenaltiesAndNeutralizations(0);
+    public BonusPenaltiesAndNeutralizations activeBonusNeutralization = new BonusPenaltiesAndNeutralizations(1);
+    public BonusPenaltiesAndNeutralizations activePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
     public GameLogs gameLogs = new GameLogs();
     public Skill[] habilidades = new Skill[2];
     
