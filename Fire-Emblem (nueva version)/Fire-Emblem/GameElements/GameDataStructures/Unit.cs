@@ -6,20 +6,19 @@ namespace Fire_Emblem;
 
 public class Unit
 {
-    //public View View;
-    public string name = "";
-    public string weapon;
-    public string gender;
-    public int hpMax;
-    public int currentHp = 0;
-    public int attk;
-    public int spd;
-    public int def;
-    public int res;
-    public BonusPenaltiesAndNeutralizations activeBonus = new BonusPenaltiesAndNeutralizations(0);
-    public BonusPenaltiesAndNeutralizations activePenalties = new BonusPenaltiesAndNeutralizations(0);
-    public BonusPenaltiesAndNeutralizations activeBonusNeutralization = new BonusPenaltiesAndNeutralizations(1);
-    public BonusPenaltiesAndNeutralizations activePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
-    public GameLogs gameLogs = new GameLogs();
-    public Skill[] skills = new Skill[] { new EmptySkill(), new EmptySkill() };
+    public string Name = "";
+    public string Weapon;
+    public string Gender;
+    public int HpMax;
+    public int CurrentHp = 0;
+    public int Attk;
+    public int Spd;
+    public int Def;
+    public int Res;
+    public BonusPenaltiesAndNeutralizations ActiveBonus = new BonusPenaltiesAndNeutralizations(0);
+    public BonusPenaltiesAndNeutralizations ActivePenalties = new BonusPenaltiesAndNeutralizations(0);
+    public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = new BonusPenaltiesAndNeutralizations(1);
+    public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
+    public GameLogs GameLogs = new GameLogs();
+    public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
 }

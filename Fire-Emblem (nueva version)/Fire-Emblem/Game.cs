@@ -65,7 +65,7 @@ public class Game
     {
         _currentUnitNumberOfPlayer2 = AskPlayerForTheUnitNumber(1);
         _currentUnitNumberOfPlayer1 = AskPlayerForTheUnitNumber(0);
-        _view.WriteLine("Round " + _gameAttacksController.currentRound + ": " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name + " (Player 2) comienza");
+        _view.WriteLine("Round " + _gameAttacksController.currentRound + ": " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name + " (Player 2) comienza");
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _gameAttacksController.currentAttacker = 0;
         _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
@@ -99,7 +99,7 @@ public class Game
     {
         string playerNumberString  = (playerNumber == 0) ? "1" :  "2";
         int numberOfThePlayersUnit  = (playerNumber == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _view.WriteLine("Round " + _gameAttacksController.currentRound + ": " + _gameAttacksController.players[playerNumber].units[numberOfThePlayersUnit].name + " (Player " + playerNumberString + ") comienza");
+        _view.WriteLine("Round " + _gameAttacksController.currentRound + ": " + _gameAttacksController.players[playerNumber].units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
     }
 
     private int AskPlayerForTheUnitNumber(int playerNumber)
@@ -115,7 +115,7 @@ public class Game
         _view.WriteLine("Player "+ playerNumberString+ " selecciona una opción");
         foreach (Unit unit in _gameAttacksController.players[playerNumber].units)
         {
-            if (unit.name != "") _view.WriteLine(unitNumberCounter + ": " + unit.name);
+            if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
             unitNumberCounter++;
         }
     }
@@ -141,23 +141,23 @@ public class Game
     private bool FirstPlayerCanDoAFollowup()
     {
         return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
-               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
-               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd + 5 <=
-               _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
-               + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
-               +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd;
+               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Spd 
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.spd
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActivePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.spd + 5 <=
+               _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Spd 
+               + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.spd
+               +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActivePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.spd;
     }
 
     private bool SecondPlayerCanDoAFollowup()
     {
         return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
-               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
-               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd >=
-               5 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
-                 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
-                 +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd;
+               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Spd 
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.spd
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActivePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.spd >=
+               5 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Spd 
+                 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.spd
+                 +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActivePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.spd;
     }
 
     private void ResetUnitsBonus()
@@ -175,45 +175,45 @@ public class Game
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks = 0;
-            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks = 0;
+            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
+            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks = 0;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks = 0;
+        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
+        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
     }
 
     private void UpdateLastOponent()
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.LastOponentName = _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].name;
-            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.LastOponentName = _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name;
+            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].GameLogs.LastOponentName = _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Name;
+            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].GameLogs.LastOponentName = _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name;
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.LastOponentName = _currentRoundsPlayer1LooserUnitsName;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.LastOponentName = _currentRoundsPlayer2LooserUnitsName;
+        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].GameLogs.LastOponentName = _currentRoundsPlayer1LooserUnitsName;
+        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].GameLogs.LastOponentName = _currentRoundsPlayer2LooserUnitsName;
     }
     
     private void ShowLeftoverHpPrintingPlayer1First()
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _view.WriteLine(_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].name +
-                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].currentHp +
-                            ") : " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name +
-                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].currentHp +
+            _view.WriteLine(_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].CurrentHp +
+                            ") : " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ")");
         }
         else if (_currentRoundsPlayer1LooserUnitsName != "")
         {
             _view.WriteLine(_currentRoundsPlayer1LooserUnitsName +
-                            " (0) : " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name +
-                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].currentHp +
+                            " (0) : " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ")");
         }
         else
         {
-            _view.WriteLine(_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].name +
-                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].currentHp +
+            _view.WriteLine(_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ") : " + _currentRoundsPlayer2LooserUnitsName +
                             " (0)");
         }
@@ -223,24 +223,24 @@ public class Game
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _view.WriteLine(_gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name +
-                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].currentHp +
-                            ") : " + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].name +
-                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].currentHp +
+            _view.WriteLine(_gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].CurrentHp +
+                            ") : " + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ")");
         }
         else if (_currentRoundsPlayer1LooserUnitsName != "")
         {
-            _view.WriteLine(_gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name +
-                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].currentHp +
+            _view.WriteLine(_gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ") : " + _currentRoundsPlayer1LooserUnitsName +
                             " (0)");
         }
         else
         {
             _view.WriteLine(_currentRoundsPlayer2LooserUnitsName +
-                            " (0) : " + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].name +
-                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].currentHp +
+                            " (0) : " + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ")");
         }
     }

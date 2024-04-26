@@ -154,8 +154,7 @@ public class UsefulFunctions
         return newGameAttacksController;
     }
 
-    private static void CreateSkills( Unit[][] unitsList, int currentPlayer,
-        int[] unitCounters, string[] listOfSkillNames)
+    private static void CreateSkills( Unit[][] unitsList, int currentPlayer, int[] unitCounters, string[] listOfSkillNames)
     {
         int contador_habilidades = 0;
         foreach (string skillName in listOfSkillNames)
@@ -167,14 +166,14 @@ public class UsefulFunctions
     
     private static void SetUnitValues(Unit unit, string name, string weapon, string gender, int currentHp,int maxHp, int attk, int spd, int def, int res)
     {
-        unit.name = name;
-        unit.weapon = weapon;
-        unit.gender = gender;
-        unit.hpMax = maxHp;
-        unit.currentHp = currentHp;
-        unit.attk = attk;
-        unit.spd = spd;
-        unit.def = def;
-        unit.res = res;
+        unit.Name = name;
+        unit.Weapon = weapon;
+        unit.Gender = gender;
+        unit.HpMax = maxHp;
+        unit.CurrentHp = currentHp;
+        unit.Attk = attk;
+        unit.Spd = spd;
+        unit.Def = def;
+        unit.Res = res;
     }
 }

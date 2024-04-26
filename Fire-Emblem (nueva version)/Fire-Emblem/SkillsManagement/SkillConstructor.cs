@@ -5,7 +5,7 @@ public class SkillConstructor
     public static void Construct(Unit[][] units, int currentPlayerNumber, int[] contadores_unidades,
         string skillString, int skillsCounter)
     {
-        Skill[] skills = units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]].skills;
+        Skill[] skills = units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]].Skills;
         if (skillString == "HP +15")
         {
             skills[skillsCounter] = new HpMas15();

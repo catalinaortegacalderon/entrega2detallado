@@ -55,7 +55,7 @@ public class GameAttacksController
 
     private void PrintWhoAttacksWho(View view)
     {
-        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + _attackValue + " de daño");
+        view.WriteLine(_currentAttackingUnit.Name + " ataca a " + _currentDefensiveUnit.Name + " con " + _attackValue + " de daño");
     }
 
     private void SetAttacksParameters(int numberOfCurrentAttack, int firstPlayersCurrentUnitNumber,
@@ -70,16 +70,16 @@ public class GameAttacksController
     private string Player2Attacks()
     {
         string loosersName;
-        if (_attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].currentHp)
+        if (_attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp)
         {
-            loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
+            loosersName = players[0].units[_firstPlayersCurrentUnitNumber].Name;
             this.roundIsTerminated = true;
             EliminateLooserUnitOfPlayer1();
             return loosersName;
         }
         else
         {
-            players[0].units[_firstPlayersCurrentUnitNumber].currentHp = players[0].units[_firstPlayersCurrentUnitNumber].currentHp - _attackValue;
+            players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp = players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp - _attackValue;
         }
         return "";
     }
@@ -87,9 +87,9 @@ public class GameAttacksController
     private string Player1Attacks(int attackValue)
     {
         string loosersName;
-        if (attackValue >= players[1].units[_secondPlayersCurrentUnitNumber].currentHp)
+        if (attackValue >= players[1].units[_secondPlayersCurrentUnitNumber].CurrentHp)
         {
-            loosersName = players[1].units[_secondPlayersCurrentUnitNumber].name;
+            loosersName = players[1].units[_secondPlayersCurrentUnitNumber].Name;
             this.roundIsTerminated = true;
             EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
             return loosersName;
@@ -135,7 +135,7 @@ public class GameAttacksController
 
     private void SetDefendorsNewHp(int secondPlayersCurrentUnitNumber, int attackValue)
     {
-        _currentDefensiveUnit.currentHp -= attackValue;
+        _currentDefensiveUnit.CurrentHp -= attackValue;
     }
 
     private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
@@ -151,14 +151,14 @@ public class GameAttacksController
 
     private void ActivateAttackersUnitSkills()
     {
-        foreach (Skill habilidad in _currentAttackingUnit.skills)
+        foreach (Skill habilidad in _currentAttackingUnit.Skills)
         {
             habilidad.ApplySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
         }
     }
     private void ActivateDefensorsUnitSkills()
     {
-        foreach (Skill habilidad in _currentDefensiveUnit.skills)
+        foreach (Skill habilidad in _currentDefensiveUnit.Skills)
         {
             habilidad.ApplySkills(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
@@ -179,28 +179,28 @@ public class GameAttacksController
 
     public int CalculateAttack()
     {
-        string attackingWeapon = _currentAttackingUnit.weapon;
-        string defensiveWeapon = _currentDefensiveUnit.weapon;
+        string attackingWeapon = _currentAttackingUnit.Weapon;
+        string defensiveWeapon = _currentDefensiveUnit.Weapon;
         int rivalsDefOrRes = CalculateRivalsDefOrRes(attackingWeapon);
         double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
         int unitsAtk = CalculateUnitsAtk();
-        _currentAttackingUnit.gameLogs.AmountOfAttacks++;
+        _currentAttackingUnit.GameLogs.AmountOfAttacks++;
         if ((unitsAtk * wtb - rivalsDefOrRes) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(unitsAtk * wtb - rivalsDefOrRes));
     }
 
     private int CalculateUnitsAtk()
     {
-        int unitsAtk = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+        int unitsAtk = _currentAttackingUnit.Attk + _currentAttackingUnit.ActiveBonus.attk * _currentAttackingUnit.ActiveBonusNeutralization.attk + _currentAttackingUnit.ActivePenalties.attk * _currentAttackingUnit.ActivePenaltiesNeutralization.attk;
         if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
         {
-            unitsAtk += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
-                          _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+            unitsAtk += _currentAttackingUnit.ActiveBonus.atkFirstAttack * _currentAttackingUnit.ActiveBonusNeutralization.attk +
+                          _currentAttackingUnit.ActivePenalties.atkFirstAttack * _currentAttackingUnit.ActivePenaltiesNeutralization.attk;
         }
         if (_numberOfThisRoundsCurrentAttack == 3)
         {
-            unitsAtk += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
-                          + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+            unitsAtk += _currentAttackingUnit.ActiveBonus.atkFollowup * _currentAttackingUnit.ActiveBonusNeutralization.attk
+                          + _currentAttackingUnit.ActivePenalties.atkFollowup * _currentAttackingUnit.ActivePenaltiesNeutralization.attk;
         }
         return unitsAtk;
     }
@@ -222,13 +222,13 @@ public class GameAttacksController
         int rivalsDefOrRes;
         if (attackingWeapon == "Magic")
         {
-            rivalsDefOrRes = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
-            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.activeBonus.resFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.resFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.res;
+            rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.res * _currentDefensiveUnit.ActiveBonusNeutralization.res + _currentDefensiveUnit.ActivePenalties.res *_currentDefensiveUnit.ActivePenaltiesNeutralization.res;
+            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.resFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.res + _currentDefensiveUnit.ActivePenalties.resFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.res;
         }
         else
         {
-            rivalsDefOrRes = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
-            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.activeBonus.defFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.defFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.def;
+            rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.def * _currentDefensiveUnit.ActiveBonusNeutralization.def + _currentDefensiveUnit.ActivePenalties.def *_currentDefensiveUnit.ActivePenaltiesNeutralization.def;
+            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.defFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.def + _currentDefensiveUnit.ActivePenalties.defFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.def;
         }
 
         return rivalsDefOrRes;
@@ -236,13 +236,13 @@ public class GameAttacksController
 
     public void PrintAdvantages(View view)
     {
-        string attackingWeapon = _currentAttackingUnit.weapon;
-        string defensiveWeapon = _currentDefensiveUnit.weapon;
+        string attackingWeapon = _currentAttackingUnit.Weapon;
+        string defensiveWeapon = _currentDefensiveUnit.Weapon;
         if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
+        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ")");
         else
         {
-            view.WriteLine(_currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ")");
+            view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ")");
         }
     }
 
@@ -264,17 +264,17 @@ public class GameAttacksController
 
     private void ResetDefensorsSkills()
     {
-        _currentAttackingUnit.activeBonus.ResetStructureToZero();
-        _currentAttackingUnit.activePenalties.ResetStructureToZero();
-        _currentAttackingUnit.activeBonusNeutralization.ResetStructureToOne();
-        _currentAttackingUnit.activePenaltiesNeutralization.ResetStructureToOne();
+        _currentAttackingUnit.ActiveBonus.ResetStructureToZero();
+        _currentAttackingUnit.ActivePenalties.ResetStructureToZero();
+        _currentAttackingUnit.ActiveBonusNeutralization.ResetStructureToOne();
+        _currentAttackingUnit.ActivePenaltiesNeutralization.ResetStructureToOne();
     }
 
     private void ResetAttackersSkills()
     {
-        _currentDefensiveUnit.activeBonus.ResetStructureToZero();
-        _currentDefensiveUnit.activePenalties.ResetStructureToZero();
-        _currentDefensiveUnit.activeBonusNeutralization.ResetStructureToOne();
-        _currentDefensiveUnit.activePenaltiesNeutralization.ResetStructureToOne();
+        _currentDefensiveUnit.ActiveBonus.ResetStructureToZero();
+        _currentDefensiveUnit.ActivePenalties.ResetStructureToZero();
+        _currentDefensiveUnit.ActiveBonusNeutralization.ResetStructureToOne();
+        _currentDefensiveUnit.ActivePenaltiesNeutralization.ResetStructureToOne();
     }
 }
