@@ -72,7 +72,6 @@ public class GameAttacksController
             if (attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].currentHp)
             {
                 loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
-                //muere esta unidad
                 this.roundIsTerminated = true;
                 EliminateLooserUnitOfPlayer1();
                 return loosersName;
@@ -94,22 +93,7 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer1()
     {
-        if (_firstPlayersCurrentUnitNumber == 0)
-        {
-            players[0].units[0] = players[0].units[1];
-            players[0].units[1] = players[0].units[2];
-            players[0].units[2] = new Unit();
-        }
-        else if (_firstPlayersCurrentUnitNumber == 1)
-        {
-            players[0].units[1] = players[0].units[2];
-            players[0].units[2] = new Unit();
-        }
-        else
-        {
-            players[0].units[2] = new Unit();
-        }
-
+        players[0].units.RemoveAt(_firstPlayersCurrentUnitNumber);
         players[0].amountOfUnits = players[0].amountOfUnits - 1;
         if (players[0].amountOfUnits == 0)
         {
@@ -140,22 +124,7 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
     {
-        if (secondPlayersCurrentUnitNumber == 0)
-        {
-            players[1].units[0] = players[1].units[1];
-            players[1].units[1] = players[1].units[2];
-            players[1].units[2] = new Unit();
-        }
-        else if (secondPlayersCurrentUnitNumber == 1)
-        {
-            players[1].units[1] = players[1].units[2];
-            players[1].units[2] = new Unit();
-        }
-        else
-        {
-            players[1].units[2] = new Unit();
-        }
-
+        players[1].units.RemoveAt(_secondPlayersCurrentUnitNumber);
         players[1].amountOfUnits = players[1].amountOfUnits - 1;
         if (players[1].amountOfUnits == 0)
         {
