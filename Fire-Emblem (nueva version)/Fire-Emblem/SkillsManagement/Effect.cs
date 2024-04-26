@@ -236,22 +236,6 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.attk * this._percentage));
             myUnit.activeBonus.atkFirstAttack  += Amount;
-            
-        }
-        else if (Stat == "Def")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.def * this._percentage));
-            myUnit.activeBonus.def += Amount;
-        }
-        else if (Stat == "Res")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.res * this._percentage));
-            myUnit.activeBonus.res += Amount;
-        }
-        else if (Stat == "Spd")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.spd * this._percentage));
-            myUnit.activeBonus.spd += Amount;
         }
     }
 }

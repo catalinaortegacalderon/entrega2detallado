@@ -12,7 +12,7 @@ public class SkillsPrinter
         if (unit.activeBonus.atkFirstAttack > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.atkFirstAttack + " en su primer ataque");
         if (unit.activeBonus.defFirstAttack > 0) view.WriteLine(unit.name + " obtiene Def+" + unit.activeBonus.defFirstAttack + " en su primer ataque");
         if (unit.activeBonus.resFirstAttack > 0) view.WriteLine(unit.name + " obtiene Res+" + unit.activeBonus.resFirstAttack + " en su primer ataque");
-        if (unit.activeBonus.atkFirstAttack > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.atkFollowup + " en su Follow-Up");
+        if (unit.activeBonus.atkFollowup > 0) view.WriteLine(unit.name + " obtiene Atk+" + unit.activeBonus.atkFollowup + " en su Follow-Up");
     }
     
     public static void PrintPenalties(View view, Unit unit)

@@ -204,7 +204,7 @@ public class GameAttacksController
         }
         int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
         // revisar si pongo * neutralizador ataque o * neutralizador de atk first attack...
-        if (_numberOfThisRoundsCurrentAttack == 1)
+        if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
         {
             atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
                           _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
