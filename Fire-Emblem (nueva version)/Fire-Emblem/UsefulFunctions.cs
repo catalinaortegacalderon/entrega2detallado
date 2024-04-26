@@ -14,7 +14,7 @@ public class UsefulFunctions
         return true;
     }
     
-        private static bool CheckIfThereAreNoEmptyTeams(string file)
+    private static bool CheckIfThereAreNoEmptyTeams(string file)
     {
         int[] unitsCounter = new int[] {0, 0};
         int curentPlayer = 0; 
@@ -42,7 +42,7 @@ public class UsefulFunctions
         return true;
     }
     
-    public static bool CheckIfThereAreNoRepeatedUnits(string file)
+    private static bool CheckIfThereAreNoRepeatedUnits(string file)
     {
         int[] unitCounter = new int[] {0, 0};
         int currentPlayer = 0; 
@@ -106,7 +106,7 @@ public class UsefulFunctions
         return false;
     }
     
-    public static GameAttacksController BuildGameController(string archivo, View view)
+    public static GameAttacksController BuildGameController(string file, View view)
     {
         int[] contadores_unidades = new int[2];
         contadores_unidades[0] = 0;
@@ -115,7 +115,7 @@ public class UsefulFunctions
         Unit[][] unidades = new Unit[2][];
         unidades[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
         unidades[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        string[] lineas = File.ReadAllLines(archivo);
+        string[] lineas = File.ReadAllLines(file);
         foreach (string linea in lineas)
         {
             if (linea == "Player 1 Team") jugador_actual = 0;
@@ -150,7 +150,6 @@ public class UsefulFunctions
         Player jugador2 = new Player();
         jugador2.amountOfUnits = contadores_unidades[1];
         jugador2.units = unidades[1].ToList();
-        
         GameAttacksController newGameAttacksController = new GameAttacksController(jugador1, jugador2);
 
         return newGameAttacksController;
