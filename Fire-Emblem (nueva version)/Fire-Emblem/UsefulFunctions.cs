@@ -108,50 +108,68 @@ public class UsefulFunctions
     
     public static GameAttacksController BuildGameController(string file, View view)
     {
-        int[] contadores_unidades = new int[2];
-        contadores_unidades[0] = 0;
-        contadores_unidades[1] = 0;
-        int jugador_actual = 0;
-        Unit[][] unidades = new Unit[2][];
-        unidades[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        unidades[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        string[] lineas = File.ReadAllLines(file);
-        foreach (string linea in lineas)
+        var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);
+        CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
+        var firstPlayer = CreatePlayers(unitCounters, units, out var secondPlayer);
+        //GameAttacksController newGameAttacksController = new GameAttacksController(firstPlayer, secondPlayer);
+        return new GameAttacksController(firstPlayer, secondPlayer);
+    }
+
+    private static Player CreatePlayers(int[] unitCounters, Unit[][] units, out Player jugador2)
+    {
+        Player jugador1 = new Player();
+        jugador1.amountOfUnits = unitCounters[0];
+        jugador1.units = units[0].ToList();
+        jugador2 = new Player();
+        jugador2.amountOfUnits = unitCounters[1];
+        jugador2.units = units[1].ToList();
+        return jugador1;
+    }
+
+    private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)
+    {
+        string[] allLines = File.ReadAllLines(file);
+        foreach (string line in allLines)
         {
-            if (linea == "Player 1 Team") jugador_actual = 0;
-            else if (linea == "Player 2 Team") jugador_actual = 1;
+            if (line == "Player 1 Team") currentPlayer = 0;
+            else if (line == "Player 2 Team") currentPlayer = 1;
             else
             {
-                // obtener nombre unidad
-                string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                string nombre = nuevo_string[0].Replace(" ", "");
-                string myJson = File.ReadAllText("characters.json");
-                var players = JsonSerializer.Deserialize<List<JsonUnit>>(myJson);
-                foreach (var player in players)
-                {
-                    if (nombre == player.Name)
-                    {
-                        SetUnitValues(unidades[jugador_actual][contadores_unidades[jugador_actual]], player.Name,
-                            player.Weapon, player.Gender, Convert.ToInt32(player.HP),
-                            Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd),
-                            Convert.ToInt32(player.Def), Convert.ToInt32(player.Res));
-                    }
-                }
-                // agregar habilidades a la unidad
-                if (nuevo_string.Length > 1) CreateSkills(unidades, jugador_actual, contadores_unidades, nuevo_string[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-                contadores_unidades[jugador_actual]++;
+                var unitInfo = CreateUnits(line, units, currentPlayer, unitCounters);
+                if (unitInfo.Length > 1) CreateSkills(units, currentPlayer, unitCounters, unitInfo[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+                unitCounters[currentPlayer]++;
+            }
+        }
+    }
+
+    private static int[] InitializeParametersToCreateController(out int currentPlayer, out Unit[][] units)
+    {
+        int[] unitCounters = new int[] {0, 0};
+        currentPlayer = 0;
+        units = new Unit[2][];
+        units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        return unitCounters;
+    }
+
+    private static string[] CreateUnits(string line, Unit[][] units, int currentPlayer, int[] unitCounters)
+    {
+        string[] unitInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        string unitsName = unitInfo[0].Replace(" ", "");
+        string myJson = File.ReadAllText("characters.json");
+        var jsonUnits = JsonSerializer.Deserialize<List<JsonUnit>>(myJson);
+        foreach (var unit in jsonUnits)
+        {
+            if (unitsName == unit.Name)
+            {
+                SetUnitValues(units[currentPlayer][unitCounters[currentPlayer]], unit.Name,
+                    unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
+                    Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
+                    Convert.ToInt32(unit.Def), Convert.ToInt32(unit.Res));
             }
         }
 
-        Player jugador1 = new Player();
-        jugador1.amountOfUnits = contadores_unidades[0];
-        jugador1.units = unidades[0].ToList();
-        Player jugador2 = new Player();
-        jugador2.amountOfUnits = contadores_unidades[1];
-        jugador2.units = unidades[1].ToList();
-        GameAttacksController newGameAttacksController = new GameAttacksController(jugador1, jugador2);
-
-        return newGameAttacksController;
+        return unitInfo;
     }
 
     private static void CreateSkills( Unit[][] unitsList, int currentPlayer, int[] unitCounters, string[] listOfSkillNames)
