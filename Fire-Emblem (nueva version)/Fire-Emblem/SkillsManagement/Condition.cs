@@ -183,14 +183,14 @@ public class OponentStartsCombatWhithWeapon: Condition
 
 public class RivalStartsAttackOrHasHpGreaterThan : Condition
 {
-    private double percentaje;
+    private double percentage;
     public RivalStartsAttackOrHasHpGreaterThan(double percentage) : base()
     {
-        this.percentaje = percentage;
+        this.percentage = percentage;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this.percentaje || !iAmAttacking)
+        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this.percentage || !iAmAttacking)
         {
             return true;
         }

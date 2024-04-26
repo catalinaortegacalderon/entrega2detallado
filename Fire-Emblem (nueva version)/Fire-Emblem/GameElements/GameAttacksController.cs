@@ -223,12 +223,12 @@ public class GameAttacksController
         if (attackingWeapon == "Magic")
         {
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.res * _currentDefensiveUnit.ActiveBonusNeutralization.res + _currentDefensiveUnit.ActivePenalties.res *_currentDefensiveUnit.ActivePenaltiesNeutralization.res;
-            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.resFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.res + _currentDefensiveUnit.ActivePenalties.resFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.res;
+            if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.resFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.res + _currentDefensiveUnit.ActivePenalties.resFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.res;
         }
         else
         {
             rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.def * _currentDefensiveUnit.ActiveBonusNeutralization.def + _currentDefensiveUnit.ActivePenalties.def *_currentDefensiveUnit.ActivePenaltiesNeutralization.def;
-            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.defFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.def + _currentDefensiveUnit.ActivePenalties.defFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.def;
+            if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.defFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.def + _currentDefensiveUnit.ActivePenalties.defFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.def;
         }
 
         return rivalsDefOrRes;
