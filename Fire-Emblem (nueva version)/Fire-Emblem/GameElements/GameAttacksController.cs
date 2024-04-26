@@ -39,12 +39,7 @@ public class GameAttacksController
     {
         //PONER LOOSERS NAME COMO PARAMETRO de clase
         if (this.gameIsTerminated || this.roundIsTerminated) return "";
-        _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
-        this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
-        this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
-        NameOfPlayer1sLoosingUnit = "";
-        NameOfPlayer2sLoosingUnit = "";
-        string loosersName = "";
+        SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         SetAttackingAndDefensiveUnits();
         if (_numberOfThisRoundsCurrentAttack == 1)
         {
@@ -59,6 +54,17 @@ public class GameAttacksController
         {
             return Player2Attacks();
         }
+    }
+
+    private void SetAttacksParameters(int numberOfCurrentAttack, int firstPlayersCurrentUnitNumber,
+        int secondPlayersCurrentUnitNumber)
+    {
+        _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
+        this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
+        this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
+        NameOfPlayer1sLoosingUnit = "";
+        NameOfPlayer2sLoosingUnit = "";
+        string loosersName = "";
     }
 
     private string Player2Attacks()

@@ -22,5 +22,4 @@ public class Unit
     public BonusPenaltiesAndNeutralizations activePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
     public GameLogs gameLogs = new GameLogs();
     public Skill[] skills = new Skill[] { new EmptySkill(), new EmptySkill() };
-    
 }

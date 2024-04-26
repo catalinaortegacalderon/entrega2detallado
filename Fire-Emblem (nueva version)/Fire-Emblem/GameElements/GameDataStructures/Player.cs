@@ -5,6 +5,4 @@ public class Player
 {
     public int amountOfUnits;
     public List<Unit> units = new List<Unit>(3);
-    
-
 }
