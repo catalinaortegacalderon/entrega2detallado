@@ -22,10 +22,7 @@ public class UsefulFunctions
         {
             if (line == "Player 1 Team") curentPlayer = 0;
             else if (line == "Player 2 Team") curentPlayer = 1;
-            else
-            {
-                unitsCounter[curentPlayer]++;
-            }
+            else { unitsCounter[curentPlayer]++; }
         }
         if (unitsCounter[0] == 0 || unitsCounter[1] == 0) return false;
         return true;
@@ -39,10 +36,7 @@ public class UsefulFunctions
         {
             if (line == "Player 1 Team") curentPlayer = 0;
             else if (line == "Player 2 Team") curentPlayer = 1;
-            else
-            {
-                unitsCounter[curentPlayer]++;
-            }
+            else { unitsCounter[curentPlayer]++; }
         }
         if (unitsCounter[0] > 3 || unitsCounter[1] > 3) return false;
         return true;
@@ -62,7 +56,6 @@ public class UsefulFunctions
                 string[] arraWithUnitsInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
                 string unitName = arraWithUnitsInfo[0]; 
                 if(units[currentPlayer].Contains(unitName)) return false;
-                // revisar
                 units[currentPlayer][unitCounter[currentPlayer]] = unitName;
                 unitCounter[currentPlayer]++;
             }
@@ -70,7 +63,7 @@ public class UsefulFunctions
         return true;
     }
     
-    public static bool CheckIfThereAreMaxTwoSkillsPerUnit(string file)
+    private static bool CheckIfThereAreMaxTwoSkillsPerUnit(string file)
     {
         foreach (string line in File.ReadAllLines(file))
         {
@@ -84,7 +77,7 @@ public class UsefulFunctions
         return true;
     }
     
-    public static bool CheckIfThereAreNoRepeatedSkills(string file)
+    private static bool CheckIfThereAreNoRepeatedSkills(string file)
     {
         foreach (string line in File.ReadAllLines(file))
         {
@@ -112,8 +105,7 @@ public class UsefulFunctions
         }   
         return false;
     }
-
-
+    
     public static GameAttacksController BuildGameController(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
@@ -178,13 +170,13 @@ public class UsefulFunctions
         }
     }
     
-    public static void SetUnitValues(Unit unit, string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
+    private static void SetUnitValues(Unit unit, string name, string weapon, string gender, int currentHp,int maxHp, int attk, int spd, int def, int res, View view)
     {
-        unit.name = nombre;
-        unit.weapon = arma;
-        unit.gender = genero;
-        unit.hpMax = hp_max;
-        unit.currentHp = hp_actual;
+        unit.name = name;
+        unit.weapon = weapon;
+        unit.gender = gender;
+        unit.hpMax = maxHp;
+        unit.currentHp = currentHp;
         unit.attk = attk;
         unit.spd = spd;
         unit.def = def;
