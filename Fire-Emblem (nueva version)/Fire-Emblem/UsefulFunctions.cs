@@ -4,12 +4,18 @@ using System.Text.Json;
 
 public class UsefulFunctions
 {
-    public static bool Juego_Valido(string archivo)
+    public static bool CheckIfGameIsValid(string file)
     {
+        // Empty team
+        if (!CheckIfThereAreNoEmptyTeams(file)) return false;
+        if (!CheckIfThereAreMaximumThreeUnitsPerTeam(file)) return false;
+        // no hay mas de tres unidades
+        // no hayan unidades repetidas
+        // // revisando que no hayan mas de dos habilidades o habilidades rep
         int[] contadores_unidades = new int[] {0, 0};
         int jugador_actual = 0; 
         string[][] unidades = new string[][] { new string[] { "", "", "" }, new string[] { "", "", "" } };
-        string[] lineas = File.ReadAllLines(archivo);
+        string[] lineas = File.ReadAllLines(file);
         //if (ThereIsAnEmptyTeam(archivo)) return false;
         foreach (string linea in lineas)
         {
@@ -17,9 +23,9 @@ public class UsefulFunctions
             else if (linea == "Player 2 Team")
             {
                 // revisando si hay equipo vacio
-                if (contadores_unidades[0] == 0){
-                    return false;
-                }
+                //if (contadores_unidades[0] == 0){
+                //    return false;
+                //}
                 jugador_actual = 1;
             }
             else
@@ -56,11 +62,45 @@ public class UsefulFunctions
             }
         }
         //revisando que no hayan equipos vacios ni con mas de 3 unidades
-        if (contadores_unidades[1] == 0 || contadores_unidades[1] > 3 || contadores_unidades[0] > 3)
-        {
-            return false;
-        }
+        //if (contadores_unidades[1] == 0 || contadores_unidades[1] > 3 || contadores_unidades[0] > 3)
+        //{
+        //    return false;
+        //}
         // valido
+        return true;
+    }
+    
+        private static bool CheckIfThereAreNoEmptyTeams(string file)
+    {
+        int[] unitsCounter = new int[] {0, 0};
+        int curentPlayer = 0; 
+        foreach (string line in File.ReadAllLines(file))
+        {
+            if (line == "Player 1 Team") curentPlayer = 0;
+            else if (line == "Player 2 Team") curentPlayer = 1;
+            else
+            {
+                unitsCounter[curentPlayer]++;
+            }
+        }
+        if (unitsCounter[0] == 0 || unitsCounter[1] == 0) return false;
+        return true;
+    }
+        
+    public static bool CheckIfThereAreMaximumThreeUnitsPerTeam(string file)
+    {
+        int[] unitsCounter = new int[] {0, 0};
+        int curentPlayer = 0; 
+        foreach (string line in File.ReadAllLines(file))
+        {
+            if (line == "Player 1 Team") curentPlayer = 0;
+            else if (line == "Player 2 Team") curentPlayer = 1;
+            else
+            {
+                unitsCounter[curentPlayer]++;
+            }
+        }
+        if (unitsCounter[0] > 3 || unitsCounter[1] > 3) return false;
         return true;
     }
     

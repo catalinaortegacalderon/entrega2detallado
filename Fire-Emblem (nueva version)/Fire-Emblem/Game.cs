@@ -87,7 +87,7 @@ public class Game
             filesCounter++;
         }
         fileNumberInput = Convert.ToInt32(_view.ReadLine());
-        if (UsefulFunctions.Juego_Valido(files[fileNumberInput]) == false)
+        if (UsefulFunctions.CheckIfGameIsValid(files[fileNumberInput]) == false)
         {
             _view.WriteLine("Archivo de equipos no válido");
             return true;
