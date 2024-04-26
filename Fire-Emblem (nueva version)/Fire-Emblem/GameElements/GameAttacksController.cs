@@ -37,23 +37,25 @@ public class GameAttacksController
 
     public string Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
-        //PONER LOOSERS NAME COMO PARAMETRO de clase
         if (this.gameIsTerminated || this.roundIsTerminated) return "";
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
-        SetAttackingAndDefensiveUnits();
-        if (_numberOfThisRoundsCurrentAttack == 1)
-        {
-            PrintAdvantages(view);
-            ActivateSkills();
-            PrintSkillsInfo(view);
-        }
+        if (_numberOfThisRoundsCurrentAttack == 1) PrintStartingParameters(view);
         _attackValue = CalculateAttack();
-        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + _attackValue + " de daño");
+        PrintWhoAttacksWho(view);
         if (currentAttacker == 0) return Player1Attacks(_attackValue);
-        else
-        {
-            return Player2Attacks();
-        }
+        else { return Player2Attacks(); }
+    }
+
+    private void PrintStartingParameters(View view)
+    {
+        PrintAdvantages(view);
+        ActivateSkills();
+        PrintSkillsInfo(view);
+    }
+
+    private void PrintWhoAttacksWho(View view)
+    {
+        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + _attackValue + " de daño");
     }
 
     private void SetAttacksParameters(int numberOfCurrentAttack, int firstPlayersCurrentUnitNumber,
@@ -62,9 +64,7 @@ public class GameAttacksController
         _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
         this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
         this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
-        NameOfPlayer1sLoosingUnit = "";
-        NameOfPlayer2sLoosingUnit = "";
-        string loosersName = "";
+        SetAttackingAndDefensiveUnits();
     }
 
     private string Player2Attacks()
@@ -73,7 +73,6 @@ public class GameAttacksController
         if (_attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].currentHp)
         {
             loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
-            
             this.roundIsTerminated = true;
             EliminateLooserUnitOfPlayer1();
             return loosersName;
@@ -222,14 +221,24 @@ public class GameAttacksController
 
     public void PrintAdvantages(View view)
     {
-        string arma_atac = _currentAttackingUnit.weapon;
-        string arma_def = _currentDefensiveUnit.weapon;
-        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance")) view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
+        string attackingWeapon = _currentAttackingUnit.weapon;
+        string defensiveWeapon = _currentDefensiveUnit.weapon;
+        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
         else
         {
             view.WriteLine(_currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ")");
         }
+    }
+
+    private static bool AttackerHasAdvantage(string arma_atac, string arma_def)
+    {
+        return (arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance");
+    }
+
+    private static bool ThereIsNoAdvantage(string arma_def, string arma_atac)
+    {
+        return arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow";
     }
 
     public void ResetAllSkills()
