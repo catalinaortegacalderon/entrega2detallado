@@ -242,44 +242,24 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
 
 public class ChangeStatsInBasePlusOnePointForEvery : Effect
 {
-    private String stat;
+    private string _stat;
     private int _baseIncrease;
-    public ChangeStatsInBasePlusOnePointForEvery(String stat, int baseIncrease, int amount) : base()
+    private int _divisor;
+    public ChangeStatsInBasePlusOnePointForEvery(String stat, int baseIncrease, int divisor) : base()
     {
-        this.stat = stat;
-        this.Amount = amount;
+        this._stat = stat;
+        this._divisor = divisor;
         this._baseIncrease = baseIncrease;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        //int Amount = 0;
-        if (stat == "Atk")
+        if (_stat == "Spd")
         {
-            double division = myUnit.attk / Amount;
-            Amount = Convert.ToInt32(Math.Truncate(division));
-            myUnit.activeBonus.attk  += (Amount + _baseIncrease);
-            
-        }
-        else if (stat == "Def")
-        {
-            double division = myUnit.def / Amount;
-            Amount = Convert.ToInt32(Math.Truncate(division));
-            myUnit.activeBonus.def += (Amount + _baseIncrease);
-        }
-        else if (stat == "Res")
-        {
-            double division = myUnit.res / Amount;
-            Amount = Convert.ToInt32(Math.Truncate(division));
-            myUnit.activeBonus.res += (Amount + _baseIncrease);
-        }
-        else if (stat == "Spd")
-        {
-            double division = myUnit.spd / Amount;
+            double division = (myUnit.spd / _divisor);
             Amount = Convert.ToInt32(Math.Truncate(division));
             myUnit.activeBonus.spd += (Amount + _baseIncrease);
         }
-        int amountFinal = Amount + _baseIncrease;
     }
 }
 
