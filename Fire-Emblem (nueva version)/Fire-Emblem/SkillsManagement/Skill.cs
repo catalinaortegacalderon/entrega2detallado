@@ -1,19 +1,16 @@
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
-using Fire_Emblem_View;
 
 namespace Fire_Emblem;
 
 
     public abstract class Skill
     {
-        protected View view;
         protected Condition[] condiciones;
         protected Effect[] efectos;
 
-        public Skill(View view)
+        public Skill()
         {
-            this.view = view;
         }
 
         public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
@@ -31,10 +28,10 @@ namespace Fire_Emblem;
 
     public class EmptySkill : Skill
     {
-        public EmptySkill(View view) : base(view)
+        public EmptySkill() : base()
         {
             this.condiciones = new Condition[] { new SiempreVerdad() };
-            this.efectos = new Effect[] { new EmptyEffect(view) };
+            this.efectos = new Effect[] { new EmptyEffect() };
         }
         public void AplicarHabilidades(Unit unitPropia, Unit OponentsUnit, bool atacando)
         {
@@ -44,101 +41,99 @@ namespace Fire_Emblem;
 
     public class HpMas15 : Skill
     {
-        public HpMas15(View view) : base(view)
+        public HpMas15() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeHPIn(this.view, 15);
+            this.efectos[0] = new ChangeHPIn(15);
         }
     }
 
     public class FairFight : Skill
     {
-        public FairFight(View view) : base(view)
+        public FairFight() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",6);
-            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Atk", 6);
+            this.efectos[0] = new ChangeStatsIn( "Atk",6);
+            this.efectos[1] = new ChangeRivalsStatsIn("Atk", 6);
         }
     }
 
     public class Resolve : Skill
     {
-        public Resolve(View view) : base(view)
+        public Resolve() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.75); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.75);
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def", 7); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 7); 
+            this.efectos[0] = new ChangeStatsIn("Def", 7); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 7); 
         }
     }
 
     public class SpeedMas5 : Skill
     {
-        public SpeedMas5(View view) : base(view)
+        public SpeedMas5() : base()
         {
-            this.view = view;
             this.condiciones = new Condition[] { new SiempreVerdad() };
-            this.efectos = new Effect[] { new ChangeStatsIn(this.view, "Spd", 5) };
+            this.efectos = new Effect[] { new ChangeStatsIn( "Spd", 5) };
         }
     }
 
     public class ArmoredBlow : Skill
     {
-        public ArmoredBlow(View view) : base(view)
+        public ArmoredBlow() : base()
         {
-            this.view = view;
             this.condiciones = new Condition[] { new UnidadIniciaCombate() };
-            this.efectos = new Effect[] { new ChangeStatsIn(this.view, "Def", 8) };
+            this.efectos = new Effect[] { new ChangeStatsIn("Def", 8) };
         }
     }
 
 
     public class AtkAndDefMas5 : Skill
     {
-        public AtkAndDefMas5(View view) : base(view)
+        public AtkAndDefMas5() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 5); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 5);
+            this.efectos[0] = new ChangeStatsIn("Atk", 5); 
+            this.efectos[1] = new ChangeStatsIn( "Def", 5);
             
         }
     }
 
     public class AtkAndResMas5 : Skill
     {
-        public AtkAndResMas5(View view) : base(view)
+        public AtkAndResMas5() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 5); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 5);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 5); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 5);
             
         }
     }
 
     public class SpdAndResMas5 : Skill
     {
-        public SpdAndResMas5 (View view) : base(view)
+        public SpdAndResMas5 () : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad(); 
             this.condiciones[1] = new SiempreVerdad(); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 5); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 5);
+            this.efectos[0] = new ChangeStatsIn( "Spd", 5); 
+            this.efectos[1] = new ChangeStatsIn("Res", 5);
             
         }
     }
@@ -146,261 +141,261 @@ namespace Fire_Emblem;
 
     public class AttackMas6 : Skill
     {
-        public AttackMas6(View view) : base(view)
+        public AttackMas6() : base()
         {
             this.condiciones = new Condition[] { new SiempreVerdad() };
-            this.efectos = new Effect[] { new ChangeStatsIn(this.view, "Atk", 6) };
+            this.efectos = new Effect[] { new ChangeStatsIn( "Atk", 6) };
         }
     }
 
     public class BracingBlow : Skill
     {
-        public BracingBlow(View view) : base(view)
+        public BracingBlow() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def", 6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res",6);
+            this.efectos[0] = new ChangeStatsIn( "Def", 6);
+            this.efectos[1] = new ChangeStatsIn( "Res",6);
         }
     }
 
     public class WillToWin : Skill
     {
-        public WillToWin(View view) : base(view)
+        public WillToWin() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.5); 
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 8); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 8); 
         }
     }
 
     public class TomePrecision : Skill
     {
-        public TomePrecision(View view) : base(view)
+        public TomePrecision() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon("Magic");
             this.condiciones[1] = new UseCertainWeapon("Magic");
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
+            this.efectos[0] = new ChangeStatsIn( "Atk",6); 
+            this.efectos[1] = new ChangeStatsIn("Spd", 6); 
         }
     }
 
     public class DefenseMas5 : Skill
     {
-        public DefenseMas5(View view) : base(view)
+        public DefenseMas5() : base()
         {
             this.condiciones = new Condition[] { new SiempreVerdad() };
-            this.efectos = new Effect[] { new ChangeStatsIn(this.view, "Def", 5) };
+            this.efectos = new Effect[] { new ChangeStatsIn( "Def", 5) };
         }
     }
 
     public class ResistanceMas5 : Skill
     {
-        public ResistanceMas5(View view) : base(view)
+        public ResistanceMas5() : base()
         {
             this.condiciones = new Condition[] { new SiempreVerdad() };
-            this.efectos = new Effect[] { new ChangeStatsIn(this.view, "Res", 5) };
+            this.efectos = new Effect[] { new ChangeStatsIn( "Res", 5) };
         }
     }
 
     public class DeadlyBlade : Skill
     {
-        public DeadlyBlade(View view) : base(view)
+        public DeadlyBlade() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeaponAndStartCombat("Sword");
             this.condiciones[1] = new UseCertainWeaponAndStartCombat("Sword");
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 8); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 8); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 8); 
+            this.efectos[1] = new ChangeStatsIn("Spd", 8); 
         }
     }
 
     public class DeathBlow : Skill
     {
-        public DeathBlow(View view) : base(view)
+        public DeathBlow() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 8);
+            this.efectos[0] = new ChangeStatsIn("Atk", 8);
         }
     }
 
     public class DartingBlow : Skill
     {
-        public DartingBlow(View view) : base(view)
+        public DartingBlow() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 8);
+            this.efectos[0] = new ChangeStatsIn( "Spd", 8);
         }
     }
 
     public class WardingBlow : Skill
     {
-        public WardingBlow(View view) : base(view)
+        public WardingBlow() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Res", 8);
+            this.efectos[0] = new ChangeStatsIn("Res", 8);
         }
     }
 
     public class SwiftSparrow : Skill
     {
-        public SwiftSparrow(View view) : base(view)
+        public SwiftSparrow() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6);
+            this.efectos[1] = new ChangeStatsIn( "Spd", 6);
         }
     }
 
     public class SturdyBlow : Skill
     {
-        public SturdyBlow(View view) : base(view)
+        public SturdyBlow() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def",6);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6);
+            this.efectos[1] = new ChangeStatsIn( "Def",6);
         }
     }
 
     public class MirrorStrike : Skill
     {
-        public MirrorStrike(View view) : base(view)
+        public MirrorStrike() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 6);
+            this.efectos[0] = new ChangeStatsIn( "Atk",6);
+            this.efectos[1] = new ChangeStatsIn( "Res", 6);
         }
     }
 
     public class SteadyBlow : Skill
     {
-        public SteadyBlow(View view) : base(view)
+        public SteadyBlow() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 6);
+            this.efectos[0] = new ChangeStatsIn( "Spd", 6);
+            this.efectos[1] = new ChangeStatsIn( "Def", 6);
         }
     }
 
     public class SwiftStrike : Skill
     {
-        public SwiftStrike(View view) : base(view)
+        public SwiftStrike() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.condiciones[1] = new UnidadIniciaCombate();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 6);
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 6);
+            this.efectos[0] = new ChangeStatsIn( "Spd", 6);
+            this.efectos[1] = new ChangeStatsIn( "Res", 6);
         }
     }
 
     public class BrazenAtkSpd : Skill
     {
-        public BrazenAtkSpd(View view) : base(view)
+        public BrazenAtkSpd() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 10); 
+            this.efectos[0] = new ChangeStatsIn( "Atk",10); 
+            this.efectos[1] = new ChangeStatsIn( "Spd", 10); 
         }
     }
 
     public class BrazenAtkDef : Skill
     {
-        public BrazenAtkDef(View view) : base(view)
+        public BrazenAtkDef() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 10); 
+            this.efectos[0] = new ChangeStatsIn( "Atk",10); 
+            this.efectos[1] = new ChangeStatsIn( "Def", 10); 
         }
     }
 
     public class BrazenAtkRes : Skill
     {
-        public BrazenAtkRes(View view) : base(view)
+        public BrazenAtkRes() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res",10); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 10); 
+            this.efectos[1] = new ChangeStatsIn( "Res",10); 
         }
     }
 
     public class BrazenSpdDef : Skill
     {
-        public BrazenSpdDef(View view) : base(view)
+        public BrazenSpdDef() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 10); 
+            this.efectos[0] = new ChangeStatsIn( "Spd",10); 
+            this.efectos[1] = new ChangeStatsIn( "Def", 10); 
         }
     }
 
     public class BrazenSpdRes : Skill
     {
-        public BrazenSpdRes(View view) : base(view)
+        public BrazenSpdRes() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res",10); 
+            this.efectos[0] = new ChangeStatsIn( "Spd",10); 
+            this.efectos[1] = new ChangeStatsIn( "Res",10); 
         }
     }
 
     public class BrazenDefRes : Skill
     {
-        public BrazenDefRes(View view) : base(view)
+        public BrazenDefRes() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new HpPropioMenorAUnValor(0.8); 
             this.condiciones[1] = new HpPropioMenorAUnValor(0.8); 
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 10); 
+            this.efectos[0] = new ChangeStatsIn( "Def",10); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 10); 
         }
     }
 
 // boost heredarán de esta clase
     public class Boost : Skill
     {
-        public Boost(View view) : base(view)
+        public Boost() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new TenerHpPropioMayorAlDelRivalAumentadoEn(3); 
@@ -411,226 +406,226 @@ namespace Fire_Emblem;
 
     public class FireBoost : Boost
     {
-        public FireBoost(View view) : base(view)
+        public FireBoost() : base()
         {
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6); 
         }
     }
 
     public class WindBoost : Boost
     {
-        public WindBoost(View view) : base(view)
+        public WindBoost() : base()
         {
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 6); 
+            this.efectos[0] = new ChangeStatsIn( "Spd", 6); 
         }
     }
 
     public class EarthBoost : Boost
     {
-        public EarthBoost(View view) : base(view)
+        public EarthBoost() : base()
         {
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def", 6); 
+            this.efectos[0] = new ChangeStatsIn( "Def", 6); 
         }
     }
 
     public class WaterBoost : Boost
     {
-        public WaterBoost(View view) : base(view)
+        public WaterBoost() : base()
         {
-            this.efectos[0] = new ChangeStatsIn(this.view, "Res", 6); 
+            this.efectos[0] = new ChangeStatsIn( "Res", 6); 
         }
     }
 
     public class ChaosStyle : Skill
     {
-        public ChaosStyle(View view) : base(view)
+        public ChaosStyle() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new AtaqueEntreArmasEspecificas("fisica", "magia");
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 3); 
+            this.efectos[0] = new ChangeStatsIn( "Spd", 3); 
         }
     }
 
     public class BlindingFlash : Skill
     {
-        public BlindingFlash(View view) : base(view)
+        public BlindingFlash() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Spd", -4); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Spd", -4); 
         }
     }
 
     public class NotQuite : Skill
     {
-        public NotQuite(View view) : base(view)
+        public NotQuite() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new RivalIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -4); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Atk", -4); 
         }
     }
 
     public class StunningSmile : Skill
     {
-        public StunningSmile(View view) : base(view)
+        public StunningSmile() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new OponentIsAMan();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Spd", -8); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Spd", -8); 
         }
     }
 
     public class DisarmingSigh : Skill
     {
-        public DisarmingSigh(View view) : base(view)
+        public DisarmingSigh() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new OponentIsAMan();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -8); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Atk", -8); 
         }
     }
 
     public class Charmer : Skill
     {
-        public Charmer(View view) : base(view)
+        public Charmer() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.condiciones[1] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -3); 
-            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Spd", -3); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Atk", -3); 
+            this.efectos[1] = new ChangeRivalsStatsIn( "Spd", -3); 
         }
     }
 
     public class Luna : Skill
     {
-        public Luna(View view) : base(view)
+        public Luna() : base()
         {
             Console.WriteLine("creando luna");
             this.condiciones = new Condition[2];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ReduceRivalsDefInPercentajeForFirstAttack(this.view, 0.5); 
-            this.efectos[1] = new ReduceRivalsResInPercentajeForFirstAttack(this.view, 0.5); 
+            this.efectos[0] = new ReduceRivalsDefInPercentajeForFirstAttack( 0.5); 
+            this.efectos[1] = new ReduceRivalsResInPercentajeForFirstAttack( 0.5); 
         }
     }
 
     public class BeliefInLove : Skill
     {
-        public BeliefInLove(View view) : base(view)
+        public BeliefInLove() : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new RivalStartCombatOrFullHP();
             this.condiciones[1] = new RivalStartCombatOrFullHP();
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -5); 
-            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Def", -5); 
+            this.efectos[0] = new ChangeRivalsStatsIn( "Atk", -5); 
+            this.efectos[1] = new ChangeRivalsStatsIn( "Def", -5); 
         }
     }
 
 
     public class BeorcsBlessing : Skill
     {
-        public BeorcsBlessing(View view) : base(view)
+        public BeorcsBlessing() : base()
         {
             Console.WriteLine("creando boercs blessing");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new NeutralizeOponentsBonus(this.view); 
+            this.efectos[0] = new NeutralizeOponentsBonus(); 
         }
     }
 
     public class AgneasArrow : Skill
     {
-        public AgneasArrow(View view) : base(view)
+        public AgneasArrow() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new NeutralizePenalties(this.view); 
+            this.efectos[0] = new NeutralizePenalties(); 
         }
     }
     public class Agility : Skill
     {
-        public Agility(View view, String weapon) : base(view)
+        public Agility(String weapon) : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Spd", 12); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Atk", -6); 
+            this.efectos[0] = new ChangeStatsIn( "Spd", 12); 
+            this.efectos[1] = new ChangeStatsIn( "Atk", -6); 
         }
     }
 
     public class Power : Skill
     {
-        public Power(View view, String weapon) : base(view)
+        public Power(String weapon) : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", -10); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 10); 
+            this.efectos[1] = new ChangeStatsIn( "Def", -10); 
         }
     }
 
     public class Focus : Skill
     {
-        public Focus(View view, String weapon) : base(view)
+        public Focus(String weapon) : base()
         {
             this.condiciones = new Condition[2];
             this.condiciones[0] = new UseCertainWeapon(weapon);
             this.condiciones[1] = new UseCertainWeapon(weapon);
             this.efectos = new Effect[2];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk",10); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", -10); 
+            this.efectos[0] = new ChangeStatsIn( "Atk",10); 
+            this.efectos[1] = new ChangeStatsIn( "Res", -10); 
         }
     }
 
     public class CloseDef : Skill
     {
-        public CloseDef(View view) : base(view)
+        public CloseDef() : base()
         {
             this.condiciones = new Condition[3];
             this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
             this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
             this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Sword", "Lance", "Axe"]);
             this.efectos = new Effect[3];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def",8); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 8); 
-            this.efectos[2] = new NeutralizeOponentsBonus(this.view); 
+            this.efectos[0] = new ChangeStatsIn( "Def",8); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 8); 
+            this.efectos[2] = new NeutralizeOponentsBonus(); 
         }
     }
 
     public class DistantDef : Skill
     {
-        public DistantDef(View view) : base(view)
+        public DistantDef() : base()
         {
             this.condiciones = new Condition[3];
             this.condiciones[0] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
             this.condiciones[1] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
             this.condiciones[2] = new OponentStartsCombatWhithWeapon(["Magic", "Bow"]);
             this.efectos = new Effect[3];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Def", 8); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 8); 
-            this.efectos[2] = new NeutralizeOponentsBonus(this.view); 
+            this.efectos[0] = new ChangeStatsIn( "Def", 8); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 8); 
+            this.efectos[2] = new NeutralizeOponentsBonus(); 
         }
     }
 
     public class Lull : Skill
     {
-        public Lull(View view, String firstStat, String secondStat) : base(view)
+        public Lull(String firstStat, String secondStat) : base()
         {
             this.condiciones = new Condition[4];
             this.condiciones[0] = new SiempreVerdad();
@@ -638,16 +633,16 @@ namespace Fire_Emblem;
             this.condiciones[2] = new SiempreVerdad();
             this.condiciones[3] = new SiempreVerdad();
             this.efectos = new Effect[4];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, firstStat, -3); 
-            this.efectos[1] = new ChangeRivalsStatsIn(this.view, secondStat, -3); 
-            this.efectos[2] = new NeutralizeOneOfOponentsBonus(this.view, firstStat); 
-            this.efectos[3] = new NeutralizeOneOfOponentsBonus(this.view, secondStat); 
+            this.efectos[0] = new ChangeRivalsStatsIn( firstStat, -3); 
+            this.efectos[1] = new ChangeRivalsStatsIn( secondStat, -3); 
+            this.efectos[2] = new NeutralizeOneOfOponentsBonus( firstStat); 
+            this.efectos[3] = new NeutralizeOneOfOponentsBonus( secondStat); 
         }
     }
 
     public class Fort : Skill
     {
-        public Fort(View view, String firstStat, String secondStat) : base(view)
+        public Fort(String firstStat, String secondStat) : base()
         {
             Console.WriteLine("creando fort, sats son" + firstStat + secondStat);
             this.condiciones = new Condition[3];
@@ -655,15 +650,15 @@ namespace Fire_Emblem;
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
             this.efectos = new Effect[3];
-            this.efectos[0] = new ChangeStatsIn(this.view, firstStat, 6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, secondStat, 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "Atk", -2); ; 
+            this.efectos[0] = new ChangeStatsIn( firstStat, 6); 
+            this.efectos[1] = new ChangeStatsIn( secondStat, 6); 
+            this.efectos[2] = new ChangeStatsIn( "Atk", -2); ; 
         }
     }
 
     public class LifeAndDeath : Skill
     {
-        public LifeAndDeath(View view) : base(view)
+        public LifeAndDeath() : base()
         {
             this.condiciones = new Condition[4];
             this.condiciones[0] = new SiempreVerdad();
@@ -671,47 +666,45 @@ namespace Fire_Emblem;
             this.condiciones[2] = new SiempreVerdad();
             this.condiciones[3] = new SiempreVerdad();
             this.efectos = new Effect[4];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "Def", -5);
-            this.efectos[3] = new ChangeStatsIn(this.view, "Res", -5);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn( "Spd", 6); 
+            this.efectos[2] = new ChangeStatsIn( "Def", -5);
+            this.efectos[3] = new ChangeStatsIn( "Res", -5);
         }
     }
 
     public class SolidGround : Skill
     {
-        public SolidGround(View view) : base(view)
+        public SolidGround() : base()
         {
             this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
             this.efectos = new Effect[3];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Def", 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "Res", -5);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn( "Def", 6); 
+            this.efectos[2] = new ChangeStatsIn( "Res", -5);
         }
     }
 
     public class StillWater : Skill
     {
-        public StillWater(View view) : base(view)
+        public StillWater() : base()
         {
             this.condiciones = new Condition[3];
             this.condiciones[0] = new SiempreVerdad();
             this.condiciones[1] = new SiempreVerdad();
             this.condiciones[2] = new SiempreVerdad();
             this.efectos = new Effect[3];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Res", 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "Def", -5);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn( "Res", 6); 
+            this.efectos[2] = new ChangeStatsIn( "Def", -5);
         }
     }
-
-// solo revisar una condicion, cambiar esto
     public class DragonSkin : Skill
     {
-        public DragonSkin(View view) : base(view)
+        public DragonSkin() : base()
         {
             this.condiciones = new Condition[5];
             this.condiciones[0] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
@@ -720,17 +713,17 @@ namespace Fire_Emblem;
             this.condiciones[3] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
             this.condiciones[4] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
             this.efectos = new Effect[5];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 6); 
-            this.efectos[1] = new ChangeStatsIn(this.view, "Spd", 6); 
-            this.efectos[2] = new ChangeStatsIn(this.view, "Def", 6);
-            this.efectos[3] = new ChangeStatsIn(this.view, "Res", 6);
-            this.efectos[4] = new NeutralizeOponentsBonus(view);
+            this.efectos[0] = new ChangeStatsIn( "Atk", 6); 
+            this.efectos[1] = new ChangeStatsIn( "Spd", 6); 
+            this.efectos[2] = new ChangeStatsIn( "Def", 6);
+            this.efectos[3] = new ChangeStatsIn( "Res", 6);
+            this.efectos[4] = new NeutralizeOponentsBonus();
         }
     }
 
     public class LightAndDark : Skill
     {
-        public LightAndDark(View view) : base(view)
+        public LightAndDark() : base()
         {
             this.condiciones = new Condition[6];
             this.condiciones[0] = new SiempreVerdad();
@@ -740,78 +733,78 @@ namespace Fire_Emblem;
             this.condiciones[4] = new SiempreVerdad();
             this.condiciones[5] = new SiempreVerdad();
             this.efectos = new Effect[6];
-            this.efectos[0] = new ChangeRivalsStatsIn(this.view, "Atk", -5); 
-            this.efectos[1] = new ChangeRivalsStatsIn(this.view, "Spd", -5); 
-            this.efectos[2] = new ChangeRivalsStatsIn(this.view, "Def", -5);
-            this.efectos[3] = new ChangeRivalsStatsIn(this.view, "Res", -5);
-            this.efectos[4] = new NeutralizePenalties(this.view);
-            this.efectos[5] = new NeutralizeOponentsBonus(this.view);
+            this.efectos[0] = new ChangeRivalsStatsIn( "Atk", -5); 
+            this.efectos[1] = new ChangeRivalsStatsIn( "Spd", -5); 
+            this.efectos[2] = new ChangeRivalsStatsIn( "Def", -5);
+            this.efectos[3] = new ChangeRivalsStatsIn( "Res", -5);
+            this.efectos[4] = new NeutralizePenalties();
+            this.efectos[5] = new NeutralizeOponentsBonus();
         }
     }
 
     public class SingleMinded : Skill
     {
-        public SingleMinded(View view) : base(view)
+        public SingleMinded() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new CurrentOponentIsAlsoTheLastOponent();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsIn(this.view, "Atk", 8); 
+            this.efectos[0] = new ChangeStatsIn( "Atk", 8); 
         }
     }
 
     public class Ignis : Skill
     {
-        public Ignis(View view) : base(view)
+        public Ignis() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatInPercentageOnlyForFirstAttack(this.view, "Atk", 0.5); 
+            this.efectos[0] = new ChangeStatInPercentageOnlyForFirstAttack( "Atk", 0.5); 
         }
     }
 
     public class Perceptive : Skill
     {
-        public Perceptive(View view) : base(view)
+        public Perceptive() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UnidadIniciaCombate();
             this.efectos = new Effect[1];
-            this.efectos[0] = new ChangeStatsInBasePlusOnePointForEvery(this.view, "Spd", 12, 4);
+            this.efectos[0] = new ChangeStatsInBasePlusOnePointForEvery( "Spd", 12, 4);
         }
     }
 
     public class Wrath : Skill
     {
-        public Wrath(View view) : base(view)
+        public Wrath() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new WrathEffect(this.view);
+            this.efectos[0] = new WrathEffect();
         }
     }
 
     public class Soulblade : Skill
     {
-        public Soulblade(View view) : base(view)
+        public Soulblade() : base()
         {
             this.condiciones = new Condition[1];
             this.condiciones[0] = new UseCertainWeapon("Sword");
             this.efectos = new Effect[1];
-            this.efectos[0] = new SoulbladeEffect(this.view);
+            this.efectos[0] = new SoulbladeEffect();
         }
     }
 
     public class Sandstorm : Skill
     {
-        public Sandstorm(View view) : base(view)
+        public Sandstorm() : base()
         {
             Console.WriteLine("crear sandstorm");
             this.condiciones = new Condition[1];
             this.condiciones[0] = new SiempreVerdad();
             this.efectos = new Effect[1];
-            this.efectos[0] = new SandstormEffect(this.view);
+            this.efectos[0] = new SandstormEffect();
         }
     }

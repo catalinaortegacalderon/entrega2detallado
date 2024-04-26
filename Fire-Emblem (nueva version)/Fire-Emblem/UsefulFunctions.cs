@@ -132,8 +132,22 @@ public class UsefulFunctions
         int contador_habilidades = 0;
         foreach (string habilidad in listadeHabilidades)
         {
-            SkillConstructor.Construct(view, unidades, jugador_actual, contadores_unidades, habilidad, contador_habilidades);
+            SkillConstructor.Construct(unidades, jugador_actual, contadores_unidades, habilidad, contador_habilidades);
             contador_habilidades++;
         }
+    }
+    
+    public void SetUnitValues(Unit unit, string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
+    {
+        unit.name = nombre;
+        unit.weapon = arma;
+        unit.gender = genero;
+        unit.hpMax = hp_max;
+        unit.currentHp = hp_actual;
+        unit.attk = attk;
+        unit.spd = spd;
+        unit.def = def;
+        unit.res = res;
+        unit.view = view;
     }
 }

@@ -21,9 +21,9 @@ public class Unit
     public BonusPenaltiesAndNeutralizations activeBonusNeutralization = new BonusPenaltiesAndNeutralizations(1);
     public BonusPenaltiesAndNeutralizations activePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
     public GameLogs gameLogs = new GameLogs();
-    public Skill[] skills = new Skill[2];
+    public Skill[] skills = new Skill[] { new EmptySkill(), new EmptySkill() };
     
-    public  void Setear_valores(string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
+    public void Setear_valores(string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
     {
         this.name = nombre;
         this.weapon = arma;
@@ -35,13 +35,5 @@ public class Unit
         this.def = def;
         this.res = res;
         this.view = view;
-    }
-
-    public Unit()
-    {
-        this.name = "";
-        this.currentHp = 0;
-        this.skills[0] = new EmptySkill(this.view);
-        this.skills[1] = new EmptySkill(this.view);
     }
 }

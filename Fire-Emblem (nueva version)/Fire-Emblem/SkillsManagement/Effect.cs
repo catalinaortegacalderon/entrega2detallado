@@ -8,12 +8,12 @@ using Fire_Emblem_View;
 public class Effect
 {
     protected int cantidad; // Este parámetro será accedido por algunas clases solamente, no repetir código
-    protected View view; // Permitir acceso desde clases hijas
+    //protected View view; // Permitir acceso desde clases hijas
     // como es protected, con _?
 
-    public Effect(View view)
+    public Effect()
     {
-        this.view = view;
+        //this.view = view;
     }
 
     public virtual void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
@@ -24,7 +24,7 @@ public class Effect
 
 public class EmptyEffect : Effect
 {
-    public EmptyEffect(View view) : base(view)
+    public EmptyEffect() : base()
     {
     }
 
@@ -36,7 +36,7 @@ public class EmptyEffect : Effect
 
 public class ChangeHPIn : Effect
 {
-    public ChangeHPIn(View view, int cantidad) : base(view)
+    public ChangeHPIn(int cantidad) : base()
     {
         this.cantidad = cantidad;
     }
@@ -50,7 +50,7 @@ public class ChangeHPIn : Effect
 public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
 {
     private double reductionPercentaje;
-    public ReduceRivalsDefInPercentajeForFirstAttack(View view, double reduction) : base(view)
+    public ReduceRivalsDefInPercentajeForFirstAttack(double reduction) : base()
     {
         this.reductionPercentaje = reduction;
     }
@@ -66,7 +66,7 @@ public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
 public class ReduceRivalsResInPercentajeForFirstAttack : Effect
 {
     private double reductionPercentaje;
-    public ReduceRivalsResInPercentajeForFirstAttack(View view, double reduction) : base(view)
+    public ReduceRivalsResInPercentajeForFirstAttack(double reduction) : base()
     {
         this.reductionPercentaje = reduction;
     }
@@ -83,7 +83,7 @@ public class ReduceRivalsResInPercentajeForFirstAttack : Effect
 public class NeutralizeOponentsBonus : Effect
 {
     
-    public NeutralizeOponentsBonus(View view) : base(view)
+    public NeutralizeOponentsBonus() : base()
     {
     }
     public override void ApplyEffect(Unit unitPropia, Unit OponentsUnit, bool atacando)
@@ -102,7 +102,7 @@ public class NeutralizeOponentsBonus : Effect
 public class NeutralizePenalties : Effect
 {
     
-    public NeutralizePenalties(View view) : base(view)
+    public NeutralizePenalties() : base()
     {
     }
     
@@ -118,7 +118,7 @@ public class NeutralizePenalties : Effect
 public class ChangeStatsIn : Effect
 {
     private String stat;
-    public ChangeStatsIn(View view, String stat, int cantidad) : base(view)
+    public ChangeStatsIn(String stat, int cantidad) : base()
     {
         this.cantidad = cantidad;
         this.stat = stat;
@@ -153,7 +153,7 @@ public class ChangeStatsIn : Effect
 public class ChangeRivalsStatsIn : Effect
 {
     private String stat;
-    public ChangeRivalsStatsIn(View view, String stat, int cantidad) : base(view)
+    public ChangeRivalsStatsIn(String stat, int cantidad) : base()
     {
         this.cantidad = cantidad;
         this.stat = stat;
@@ -187,7 +187,7 @@ public class ChangeRivalsStatsIn : Effect
 public class NeutralizeOneOfOponentsBonus : Effect
 {
     private String stat;
-    public NeutralizeOneOfOponentsBonus(View view, String stat) : base(view)
+    public NeutralizeOneOfOponentsBonus(String stat) : base()
     {
         this.stat = stat;
     }
@@ -205,7 +205,7 @@ public class ChangeStatInPercentaje : Effect
 {
     private String stat;
     private double percentaje;
-    public ChangeStatInPercentaje(View view, String stat, Double percentaje) : base(view)
+    public ChangeStatInPercentaje(String stat, Double percentaje) : base()
     {
         this.stat = stat;
         this.percentaje = percentaje;
@@ -243,7 +243,7 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
     private String stat;
     private double percentaje;
     // arreglar esto, solo funciona para ataque
-    public ChangeStatInPercentageOnlyForFirstAttack(View view, String stat, Double percentaje) : base(view)
+    public ChangeStatInPercentageOnlyForFirstAttack(String stat, Double percentaje) : base()
     {
         this.stat = stat;
         this.percentaje = percentaje;
@@ -281,7 +281,7 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
     private String stat;
     private int amount;
     private int _baseIncrease;
-    public ChangeStatsInBasePlusOnePointForEvery(View view, String stat, int baseIncrease, int amount) : base(view)
+    public ChangeStatsInBasePlusOnePointForEvery(String stat, int baseIncrease, int amount) : base()
     {
         this.stat = stat;
         this.amount = amount;
@@ -322,7 +322,7 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
 
 public class WrathEffect : Effect
 {
-    public WrathEffect(View view) : base(view)
+    public WrathEffect() : base()
     {
     }
 
@@ -337,7 +337,7 @@ public class WrathEffect : Effect
 
 public class SoulbladeEffect : Effect
 {
-    public SoulbladeEffect(View view) : base(view)
+    public SoulbladeEffect() : base()
     {
     }
 
@@ -363,7 +363,7 @@ public class SoulbladeEffect : Effect
 
 public class SandstormEffect : Effect
 {
-    public SandstormEffect(View view) : base(view)
+    public SandstormEffect() : base()
     {
     }
 
