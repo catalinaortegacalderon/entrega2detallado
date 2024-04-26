@@ -79,14 +79,8 @@ public class UsefulFunctions
         string[] lineas = File.ReadAllLines(archivo);
         foreach (string linea in lineas)
         {
-            if (linea == "Player 1 Team")
-            {
-                jugador_actual = 0;
-            }
-            else if (linea == "Player 2 Team")
-            {
-                jugador_actual = 1;
-            }
+            if (linea == "Player 1 Team") jugador_actual = 0;
+            else if (linea == "Player 2 Team") jugador_actual = 1;
             else
             {
                 // obtener nombre unidad
@@ -105,13 +99,8 @@ public class UsefulFunctions
                             view);
                     }
                 }
-
                 // agregar habilidades a la unidad
-                if (nuevo_string.Length > 1)
-                {
-                    CreateSkills(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
-                }
-
+                if (nuevo_string.Length > 1) CreateSkills(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
                 contadores_unidades[jugador_actual]++;
             }
         }
