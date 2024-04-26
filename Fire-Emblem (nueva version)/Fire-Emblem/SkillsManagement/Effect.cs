@@ -35,7 +35,12 @@ public class ChangeHpIn : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        myUnit.CurrentHp = myUnit.CurrentHp + this.Amount;
+        if (!myUnit.ActiveBonus.hpBonusActivated)
+        {
+            myUnit.CurrentHp = myUnit.CurrentHp + this.Amount; 
+            myUnit.HpMax = myUnit.HpMax + this.Amount;
+            myUnit.ActiveBonus.hpBonusActivated = true;
+        }
     }
 }
 

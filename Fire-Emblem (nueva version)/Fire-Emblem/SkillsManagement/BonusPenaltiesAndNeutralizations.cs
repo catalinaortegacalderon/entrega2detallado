@@ -12,6 +12,7 @@ public class BonusPenaltiesAndNeutralizations
     public int atkFirstAttack;
     public int defFirstAttack;
     public int resFirstAttack;
+    public bool hpBonusActivated = false;
 
     public BonusPenaltiesAndNeutralizations(int startValuesIn)
     {
