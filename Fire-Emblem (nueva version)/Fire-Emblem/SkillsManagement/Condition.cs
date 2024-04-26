@@ -158,9 +158,7 @@ public class RivalStartCombatOrFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        Console.WriteLine("pase por verify de statrtcombat or full hp, belief in love");
         if (myUnit.CurrentHp == myUnit.HpMax || iAmAttacking == false) return true;
-        Console.WriteLine("falso");
         return false;
     }
     

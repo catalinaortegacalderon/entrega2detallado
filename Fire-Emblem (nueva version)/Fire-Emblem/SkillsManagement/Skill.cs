@@ -508,7 +508,6 @@ namespace Fire_Emblem;
     {
         public Luna() : base()
         {
-            Console.WriteLine("creando luna");
             this.Conditions = new Condition[2];
             this.Conditions[0] = new SiempreVerdad();
             this.Conditions[1] = new SiempreVerdad();
@@ -536,7 +535,6 @@ namespace Fire_Emblem;
     {
         public BeorcsBlessing() : base()
         {
-            Console.WriteLine("creando boercs blessing");
             this.Conditions = new Condition[1];
             this.Conditions[0] = new SiempreVerdad();
             this.Effects = new Effect[1];
@@ -644,7 +642,6 @@ namespace Fire_Emblem;
     {
         public Fort(String firstStat, String secondStat) : base()
         {
-            Console.WriteLine("creando fort, sats son" + firstStat + secondStat);
             this.Conditions = new Condition[3];
             this.Conditions[0] = new SiempreVerdad();
             this.Conditions[1] = new SiempreVerdad();
