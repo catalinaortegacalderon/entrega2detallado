@@ -4,329 +4,277 @@ using Fire_Emblem_View;
 public class SkillConstructor
 {
     public static void Construct(View view, Unit[][] units, int currentPlayerNumber, int[] contadores_unidades,
-        string habilidad, int skillsCounter)
+        string skillString, int skillsCounter)
     {
         Skill[] skills = units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]].skills;
-        if (habilidad == "HP +15")
+        if (skillString == "HP +15")
         {
             skills[skillsCounter] = new HpMas15(view);
         }
-        else if (habilidad == "Speed +5")
+        else if (skillString == "Speed +5")
         {
             skills[skillsCounter] = new SpeedMas5(view);
         }
 
-        else if (habilidad == "Resolve")
+        else if (skillString == "Resolve")
         {
             skills[skillsCounter] = new Resolve(view);
         }
-        else if (habilidad == "Armored Blow")
+        else if (skillString == "Armored Blow")
         {
             skills[skillsCounter] = new ArmoredBlow(view);
         }
 
-        else if (habilidad == "Fair Fight")
+        else if (skillString == "Fair Fight")
         {
             skills[skillsCounter] = new FairFight(view);
         }
-        else if (habilidad == "Atk/Def +5")
+        else if (skillString == "Atk/Def +5")
         {
             skills[skillsCounter] = new AtkAndDefMas5(view);
         }
-        else if (habilidad == "Atk/Res +5")
+        else if (skillString == "Atk/Res +5")
         {
             skills[skillsCounter] = new AtkAndResMas5(view);
         }
-        else if (habilidad == "Spd/Res +5")
+        else if (skillString == "Spd/Res +5")
         {
             skills[skillsCounter] = new SpdAndResMas5(view);
         }
-        else if (habilidad == "Attack +6")
+        else if (skillString == "Attack +6")
         {
             skills[skillsCounter] = new AttackMas6(view);
         }
-        else if (habilidad == "Bracing Blow")
+        else if (skillString == "Bracing Blow")
         {
             skills[skillsCounter] = new BracingBlow(view);
         }
             
-        else if (habilidad == "Will to Win")
+        else if (skillString == "Will to Win")
         {
             skills[skillsCounter] = new WillToWin(view);
         }
-        else if (habilidad == "Tome Precision")
+        else if (skillString == "Tome Precision")
         {
             skills[skillsCounter] = new TomePrecision(view);
         }
-        else if (habilidad == "Defense +5")
+        else if (skillString == "Defense +5")
         {
             skills[skillsCounter] = new DefenseMas5(view);
         }
-        else if (habilidad == "Resistance +5")
+        else if (skillString == "Resistance +5")
         {
             skills[skillsCounter] = new ResistanceMas5(view);
         }
-        else if (habilidad == "Deadly Blade")
+        else if (skillString == "Deadly Blade")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DeadlyBlade(view);
+            skills[skillsCounter] = new DeadlyBlade(view);
         }
-        else if (habilidad == "Death Blow")
+        else if (skillString == "Death Blow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DeathBlow(view);
+            skills[skillsCounter] = new DeathBlow(view);
         }
-        else if (habilidad == "Darting Blow")
+        else if (skillString == "Darting Blow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DartingBlow(view);
+            skills[skillsCounter] = new DartingBlow(view);
         }
-        else if (habilidad == "Warding Blow")
+        else if (skillString == "Warding Blow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new WardingBlow(view);
+            skills[skillsCounter] = new WardingBlow(view);
         }
-        else if (habilidad == "Swift Sparrow")
+        else if (skillString == "Swift Sparrow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SwiftSparrow(view);
+            skills[skillsCounter] = new SwiftSparrow(view);
         }
-        else if (habilidad == "Sturdy Blow")
+        else if (skillString == "Sturdy Blow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SturdyBlow(view);
+            skills[skillsCounter] = new SturdyBlow(view);
         }
-        else if (habilidad == "Mirror Strike")
+        else if (skillString == "Mirror Strike")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new MirrorStrike(view);
+            skills[skillsCounter] = new MirrorStrike(view);
         }
-        else if (habilidad == "Steady Blow")
+        else if (skillString == "Steady Blow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SteadyBlow(view);
+            skills[skillsCounter] = new SteadyBlow(view);
         }
-        else if (habilidad == "Swift Strike")
+        else if (skillString == "Swift Strike")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SwiftStrike(view);
+            skills[skillsCounter] = new SwiftStrike(view);
         }
-        else if (habilidad == "Brazen Atk/Spd")
+        else if (skillString == "Brazen Atk/Spd")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenAtkSpd(view);
+            skills[skillsCounter] = new BrazenAtkSpd(view);
         }
-        else if (habilidad == "Brazen Atk/Def")
+        else if (skillString == "Brazen Atk/Def")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenAtkDef(view);
+            skills[skillsCounter] = new BrazenAtkDef(view);
         }
-        else if (habilidad == "Brazen Atk/Res")
+        else if (skillString == "Brazen Atk/Res")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenAtkRes(view);
+            skills[skillsCounter] = new BrazenAtkRes(view);
         }
-        else if (habilidad == "Brazen Spd/Def")
+        else if (skillString == "Brazen Spd/Def")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenSpdDef(view);
+            skills[skillsCounter] = new BrazenSpdDef(view);
         }
-        else if (habilidad == "Brazen Spd/Res")
+        else if (skillString == "Brazen Spd/Res")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenSpdRes(view);
+            skills[skillsCounter] = new BrazenSpdRes(view);
         }
-        else if (habilidad == "Brazen Def/Res")
+        else if (skillString == "Brazen Def/Res")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BrazenDefRes(view);
+            skills[skillsCounter] = new BrazenDefRes(view);
         }
-        else if (habilidad == "Fire Boost")
+        else if (skillString == "Fire Boost")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new FireBoost(view);
+            skills[skillsCounter] = new FireBoost(view);
         }
-        else if (habilidad == "Wind Boost")
+        else if (skillString == "Wind Boost")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new WindBoost(view);
+            skills[skillsCounter] = new WindBoost(view);
         }
-        else if (habilidad == "Earth Boost")
+        else if (skillString == "Earth Boost")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new EarthBoost(view);
+            skills[skillsCounter] = new EarthBoost(view);
         }
-        else if (habilidad == "Water Boost")
+        else if (skillString == "Water Boost")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new WaterBoost(view);
+            skills[skillsCounter] = new WaterBoost(view);
         }
-        else if (habilidad == "Chaos Style")
+        else if (skillString == "Chaos Style")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new ChaosStyle(view);
+            skills[skillsCounter] = new ChaosStyle(view);
         }
-        else if (habilidad == "Blinding Flash")
+        else if (skillString == "Blinding Flash")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BlindingFlash(view);
+            skills[skillsCounter] = new BlindingFlash(view);
         }
-        else if (habilidad == "Not *Quite*")
+        else if (skillString == "Not *Quite*")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new NotQuite(view);
+            skills[skillsCounter] = new NotQuite(view);
         }
-        else if (habilidad == "Stunning Smile")
+        else if (skillString == "Stunning Smile")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new StunningSmile(view);
+            skills[skillsCounter] = new StunningSmile(view);
         }
-        else if (habilidad == "Disarming Sigh")
+        else if (skillString == "Disarming Sigh")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DisarmingSigh(view);
+            skills[skillsCounter] = new DisarmingSigh(view);
         }
-        else if (habilidad == "Charmer")
+        else if (skillString == "Charmer")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Charmer(view);
+            skills[skillsCounter] = new Charmer(view);
         }
-        else if (habilidad == "Luna")
+        else if (skillString == "Luna")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Luna(view);
+            skills[skillsCounter] = new Luna(view);
         }
-        else if (habilidad == "Belief in Love")
+        else if (skillString == "Belief in Love")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BeliefInLove(view);
+            skills[skillsCounter] = new BeliefInLove(view);
         }
-        else if (habilidad == "Beorc's Blessing")
+        else if (skillString == "Beorc's Blessing")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new BeorcsBlessing(view);
+            skills[skillsCounter] = new BeorcsBlessing(view);
         }
-        else if (habilidad == "Agnea's Arrow")
+        else if (skillString == "Agnea's Arrow")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new AgneasArrow(view);
+            skills[skillsCounter] = new AgneasArrow(view);
         }
-        else if (habilidad == "Sword Agility")
+        else if (skillString == "Sword Agility")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Agility(view, "Sword");
+            skills[skillsCounter] = new Agility(view, "Sword");
         }
-        else if (habilidad == "Lance Power")
+        else if (skillString == "Lance Power")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Power(view, "Lance");
+            skills[skillsCounter] = new Power(view, "Lance");
         }
-        else if (habilidad == "Sword Power")
+        else if (skillString == "Sword Power")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Power(view, "Sword");
+            skills[skillsCounter] = new Power(view, "Sword");
         }
-        else if (habilidad == "Bow Focus")
+        else if (skillString == "Bow Focus")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Focus(view, "Bow");
+            skills[skillsCounter] = new Focus(view, "Bow");
         }
-        else if (habilidad == "Lance Agility")
+        else if (skillString == "Lance Agility")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Agility(view, "Lance");
+            skills[skillsCounter] = new Agility(view, "Lance");
         }
-        else if (habilidad == "Axe Power")
+        else if (skillString == "Axe Power")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Power(view, "Axe");
+            skills[skillsCounter] = new Power(view, "Axe");
         }
-        else if (habilidad == "Bow Agility")
+        else if (skillString == "Bow Agility")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Agility(view, "Bow");
+            skills[skillsCounter] = new Agility(view, "Bow");
         }
-        else if (habilidad == "Sword Focus")
+        else if (skillString == "Sword Focus")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Focus(view, "Sword");
+            skills[skillsCounter] = new Focus(view, "Sword");
         }
-        else if (habilidad == "Close Def")
+        else if (skillString == "Close Def")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new CloseDef(view);
+            skills[skillsCounter] = new CloseDef(view);
         }
-        else if (habilidad == "Distant Def")
+        else if (skillString == "Distant Def")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DistantDef(view);
+            skills[skillsCounter] = new DistantDef(view);
         }
-        else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
+        else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Lull(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+            skills[skillsCounter] = new Lull(view,skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
-        else if (habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
+        else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Fort(view,habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                habilidad.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+            skills[skillsCounter] = new Fort(view,skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
         }
-        else if (habilidad == "Life and Death")
+        else if (skillString == "Life and Death")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new LifeAndDeath(view);
+            skills[skillsCounter] = new LifeAndDeath(view);
         }
-        else if (habilidad == "Solid Ground")
+        else if (skillString == "Solid Ground")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SolidGround(view);
+            skills[skillsCounter] = new SolidGround(view);
         }
-        else if (habilidad == "Still Water")
+        else if (skillString == "Still Water")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new StillWater(view);
+            skills[skillsCounter] = new StillWater(view);
         }
-        else if (habilidad == "Dragonskin")
+        else if (skillString == "Dragonskin")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new DragonSkin(view);
+            skills[skillsCounter] = new DragonSkin(view);
         }
-        else if (habilidad == "Light and Dark")
+        else if (skillString == "Light and Dark")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new LightAndDark(view);
+            skills[skillsCounter] = new LightAndDark(view);
         }
-        else if (habilidad == "Single-Minded")
+        else if (skillString == "Single-Minded")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new SingleMinded(view);
+            skills[skillsCounter] = new SingleMinded(view);
         }
-        else if (habilidad == "Ignis")
+        else if (skillString == "Ignis")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Ignis(view);
+            skills[skillsCounter] = new Ignis(view);
         }
-        else if (habilidad == "Perceptive")
+        else if (skillString == "Perceptive")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Perceptive(view);
+            skills[skillsCounter] = new Perceptive(view);
         }
-        else if (habilidad == "Wrath")
+        else if (skillString == "Wrath")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Wrath(view);
+            skills[skillsCounter] = new Wrath(view);
         }
-        else if (habilidad == "Soulblade")
+        else if (skillString == "Soulblade")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Soulblade(view);
+            skills[skillsCounter] = new Soulblade(view);
         }
-        else if (habilidad == "Sandstorm")
+        else if (skillString == "Sandstorm")
         {
-            units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]]
-                .skills[skillsCounter] = new Sandstorm(view);
+            skills[skillsCounter] = new Sandstorm(view);
         }
     }
 }

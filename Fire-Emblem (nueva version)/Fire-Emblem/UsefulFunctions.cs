@@ -109,7 +109,7 @@ public class UsefulFunctions
                 // agregar habilidades a la unidad
                 if (nuevo_string.Length > 1)
                 {
-                    InstanciarHabilidades(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
+                    CreateSkills(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
                 }
 
                 contadores_unidades[jugador_actual]++;
@@ -123,7 +123,7 @@ public class UsefulFunctions
         return newGameAttacksController;
     }
 
-    private static void InstanciarHabilidades(View view, string[] nuevo_string, Unit[][] unidades, int jugador_actual,
+    private static void CreateSkills(View view, string[] nuevo_string, Unit[][] unidades, int jugador_actual,
         int[] contadores_unidades)
     {
         string stringHabilidades = nuevo_string[1];
@@ -132,7 +132,6 @@ public class UsefulFunctions
         int contador_habilidades = 0;
         foreach (string habilidad in listadeHabilidades)
         {
-            //buscar una forma mas eficiente de hacer esto
             SkillConstructor.Construct(view, unidades, jugador_actual, contadores_unidades, habilidad, contador_habilidades);
             contador_habilidades++;
         }
