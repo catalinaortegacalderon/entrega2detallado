@@ -209,13 +209,12 @@ public class GameAttacksController
     private static double CalculateWtb(string defensiveWeapon, string attackingWeapon)
     {
         double wtb;
-        if (defensiveWeapon == attackingWeapon || attackingWeapon == "Magic" || defensiveWeapon == "Magic" || defensiveWeapon == "Bow" || attackingWeapon == "Bow") wtb = 1;
-        else if ((attackingWeapon == "Sword" & defensiveWeapon == "Axe") || (attackingWeapon == "Lance" & defensiveWeapon == "Sword") || (attackingWeapon == "Axe" & defensiveWeapon == "Lance")) wtb = 1.2;
+        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) wtb = 1;
+        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) wtb = 1.2;
         else
         {
             wtb = 0.8;
         }
-
         return wtb;
     }
 

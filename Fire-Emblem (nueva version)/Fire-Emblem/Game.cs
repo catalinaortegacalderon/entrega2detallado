@@ -165,12 +165,11 @@ public class Game
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks++;
-            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks++;
+            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks = 0;
+            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks = 0;
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "")
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks++;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks++;
+        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks = 0;
+        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks = 0;
     }
 
     private void UpdateLastOponent()
