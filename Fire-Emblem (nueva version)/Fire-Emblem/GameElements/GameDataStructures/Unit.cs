@@ -6,7 +6,7 @@ namespace Fire_Emblem;
 
 public class Unit
 {
-    public View view;
+    //public View View;
     public string name = "";
     public string weapon;
     public string gender;

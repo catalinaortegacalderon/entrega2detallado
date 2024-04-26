@@ -134,12 +134,11 @@ public class UsefulFunctions
                         SetUnitValues(unidades[jugador_actual][contadores_unidades[jugador_actual]], player.Name,
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
                             Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd),
-                            Convert.ToInt32(player.Def), Convert.ToInt32(player.Res),
-                            view);
+                            Convert.ToInt32(player.Def), Convert.ToInt32(player.Res));
                     }
                 }
                 // agregar habilidades a la unidad
-                if (nuevo_string.Length > 1) CreateSkills(view, nuevo_string, unidades, jugador_actual, contadores_unidades);
+                if (nuevo_string.Length > 1) CreateSkills(unidades, jugador_actual, contadores_unidades, nuevo_string[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
                 contadores_unidades[jugador_actual]++;
             }
         }
@@ -155,21 +154,18 @@ public class UsefulFunctions
         return newGameAttacksController;
     }
 
-    private static void CreateSkills(View view, string[] nuevo_string, Unit[][] unidades, int jugador_actual,
-        int[] contadores_unidades)
+    private static void CreateSkills( Unit[][] unitsList, int currentPlayer,
+        int[] unitCounters, string[] listOfSkillNames)
     {
-        string stringHabilidades = nuevo_string[1];
-        string[] listadeHabilidades =
-            stringHabilidades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
         int contador_habilidades = 0;
-        foreach (string habilidad in listadeHabilidades)
+        foreach (string skillName in listOfSkillNames)
         {
-            SkillConstructor.Construct(unidades, jugador_actual, contadores_unidades, habilidad, contador_habilidades);
+            SkillConstructor.Construct(unitsList, currentPlayer, unitCounters, skillName, contador_habilidades);
             contador_habilidades++;
         }
     }
     
-    private static void SetUnitValues(Unit unit, string name, string weapon, string gender, int currentHp,int maxHp, int attk, int spd, int def, int res, View view)
+    private static void SetUnitValues(Unit unit, string name, string weapon, string gender, int currentHp,int maxHp, int attk, int spd, int def, int res)
     {
         unit.name = name;
         unit.weapon = weapon;
@@ -180,6 +176,5 @@ public class UsefulFunctions
         unit.spd = spd;
         unit.def = def;
         unit.res = res;
-        unit.view = view;
     }
 }
