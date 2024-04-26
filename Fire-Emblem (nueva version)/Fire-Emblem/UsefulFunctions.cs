@@ -13,10 +13,7 @@ public class UsefulFunctions
         //if (ThereIsAnEmptyTeam(archivo)) return false;
         foreach (string linea in lineas)
         {
-            if (linea == "Player 1 Team")
-            {
-                jugador_actual = 0;
-            }
+            if (linea == "Player 1 Team") jugador_actual = 0;
             else if (linea == "Player 2 Team")
             {
                 // revisando si hay equipo vacio
