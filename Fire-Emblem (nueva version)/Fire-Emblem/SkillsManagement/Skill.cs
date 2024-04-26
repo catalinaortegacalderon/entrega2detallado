@@ -39,9 +39,9 @@ namespace Fire_Emblem;
         }
     }
 
-    public class HpMas15 : Skill
+    public class HpPlus15 : Skill
     {
-        public HpMas15() : base()
+        public HpPlus15() : base()
         {
             this.Conditions = new Condition[1];
             this.Conditions[0] = new SiempreVerdad();
@@ -76,9 +76,9 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SpeedMas5 : Skill
+    public class SpeedPlus5 : Skill
     {
-        public SpeedMas5() : base()
+        public SpeedPlus5() : base()
         {
             this.Conditions = new Condition[] { new SiempreVerdad() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Spd", 5) };
@@ -95,9 +95,9 @@ namespace Fire_Emblem;
     }
 
 
-    public class AtkAndDefMas5 : Skill
+    public class AtkAndDefPlus5 : Skill
     {
-        public AtkAndDefMas5() : base()
+        public AtkAndDefPlus5() : base()
         {
             this.Conditions = new Condition[2];
             this.Conditions[0] = new SiempreVerdad(); 
@@ -109,9 +109,9 @@ namespace Fire_Emblem;
         }
     }
 
-    public class AtkAndResMas5 : Skill
+    public class AtkAndResPlus5 : Skill
     {
-        public AtkAndResMas5() : base()
+        public AtkAndResPlus5() : base()
         {
             this.Conditions = new Condition[2];
             this.Conditions[0] = new SiempreVerdad(); 
@@ -124,9 +124,9 @@ namespace Fire_Emblem;
         }
     }
 
-    public class SpdAndResMas5 : Skill
+    public class SpdAndResPlus5 : Skill
     {
-        public SpdAndResMas5 () : base()
+        public SpdAndResPlus5 () : base()
         {
             this.Conditions = new Condition[2];
             this.Conditions[0] = new SiempreVerdad(); 
@@ -139,9 +139,9 @@ namespace Fire_Emblem;
     }
 
 
-    public class AttackMas6 : Skill
+    public class AttackPlus6 : Skill
     {
-        public AttackMas6() : base()
+        public AttackPlus6() : base()
         {
             this.Conditions = new Condition[] { new SiempreVerdad() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Atk", 6) };
@@ -185,18 +185,18 @@ namespace Fire_Emblem;
         }
     }
 
-    public class DefenseMas5 : Skill
+    public class DefensePlus5 : Skill
     {
-        public DefenseMas5() : base()
+        public DefensePlus5() : base()
         {
             this.Conditions = new Condition[] { new SiempreVerdad() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Def", 5) };
         }
     }
 
-    public class ResistanceMas5 : Skill
+    public class ResistancePlus5 : Skill
     {
-        public ResistanceMas5() : base()
+        public ResistancePlus5() : base()
         {
             this.Conditions = new Condition[] { new SiempreVerdad() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Res", 5) };
@@ -441,7 +441,7 @@ namespace Fire_Emblem;
         public ChaosStyle() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AtaqueEntreArmasEspecificas("fisica", "magia");
+            this.Conditions[0] = new AttackBetweenSpecificWeapons("fisica", "magia");
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn( "Spd", 3); 
         }

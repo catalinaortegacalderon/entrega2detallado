@@ -8,11 +8,11 @@ public class SkillConstructor
         Skill[] skills = units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]].Skills;
         if (skillString == "HP +15")
         {
-            skills[skillsCounter] = new HpMas15();
+            skills[skillsCounter] = new HpPlus15();
         }
         else if (skillString == "Speed +5")
         {
-            skills[skillsCounter] = new SpeedMas5();
+            skills[skillsCounter] = new SpeedPlus5();
         }
 
         else if (skillString == "Resolve")
@@ -30,19 +30,19 @@ public class SkillConstructor
         }
         else if (skillString == "Atk/Def +5")
         {
-            skills[skillsCounter] = new AtkAndDefMas5();
+            skills[skillsCounter] = new AtkAndDefPlus5();
         }
         else if (skillString == "Atk/Res +5")
         {
-            skills[skillsCounter] = new AtkAndResMas5();
+            skills[skillsCounter] = new AtkAndResPlus5();
         }
         else if (skillString == "Spd/Res +5")
         {
-            skills[skillsCounter] = new SpdAndResMas5();
+            skills[skillsCounter] = new SpdAndResPlus5();
         }
         else if (skillString == "Attack +6")
         {
-            skills[skillsCounter] = new AttackMas6();
+            skills[skillsCounter] = new AttackPlus6();
         }
         else if (skillString == "Bracing Blow")
         {
@@ -59,11 +59,11 @@ public class SkillConstructor
         }
         else if (skillString == "Defense +5")
         {
-            skills[skillsCounter] = new DefenseMas5();
+            skills[skillsCounter] = new DefensePlus5();
         }
         else if (skillString == "Resistance +5")
         {
-            skills[skillsCounter] = new ResistanceMas5();
+            skills[skillsCounter] = new ResistancePlus5();
         }
         else if (skillString == "Deadly Blade")
         {

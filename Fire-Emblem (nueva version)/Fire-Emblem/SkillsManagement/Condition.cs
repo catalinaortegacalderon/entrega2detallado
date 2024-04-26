@@ -95,13 +95,13 @@ public class TenerHpPropioMayorAlDelRivalAumentadoEn: Condition
     }
 }
 
-public class AtaqueEntreArmasEspecificas : Condition
+public class AttackBetweenSpecificWeapons : Condition
 {
     
     private string tipoDeArma1;
     private string tipoDeArma2;
         
-    public AtaqueEntreArmasEspecificas(string tipoDeArma1, string tipoDeArma2) : base()
+    public AttackBetweenSpecificWeapons(string tipoDeArma1, string tipoDeArma2) : base()
     {
         this.tipoDeArma1 = tipoDeArma1;
         this.tipoDeArma2 = tipoDeArma2;
@@ -158,7 +158,7 @@ public class RivalStartCombatOrFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.CurrentHp == myUnit.HpMax || iAmAttacking == false) return true;
+        if (opponentsUnit.CurrentHp == opponentsUnit.HpMax || iAmAttacking == false) return true;
         return false;
     }
     
