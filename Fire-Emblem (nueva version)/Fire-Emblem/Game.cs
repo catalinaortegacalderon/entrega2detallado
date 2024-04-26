@@ -122,24 +122,12 @@ public class Game
     
     private void Followup()
     {
-        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
-            + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
-            + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd >=
-            5 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
-              + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
-              +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd)
+        if (SecondPlayerCanDoAFollowup())
         {
             _gameAttacksController.currentAttacker = 1;
             _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
-        else if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
-                 _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
-                 + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
-                 + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd + 5 <=
-                 _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
-                 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
-                 +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd)
+        else if (FirstPlayerCanDoAFollowup())
         {
             _gameAttacksController.currentAttacker = 0;
             _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
@@ -149,7 +137,29 @@ public class Game
             _view.WriteLine("Ninguna unidad puede hacer un follow up");
         }
     }
-    
+
+    private bool FirstPlayerCanDoAFollowup()
+    {
+        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
+               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd + 5 <=
+               _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
+               + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
+               +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd;
+    }
+
+    private bool SecondPlayerCanDoAFollowup()
+    {
+        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
+               _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].spd 
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonus.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activeBonusNeutralization.spd
+               + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenalties.spd * _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].activePenaltiesNeutralization.spd >=
+               5 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].spd 
+                 + _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonus.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activeBonusNeutralization.spd
+                 +_gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenalties.spd * _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].activePenaltiesNeutralization.spd;
+    }
+
     private void ResetUnitsBonus()
     {
         _gameAttacksController.ResetAllSkills();

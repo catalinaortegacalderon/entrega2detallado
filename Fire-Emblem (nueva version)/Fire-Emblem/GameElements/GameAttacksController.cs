@@ -202,7 +202,6 @@ public class GameAttacksController
             unitsAtk += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
                           + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
         }
-
         return unitsAtk;
     }
 
