@@ -152,7 +152,7 @@ public class Game
     
     private void ResetUnitsBonus()
     {
-        _gameAttacksController.resetAllSkills();
+        _gameAttacksController.ResetAllSkills();
     }
     
     private void UpdateGameLogs()

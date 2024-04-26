@@ -187,13 +187,11 @@ public class GameAttacksController
         {
             def_o_res_rival = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
             if (_numberOfThisRoundsCurrentAttack == 2) def_o_res_rival += _currentDefensiveUnit.activeBonus.resFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.resFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.res;
-            Console.WriteLine("res rival" + def_o_res_rival);
         }
         else
         {
             def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
             if (_numberOfThisRoundsCurrentAttack == 2) def_o_res_rival += _currentDefensiveUnit.activeBonus.defFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.defFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.def;
-            Console.WriteLine("def rival" + def_o_res_rival);
         }
         double wtb;
         if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") wtb = 1;
@@ -211,7 +209,6 @@ public class GameAttacksController
             // revisar esto de abajo
             _currentAttackingUnit.gameLogs.AmountOfAttacks++;
         }
-        Console.WriteLine("ataque final antes de activar cambios por followup" + atk_unidad);
         if (_numberOfThisRoundsCurrentAttack == 3)
         {
             atk_unidad += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
@@ -219,8 +216,6 @@ public class GameAttacksController
             // revisar esto de abajo
             _currentAttackingUnit.gameLogs.AmountOfAttacks++;
         }
-        Console.WriteLine("ataque final " + atk_unidad);
-        Console.WriteLine("penalties atk " + _currentAttackingUnit.activePenalties.atkFollowup);
         if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
     }
@@ -237,7 +232,7 @@ public class GameAttacksController
         }
     }
 
-    public void resetAllSkills()
+    public void ResetAllSkills()
     {
         ResetAttackersSkills();
         ResetDefensorsSkills();
