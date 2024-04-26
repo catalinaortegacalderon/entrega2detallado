@@ -1,7 +1,7 @@
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 
-public class GameController
+public class GameAttacksController
 {
     public Player[] players = new Player[2];
     public int currentAttacker;
@@ -14,6 +14,10 @@ public class GameController
     private int _numberOfThisRoundsCurrentAttack;
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
+    public string NameOfPlayer1sLoosingUnit = "";
+    public string NameOfPlayer2sLoosingUnit = "";
+    private int _attacknumber;
+    
     
     // arreglos: hacer variables privadas (setter y getter)
     //  ver si dejo lineas largas o con enter
@@ -23,7 +27,7 @@ public class GameController
     // ver si dejo view como atributo o solo como param de funcion
     // IDEA: SOLO ATACKING PLAYER Y DEFENSE PLAYER, SACAR CURRENT PLAYER
 
-    public GameController(Player firstPlayer, Player secondPlayer)
+    public GameAttacksController(Player firstPlayer, Player secondPlayer)
     {
         this.currentAttacker = 0;
         this.players[0] = firstPlayer;
@@ -33,33 +37,20 @@ public class GameController
 
     public string Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
-        //PONER LOOSERS NAME COMO PARAMETRO
+        //PONER LOOSERS NAME COMO PARAMETRO de clase
         if (this.gameIsTerminated || this.roundIsTerminated) return "";
         _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
         this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
         this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
         string loosersName = "";
-        int attackValue;
-        if (currentAttacker == 0)
-        {
-            _currentAttackingUnit = players[0].units[_firstPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = players[1].units[_secondPlayersCurrentUnitNumber];
-        }
-        else
-        {
-            _currentAttackingUnit = players[1].units[_secondPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = players[0].units[_firstPlayersCurrentUnitNumber];
-
-        }
-
-        if (numberOfCurrentAttack == 1)
+        SetAttackingAndDefensiveUnits();
+        if (_numberOfThisRoundsCurrentAttack == 1)
         {
             PrintAdvantages(view);
-            ActivateAttackersUnitHabilities();
-            ActivateDefensorsUnitHabilities();
-            PrintHabilitiesInfo(view);
+            ActivateSkills();
+            PrintSkillsInfo(view);
         }
-        attackValue = CalculateAttack();
+        int attackValue = CalculateAttack();
         view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + attackValue + " de daño");
         if (currentAttacker == 0)
         {
@@ -67,7 +58,7 @@ public class GameController
             {
                 loosersName = players[1].units[_secondPlayersCurrentUnitNumber].name;
                 this.roundIsTerminated = true;
-                EliminateLooserUnit(_secondPlayersCurrentUnitNumber);
+                EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
                 return loosersName;
             }
             else
@@ -83,30 +74,7 @@ public class GameController
                 loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
                 //muere esta unidad
                 this.roundIsTerminated = true;
-                if (_firstPlayersCurrentUnitNumber == 0)
-                {
-                    players[0].units[0] = players[0].units[1];
-                    players[0].units[1] = players[0].units[2];
-                    players[0].units[2] = new Unit();
-                }
-                else if (_firstPlayersCurrentUnitNumber == 1)
-                {
-                    players[0].units[1] = players[0].units[2];
-                    players[0].units[2] = new Unit();
-                }
-                else
-                {
-                    players[0].units[2] = new Unit();
-                }
-
-                players[0].amountOfUnits = players[0].amountOfUnits - 1;
-                if (players[0].amountOfUnits == 0)
-                {
-                    this.gameIsTerminated = true;
-                    this.winner = 1;
-                    return loosersName;
-                }
-
+                EliminateLooserUnitOfPlayer1();
                 return loosersName;
             }
             else
@@ -118,12 +86,59 @@ public class GameController
         }
     }
 
+    private void ActivateSkills()
+    {
+        ActivateAttackersUnitSkills();
+        ActivateDefensorsUnitSkills();
+    }
+
+    private void EliminateLooserUnitOfPlayer1()
+    {
+        if (_firstPlayersCurrentUnitNumber == 0)
+        {
+            players[0].units[0] = players[0].units[1];
+            players[0].units[1] = players[0].units[2];
+            players[0].units[2] = new Unit();
+        }
+        else if (_firstPlayersCurrentUnitNumber == 1)
+        {
+            players[0].units[1] = players[0].units[2];
+            players[0].units[2] = new Unit();
+        }
+        else
+        {
+            players[0].units[2] = new Unit();
+        }
+
+        players[0].amountOfUnits = players[0].amountOfUnits - 1;
+        if (players[0].amountOfUnits == 0)
+        {
+            this.gameIsTerminated = true;
+            this.winner = 1;
+        }
+    }
+
+    private void SetAttackingAndDefensiveUnits()
+    {
+        if (currentAttacker == 0)
+        {
+            _currentAttackingUnit = players[0].units[_firstPlayersCurrentUnitNumber];
+            _currentDefensiveUnit = players[1].units[_secondPlayersCurrentUnitNumber];
+        }
+        else
+        {
+            _currentAttackingUnit = players[1].units[_secondPlayersCurrentUnitNumber];
+            _currentDefensiveUnit = players[0].units[_firstPlayersCurrentUnitNumber];
+
+        }
+    }
+
     private void SetDefendorsNewHp(int secondPlayersCurrentUnitNumber, int attackValue)
     {
         players[1].units[secondPlayersCurrentUnitNumber].currentHp = players[1].units[secondPlayersCurrentUnitNumber].currentHp - attackValue;
     }
 
-    private void EliminateLooserUnit(int secondPlayersCurrentUnitNumber)
+    private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
     {
         if (secondPlayersCurrentUnitNumber == 0)
         {
@@ -149,36 +164,33 @@ public class GameController
         }
     }
 
-    private void ActivateAttackersUnitHabilities()
+    private void ActivateAttackersUnitSkills()
     {
         foreach (Skill habilidad in _currentAttackingUnit.skills)
         {
             habilidad.AplicarHabilidades(_currentAttackingUnit, _currentDefensiveUnit, true);
         }
     }
-    private void ActivateDefensorsUnitHabilities()
+    private void ActivateDefensorsUnitSkills()
     {
         foreach (Skill habilidad in _currentDefensiveUnit.skills)
         {
             habilidad.AplicarHabilidades(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
     }
-    
-    private void PrintHabilitiesInfo(View view)
+
+    private void PrintSkillsInfo(View view)
     {
         SkillsPrinter.PrintBonus(view, _currentAttackingUnit);
         SkillsPrinter.PrintPenalties(view, _currentAttackingUnit);
         SkillsPrinter.PrintBonusNetralization(view, _currentAttackingUnit);
         SkillsPrinter.PrintPenaltyNetralization(view, _currentAttackingUnit);
-        
+
         SkillsPrinter.PrintBonus(view, _currentDefensiveUnit);
         SkillsPrinter.PrintPenalties(view, _currentDefensiveUnit);
         SkillsPrinter.PrintBonusNetralization(view, _currentDefensiveUnit);
         SkillsPrinter.PrintPenaltyNetralization(view, _currentDefensiveUnit);
-        
-        
     }
-    
 
     public int CalculateAttack()
     {
@@ -231,14 +243,8 @@ public class GameController
     {
         string arma_atac = _currentAttackingUnit.weapon;
         string arma_def = _currentDefensiveUnit.weapon;
-        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow")
-        {
-            view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        }
-        else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance"))
-        {
-            view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
-        }
+        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+        else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance")) view.WriteLine(_currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ")");
         else
         {
             view.WriteLine(_currentDefensiveUnit.name + " (" + _currentDefensiveUnit.weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.name + " (" + _currentAttackingUnit.weapon + ")");
@@ -247,14 +253,23 @@ public class GameController
 
     public void resetAllSkills()
     {
-        _currentDefensiveUnit.activeBonus.ResetStructureToZero();
-        _currentDefensiveUnit.activePenalties.ResetStructureToZero();
-        _currentDefensiveUnit.activeBonusNeutralization.ResetStructureToOne();
-        _currentDefensiveUnit.activePenaltiesNeutralization.ResetStructureToOne();
-        
+        ResetAttackersSkills();
+        ResetDefensorsSkills();
+    }
+
+    private void ResetDefensorsSkills()
+    {
         _currentAttackingUnit.activeBonus.ResetStructureToZero();
         _currentAttackingUnit.activePenalties.ResetStructureToZero();
         _currentAttackingUnit.activeBonusNeutralization.ResetStructureToOne();
         _currentAttackingUnit.activePenaltiesNeutralization.ResetStructureToOne();
+    }
+
+    private void ResetAttackersSkills()
+    {
+        _currentDefensiveUnit.activeBonus.ResetStructureToZero();
+        _currentDefensiveUnit.activePenalties.ResetStructureToZero();
+        _currentDefensiveUnit.activeBonusNeutralization.ResetStructureToOne();
+        _currentDefensiveUnit.activePenaltiesNeutralization.ResetStructureToOne();
     }
 }
