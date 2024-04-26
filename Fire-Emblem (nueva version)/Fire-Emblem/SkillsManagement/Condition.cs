@@ -148,7 +148,7 @@ public class FirstAtack: Condition
 {
     public override bool Verify(Unit myUnit, Unit oponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.gameLogs.amountOfAttacks == 0) return true;
+        if (myUnit.gameLogs.AmountOfAttacks == 0) return true;
         return false;
     }
     

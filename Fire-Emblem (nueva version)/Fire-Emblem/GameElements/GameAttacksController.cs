@@ -16,7 +16,7 @@ public class GameAttacksController
     private int _secondPlayersCurrentUnitNumber;
     public string NameOfPlayer1sLoosingUnit = "";
     public string NameOfPlayer2sLoosingUnit = "";
-    private int _attacknumber;
+    private int _attackValue;
     
     
     // arreglos: hacer variables privadas (setter y getter)
@@ -42,6 +42,8 @@ public class GameAttacksController
         _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
         this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
         this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
+        NameOfPlayer1sLoosingUnit = "";
+        NameOfPlayer2sLoosingUnit = "";
         string loosersName = "";
         SetAttackingAndDefensiveUnits();
         if (_numberOfThisRoundsCurrentAttack == 1)
@@ -50,37 +52,46 @@ public class GameAttacksController
             ActivateSkills();
             PrintSkillsInfo(view);
         }
-        int attackValue = CalculateAttack();
-        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + attackValue + " de daño");
-        if (currentAttacker == 0)
+        _attackValue = CalculateAttack();
+        view.WriteLine(_currentAttackingUnit.name + " ataca a " + _currentDefensiveUnit.name + " con " + _attackValue + " de daño");
+        if (currentAttacker == 0) return Player1Attacks(_attackValue);
+        else
         {
-            if (attackValue >= players[1].units[_secondPlayersCurrentUnitNumber].currentHp)
-            {
-                loosersName = players[1].units[_secondPlayersCurrentUnitNumber].name;
-                this.roundIsTerminated = true;
-                EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
-                return loosersName;
-            }
-            else
-            {
-                SetDefendorsNewHp(_secondPlayersCurrentUnitNumber, attackValue);
-                return "";
-            }
+            return Player2Attacks();
+        }
+    }
+
+    private string Player2Attacks()
+    {
+        string loosersName;
+        if (_attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].currentHp)
+        {
+            loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
+            
+            this.roundIsTerminated = true;
+            EliminateLooserUnitOfPlayer1();
+            return loosersName;
         }
         else
         {
-            if (attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].currentHp)
-            {
-                loosersName = players[0].units[_firstPlayersCurrentUnitNumber].name;
-                this.roundIsTerminated = true;
-                EliminateLooserUnitOfPlayer1();
-                return loosersName;
-            }
-            else
-            {
-                players[0].units[_firstPlayersCurrentUnitNumber].currentHp = players[0].units[_firstPlayersCurrentUnitNumber].currentHp - attackValue;
-            }
+            players[0].units[_firstPlayersCurrentUnitNumber].currentHp = players[0].units[_firstPlayersCurrentUnitNumber].currentHp - _attackValue;
+        }
+        return "";
+    }
 
+    private string Player1Attacks(int attackValue)
+    {
+        string loosersName;
+        if (attackValue >= players[1].units[_secondPlayersCurrentUnitNumber].currentHp)
+        {
+            loosersName = players[1].units[_secondPlayersCurrentUnitNumber].name;
+            this.roundIsTerminated = true;
+            EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
+            return loosersName;
+        }
+        else
+        {
+            SetDefendorsNewHp(_secondPlayersCurrentUnitNumber, attackValue);
             return "";
         }
     }
@@ -119,7 +130,7 @@ public class GameAttacksController
 
     private void SetDefendorsNewHp(int secondPlayersCurrentUnitNumber, int attackValue)
     {
-        players[1].units[secondPlayersCurrentUnitNumber].currentHp = players[1].units[secondPlayersCurrentUnitNumber].currentHp - attackValue;
+        _currentDefensiveUnit.currentHp -= attackValue;
     }
 
     private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
@@ -192,7 +203,7 @@ public class GameAttacksController
             atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
                           _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
             // revisar esto de abajo
-            _currentAttackingUnit.gameLogs.amountOfAttacks++;
+            _currentAttackingUnit.gameLogs.AmountOfAttacks++;
         }
         Console.WriteLine("ataque final antes de activar cambios por followup" + atk_unidad);
         if (_numberOfThisRoundsCurrentAttack == 3)
@@ -200,7 +211,7 @@ public class GameAttacksController
             atk_unidad += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
                 + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
             // revisar esto de abajo
-            _currentAttackingUnit.gameLogs.amountOfAttacks++;
+            _currentAttackingUnit.gameLogs.AmountOfAttacks++;
         }
         Console.WriteLine("ataque final " + atk_unidad);
         Console.WriteLine("penalties atk " + _currentAttackingUnit.activePenalties.atkFollowup);

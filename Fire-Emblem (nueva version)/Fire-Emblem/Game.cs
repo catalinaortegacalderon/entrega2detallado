@@ -26,19 +26,24 @@ public class Game
     public void Play()
     {
         if (VerifyIfTeamsAreValid(out var files, out var fileNumberInput)) return;
-        _gameAttacksController = Functions.BuildGameController(files[fileNumberInput], _view);
+        _gameAttacksController = UsefulFunctions.BuildGameController(files[fileNumberInput], _view);
         while (_gameAttacksController.gameIsTerminated == false) PlayOneRound();
         _view.WriteLine("Player " + (_gameAttacksController.winner + 1) + " ganó");
     }
 
     private void PlayOneRound()
     {
-        _gameAttacksController.roundIsTerminated = false;
-        _currentRoundsPlayer1LooserUnitsName = "";
-        _currentRoundsPlayer2LooserUnitsName = "";
+        SetRoundsParameters();
         if (_gameAttacksController.currentAttacker == 0) Player1StartsRound();
         else if (_gameAttacksController.currentAttacker == 1) Player2StartsRound();
         _gameAttacksController.currentRound++;
+    }
+
+    private void SetRoundsParameters()
+    {
+        _gameAttacksController.roundIsTerminated = false;
+        _currentRoundsPlayer1LooserUnitsName = "";
+        _currentRoundsPlayer2LooserUnitsName = "";
     }
 
     private void Player1StartsRound()
@@ -46,12 +51,9 @@ public class Game
         _currentUnitNumberOfPlayer1 = AskPlayerForTheUnitNumber(0);
         _currentUnitNumberOfPlayer2 = AskPlayerForTheUnitNumber(1);
         PrintRound(_gameAttacksController.currentAttacker);
-        //ataque
         _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _gameAttacksController.currentAttacker = 1;
-        //contraataque
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        //ActivateFollowupBonusOfPlayer(0);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer1First();
@@ -64,12 +66,9 @@ public class Game
         _currentUnitNumberOfPlayer2 = AskPlayerForTheUnitNumber(1);
         _currentUnitNumberOfPlayer1 = AskPlayerForTheUnitNumber(0);
         _view.WriteLine("Round " + _gameAttacksController.currentRound + ": " + _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].name + " (Player 2) comienza");
-        //ataque
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _gameAttacksController.currentAttacker = 0;
-        //contraataque
         _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        //ActivateFollowupBonusOfPlayer(1);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer2First();
@@ -88,7 +87,7 @@ public class Game
             filesCounter++;
         }
         fileNumberInput = Convert.ToInt32(_view.ReadLine());
-        if (Functions.Juego_Valido(files[fileNumberInput]) == false)
+        if (UsefulFunctions.Juego_Valido(files[fileNumberInput]) == false)
         {
             _view.WriteLine("Archivo de equipos no válido");
             return true;
@@ -121,12 +120,6 @@ public class Game
         }
     }
     
-    //private void ActivateFollowupBonusOfPlayer(int playerNumber)
-    //{
-    //    int numberOfThePlayersUnit  = (playerNumber == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-    //    _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.attk += _gameController.players[playerNumber].units[numberOfThePlayersUnit].activeBonus.atkFollowup;
-    //}
-
     private void Followup()
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
@@ -172,12 +165,12 @@ public class Game
     {
         if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
         {
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.amountOfAttacks++;
-            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.amountOfAttacks++;
+            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks++;
+            _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks++;
         }
         else if (_currentRoundsPlayer1LooserUnitsName != "")
-            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.amountOfAttacks++;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.amountOfAttacks++;
+            _gameAttacksController.players[1].units[_currentUnitNumberOfPlayer2].gameLogs.AmountOfAttacks++;
+        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.players[0].units[_currentUnitNumberOfPlayer1].gameLogs.AmountOfAttacks++;
     }
 
     private void UpdateLastOponent()

@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
 
-public class Functions
+public class UsefulFunctions
 {
     public static bool Juego_Valido(string archivo)
     {
