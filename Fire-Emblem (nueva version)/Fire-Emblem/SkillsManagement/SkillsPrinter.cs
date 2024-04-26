@@ -17,8 +17,6 @@ public class SkillsPrinter
     
     public static void PrintPenalties(View view, Unit unit)
     {
-        Console.WriteLine("penalty def first atack" + unit.ActiveBonus.defFirstAttack);
-        Console.WriteLine("penalty res first atack" + unit.ActiveBonus.defFirstAttack);
         if (unit.ActivePenalties.attk < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.attk);
         if (unit.ActivePenalties.spd < 0) view.WriteLine(unit.Name + " obtiene Spd" + unit.ActivePenalties.spd);
         if (unit.ActivePenalties.def < 0) view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.def);
