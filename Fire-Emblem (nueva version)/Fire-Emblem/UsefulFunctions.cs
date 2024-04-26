@@ -89,7 +89,7 @@ public class UsefulFunctions
                 {
                     if (nombre == player.Name)
                     {
-                        unidades[jugador_actual][contadores_unidades[jugador_actual]].Setear_valores(player.Name,
+                        SetUnitValues(unidades[jugador_actual][contadores_unidades[jugador_actual]], player.Name,
                             player.Weapon, player.Gender, Convert.ToInt32(player.HP),
                             Convert.ToInt32(player.HP), Convert.ToInt32(player.Atk), Convert.ToInt32(player.Spd),
                             Convert.ToInt32(player.Def), Convert.ToInt32(player.Res),
@@ -102,8 +102,13 @@ public class UsefulFunctions
             }
         }
 
-        Player jugador1 = new Player(contadores_unidades[0], unidades[0]);
-        Player jugador2 = new Player(contadores_unidades[1], unidades[1]);
+        Player jugador1 = new Player();
+        jugador1.amountOfUnits = contadores_unidades[0];
+        jugador1.units = unidades[0].ToList();
+        Player jugador2 = new Player();
+        jugador2.amountOfUnits = contadores_unidades[1];
+        jugador2.units = unidades[1].ToList();
+        
         GameAttacksController newGameAttacksController = new GameAttacksController(jugador1, jugador2);
 
         return newGameAttacksController;
@@ -123,7 +128,7 @@ public class UsefulFunctions
         }
     }
     
-    public void SetUnitValues(Unit unit, string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
+    public static void SetUnitValues(Unit unit, string nombre, string arma, string genero, int hp_actual,int hp_max, int attk, int spd, int def, int res, View view)
     {
         unit.name = nombre;
         unit.weapon = arma;
