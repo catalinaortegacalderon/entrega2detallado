@@ -179,44 +179,61 @@ public class GameAttacksController
 
     public int CalculateAttack()
     {
-        string arma_atac = _currentAttackingUnit.weapon;
-        string arma_def = _currentDefensiveUnit.weapon;
-        int def_o_res_rival;
-        if (arma_atac == "Magic")
+        string attackingWeapon = _currentAttackingUnit.weapon;
+        string defensiveWeapon = _currentDefensiveUnit.weapon;
+        int rivalsDefOrRes = CalculateRivalsDefOrRes(attackingWeapon);
+        double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
+        int unitsAtk = CalculateUnitsAtk();
+        _currentAttackingUnit.gameLogs.AmountOfAttacks++;
+        if ((unitsAtk * wtb - rivalsDefOrRes) < 0) return 0;
+        return Convert.ToInt32(Math.Truncate(unitsAtk * wtb - rivalsDefOrRes));
+    }
+
+    private int CalculateUnitsAtk()
+    {
+        int unitsAtk = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
+        if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
         {
-            def_o_res_rival = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
-            if (_numberOfThisRoundsCurrentAttack == 2) def_o_res_rival += _currentDefensiveUnit.activeBonus.resFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.resFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.res;
+            unitsAtk += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
+                          _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
         }
-        else
+        if (_numberOfThisRoundsCurrentAttack == 3)
         {
-            def_o_res_rival = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
-            if (_numberOfThisRoundsCurrentAttack == 2) def_o_res_rival += _currentDefensiveUnit.activeBonus.defFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.defFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.def;
+            unitsAtk += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
+                          + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
         }
+
+        return unitsAtk;
+    }
+
+    private static double CalculateWtb(string defensiveWeapon, string attackingWeapon)
+    {
         double wtb;
-        if (arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow") wtb = 1;
-        else if ((arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance")) wtb = 1.2;
+        if (defensiveWeapon == attackingWeapon || attackingWeapon == "Magic" || defensiveWeapon == "Magic" || defensiveWeapon == "Bow" || attackingWeapon == "Bow") wtb = 1;
+        else if ((attackingWeapon == "Sword" & defensiveWeapon == "Axe") || (attackingWeapon == "Lance" & defensiveWeapon == "Sword") || (attackingWeapon == "Axe" & defensiveWeapon == "Lance")) wtb = 1.2;
         else
         {
             wtb = 0.8;
         }
-        int atk_unidad = _currentAttackingUnit.attk + _currentAttackingUnit.activeBonus.attk * _currentAttackingUnit.activeBonusNeutralization.attk + _currentAttackingUnit.activePenalties.attk * _currentAttackingUnit.activePenaltiesNeutralization.attk;
-        // revisar si pongo * neutralizador ataque o * neutralizador de atk first attack...
-        if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
+
+        return wtb;
+    }
+
+    private int CalculateRivalsDefOrRes(string attackingWeapon)
+    {
+        int rivalsDefOrRes;
+        if (attackingWeapon == "Magic")
         {
-            atk_unidad += _currentAttackingUnit.activeBonus.atkFirstAttack * _currentAttackingUnit.activeBonusNeutralization.attk +
-                          _currentAttackingUnit.activePenalties.atkFirstAttack * _currentAttackingUnit.activePenaltiesNeutralization.attk;
-            // revisar esto de abajo
-            _currentAttackingUnit.gameLogs.AmountOfAttacks++;
+            rivalsDefOrRes = _currentDefensiveUnit.res + _currentDefensiveUnit.activeBonus.res * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.res *_currentDefensiveUnit.activePenaltiesNeutralization.res;
+            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.activeBonus.resFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.res + _currentDefensiveUnit.activePenalties.resFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.res;
         }
-        if (_numberOfThisRoundsCurrentAttack == 3)
+        else
         {
-            atk_unidad += _currentAttackingUnit.activeBonus.atkFollowup * _currentAttackingUnit.activeBonusNeutralization.attk
-                + _currentAttackingUnit.activePenalties.atkFollowup * _currentAttackingUnit.activePenaltiesNeutralization.attk;
-            // revisar esto de abajo
-            _currentAttackingUnit.gameLogs.AmountOfAttacks++;
+            rivalsDefOrRes = _currentDefensiveUnit.def + _currentDefensiveUnit.activeBonus.def * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.def *_currentDefensiveUnit.activePenaltiesNeutralization.def;
+            if (_numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.activeBonus.defFirstAttack * _currentDefensiveUnit.activeBonusNeutralization.def + _currentDefensiveUnit.activePenalties.defFirstAttack *_currentDefensiveUnit.activePenaltiesNeutralization.def;
         }
-        if ((atk_unidad * wtb - def_o_res_rival) < 0) return 0;
-        return Convert.ToInt32(Math.Truncate(atk_unidad * wtb - def_o_res_rival));
+
+        return rivalsDefOrRes;
     }
 
     public void PrintAdvantages(View view)
@@ -231,14 +248,14 @@ public class GameAttacksController
         }
     }
 
-    private static bool AttackerHasAdvantage(string arma_atac, string arma_def)
+    private static bool AttackerHasAdvantage(string attackingWeapon, string defensiveWeapon)
     {
-        return (arma_atac == "Sword" & arma_def == "Axe") || (arma_atac == "Lance" & arma_def == "Sword") || (arma_atac == "Axe" & arma_def == "Lance");
+        return (attackingWeapon == "Sword" & defensiveWeapon == "Axe") || (attackingWeapon == "Lance" & defensiveWeapon == "Sword") || (attackingWeapon == "Axe" & defensiveWeapon == "Lance");
     }
 
-    private static bool ThereIsNoAdvantage(string arma_def, string arma_atac)
+    private static bool ThereIsNoAdvantage(string defensiveWeapon, string attackingWeapon)
     {
-        return arma_def == arma_atac || arma_atac == "Magic" || arma_def == "Magic" || arma_def == "Bow" || arma_atac == "Bow";
+        return defensiveWeapon == attackingWeapon || attackingWeapon == "Magic" || defensiveWeapon == "Magic" || defensiveWeapon == "Bow" || attackingWeapon == "Bow";
     }
 
     public void ResetAllSkills()
