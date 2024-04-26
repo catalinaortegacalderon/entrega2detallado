@@ -6,67 +6,11 @@ public class UsefulFunctions
 {
     public static bool CheckIfGameIsValid(string file)
     {
-        // Empty team
         if (!CheckIfThereAreNoEmptyTeams(file)) return false;
         if (!CheckIfThereAreMaximumThreeUnitsPerTeam(file)) return false;
-        // no hay mas de tres unidades
-        // no hayan unidades repetidas
-        // // revisando que no hayan mas de dos habilidades o habilidades rep
-        int[] contadores_unidades = new int[] {0, 0};
-        int jugador_actual = 0; 
-        string[][] unidades = new string[][] { new string[] { "", "", "" }, new string[] { "", "", "" } };
-        string[] lineas = File.ReadAllLines(file);
-        //if (ThereIsAnEmptyTeam(archivo)) return false;
-        foreach (string linea in lineas)
-        {
-            if (linea == "Player 1 Team") jugador_actual = 0;
-            else if (linea == "Player 2 Team")
-            {
-                // revisando si hay equipo vacio
-                //if (contadores_unidades[0] == 0){
-                //    return false;
-                //}
-                jugador_actual = 1;
-            }
-            else
-            {
-                string[] nuevo_string = linea.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-                string nombre = nuevo_string[0]; 
-                // revisar que no hayan mas de tres unidades
-                if(contadores_unidades[jugador_actual] == 3){
-                    return false;
-                }
-                // revisar que no hayan unidades repetidas
-                if(unidades[jugador_actual].Contains(nombre)){
-                    return false;
-                }
-                unidades[jugador_actual][contadores_unidades[jugador_actual]] = nombre;
-                //contadores_unidades[jugador_actual]++;
-                // revisar habilidades
-                char caracterABuscar = '(';
-                if (linea.Contains(caracterABuscar)){ 
-                    nuevo_string = nuevo_string[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                    // revisando que no hayan mas de dos habilidades o habilidades rep
-                    if (nuevo_string.Length> 2){
-                        return false; 
-                    }
-                    if (nuevo_string.Length == 2)
-                    {
-                        if (nuevo_string[0] == nuevo_string[1])
-                        {
-                            return false;
-                        }
-                    }
-                }
-                contadores_unidades[jugador_actual]++;
-            }
-        }
-        //revisando que no hayan equipos vacios ni con mas de 3 unidades
-        //if (contadores_unidades[1] == 0 || contadores_unidades[1] > 3 || contadores_unidades[0] > 3)
-        //{
-        //    return false;
-        //}
-        // valido
+        if (!CheckIfThereAreNoRepeatedUnits(file)) return false;
+        if (!CheckIfThereAreMaxTwoSkillsPerUnit(file)) return false;
+        if (!CheckIfThereAreNoRepeatedSkills(file)) return false;
         return true;
     }
     
@@ -87,7 +31,7 @@ public class UsefulFunctions
         return true;
     }
         
-    public static bool CheckIfThereAreMaximumThreeUnitsPerTeam(string file)
+    private static bool CheckIfThereAreMaximumThreeUnitsPerTeam(string file)
     {
         int[] unitsCounter = new int[] {0, 0};
         int curentPlayer = 0; 
@@ -104,6 +48,72 @@ public class UsefulFunctions
         return true;
     }
     
+    public static bool CheckIfThereAreNoRepeatedUnits(string file)
+    {
+        int[] unitCounter = new int[] {0, 0};
+        int currentPlayer = 0; 
+        string[][] units = new string[][] { new string[] { "", "", "" }, new string[] { "", "", "" } };
+        foreach (string line in File.ReadAllLines(file))
+        {
+            if (line == "Player 1 Team") currentPlayer = 0;
+            else if (line == "Player 2 Team") currentPlayer = 1;
+            else
+            {
+                string[] arraWithUnitsInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                string unitName = arraWithUnitsInfo[0]; 
+                if(units[currentPlayer].Contains(unitName)) return false;
+                // revisar
+                units[currentPlayer][unitCounter[currentPlayer]] = unitName;
+                unitCounter[currentPlayer]++;
+            }
+        }
+        return true;
+    }
+    
+    public static bool CheckIfThereAreMaxTwoSkillsPerUnit(string file)
+    {
+        foreach (string line in File.ReadAllLines(file))
+        {
+            if (ContainsSkills(line))
+            {
+                string[] listWithUnitsInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] listWithSkillsInfo = listWithUnitsInfo[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (listWithSkillsInfo.Length> 2)return false; 
+            }
+        }
+        return true;
+    }
+    
+    public static bool CheckIfThereAreNoRepeatedSkills(string file)
+    {
+        foreach (string line in File.ReadAllLines(file))
+        {
+            if (ContainsTwoSkills(line))
+            {
+                string[] listWithUnitsInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] listWithSkillsInfo = listWithUnitsInfo[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (listWithSkillsInfo[0] == listWithSkillsInfo[1]) return false;
+            }
+        }
+        return true;
+    }
+
+    private static bool ContainsSkills(string line)
+    {
+        return line != "Player 1 Team" && line != "Player 2 Team" && line.Contains('(');
+    }
+    private static bool ContainsTwoSkills(string line)
+    {
+        if (ContainsSkills(line)) 
+        {   
+            string[] listWithUnitsInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] listWithSkillsInfo = listWithUnitsInfo[1].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return  listWithSkillsInfo.Length == 2;
+        }   
+        return false;
+    }
+
+
     public static GameAttacksController BuildGameController(string archivo, View view)
     {
         int[] contadores_unidades = new int[2];
