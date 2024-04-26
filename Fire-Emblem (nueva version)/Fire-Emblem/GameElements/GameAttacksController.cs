@@ -154,14 +154,14 @@ public class GameAttacksController
     {
         foreach (Skill habilidad in _currentAttackingUnit.skills)
         {
-            habilidad.AplicarHabilidades(_currentAttackingUnit, _currentDefensiveUnit, true);
+            habilidad.ApplySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
         }
     }
     private void ActivateDefensorsUnitSkills()
     {
         foreach (Skill habilidad in _currentDefensiveUnit.skills)
         {
-            habilidad.AplicarHabilidades(_currentDefensiveUnit, _currentAttackingUnit, false);
+            habilidad.ApplySkills(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
     }
 
