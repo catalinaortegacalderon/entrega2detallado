@@ -111,7 +111,6 @@ public class UsefulFunctions
         var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);
         CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
         var firstPlayer = CreatePlayers(unitCounters, units, out var secondPlayer);
-        //GameAttacksController newGameAttacksController = new GameAttacksController(firstPlayer, secondPlayer);
         return new GameAttacksController(firstPlayer, secondPlayer);
     }
 
