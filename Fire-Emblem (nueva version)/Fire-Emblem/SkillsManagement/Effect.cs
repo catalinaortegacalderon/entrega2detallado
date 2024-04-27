@@ -35,11 +35,11 @@ public class ChangeHpIn : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        if (!myUnit.ActiveBonus.hpBonusActivated)
+        if (!myUnit.ActiveBonus.HpBonusActivated)
         {
             myUnit.CurrentHp = myUnit.CurrentHp + this.Amount; 
             myUnit.HpMax = myUnit.HpMax + this.Amount;
-            myUnit.ActiveBonus.hpBonusActivated = true;
+            myUnit.ActiveBonus.HpBonusActivated = true;
         }
     }
 }
@@ -55,7 +55,7 @@ public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
         int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * 0.5));
-        opponentsUnit.ActivePenalties.defFirstAttack  -= reduction;
+        opponentsUnit.ActivePenalties.DefFirstAttack  -= reduction;
     }
 }
 
@@ -70,7 +70,7 @@ public class ReduceRivalsResInPercentajeForFirstAttack : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
         int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Res * 0.5));
-        opponentsUnit.ActivePenalties.resFirstAttack  -= reduction;
+        opponentsUnit.ActivePenalties.ResFirstAttack  -= reduction;
     }
 }
 
@@ -79,12 +79,12 @@ public class NeutralizeOponentsBonus : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        opponentsUnit.ActiveBonusNeutralization.attk = 0;
-        opponentsUnit.ActiveBonusNeutralization.atkFollowup = 0; 
-        opponentsUnit.ActiveBonusNeutralization.atkFirstAttack = 0; 
-        opponentsUnit.ActiveBonusNeutralization.spd = 0; 
-        opponentsUnit.ActiveBonusNeutralization.def = 0; 
-        opponentsUnit.ActiveBonusNeutralization.res = 0;
+        opponentsUnit.ActiveBonusNeutralization.Attk = 0;
+        opponentsUnit.ActiveBonusNeutralization.AtkFollowup = 0; 
+        opponentsUnit.ActiveBonusNeutralization.AtkFirstAttack = 0; 
+        opponentsUnit.ActiveBonusNeutralization.Spd = 0; 
+        opponentsUnit.ActiveBonusNeutralization.Def = 0; 
+        opponentsUnit.ActiveBonusNeutralization.Res = 0;
     }
 }
 
@@ -93,10 +93,10 @@ public class NeutralizePenalties : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        myUnit.ActivePenaltiesNeutralization.attk = 0;
-        myUnit.ActivePenaltiesNeutralization.spd = 0;
-        myUnit.ActivePenaltiesNeutralization.def = 0;
-        myUnit.ActivePenaltiesNeutralization.res = 0;
+        myUnit.ActivePenaltiesNeutralization.Attk = 0;
+        myUnit.ActivePenaltiesNeutralization.Spd = 0;
+        myUnit.ActivePenaltiesNeutralization.Def = 0;
+        myUnit.ActivePenaltiesNeutralization.Res = 0;
     }
 }
 
@@ -113,23 +113,23 @@ public class ChangeStatsIn : Effect
     {
         if (_stat == "Atk")
         {
-            if ( Amount > 0) myUnit.ActiveBonus.attk  = myUnit.ActiveBonus.attk + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.attk  = myUnit.ActivePenalties.attk + this.Amount;
+            if ( Amount > 0) myUnit.ActiveBonus.Attk  = myUnit.ActiveBonus.Attk + this.Amount;
+            if ( Amount < 0) myUnit.ActivePenalties.Attk  = myUnit.ActivePenalties.Attk + this.Amount;
         }
         else if (_stat == "Def")
         {
-            if ( Amount > 0) myUnit.ActiveBonus.def  = myUnit.ActiveBonus.def + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.def  = myUnit.ActivePenalties.def + this.Amount;
+            if ( Amount > 0) myUnit.ActiveBonus.Def  = myUnit.ActiveBonus.Def + this.Amount;
+            if ( Amount < 0) myUnit.ActivePenalties.Def  = myUnit.ActivePenalties.Def + this.Amount;
         }
         else if (_stat == "Res")
         {
-            if ( Amount > 0) myUnit.ActiveBonus.res  = myUnit.ActiveBonus.res + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.res  = myUnit.ActivePenalties.res + this.Amount;
+            if ( Amount > 0) myUnit.ActiveBonus.Res  = myUnit.ActiveBonus.Res + this.Amount;
+            if ( Amount < 0) myUnit.ActivePenalties.Res  = myUnit.ActivePenalties.Res + this.Amount;
         }
         else if (_stat == "Spd")
         {
-            if ( Amount > 0) myUnit.ActiveBonus.spd  = myUnit.ActiveBonus.spd + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.spd  = myUnit.ActivePenalties.spd + this.Amount;
+            if ( Amount > 0) myUnit.ActiveBonus.Spd  = myUnit.ActiveBonus.Spd + this.Amount;
+            if ( Amount < 0) myUnit.ActivePenalties.Spd  = myUnit.ActivePenalties.Spd + this.Amount;
         }
     }
 }
@@ -148,23 +148,23 @@ public class ChangeRivalsStatsIn : Effect
     {
         if (stat == "Atk")
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.attk  = opponentsUnit.ActiveBonus.attk + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.attk  = opponentsUnit.ActivePenalties.attk + this.Amount;
+            if ( Amount > 0) opponentsUnit.ActiveBonus.Attk  = opponentsUnit.ActiveBonus.Attk + this.Amount;
+            if ( Amount < 0) opponentsUnit.ActivePenalties.Attk  = opponentsUnit.ActivePenalties.Attk + this.Amount;
         }
         else if (stat == "Def")
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.def  = opponentsUnit.ActiveBonus.def + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.def  = opponentsUnit.ActivePenalties.def + this.Amount;
+            if ( Amount > 0) opponentsUnit.ActiveBonus.Def  = opponentsUnit.ActiveBonus.Def + this.Amount;
+            if ( Amount < 0) opponentsUnit.ActivePenalties.Def  = opponentsUnit.ActivePenalties.Def + this.Amount;
         }
         else if (stat == "Res")
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.res  = opponentsUnit.ActiveBonus.res + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.res  = opponentsUnit.ActivePenalties.res + this.Amount;
+            if ( Amount > 0) opponentsUnit.ActiveBonus.Res  = opponentsUnit.ActiveBonus.Res + this.Amount;
+            if ( Amount < 0) opponentsUnit.ActivePenalties.Res  = opponentsUnit.ActivePenalties.Res + this.Amount;
         }
         else if (stat == "Spd")
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.spd  = opponentsUnit.ActiveBonus.spd + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.spd  = opponentsUnit.ActivePenalties.spd + this.Amount;
+            if ( Amount > 0) opponentsUnit.ActiveBonus.Spd  = opponentsUnit.ActiveBonus.Spd + this.Amount;
+            if ( Amount < 0) opponentsUnit.ActivePenalties.Spd  = opponentsUnit.ActivePenalties.Spd + this.Amount;
         }
     }
 }
@@ -179,10 +179,10 @@ public class NeutralizeOneOfOponentsBonus : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        if (stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.attk  = 0;
-        else if (stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.def = 0;
-        else if (stat == "Res" ) opponentsUnit.ActiveBonusNeutralization.res = 0;
-        else if (stat == "Spd" ) opponentsUnit.ActiveBonusNeutralization.spd = 0;
+        if (stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
+        else if (stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
+        else if (stat == "Res" ) opponentsUnit.ActiveBonusNeutralization.Res = 0;
+        else if (stat == "Spd" ) opponentsUnit.ActiveBonusNeutralization.Spd = 0;
     }
 }
 
@@ -202,23 +202,23 @@ public class ChangeStatInPercentaje : Effect
         if (stat == "Atk")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this.percentaje));
-            myUnit.ActiveBonus.attk  += Amount;
+            myUnit.ActiveBonus.Attk  += Amount;
             
         }
         else if (stat == "Def")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Def * this.percentaje));
-            myUnit.ActiveBonus.def += Amount;
+            myUnit.ActiveBonus.Def += Amount;
         }
         else if (stat == "Res")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Res * this.percentaje));
-            myUnit.ActiveBonus.res += Amount;
+            myUnit.ActiveBonus.Res += Amount;
         }
         else if (stat == "Spd")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Spd * this.percentaje));
-            myUnit.ActiveBonus.spd += Amount;
+            myUnit.ActiveBonus.Spd += Amount;
         }
     }
 }
@@ -240,7 +240,7 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
         if (Stat == "Atk")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this._percentage));
-            myUnit.ActiveBonus.atkFirstAttack  += Amount;
+            myUnit.ActiveBonus.AtkFirstAttack  += Amount;
         }
     }
 }
@@ -263,7 +263,7 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
         {
             double division = (myUnit.Spd / _divisor);
             Amount = Convert.ToInt32(Math.Truncate(division));
-            myUnit.ActiveBonus.spd += (Amount + _baseIncrease);
+            myUnit.ActiveBonus.Spd += (Amount + _baseIncrease);
         }
     }
 }
@@ -275,8 +275,8 @@ public class WrathEffect : Effect
     {
         int amount = myUnit.HpMax - myUnit.CurrentHp;
         if (amount > 30) amount = 30;
-        myUnit.ActiveBonus.attk += amount;
-        myUnit.ActiveBonus.spd += amount;
+        myUnit.ActiveBonus.Attk += amount;
+        myUnit.ActiveBonus.Spd += amount;
     }
 }
 
@@ -289,15 +289,15 @@ public class SoulbladeEffect : Effect
         int refDesAverageInt = Convert.ToInt32(Math.Truncate(refDesAverage));
         int defChange = refDesAverageInt - opponentsUnit.Def;
         int resChange = refDesAverageInt - opponentsUnit.Res;
-        if (defChange < 0) opponentsUnit.ActivePenalties.def += defChange;
+        if (defChange < 0) opponentsUnit.ActivePenalties.Def += defChange;
         else
         {
-            opponentsUnit.ActiveBonus.def += defChange;
+            opponentsUnit.ActiveBonus.Def += defChange;
         }    
-        if (resChange < 0) opponentsUnit.ActivePenalties.res += resChange;
+        if (resChange < 0) opponentsUnit.ActivePenalties.Res += resChange;
         else
         {
-            opponentsUnit.ActiveBonus.res += resChange;
+            opponentsUnit.ActiveBonus.Res += resChange;
         }
         
     }
@@ -309,10 +309,10 @@ public class SandstormEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
         int amount = Convert.ToInt32(Math.Truncate(1.5 * myUnit.Def)) - ((myUnit.Atk));
-        if (amount < 0) myUnit.ActivePenalties.atkFollowup += amount;
+        if (amount < 0) myUnit.ActivePenalties.AtkFollowup += amount;
         else
         {
-            myUnit.ActiveBonus.atkFollowup += amount;
+            myUnit.ActiveBonus.AtkFollowup += amount;
         }
     }
 }

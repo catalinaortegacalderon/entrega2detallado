@@ -173,11 +173,11 @@ public class UsefulFunctions
 
     private static void CreateSkills( Unit[][] unitsList, int currentPlayer, int[] unitCounters, string[] listOfSkillNames)
     {
-        int contador_habilidades = 0;
+        int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            SkillConstructor.Construct(unitsList, currentPlayer, unitCounters, skillName, contador_habilidades);
-            contador_habilidades++;
+            SkillConstructor.Construct(unitsList, currentPlayer, unitCounters, skillName, skillsCounter);
+            skillsCounter++;
         }
     }
     

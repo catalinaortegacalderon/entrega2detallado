@@ -5,41 +5,41 @@ public class SkillsPrinter
 {
     public static void PrintBonus(View view, Unit unit)
     {
-        if (unit.ActiveBonus.attk > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.attk);
-        if (unit.ActiveBonus.spd > 0) view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.spd);
-        if (unit.ActiveBonus.def > 0) view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.def);
-        if (unit.ActiveBonus.res > 0) view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.res);
-        if (unit.ActiveBonus.atkFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.atkFirstAttack + " en su primer ataque");
-        if (unit.ActiveBonus.defFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.defFirstAttack + " en su primer ataque");
-        if (unit.ActiveBonus.resFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.resFirstAttack + " en su primer ataque");
-        if (unit.ActiveBonus.atkFollowup > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.atkFollowup + " en su Follow-Up");
+        if (unit.ActiveBonus.Attk > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.Attk);
+        if (unit.ActiveBonus.Spd > 0) view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.Spd);
+        if (unit.ActiveBonus.Def > 0) view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.Def);
+        if (unit.ActiveBonus.Res > 0) view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.Res);
+        if (unit.ActiveBonus.AtkFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.AtkFirstAttack + " en su primer ataque");
+        if (unit.ActiveBonus.DefFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.DefFirstAttack + " en su primer ataque");
+        if (unit.ActiveBonus.ResFirstAttack > 0) view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.ResFirstAttack + " en su primer ataque");
+        if (unit.ActiveBonus.AtkFollowup > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.AtkFollowup + " en su Follow-Up");
     }
     
     public static void PrintPenalties(View view, Unit unit)
     {
-        if (unit.ActivePenalties.attk < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.attk);
-        if (unit.ActivePenalties.spd < 0) view.WriteLine(unit.Name + " obtiene Spd" + unit.ActivePenalties.spd);
-        if (unit.ActivePenalties.def < 0) view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.def);
-        if (unit.ActivePenalties.res < 0) view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.res);
-        if (unit.ActivePenalties.atkFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.atkFirstAttack + " en su primer ataque");
-        if (unit.ActivePenalties.defFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.defFirstAttack + " en su primer ataque");
-        if (unit.ActivePenalties.resFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.resFirstAttack + " en su primer ataque");
-        if (unit.ActivePenalties.atkFollowup < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.atkFollowup + " en su Follow-Up");
+        if (unit.ActivePenalties.Attk < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.Attk);
+        if (unit.ActivePenalties.Spd < 0) view.WriteLine(unit.Name + " obtiene Spd" + unit.ActivePenalties.Spd);
+        if (unit.ActivePenalties.Def < 0) view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.Def);
+        if (unit.ActivePenalties.Res < 0) view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.Res);
+        if (unit.ActivePenalties.AtkFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.AtkFirstAttack + " en su primer ataque");
+        if (unit.ActivePenalties.DefFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Def" + unit.ActivePenalties.DefFirstAttack + " en su primer ataque");
+        if (unit.ActivePenalties.ResFirstAttack < 0) view.WriteLine(unit.Name + " obtiene Res" + unit.ActivePenalties.ResFirstAttack + " en su primer ataque");
+        if (unit.ActivePenalties.AtkFollowup < 0) view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.AtkFollowup + " en su Follow-Up");
     }
     
     public static void PrintBonusNetralization(View view, Unit unit)
     {
-        if (unit.ActiveBonusNeutralization.attk == 0) view.WriteLine("Los bonus de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralization.spd == 0) view.WriteLine("Los bonus de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralization.def == 0) view.WriteLine("Los bonus de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralization.res == 0) view.WriteLine("Los bonus de Res de " + unit.Name + " fueron neutralizados");
+        if (unit.ActiveBonusNeutralization.Attk == 0) view.WriteLine("Los bonus de Atk de " + unit.Name + " fueron neutralizados");
+        if (unit.ActiveBonusNeutralization.Spd == 0) view.WriteLine("Los bonus de Spd de " + unit.Name + " fueron neutralizados");
+        if (unit.ActiveBonusNeutralization.Def == 0) view.WriteLine("Los bonus de Def de " + unit.Name + " fueron neutralizados");
+        if (unit.ActiveBonusNeutralization.Res == 0) view.WriteLine("Los bonus de Res de " + unit.Name + " fueron neutralizados");
     }
     
     public static void PrintPenaltyNetralization(View view, Unit unit)
     {
-        if (unit.ActivePenaltiesNeutralization.attk == 0) view.WriteLine("Los penalty de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralization.spd == 0) view.WriteLine("Los penalty de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralization.def == 0) view.WriteLine("Los penalty de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralization.res == 0) view.WriteLine("Los penalty de Res de " + unit.Name + " fueron neutralizados");
+        if (unit.ActivePenaltiesNeutralization.Attk == 0) view.WriteLine("Los penalty de Atk de " + unit.Name + " fueron neutralizados");
+        if (unit.ActivePenaltiesNeutralization.Spd == 0) view.WriteLine("Los penalty de Spd de " + unit.Name + " fueron neutralizados");
+        if (unit.ActivePenaltiesNeutralization.Def == 0) view.WriteLine("Los penalty de Def de " + unit.Name + " fueron neutralizados");
+        if (unit.ActivePenaltiesNeutralization.Res == 0) view.WriteLine("Los penalty de Res de " + unit.Name + " fueron neutralizados");
     }
 }
