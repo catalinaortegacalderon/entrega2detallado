@@ -108,7 +108,7 @@ public class Game
     {
         string playerNumberString  = (_gameAttacksController.GetCurrentAttacker() == 0) ? "1" :  "2";
         int numberOfThePlayersUnit  = (_gameAttacksController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _view.WriteLine("Round " + _currentRound + ": " + _gameAttacksController.Players[_gameAttacksController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
+        _view.WriteLine("Round " + _currentRound + ": " + _gameAttacksController.GetPlayers()[_gameAttacksController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
     }
 
     private int AskAPlayerForTheChosenUnit(int playerNumber)
@@ -122,7 +122,7 @@ public class Game
         int unitNumberCounter = 0;
         string playerNumberString  = (playerNumber == 0) ? "1" :  "2";
         _view.WriteLine("Player "+ playerNumberString+ " selecciona una opción");
-        foreach (Unit unit in _gameAttacksController.Players[playerNumber].Units)
+        foreach (Unit unit in _gameAttacksController.GetPlayers()[playerNumber].Units)
         {
             if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
             unitNumberCounter++;
@@ -150,23 +150,23 @@ public class Game
     private bool FirstPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
-               _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Spd 
-               + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-               +_gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
+               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
+               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
+               _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
+               + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
+               +_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
     }
 
     private bool SecondPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
-               5 + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Spd 
-                 + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-                 +_gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
+               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
+               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
+               5 + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
+                 + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
+                 +_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
     }
 
     private void ResetUnitsBonus()
@@ -209,23 +209,23 @@ public class Game
     {
         if (ThereAreNoLoosers())
         {
-            _view.WriteLine(_gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
-                            ") : " + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+            _view.WriteLine(_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+                            ") : " + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ")");
         }
         else if (Player1LoosesRound())
         {
             _view.WriteLine(_currentRoundsPlayer1LooserUnitsName +
-                            " (0) : " + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+                            " (0) : " + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ")");
         }
         else
         {
-            _view.WriteLine(_gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+            _view.WriteLine(_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ") : " + _currentRoundsPlayer2LooserUnitsName +
                             " (0)");
         }
@@ -235,24 +235,24 @@ public class Game
     {
         if (ThereAreNoLoosers())
         {
-            _view.WriteLine(_gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
-                            ") : " + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+            _view.WriteLine(_gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+                            ") : " + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ")");
         }
         else if (Player1LoosesRound())
         {
-            _view.WriteLine(_gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+            _view.WriteLine(_gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
+                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ") : " + _currentRoundsPlayer1LooserUnitsName +
                             " (0)");
         }
         else
         {
             _view.WriteLine(_currentRoundsPlayer2LooserUnitsName +
-                            " (0) : " + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+                            " (0) : " + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
+                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ")");
         }
     }

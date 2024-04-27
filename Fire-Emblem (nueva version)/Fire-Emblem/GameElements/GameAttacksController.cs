@@ -307,5 +307,10 @@ public class GameAttacksController
     {
         return _currentAttackingUnit.Name;
     }
+
+    public Player[] GetPlayers()
+    {
+        return this.Players;
+    }
     
 }
