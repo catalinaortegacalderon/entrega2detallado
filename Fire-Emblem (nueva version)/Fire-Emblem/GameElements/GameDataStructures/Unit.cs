@@ -15,10 +15,10 @@ public class Unit
     public int Spd;
     public int Def;
     public int Res;
-    public BonusPenaltiesAndNeutralizations ActiveBonus = new BonusPenaltiesAndNeutralizations(0);
-    public BonusPenaltiesAndNeutralizations ActivePenalties = new BonusPenaltiesAndNeutralizations(0);
-    public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = new BonusPenaltiesAndNeutralizations(1);
-    public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = new BonusPenaltiesAndNeutralizations(1);
+    public BonusPenaltiesAndNeutralizations ActiveBonus = DataStructuresFunctions.CreateStructure(0);
+    public BonusPenaltiesAndNeutralizations ActivePenalties = DataStructuresFunctions.CreateStructure(0);
+    public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = DataStructuresFunctions.CreateStructure(1);
+    public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = DataStructuresFunctions.CreateStructure(1);
     public GameLogs GameLogs = new GameLogs();
     public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
 }

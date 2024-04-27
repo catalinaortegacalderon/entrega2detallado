@@ -4,7 +4,6 @@ namespace Fire_Emblem;
 
 public class Condition
 {
-    protected string usedWeapon;
     public virtual bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
         return true;
@@ -57,26 +56,28 @@ public class RivalIniciaCombate : Condition
 
 public class UseCertainWeapon : Condition
 {
+    private string _usedWeapon;
     public UseCertainWeapon(string arma) : base()
     {
-        this.usedWeapon = arma;
+        this._usedWeapon = arma;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.Weapon == this.usedWeapon) return true;
+        if (myUnit.Weapon == this._usedWeapon) return true;
         return false;
     }
 }
 
 public class UseCertainWeaponAndStartCombat : Condition
 {
+    private string _usedWeapon;
     public UseCertainWeaponAndStartCombat(string arma) : base()
     {
-        this.usedWeapon = arma;
+        this._usedWeapon = arma;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.Weapon == this.usedWeapon && iAmAttacking) return true;
+        if (myUnit.Weapon == this._usedWeapon && iAmAttacking) return true;
         return false;
     }
 }
