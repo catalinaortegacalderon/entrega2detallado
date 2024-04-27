@@ -182,13 +182,7 @@ public class Game
 
     private void UpdateAttacks()
     {
-        if (ThereAreNoLoosers())
-        {
-            _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
-            _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
-        }
-        else if (Player1LoosesRound()) _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
-        else if (Player2LoosesRound()) _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
+        _gameAttacksController.UpdateAttacks();
     }
 
     private bool Player2LoosesRound()
@@ -208,15 +202,9 @@ public class Game
 
     private void UpdateLastOponent()
     {
-        if (ThereAreNoLoosers())
-        {
-            _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.LastOpponentName = _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name;
-            _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.LastOpponentName = _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name;
-        }
-        else if (Player1LoosesRound()) _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.LastOpponentName = _currentRoundsPlayer1LooserUnitsName;
-        else if (Player2LoosesRound()) _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.LastOpponentName = _currentRoundsPlayer2LooserUnitsName;
+        _gameAttacksController.UpdateLastOpponents();
     }
-    
+
     private void ShowLeftoverHpPrintingPlayer1First()
     {
         if (ThereAreNoLoosers())

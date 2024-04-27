@@ -290,4 +290,17 @@ public class GameAttacksController
     {
         this._currentAttacker = value;
     }
+
+    public void UpdateAttacks()
+    {
+        _currentAttackingUnit.GameLogs.AmountOfAttacks = 0;
+        _currentDefensiveUnit.GameLogs.AmountOfAttacks = 0;
+    }
+    
+    public void UpdateLastOpponents()
+    {
+        _currentAttackingUnit.GameLogs.LastOpponentName = _currentDefensiveUnit.Name;
+        _currentDefensiveUnit.GameLogs.LastOpponentName = _currentAttackingUnit.Name;
+    }
+    
 }
