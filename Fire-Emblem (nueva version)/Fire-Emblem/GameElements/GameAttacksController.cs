@@ -6,7 +6,6 @@ public class GameAttacksController
     public Player[] players = new Player[2];
     public int currentAttacker;
     private bool _gameIsTerminated;
-    public int currentRound = 1;
     private int _winner = -1;
     private bool _roundIsTerminated = false;
     private Unit _currentAttackingUnit;
@@ -290,6 +289,15 @@ public class GameAttacksController
     {
         return this._winner + 1;
     }
+
+    public int GetCurrentAttacker()
+    {
+        return this.currentAttacker;
+    }
     
+    public void SetCurrentAttacker(int value)
+    {
+        this.currentAttacker = value;
+    }
 
 }

@@ -36,8 +36,8 @@ public class Game
     private void PlayOneRound()
     {
         SetRoundsParameters();
-        if (_gameAttacksController.currentAttacker == 0) Player1StartsRound();
-        else if (_gameAttacksController.currentAttacker == 1) Player2StartsRound();
+        if (_gameAttacksController.GetCurrentAttacker() == 0) Player1StartsRound();
+        else if (_gameAttacksController.GetCurrentAttacker() == 1) Player2StartsRound();
         _currentRound++;
     }
 
@@ -53,18 +53,18 @@ public class Game
         AskBothPlayersForTheChosenUnit();
         PrintRound();
         _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _gameAttacksController.currentAttacker = 1;
+        _gameAttacksController.SetCurrentAttacker(1);
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer1First();
         UpdateGameLogs();
-        _gameAttacksController.currentAttacker = 1;
+        _gameAttacksController.SetCurrentAttacker(1);
     }
 
     private void AskBothPlayersForTheChosenUnit()
     {
-        if (_gameAttacksController.currentAttacker == 0)
+        if (_gameAttacksController.GetCurrentAttacker() == 0)
         {
             _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
             _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
@@ -81,13 +81,13 @@ public class Game
         AskBothPlayersForTheChosenUnit();
         PrintRound();
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _gameAttacksController.currentAttacker = 0;
+        _gameAttacksController.SetCurrentAttacker(0);
         _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer2First();
         UpdateGameLogs();
-        _gameAttacksController.currentAttacker = 0;
+        _gameAttacksController.SetCurrentAttacker(0);
     }
 
     private bool VerifyIfTeamsAreValid(out string[] files, out int fileNumberInput)
@@ -111,9 +111,9 @@ public class Game
 
     private void PrintRound()
     {
-        string playerNumberString  = (_gameAttacksController.currentAttacker == 0) ? "1" :  "2";
-        int numberOfThePlayersUnit  = (_gameAttacksController.currentAttacker == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _view.WriteLine("Round " + _currentRound + ": " + _gameAttacksController.players[_gameAttacksController.currentAttacker].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
+        string playerNumberString  = (_gameAttacksController.GetCurrentAttacker() == 0) ? "1" :  "2";
+        int numberOfThePlayersUnit  = (_gameAttacksController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
+        _view.WriteLine("Round " + _currentRound + ": " + _gameAttacksController.players[_gameAttacksController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
     }
 
     private int AskAPlayerForTheChosenUnit(int playerNumber)
@@ -138,12 +138,12 @@ public class Game
     {
         if (SecondPlayerCanDoAFollowup())
         {
-            _gameAttacksController.currentAttacker = 1;
+            _gameAttacksController.SetCurrentAttacker(1);
             _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (FirstPlayerCanDoAFollowup())
         {
-            _gameAttacksController.currentAttacker = 0;
+            _gameAttacksController.SetCurrentAttacker(0);
             _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
