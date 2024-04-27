@@ -13,10 +13,7 @@ public class Game
     private int _currentUnitNumberOfPlayer2;
     private int _currentRound;
     // arreglos: ENCADENAMIENTO, ACCEDER A MUCHAS COSAS A UN NIVEL MUCHO MAS ABAJO, revisar largo funcion
-    // SACAR QUE FUNCIONES RETORNEN PERDEDOR, tal vez atributo desaparezca
-    // eliminar comentario ataque y contraataque, ver como hacer mas evidente
-    // ideas: private Printer printer (clase impresora), hacer solo 1 funcion para mostrar hp, hacer funcion para cambiar current player
-    // separar play en jugador1jugando y jugador2jugando, ver si se puede hacer esto en 1 funcion, creo q si
+    // SACAR QUE FUNCIONES RETORNEN PERDEDOR, tal vez atributo desaparezcae
     
     public Game(View view, string teamsFolder)
     {
@@ -61,6 +58,20 @@ public class Game
         UpdateGameLogs();
         _gameAttacksController.SetCurrentAttacker(1);
     }
+    
+    private void Player2StartsRound()
+    {
+        AskBothPlayersForTheChosenUnit();
+        PrintRound();
+        _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _gameAttacksController.SetCurrentAttacker(0);
+        _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        Followup();
+        ResetUnitsBonus();
+        ShowLeftoverHpPrintingPlayer2First();
+        UpdateGameLogs();
+        _gameAttacksController.SetCurrentAttacker(0);
+    }
 
     private void AskBothPlayersForTheChosenUnit()
     {
@@ -74,20 +85,6 @@ public class Game
             _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
             _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
         }
-    }
-
-    private void Player2StartsRound()
-    {
-        AskBothPlayersForTheChosenUnit();
-        PrintRound();
-        _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _gameAttacksController.SetCurrentAttacker(0);
-        _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        Followup();
-        ResetUnitsBonus();
-        ShowLeftoverHpPrintingPlayer2First();
-        UpdateGameLogs();
-        _gameAttacksController.SetCurrentAttacker(0);
     }
 
     private bool VerifyIfTeamsAreValid(out string[] files, out int fileNumberInput)

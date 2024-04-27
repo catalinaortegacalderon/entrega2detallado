@@ -2,10 +2,10 @@ namespace Fire_Emblem;
 
 public class SkillConstructor
 {
-    public static void Construct(Unit[][] units, int currentPlayerNumber, int[] contadores_unidades,
+    public static void Construct(Unit[][] units, int currentPlayerNumber, int[] unitCounters,
         string skillString, int skillsCounter)
     {
-        Skill[] skills = units[currentPlayerNumber][contadores_unidades[currentPlayerNumber]].Skills;
+        Skill[] skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
         if (skillString == "HP +15")
         {
             skills[skillsCounter] = new HpPlus15();

@@ -9,10 +9,6 @@ namespace Fire_Emblem;
         protected Condition[] Conditions;
         protected Effect[] Effects;
 
-        public Skill()
-        {
-        }
-
         public void ApplySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
         {
             if (this.Conditions.Length == 0) return;
@@ -32,10 +28,6 @@ namespace Fire_Emblem;
         {
             this.Conditions = new Condition[] { new AlwaysTrue() };
             this.Effects = new Effect[] { new EmptyEffect() };
-        }
-        public void AplicarHabilidades(Unit myUnit, Unit opponentsUnit, bool attacking)
-        {
-            return;
         }
     }
 
