@@ -209,23 +209,23 @@ public class Game
     {
         if (ThereAreNoLoosers())
         {
-            _view.WriteLine(_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
-                            ") : " + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+            _view.WriteLine(GetPlayersName(0) +
+                            " (" + GetPlayersHp(0) +
+                            ") : " + GetPlayersName(1) +
+                            " (" + GetPlayersHp(1) +
                             ")");
         }
         else if (Player1LoosesRound())
         {
             _view.WriteLine(_currentRoundsPlayer1LooserUnitsName +
-                            " (0) : " + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+                            " (0) : " + GetPlayersName(1) +
+                            " (" + GetPlayersHp(1) +
                             ")");
         }
         else
         {
-            _view.WriteLine(_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+            _view.WriteLine(GetPlayersName(0) +
+                            " (" + GetPlayersHp(0) +
                             ") : " + _currentRoundsPlayer2LooserUnitsName +
                             " (0)");
         }
@@ -235,25 +235,47 @@ public class Game
     {
         if (ThereAreNoLoosers())
         {
-            _view.WriteLine(_gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
-                            ") : " + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+            _view.WriteLine(GetPlayersName(1) +
+                            " (" + GetPlayersHp(1) +
+                            ") : " + GetPlayersName(0) +
+                            " (" + GetPlayersHp(0) +
                             ")");
         }
         else if (Player1LoosesRound())
         {
-            _view.WriteLine(_gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Name +
-                            " (" + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
+            _view.WriteLine(GetPlayersName(1) +
+                            " (" + GetPlayersHp(1) +
                             ") : " + _currentRoundsPlayer1LooserUnitsName +
                             " (0)");
         }
         else
         {
             _view.WriteLine(_currentRoundsPlayer2LooserUnitsName +
-                            " (0) : " + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Name +
-                            " (" + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
+                            " (0) : " + GetPlayersName(0) +
+                            " (" + GetPlayersHp(0) +
                             ")");
         }
+    }
+
+    private string GetPlayersName(int player)
+    {
+        int unitNumber;
+        if (player == 0) unitNumber = _currentUnitNumberOfPlayer1;
+        else
+        {
+            unitNumber = _currentUnitNumberOfPlayer2;
+        }
+        return _gameAttacksController.GetPlayers()[player].Units[unitNumber].Name;
+    }
+    
+    private int GetPlayersHp(int player)
+    {
+        int unitNumber;
+        if (player == 0) unitNumber = _currentUnitNumberOfPlayer1;
+        else
+        {
+            unitNumber = _currentUnitNumberOfPlayer2;
+        }
+        return _gameAttacksController.GetPlayers()[player].Units[unitNumber].CurrentHp;
     }
 }
