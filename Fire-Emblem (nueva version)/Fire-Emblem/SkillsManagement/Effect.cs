@@ -46,30 +46,30 @@ public class ChangeHpIn : Effect
 
 public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
 {
-    private double reductionPercentaje;
+    private double _reductionPercentaje;
     public ReduceRivalsDefInPercentajeForFirstAttack(double reduction) : base()
     {
-        this.reductionPercentaje = reduction;
+        this._reductionPercentaje = reduction;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * 0.5));
+        int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * _reductionPercentaje));
         opponentsUnit.ActivePenalties.DefFirstAttack  -= reduction;
     }
 }
 
-public class ReduceRivalsResInPercentajeForFirstAttack : Effect
+public class ReduceRivalsResInPercentageForFirstAttack : Effect
 {
-    private double reductionPercentaje;
-    public ReduceRivalsResInPercentajeForFirstAttack(double reduction) : base()
+    private double _reductionPercentage;
+    public ReduceRivalsResInPercentageForFirstAttack(double reduction) : base()
     {
-        this.reductionPercentaje = reduction;
+        this._reductionPercentage = reduction;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Res * 0.5));
+        int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Res * _reductionPercentage));
         opponentsUnit.ActivePenalties.ResFirstAttack  -= reduction;
     }
 }
@@ -137,31 +137,31 @@ public class ChangeStatsIn : Effect
 
 public class ChangeRivalsStatsIn : Effect
 {
-    private String stat;
+    private String _stat;
     public ChangeRivalsStatsIn(String stat, int amount) : base()
     {
         this.Amount = amount;
-        this.stat = stat;
+        this._stat = stat;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        if (stat == "Atk")
+        if (_stat == "Atk")
         {
             if ( Amount > 0) opponentsUnit.ActiveBonus.Attk  = opponentsUnit.ActiveBonus.Attk + this.Amount;
             if ( Amount < 0) opponentsUnit.ActivePenalties.Attk  = opponentsUnit.ActivePenalties.Attk + this.Amount;
         }
-        else if (stat == "Def")
+        else if (_stat == "Def")
         {
             if ( Amount > 0) opponentsUnit.ActiveBonus.Def  = opponentsUnit.ActiveBonus.Def + this.Amount;
             if ( Amount < 0) opponentsUnit.ActivePenalties.Def  = opponentsUnit.ActivePenalties.Def + this.Amount;
         }
-        else if (stat == "Res")
+        else if (_stat == "Res")
         {
             if ( Amount > 0) opponentsUnit.ActiveBonus.Res  = opponentsUnit.ActiveBonus.Res + this.Amount;
             if ( Amount < 0) opponentsUnit.ActivePenalties.Res  = opponentsUnit.ActivePenalties.Res + this.Amount;
         }
-        else if (stat == "Spd")
+        else if (_stat == "Spd")
         {
             if ( Amount > 0) opponentsUnit.ActiveBonus.Spd  = opponentsUnit.ActiveBonus.Spd + this.Amount;
             if ( Amount < 0) opponentsUnit.ActivePenalties.Spd  = opponentsUnit.ActivePenalties.Spd + this.Amount;
@@ -169,75 +169,37 @@ public class ChangeRivalsStatsIn : Effect
     }
 }
 
-public class NeutralizeOneOfOponentsBonus : Effect
+public class NeutralizeOneOfOpponentsBonus : Effect
 {
-    private String stat;
-    public NeutralizeOneOfOponentsBonus(String stat) : base()
+    private String _stat;
+    public NeutralizeOneOfOpponentsBonus(String stat) : base()
     {
-        this.stat = stat;
+        this._stat = stat;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        if (stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
-        else if (stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
-        else if (stat == "Res" ) opponentsUnit.ActiveBonusNeutralization.Res = 0;
-        else if (stat == "Spd" ) opponentsUnit.ActiveBonusNeutralization.Spd = 0;
-    }
-}
-
-public class ChangeStatInPercentaje : Effect
-{
-    private String stat;
-    private double percentaje;
-    public ChangeStatInPercentaje(String stat, Double percentaje) : base()
-    {
-        this.stat = stat;
-        this.percentaje = percentaje;
-    }
-
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
-    {
-        Amount = 0;
-        if (stat == "Atk")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this.percentaje));
-            myUnit.ActiveBonus.Attk  += Amount;
-            
-        }
-        else if (stat == "Def")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Def * this.percentaje));
-            myUnit.ActiveBonus.Def += Amount;
-        }
-        else if (stat == "Res")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Res * this.percentaje));
-            myUnit.ActiveBonus.Res += Amount;
-        }
-        else if (stat == "Spd")
-        {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Spd * this.percentaje));
-            myUnit.ActiveBonus.Spd += Amount;
-        }
+        if (_stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
+        else if (_stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
+        else if (_stat == "Res" ) opponentsUnit.ActiveBonusNeutralization.Res = 0;
+        else if (_stat == "Spd" ) opponentsUnit.ActiveBonusNeutralization.Spd = 0;
     }
 }
 
 public class ChangeStatInPercentageOnlyForFirstAttack : Effect
 {
-    private String Stat;
+    private String _stat;
     private double _percentage;
-    // arreglar esto, solo funciona para ataque
     public ChangeStatInPercentageOnlyForFirstAttack(String stat, Double percentage) : base()
     {
-        this.Stat = stat;
+        this._stat = stat;
         this._percentage = percentage;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
         Amount = 0;
-        if (Stat == "Atk")
+        if (_stat == "Atk")
         {
             Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this._percentage));
             myUnit.ActiveBonus.AtkFirstAttack  += Amount;

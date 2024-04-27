@@ -36,7 +36,7 @@ public class OwnHpLessThan : Condition
     
 }
 
-public class UnidadIniciaCombate : Condition
+public class UnitStartsCombat : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
@@ -45,7 +45,7 @@ public class UnidadIniciaCombate : Condition
     }
 }
 
-public class RivalIniciaCombate : Condition
+public class OpponentStartsCombat : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
@@ -57,9 +57,9 @@ public class RivalIniciaCombate : Condition
 public class UseCertainWeapon : Condition
 {
     private string _usedWeapon;
-    public UseCertainWeapon(string arma) : base()
+    public UseCertainWeapon(string weapon) : base()
     {
-        this._usedWeapon = arma;
+        this._usedWeapon = weapon;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
@@ -71,9 +71,9 @@ public class UseCertainWeapon : Condition
 public class UseCertainWeaponAndStartCombat : Condition
 {
     private string _usedWeapon;
-    public UseCertainWeaponAndStartCombat(string arma) : base()
+    public UseCertainWeaponAndStartCombat(string weapon) : base()
     {
-        this._usedWeapon = arma;
+        this._usedWeapon = weapon;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
@@ -145,17 +145,7 @@ public class CurrentOponentIsAlsoTheLastOponent: Condition
     
 }
 
-public class FirstAtack: Condition
-{
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
-    {
-        if (myUnit.GameLogs.AmountOfAttacks == 0) return true;
-        return false;
-    }
-    
-}
-
-public class RivalStartCombatOrFullHP: Condition
+public class RivalStartsCombatOrHasFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
@@ -165,10 +155,10 @@ public class RivalStartCombatOrFullHP: Condition
     
 }
 
-public class OponentStartsCombatWhithWeapon: Condition
+public class OpponentStartsCombatWithCertainWeapon: Condition
 {
     private String[] _weapons;
-    public OponentStartsCombatWhithWeapon(String[] weapons) : base()
+    public OpponentStartsCombatWithCertainWeapon(String[] weapons) : base()
     {
         this._weapons = weapons;
     }
@@ -196,7 +186,3 @@ public class RivalStartsAttackOrHasHpGreaterThan : Condition
         return false;
     }
 }
-
-
-
-
