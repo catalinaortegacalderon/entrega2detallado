@@ -303,4 +303,9 @@ public class GameAttacksController
         _currentDefensiveUnit.GameLogs.LastOpponentName = _currentAttackingUnit.Name;
     }
     
+    public string GetAttackersName()
+    {
+        return _currentAttackingUnit.Name;
+    }
+    
 }
