@@ -14,9 +14,6 @@ public class GameAttacksController
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
-    
-    // arreglos: hacer variables privadas (setter y getter) (SOLO FALTA PLAYER)
-    //eliminar que se retorne el nombre del jugador
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer)
     {

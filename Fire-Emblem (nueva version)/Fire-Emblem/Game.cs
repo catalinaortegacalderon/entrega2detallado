@@ -12,8 +12,6 @@ public class Game
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
     private int _currentRound;
-    // arreglos: ENCADENAMIENTO, ACCEDER A MUCHAS COSAS A UN NIVEL MUCHO MAS ABAJO, revisar largo funcion
-    // SACAR QUE FUNCIONES RETORNEN PERDEDOR, tal vez atributo desaparezcae
     
     public Game(View view, string teamsFolder)
     {
@@ -143,7 +141,7 @@ public class Game
             _gameAttacksController.SetCurrentAttacker(0);
             _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
-        else if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        else if (ThereAreNoLoosers())
         {
             _view.WriteLine("Ninguna unidad puede hacer un follow up");
         }
@@ -151,7 +149,7 @@ public class Game
 
     private bool FirstPlayerCanDoAFollowup()
     {
-        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
+        return ThereAreNoLoosers() &&
                _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Spd 
                + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
                + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
@@ -162,7 +160,7 @@ public class Game
 
     private bool SecondPlayerCanDoAFollowup()
     {
-        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "" &&
+        return ThereAreNoLoosers() &&
                _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Spd 
                + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
                + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
@@ -184,29 +182,44 @@ public class Game
 
     private void UpdateAttacks()
     {
-        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        if (ThereAreNoLoosers())
         {
             _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
             _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
+        else if (Player1LoosesRound()) _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.AmountOfAttacks = 0;
+        else if (Player2LoosesRound()) _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.AmountOfAttacks = 0;
+    }
+
+    private bool Player2LoosesRound()
+    {
+        return _currentRoundsPlayer2LooserUnitsName != "";
+    }
+
+    private bool Player1LoosesRound()
+    {
+        return _currentRoundsPlayer1LooserUnitsName != "";
+    }
+
+    private bool ThereAreNoLoosers()
+    {
+        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "";
     }
 
     private void UpdateLastOponent()
     {
-        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        if (ThereAreNoLoosers())
         {
             _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.LastOpponentName = _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name;
             _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.LastOpponentName = _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name;
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "") _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.LastOpponentName = _currentRoundsPlayer1LooserUnitsName;
-        else if (_currentRoundsPlayer2LooserUnitsName != "") _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.LastOpponentName = _currentRoundsPlayer2LooserUnitsName;
+        else if (Player1LoosesRound()) _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].GameLogs.LastOpponentName = _currentRoundsPlayer1LooserUnitsName;
+        else if (Player2LoosesRound()) _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].GameLogs.LastOpponentName = _currentRoundsPlayer2LooserUnitsName;
     }
     
     private void ShowLeftoverHpPrintingPlayer1First()
     {
-        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        if (ThereAreNoLoosers())
         {
             _view.WriteLine(_gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].Name +
                             " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
@@ -214,7 +227,7 @@ public class Game
                             " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
                             ")");
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "")
+        else if (Player1LoosesRound())
         {
             _view.WriteLine(_currentRoundsPlayer1LooserUnitsName +
                             " (0) : " + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
@@ -232,7 +245,7 @@ public class Game
     
         private void ShowLeftoverHpPrintingPlayer2First()
     {
-        if (_currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "")
+        if (ThereAreNoLoosers())
         {
             _view.WriteLine(_gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
                             " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
@@ -240,7 +253,7 @@ public class Game
                             " (" + _gameAttacksController.Players[0].Units[_currentUnitNumberOfPlayer1].CurrentHp +
                             ")");
         }
-        else if (_currentRoundsPlayer1LooserUnitsName != "")
+        else if (Player1LoosesRound())
         {
             _view.WriteLine(_gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].Name +
                             " (" + _gameAttacksController.Players[1].Units[_currentUnitNumberOfPlayer2].CurrentHp +
