@@ -71,15 +71,14 @@ public class Game
         }
         else
         {
-            _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(1);
-            _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(0);
+            _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
+            _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
         }
     }
 
     private void Player2StartsRound()
     {
-        _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
-        _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
+        AskBothPlayersForTheChosenUnit();
         PrintRound();
         _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _gameAttacksController.currentAttacker = 0;
