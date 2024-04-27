@@ -3,6 +3,6 @@ using Fire_Emblem_View;
 using System.Collections.Generic;
 public class Player
 {
-    public int amountOfUnits;
-    public List<Unit> units = new List<Unit>(3);
+    public int AmountOfUnits;
+    public List<Unit> Units = new List<Unit>(3);
 }

@@ -117,11 +117,11 @@ public class UsefulFunctions
     private static Player CreatePlayers(int[] unitCounters, Unit[][] units, out Player jugador2)
     {
         Player jugador1 = new Player();
-        jugador1.amountOfUnits = unitCounters[0];
-        jugador1.units = units[0].ToList();
+        jugador1.AmountOfUnits = unitCounters[0];
+        jugador1.Units = units[0].ToList();
         jugador2 = new Player();
-        jugador2.amountOfUnits = unitCounters[1];
-        jugador2.units = units[1].ToList();
+        jugador2.AmountOfUnits = unitCounters[1];
+        jugador2.Units = units[1].ToList();
         return jugador1;
     }
 
@@ -188,7 +188,7 @@ public class UsefulFunctions
         unit.Gender = gender;
         unit.HpMax = maxHp;
         unit.CurrentHp = currentHp;
-        unit.Attk = attk;
+        unit.Atk = attk;
         unit.Spd = spd;
         unit.Def = def;
         unit.Res = res;

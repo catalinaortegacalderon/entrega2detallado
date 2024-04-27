@@ -5,17 +5,15 @@ public class GameAttacksController
 {
     public Player[] players = new Player[2];
     public int currentAttacker;
-    public bool gameIsTerminated;
+    private bool _gameIsTerminated;
     public int currentRound = 1;
-    public int winner = -1;
-    public bool roundIsTerminated = false;
+    private int _winner = -1;
+    private bool _roundIsTerminated = false;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
     private int _numberOfThisRoundsCurrentAttack;
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
-    public string NameOfPlayer1sLoosingUnit = "";
-    public string NameOfPlayer2sLoosingUnit = "";
     private int _attackValue;
     
     
@@ -32,12 +30,12 @@ public class GameAttacksController
         this.currentAttacker = 0;
         this.players[0] = firstPlayer;
         this.players[1] = secondPlayer;
-        this.gameIsTerminated = false;
+        this._gameIsTerminated = false;
     }
 
     public string Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
-        if (this.gameIsTerminated || this.roundIsTerminated) return "";
+        if (this._gameIsTerminated || this._roundIsTerminated) return "";
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         if (_numberOfThisRoundsCurrentAttack == 1) PrintStartingParameters(view);
         _attackValue = CalculateAttack();
@@ -70,16 +68,16 @@ public class GameAttacksController
     private string Player2Attacks()
     {
         string loosersName;
-        if (_attackValue >= players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp)
+        if (_attackValue >= players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp)
         {
-            loosersName = players[0].units[_firstPlayersCurrentUnitNumber].Name;
-            this.roundIsTerminated = true;
+            loosersName = players[0].Units[_firstPlayersCurrentUnitNumber].Name;
+            this._roundIsTerminated = true;
             EliminateLooserUnitOfPlayer1();
             return loosersName;
         }
         else
         {
-            players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp = players[0].units[_firstPlayersCurrentUnitNumber].CurrentHp - _attackValue;
+            players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp = players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp - _attackValue;
         }
         return "";
     }
@@ -87,10 +85,10 @@ public class GameAttacksController
     private string Player1Attacks(int attackValue)
     {
         string loosersName;
-        if (attackValue >= players[1].units[_secondPlayersCurrentUnitNumber].CurrentHp)
+        if (attackValue >= players[1].Units[_secondPlayersCurrentUnitNumber].CurrentHp)
         {
-            loosersName = players[1].units[_secondPlayersCurrentUnitNumber].Name;
-            this.roundIsTerminated = true;
+            loosersName = players[1].Units[_secondPlayersCurrentUnitNumber].Name;
+            this._roundIsTerminated = true;
             EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
             return loosersName;
         }
@@ -109,12 +107,12 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer1()
     {
-        players[0].units.RemoveAt(_firstPlayersCurrentUnitNumber);
-        players[0].amountOfUnits = players[0].amountOfUnits - 1;
-        if (players[0].amountOfUnits == 0)
+        players[0].Units.RemoveAt(_firstPlayersCurrentUnitNumber);
+        players[0].AmountOfUnits = players[0].AmountOfUnits - 1;
+        if (players[0].AmountOfUnits == 0)
         {
-            this.gameIsTerminated = true;
-            this.winner = 1;
+            this._gameIsTerminated = true;
+            this._winner = 1;
         }
     }
 
@@ -122,13 +120,13 @@ public class GameAttacksController
     {
         if (currentAttacker == 0)
         {
-            _currentAttackingUnit = players[0].units[_firstPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = players[1].units[_secondPlayersCurrentUnitNumber];
+            _currentAttackingUnit = players[0].Units[_firstPlayersCurrentUnitNumber];
+            _currentDefensiveUnit = players[1].Units[_secondPlayersCurrentUnitNumber];
         }
         else
         {
-            _currentAttackingUnit = players[1].units[_secondPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = players[0].units[_firstPlayersCurrentUnitNumber];
+            _currentAttackingUnit = players[1].Units[_secondPlayersCurrentUnitNumber];
+            _currentDefensiveUnit = players[0].Units[_firstPlayersCurrentUnitNumber];
 
         }
     }
@@ -140,12 +138,12 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
     {
-        players[1].units.RemoveAt(_secondPlayersCurrentUnitNumber);
-        players[1].amountOfUnits = players[1].amountOfUnits - 1;
-        if (players[1].amountOfUnits == 0)
+        players[1].Units.RemoveAt(_secondPlayersCurrentUnitNumber);
+        players[1].AmountOfUnits = players[1].AmountOfUnits - 1;
+        if (players[1].AmountOfUnits == 0)
         {
-            this.gameIsTerminated = true;
-            this.winner = 0;
+            this._gameIsTerminated = true;
+            this._winner = 0;
         }
     }
 
@@ -191,7 +189,7 @@ public class GameAttacksController
 
     private int CalculateUnitsAtk()
     {
-        int unitsAtk = _currentAttackingUnit.Attk + _currentAttackingUnit.ActiveBonus.attk * _currentAttackingUnit.ActiveBonusNeutralization.attk + _currentAttackingUnit.ActivePenalties.attk * _currentAttackingUnit.ActivePenaltiesNeutralization.attk;
+        int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.attk * _currentAttackingUnit.ActiveBonusNeutralization.attk + _currentAttackingUnit.ActivePenalties.attk * _currentAttackingUnit.ActivePenaltiesNeutralization.attk;
         if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.atkFirstAttack * _currentAttackingUnit.ActiveBonusNeutralization.attk +
@@ -277,4 +275,21 @@ public class GameAttacksController
         _currentDefensiveUnit.ActiveBonusNeutralization.ResetStructureToOne();
         _currentDefensiveUnit.ActivePenaltiesNeutralization.ResetStructureToOne();
     }
+
+    public bool IsGameTerminated()
+    {
+        return this._gameIsTerminated;
+    }
+
+    public void RestartRound()
+    {
+        this._roundIsTerminated = false;
+    }
+    
+    public int GetWinner()
+    {
+        return this._winner + 1;
+    }
+    
+
 }

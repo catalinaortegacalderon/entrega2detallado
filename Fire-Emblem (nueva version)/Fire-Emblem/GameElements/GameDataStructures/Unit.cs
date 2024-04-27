@@ -11,7 +11,7 @@ public class Unit
     public string Gender;
     public int HpMax;
     public int CurrentHp = 0;
-    public int Attk;
+    public int Atk;
     public int Spd;
     public int Def;
     public int Res;

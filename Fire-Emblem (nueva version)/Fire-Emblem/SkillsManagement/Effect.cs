@@ -201,7 +201,7 @@ public class ChangeStatInPercentaje : Effect
         Amount = 0;
         if (stat == "Atk")
         {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Attk * this.percentaje));
+            Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this.percentaje));
             myUnit.ActiveBonus.attk  += Amount;
             
         }
@@ -239,7 +239,7 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
         Amount = 0;
         if (Stat == "Atk")
         {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Attk * this._percentage));
+            Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this._percentage));
             myUnit.ActiveBonus.atkFirstAttack  += Amount;
         }
     }
@@ -308,7 +308,7 @@ public class SandstormEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
-        int amount = Convert.ToInt32(Math.Truncate(1.5 * myUnit.Def)) - ((myUnit.Attk));
+        int amount = Convert.ToInt32(Math.Truncate(1.5 * myUnit.Def)) - ((myUnit.Atk));
         if (amount < 0) myUnit.ActivePenalties.atkFollowup += amount;
         else
         {
