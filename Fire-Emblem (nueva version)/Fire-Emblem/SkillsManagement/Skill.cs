@@ -796,3 +796,24 @@ namespace Fire_Emblem;
             this.Effects[0] = new SandstormEffect();
         }
     }
+
+// SKILLS E3, TAL VEZ SEPARAR SKILLS POR TIPO (BONUS, HIBRIDAS...)
+
+// REDUCCION DE DAÑO ABSOLUTA
+
+// HARE LA SEPARACIÓN AL TIRO
+
+ //   public class Gentility : Skill
+  //  {
+   //     public Gentility() : base()
+    //    {
+     //       this.Conditions = new Condition[1];
+   //         this.Conditions[0] = new OpponentStartsCombatWithCertainWeapon(["Axe"]);
+   //         this.Effects = new Effect[1];
+    //        this.Effects[0] = new SandstormEffect();
+    //    }
+   // }
+
+
+    
+    
