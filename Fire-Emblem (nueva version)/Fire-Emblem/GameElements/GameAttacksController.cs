@@ -141,14 +141,22 @@ public class GameAttacksController
     {
         foreach (Skill habilidad in _currentAttackingUnit.Skills)
         {
-            habilidad.ApplySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
+            habilidad.ApplyFirstCategorySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
+        }
+        foreach (Skill habilidad in _currentAttackingUnit.Skills)
+        {
+            habilidad.ApplySecondCategorySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
         }
     }
     private void ActivateDefensorsUnitSkills()
     {
         foreach (Skill habilidad in _currentDefensiveUnit.Skills)
         {
-            habilidad.ApplySkills(_currentDefensiveUnit, _currentAttackingUnit, false);
+            habilidad.ApplyFirstCategorySkills(_currentDefensiveUnit, _currentAttackingUnit, false);
+        }
+        foreach (Skill habilidad in _currentDefensiveUnit.Skills)
+        {
+            habilidad.ApplySecondCategorySkills(_currentDefensiveUnit, _currentAttackingUnit, false);
         }
     }
 

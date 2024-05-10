@@ -9,12 +9,24 @@ namespace Fire_Emblem;
         protected Condition[] Conditions;
         protected Effect[] Effects;
 
-        public void ApplySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
+        public void ApplyFirstCategorySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
         {
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, oponentsUnit,attacking))
+                if (this.Conditions[i].Verify(myUnit, oponentsUnit,attacking) && this.Conditions[i].GetPriority() == 1)
+                {
+                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit,attacking);
+                }
+            }
+        }
+        
+        public void ApplySecondCategorySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
+        {
+            if (this.Conditions.Length == 0) return;
+            for (int i = 0; i < this.Conditions.Length; i++)
+            {
+                if (this.Conditions[i].Verify(myUnit, oponentsUnit,attacking) && this.Conditions[i].GetPriority() == 2)
                 {
                     this.Effects[i].ApplyEffect(myUnit, oponentsUnit,attacking);
                 }

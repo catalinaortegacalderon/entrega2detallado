@@ -14,6 +14,11 @@ public class Condition
     {
         return true;
     }
+
+    public int GetPriority()
+    {
+        return this.Priority;
+    }
 }
 
 public class AlwaysTrue : Condition
