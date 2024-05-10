@@ -12,3 +12,11 @@ public class SecondCategoryCondition: Condition
     }
 }
 
+public class CertainSelfUnitStatBiggerThanCertainRivalStat: SecondCategoryCondition
+{
+    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    {
+        return true;
+    }
+}
+
