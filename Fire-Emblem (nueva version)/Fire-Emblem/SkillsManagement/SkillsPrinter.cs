@@ -58,7 +58,7 @@ public class SkillsPrinter
         if (unit.DamageEffects.PorcentualReductionRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un +" + ((1 - unit.DamageEffects.PorcentualReductionRivalsFollowup)* 100)
             + "%");
         if (unit.DamageEffects.AbsolutDamageReduction != 0) view.WriteLine(unit.Name + " recibirá " + unit.DamageEffects.AbsolutDamageReduction
-            + " daño extra en cada ataque");
+            + " daño en cada ataque");
         
     }
 }

@@ -275,5 +275,9 @@ public class SkillConstructor
         {
             skills[skillsCounter] = new Sandstorm();
         }
+        else if (skillString == "Gentility")
+        {
+            skills[skillsCounter] = new Gentility();
+        }
     }
 }
