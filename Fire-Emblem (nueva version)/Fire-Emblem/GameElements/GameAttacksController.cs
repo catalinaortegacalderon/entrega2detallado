@@ -313,6 +313,7 @@ public class GameAttacksController
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenalties, 0);
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActiveBonusNeutralization, 1);
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenaltiesNeutralization, 1);
+        
     }
 
     public bool IsGameTerminated()
