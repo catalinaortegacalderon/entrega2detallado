@@ -7,13 +7,20 @@ using Fire_Emblem_View;
 
 public class Effect
 {
+    protected int Priority;
     protected int Amount;
-    protected Effect()
+    public Effect()
     {
+        this.Priority = 1;
     }
     public virtual void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
     {
         return;
+    }
+
+    public virtual int GetPriority()
+    {
+        return this.Priority;
     }
 }
 

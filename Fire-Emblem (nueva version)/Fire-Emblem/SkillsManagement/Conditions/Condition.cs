@@ -4,6 +4,12 @@ namespace Fire_Emblem;
 
 public class Condition
 {
+    protected int Priority;
+    
+    public Condition() : base()
+    {
+        this.Priority = 1;
+    }
     public virtual bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
         return true;
