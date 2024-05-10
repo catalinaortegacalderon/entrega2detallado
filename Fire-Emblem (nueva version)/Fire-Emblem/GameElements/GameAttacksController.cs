@@ -183,6 +183,7 @@ public class GameAttacksController
         double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
         int unitsAtk = CalculateUnitsAtk();
         _currentAttackingUnit.GameLogs.AmountOfAttacks++;
+        double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
         if ((unitsAtk * wtb - rivalsDefOrRes) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(unitsAtk * wtb - rivalsDefOrRes));
     }
@@ -230,6 +231,28 @@ public class GameAttacksController
         }
 
         return rivalsDefOrRes;
+    }
+    private double CalculateFinalDamage(double initialDamage)
+    {
+        double finalDamage  = initialDamage;
+        if (_numberOfThisRoundsCurrentAttack == 1)
+        {
+            //finalDamage= initialDamage * _currentDefensiveUnit. + _currentAttackingUnit.DamageEffects.
+            finalDamage  = initialDamage;
+            
+        }
+        else if (_numberOfThisRoundsCurrentAttack == 2)
+        {
+            finalDamage  = initialDamage;
+            
+        }
+        else if (_numberOfThisRoundsCurrentAttack == 3)
+        {
+            finalDamage  = initialDamage;
+            
+        }
+        //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO
+        return finalDamage;
     }
 
     public void PrintAdvantages(View view)
