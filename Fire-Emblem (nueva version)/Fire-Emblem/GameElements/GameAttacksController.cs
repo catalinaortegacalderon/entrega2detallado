@@ -186,8 +186,8 @@ public class GameAttacksController
         int unitsAtk = CalculateUnitsAtk();
         _currentAttackingUnit.GameLogs.AmountOfAttacks++;
         double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
-        if ((unitsAtk * wtb - rivalsDefOrRes) < 0) return 0;
-        return Convert.ToInt32(Math.Truncate(unitsAtk * wtb - rivalsDefOrRes));
+        if ((finalDamage) < 0) return 0;
+        return Convert.ToInt32(Math.Truncate(finalDamage));
     }
 
     private int CalculateUnitsAtk()
@@ -299,21 +299,22 @@ public class GameAttacksController
         ResetDefensorsSkills();
     }
 
-    private void ResetDefensorsSkills()
+    private void ResetAttackersSkills()
     {
         DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActiveBonus, 0);
         DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActivePenalties, 0);
         DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActiveBonusNeutralization, 1);
         DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActivePenaltiesNeutralization, 1);
+        DataStructuresFunctions.ResetDamageStructure(_currentAttackingUnit.DamageEffects);
     }
 
-    private void ResetAttackersSkills()
+    private void ResetDefensorsSkills()
     {
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActiveBonus, 0);
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenalties, 0);
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActiveBonusNeutralization, 1);
         DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenaltiesNeutralization, 1);
-        
+        DataStructuresFunctions.ResetDamageStructure(_currentDefensiveUnit.DamageEffects);
     }
 
     public bool IsGameTerminated()
