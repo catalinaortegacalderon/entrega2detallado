@@ -42,4 +42,34 @@ public class SkillsPrinter
         if (unit.ActivePenaltiesNeutralization.Def == 0) view.WriteLine("Los penalty de Def de " + unit.Name + " fueron neutralizados");
         if (unit.ActivePenaltiesNeutralization.Res == 0) view.WriteLine("Los penalty de Res de " + unit.Name + " fueron neutralizados");
     }
+    
+    public static void PrintDamageEffects(View view, Unit unit)
+    {
+        if (unit.DamageEffects.BonusDamageInflictedInEveryAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInEveryAttack
+            + " daño extra en su primer ataque");
+        if (unit.DamageEffects.BonusDamageInflictedInFirstAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInFirstAttack
+            + " daño extra en su primer ataque");
+        if (unit.DamageEffects.BonusDamageInflictedInFollowup != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInFollowup
+            + " daño extra en su primer ataque");
+        if (unit.DamageEffects.DamageReductionInRivalsAttack != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsAttack)* 100)
+            + "%");
+        if (unit.DamageEffects.DamageReductionInRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsFirstAttack)* 100)
+            + "%");
+        if (unit.DamageEffects.DamageReductionInRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsFollowup)* 100)
+            + "%");
+        if (unit.DamageEffects.DamageReductionInEveryAttack != 0) view.WriteLine(unit.Name + " recibirá -" + unit.DamageEffects.DamageReductionInEveryAttack
+            + " daño extra en cada ataque");
+        
+    }
 }
+
+//33 Edelgard realizar´ a +75 da~ no extra en cada ataque
+//34 Edelgard realizar´ a +11 da~ no extra en su primer ataque
+//35 Edelgard realizar´ a +185 da~no extra en su Follow-Up
+//36 Edelgard reducir´a el da~no de los ataques del rival en un 48%
+//    37 Edelgard reducir´a el da~no del primer ataque del rival en un 63%
+//    38 Edelgard reducir´a el da~no del Follow-Up del rival en un 10%
+ //   39 Edelgard recibir´a-24 da~no en cada ataque
+
+ 
+ // OBLIGATORIO: EMPEZAR A USAR LOGS DE FIRST ATTACK, SECOND ATTACK, RIVALS ATACK ....

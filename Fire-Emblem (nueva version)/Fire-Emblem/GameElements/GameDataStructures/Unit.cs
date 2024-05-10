@@ -19,6 +19,7 @@ public class Unit
     public BonusPenaltiesAndNeutralizations ActivePenalties = DataStructuresFunctions.CreateStructure(0);
     public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = DataStructuresFunctions.CreateStructure(1);
     public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = DataStructuresFunctions.CreateStructure(1);
+    public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
     public GameLogs GameLogs = new GameLogs();
     public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
 }

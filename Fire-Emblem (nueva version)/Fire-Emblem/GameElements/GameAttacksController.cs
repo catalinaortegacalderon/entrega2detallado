@@ -166,11 +166,13 @@ public class GameAttacksController
         SkillsPrinter.PrintPenalties(view, _currentAttackingUnit);
         SkillsPrinter.PrintBonusNetralization(view, _currentAttackingUnit);
         SkillsPrinter.PrintPenaltyNetralization(view, _currentAttackingUnit);
+        SkillsPrinter.PrintDamageEffects(view, _currentAttackingUnit);
 
         SkillsPrinter.PrintBonus(view, _currentDefensiveUnit);
         SkillsPrinter.PrintPenalties(view, _currentDefensiveUnit);
         SkillsPrinter.PrintBonusNetralization(view, _currentDefensiveUnit);
         SkillsPrinter.PrintPenaltyNetralization(view, _currentDefensiveUnit);
+        SkillsPrinter.PrintDamageEffects(view, _currentDefensiveUnit);
     }
 
     public int CalculateAttack()
