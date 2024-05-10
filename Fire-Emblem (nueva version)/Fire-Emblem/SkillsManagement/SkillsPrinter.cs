@@ -45,19 +45,19 @@ public class SkillsPrinter
     
     public static void PrintDamageEffects(View view, Unit unit)
     {
-        if (unit.DamageEffects.BonusDamageInflictedInEveryAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInEveryAttack
+        if (unit.DamageEffects.ExtraDamage != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamage
             + " daño extra en su primer ataque");
-        if (unit.DamageEffects.BonusDamageInflictedInFirstAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInFirstAttack
+        if (unit.DamageEffects.ExtraDamageFirstAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFirstAttack
             + " daño extra en su primer ataque");
-        if (unit.DamageEffects.BonusDamageInflictedInFollowup != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.BonusDamageInflictedInFollowup
+        if (unit.DamageEffects.ExtraDamageFollowup != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFollowup
             + " daño extra en su primer ataque");
-        if (unit.DamageEffects.DamageReductionInRivalsAttack != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsAttack)* 100)
+        if (unit.DamageEffects.PorcentualReduction != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un +" + ((1 - unit.DamageEffects.PorcentualReduction)* 100)
             + "%");
-        if (unit.DamageEffects.DamageReductionInRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsFirstAttack)* 100)
+        if (unit.DamageEffects.PorcentualReductionRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un +" + ((1 - unit.DamageEffects.PorcentualReductionRivalsFirstAttack)* 100)
             + "%");
-        if (unit.DamageEffects.DamageReductionInRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un +" + ((1 - unit.DamageEffects.DamageReductionInRivalsFollowup)* 100)
+        if (unit.DamageEffects.PorcentualReductionRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un +" + ((1 - unit.DamageEffects.PorcentualReductionRivalsFollowup)* 100)
             + "%");
-        if (unit.DamageEffects.DamageReductionInEveryAttack != 0) view.WriteLine(unit.Name + " recibirá -" + unit.DamageEffects.DamageReductionInEveryAttack
+        if (unit.DamageEffects.AbsolutDamageReduction != 0) view.WriteLine(unit.Name + " recibirá " + unit.DamageEffects.AbsolutDamageReduction
             + " daño extra en cada ataque");
         
     }

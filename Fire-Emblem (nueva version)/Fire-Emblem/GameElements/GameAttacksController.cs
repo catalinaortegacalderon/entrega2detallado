@@ -174,6 +174,8 @@ public class GameAttacksController
         SkillsPrinter.PrintPenaltyNetralization(view, _currentDefensiveUnit);
         SkillsPrinter.PrintDamageEffects(view, _currentDefensiveUnit);
     }
+    
+    // CALCULAR ATAQUE SERA UNA CLASE DISTINTA
 
     public int CalculateAttack()
     {
@@ -237,19 +239,33 @@ public class GameAttacksController
         double finalDamage  = initialDamage;
         if (_numberOfThisRoundsCurrentAttack == 1)
         {
-            //finalDamage= initialDamage * _currentDefensiveUnit. + _currentAttackingUnit.DamageEffects.
-            finalDamage  = initialDamage;
+            //finalDamage =
+            //    (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage) *
+            //    _currentDefensiveUnit.DamageEffects.PorcentualReduction +
+            //    _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
+            //finalDamage  = initialDamage;
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
+                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
+                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
         else if (_numberOfThisRoundsCurrentAttack == 2)
         {
             finalDamage  = initialDamage;
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
+                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
+                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
         else if (_numberOfThisRoundsCurrentAttack == 3)
         {
             finalDamage  = initialDamage;
-            
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup) *
+                _currentDefensiveUnit.DamageEffects.PorcentualReduction * _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFollowup +
+                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
         }
         //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO
         return finalDamage;

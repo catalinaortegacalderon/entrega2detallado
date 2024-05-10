@@ -2,13 +2,13 @@ namespace Fire_Emblem;
 
 public class DataStructureDamageEffects
 {
-    public int BonusDamageInflictedInEveryAttack = 0; //realizara ABSOLUTO   //daño extra
-    public int BonusDamageInflictedInFirstAttack = 0; //realizara ABSOLUTO   //daño extra
-    public int BonusDamageInflictedInFollowup = 0; //realizara ABSOLUTO   //daño extra
-    public int DamageReductionInRivalsAttack = 1; //reduce PORCENTUAL    // daño porcental
-    public int DamageReductionInRivalsFirstAttack = 1; //reduce PORCENTUAL  // daño porcental
-    public int DamageReductionInRivalsFollowup = 1; //reduce PORCENTUAL  // daño porcental
-    public int DamageReductionInEveryAttack = 0; // REVISAR ESTO recibira ABSOLUTO // daño absoluto
+    public int ExtraDamage = 0; //realizara ABSOLUTO   //daño extra
+    public int ExtraDamageFirstAttack = 0; //realizara ABSOLUTO   //daño extra
+    public int ExtraDamageFollowup = 0; //realizara ABSOLUTO   //daño extra
+    public int PorcentualReduction = 1; //reduce PORCENTUAL    // daño porcental
+    public int PorcentualReductionRivalsFirstAttack = 1; //reduce PORCENTUAL  // daño porcental
+    public int PorcentualReductionRivalsFollowup = 1; //reduce PORCENTUAL  // daño porcental
+    public int AbsolutDamageReduction = 0; // REVISAR ESTO recibira ABSOLUTO // daño absoluto // esto se guardara en negativo
 }
 
 // LOS REDUCE (PORCENTAJE) SERAN GUARADOS PARA MULTIPLCIAR
