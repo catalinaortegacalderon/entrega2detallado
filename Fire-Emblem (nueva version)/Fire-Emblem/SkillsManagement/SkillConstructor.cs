@@ -279,5 +279,9 @@ public class SkillConstructor
         {
             skills[skillsCounter] = new Gentility();
         }
+        else if (skillString.Split(" ")[1] == "Guard")
+        {
+            skills[skillsCounter] = new Guard(skillString.Split(" ")[0]);
+        }
     }
 }

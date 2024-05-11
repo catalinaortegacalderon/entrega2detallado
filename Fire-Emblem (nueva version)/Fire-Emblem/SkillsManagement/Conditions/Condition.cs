@@ -181,6 +181,21 @@ public class OpponentStartsCombatWithCertainWeapon: Condition
     
 }
 
+public class OpponentUsesCertainWeapon: Condition
+{
+    private String[] _weapons;
+    public OpponentUsesCertainWeapon(String[] weapons) : base()
+    {
+        this._weapons = weapons;
+    }
+    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    {
+        if (this._weapons.Contains(opponentsUnit.Weapon)) return true;
+        return false;
+    }
+    
+}
+
 public class RivalStartsAttackOrHasHpGreaterThan : Condition
 {
     private double _percentage;
