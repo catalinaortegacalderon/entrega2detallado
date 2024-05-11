@@ -283,5 +283,15 @@ public class SkillConstructor
         {
             skills[skillsCounter] = new Guard(skillString.Split(" ")[0]);
         }
+        else if (skillString == "Sympathetic")
+        {
+            skills[skillsCounter] = new Sympathetic();
+        }
+        // con armsshield me falla un tests mas que sin, ver despues porque
+        else if (skillString == "Arms Shield")
+        {
+            skills[skillsCounter] = new ArmsShield();
+        }
+        
     }
 }
