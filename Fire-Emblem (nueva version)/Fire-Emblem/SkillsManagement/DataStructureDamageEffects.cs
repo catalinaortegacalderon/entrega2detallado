@@ -5,9 +5,9 @@ public class DataStructureDamageEffects
     public int ExtraDamage = 0; //realizara ABSOLUTO   //daño extra
     public int ExtraDamageFirstAttack = 0; //realizara ABSOLUTO   //daño extra
     public int ExtraDamageFollowup = 0; //realizara ABSOLUTO   //daño extra
-    public int PorcentualReduction = 1; //reduce PORCENTUAL    // daño porcental
-    public int PorcentualReductionRivalsFirstAttack = 1; //reduce PORCENTUAL  // daño porcental
-    public int PorcentualReductionRivalsFollowup = 1; //reduce PORCENTUAL  // daño porcental
+    public double PorcentualReduction = 1; //reduce PORCENTUAL    // daño porcental
+    public double PorcentualReductionRivalsFirstAttack = 1; //reduce PORCENTUAL  // daño porcental
+    public double PorcentualReductionRivalsFollowup = 1; //reduce PORCENTUAL  // daño porcental
     public int AbsolutDamageReduction = 0; // REVISAR ESTO recibira ABSOLUTO // daño absoluto // esto se guardara en negativo
 }
 

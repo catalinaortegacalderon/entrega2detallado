@@ -51,11 +51,11 @@ public class SkillsPrinter
             + " daño extra en su primer ataque");
         if (unit.DamageEffects.ExtraDamageFollowup != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFollowup
             + " daño extra en su primer ataque");
-        if (unit.DamageEffects.PorcentualReduction != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un +" + ((1 - unit.DamageEffects.PorcentualReduction)* 100)
+        if (unit.DamageEffects.PorcentualReduction != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un " + (Math.Round(((1 - unit.DamageEffects.PorcentualReduction)* 100)))
             + "%");
-        if (unit.DamageEffects.PorcentualReductionRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un +" + ((1 - unit.DamageEffects.PorcentualReductionRivalsFirstAttack)* 100)
+        if (unit.DamageEffects.PorcentualReductionRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un " + (Math.Round(((1 - unit.DamageEffects.PorcentualReductionRivalsFirstAttack)* 100)))
             + "%");
-        if (unit.DamageEffects.PorcentualReductionRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un +" + ((1 - unit.DamageEffects.PorcentualReductionRivalsFollowup)* 100)
+        if (unit.DamageEffects.PorcentualReductionRivalsFollowup != 1) view.WriteLine(unit.Name + " reducirá el daño del Follow-Up del rival en un " + (Math.Round((1 - unit.DamageEffects.PorcentualReductionRivalsFollowup)* 100))
             + "%");
         if (unit.DamageEffects.AbsolutDamageReduction != 0) view.WriteLine(unit.Name + " recibirá " + unit.DamageEffects.AbsolutDamageReduction
             + " daño en cada ataque");

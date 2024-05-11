@@ -2,6 +2,9 @@ using System.Runtime.CompilerServices;
 
 namespace Fire_Emblem;
 
+// cambiar rival por oponent, ser consistente
+//hay oponent y opponent con dos p
+
 public class Condition
 {
     protected int Priority;

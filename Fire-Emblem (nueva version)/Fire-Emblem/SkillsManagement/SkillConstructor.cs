@@ -292,6 +292,50 @@ public class SkillConstructor
         {
             skills[skillsCounter] = new ArmsShield();
         }
-        
+        // tal vez separar posture aca
+        else if (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture")
+        {
+            // tal vez codigo rep aca
+            if (skillString.Split(" ")[0] == "Fierce")
+            {
+                skills[skillsCounter] = new Stance("Atk", "", 8,0);
+            }
+            if (skillString.Split(" ")[0] == "Darting")
+            {
+                skills[skillsCounter] = new Stance("Spd", "", 8,0);
+            }
+            if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Stance")
+            {
+                skills[skillsCounter] = new Stance("Def", "", 8,0);
+            }
+            if (skillString.Split(" ")[0] == "Warding")
+            {
+                skills[skillsCounter] = new Stance("Res", "", 8,0);
+            }
+            if (skillString.Split(" ")[0] == "Kestrel")
+            {
+                skills[skillsCounter] = new Stance("Atk", "Spd", 6,6);
+            }
+            if (skillString.Split(" ")[0] == "Sturdy")
+            {
+                skills[skillsCounter] = new Stance("Atk", "Def", 6,6);
+            }
+            if (skillString.Split(" ")[0] == "Mirror")
+            {
+                skills[skillsCounter] = new Stance("Atk", "Res", 6,6);
+            }
+            if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture")
+            {
+                skills[skillsCounter] = new Stance("Spd", "Def", 6,6);
+            }
+            if (skillString.Split(" ")[0] == "Swift")
+            {
+                skills[skillsCounter] = new Stance("Spd", "Res", 6,6);
+            }
+            if (skillString.Split(" ")[0] == "Bracing")
+            {
+                skills[skillsCounter] = new Stance("Def", "Res", 6,6);
+            }
+        }
     }
 }
