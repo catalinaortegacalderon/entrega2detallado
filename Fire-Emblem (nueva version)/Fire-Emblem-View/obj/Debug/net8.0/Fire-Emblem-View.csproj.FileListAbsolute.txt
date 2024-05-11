@@ -10,3 +10,15 @@ C:\Users\catal\Desktop\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem
 C:\Users\catal\Desktop\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\refint\Fire-Emblem-View.dll
 C:\Users\catal\Desktop\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.pdb
 C:\Users\catal\Desktop\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\ref\Fire-Emblem-View.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.deps.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.pdb
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.AssemblyInfoInputs.cache
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.AssemblyInfo.cs
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.csproj.CoreCompileInputs.cache
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.sourcelink.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\refint\Fire-Emblem-View.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.pdb
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\ref\Fire-Emblem-View.dll
