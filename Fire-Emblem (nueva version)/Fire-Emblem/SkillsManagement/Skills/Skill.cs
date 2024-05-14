@@ -212,8 +212,8 @@ namespace Fire_Emblem;
         public DeadlyBlade() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeaponAndStartCombat("Sword");
-            this.Conditions[1] = new UseCertainWeaponAndStartCombat("Sword");
+            this.Conditions[0] = new UseCertainWeaponAndStartCombat(["Sword"]);
+            this.Conditions[1] = new UseCertainWeaponAndStartCombat(["Sword"]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 8); 
             this.Effects[1] = new ChangeStatsIn("Spd", 8); 

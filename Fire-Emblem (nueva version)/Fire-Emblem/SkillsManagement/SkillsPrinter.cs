@@ -46,11 +46,11 @@ public class SkillsPrinter
     public static void PrintDamageEffects(View view, Unit unit)
     {
         if (unit.DamageEffects.ExtraDamage != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamage
-            + " daño extra en su primer ataque");
+            + " daño extra en cada ataque");
         if (unit.DamageEffects.ExtraDamageFirstAttack != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFirstAttack
             + " daño extra en su primer ataque");
         if (unit.DamageEffects.ExtraDamageFollowup != 0) view.WriteLine(unit.Name + " realizará +" + unit.DamageEffects.ExtraDamageFollowup
-            + " daño extra en su primer ataque");
+            + " daño extra en su Followup");
         if (unit.DamageEffects.PorcentualReduction != 1) view.WriteLine(unit.Name + " reducirá el daño de los ataques del rival en un " + (Math.Round(((1 - unit.DamageEffects.PorcentualReduction)* 100)))
             + "%");
         if (unit.DamageEffects.PorcentualReductionRivalsFirstAttack != 1) view.WriteLine(unit.Name + " reducirá el daño del primer ataque del rival en un " + (Math.Round(((1 - unit.DamageEffects.PorcentualReductionRivalsFirstAttack)* 100)))

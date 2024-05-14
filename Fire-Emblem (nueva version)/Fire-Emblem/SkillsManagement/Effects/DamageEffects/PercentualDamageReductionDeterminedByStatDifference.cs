@@ -19,10 +19,10 @@ public class PercentualDamageReductionDeterminedByStatDifference : Effect
         double redutionPercentage = 1;
         if (this.stat == "Spd")
         {
-            int myTotalSpd = 
+            double myTotalSpd = 
                 myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralization.Spd 
                            + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralization.Spd;
-            int opponentsTotalSpd =
+            double opponentsTotalSpd =
                 opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralization.Spd
                                   + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralization.Spd;
             redutionPercentage =  1 - (((myTotalSpd - opponentsTotalSpd) * this.multiplicator)/100);

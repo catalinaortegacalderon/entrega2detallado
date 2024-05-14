@@ -84,14 +84,16 @@ public class UseCertainWeapon : Condition
 
 public class UseCertainWeaponAndStartCombat : Condition
 {
-    private string _usedWeapon;
-    public UseCertainWeaponAndStartCombat(string weapon) : base()
+    private string[] _weapons;
+    public UseCertainWeaponAndStartCombat(string[] weapon) : base()
     {
-        this._usedWeapon = weapon;
+        this._weapons = weapon;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.Weapon == this._usedWeapon && iAmAttacking) return true;
+        Console.WriteLine("verficando");
+        if (this._weapons.Contains(myUnit.Weapon) && iAmAttacking) return true;
+        Console.WriteLine("false");
         return false;
     }
 }
@@ -193,10 +195,11 @@ public class OpponentUsesCertainWeapon: Condition
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
+        Console.WriteLine("paso por el verify");
         if (this._weapons.Contains(opponentsUnit.Weapon)) return true;
+        Console.WriteLine("false");
         return false;
     }
-    
 }
 
 public class RivalStartsAttackOrHasHpGreaterThan : Condition

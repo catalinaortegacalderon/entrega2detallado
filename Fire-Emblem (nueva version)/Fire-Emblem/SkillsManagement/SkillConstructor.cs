@@ -1,3 +1,5 @@
+using Fire_Emblem.ExtraDamageSkills;
+
 namespace Fire_Emblem;
 
 public class SkillConstructor
@@ -279,7 +281,7 @@ public class SkillConstructor
         {
             skills[skillsCounter] = new Gentility();
         }
-        else if (skillString.Split(" ")[1] == "Guard")
+        else if (skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard")
         {
             skills[skillsCounter] = new Guard(skillString.Split(" ")[0]);
         }
@@ -293,7 +295,7 @@ public class SkillConstructor
             skills[skillsCounter] = new ArmsShield();
         }
         // tal vez separar posture aca
-        else if (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture")
+        else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture"))
         {
             // tal vez codigo rep aca
             if (skillString.Split(" ")[0] == "Fierce")
@@ -348,8 +350,23 @@ public class SkillConstructor
         }
         else if (skillString == "Dragon Wall")
         { 
-            Console.WriteLine("crando dragon wall");
             skills[skillsCounter] = new DragonWall();
+        }
+        else if (skillString == "Dodge")
+        { 
+            skills[skillsCounter] = new Dodge();
+        }
+        else if (skillString == "Golden Lotus")
+        { 
+            skills[skillsCounter] = new GoldenLotus();
+        }
+        else if (skillString == "Bravery")
+        { 
+            skills[skillsCounter] = new Bravery();
+        }
+        else if (skillString == "Back at You")
+        { 
+            skills[skillsCounter] = new BackAtYou();
         }
     }
 }

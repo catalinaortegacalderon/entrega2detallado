@@ -23,6 +23,7 @@ public class PercentualDamageReduction : Effect
         else if (this.Type == "First Attack")
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack = myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack * this.percentaje;
+            Console.WriteLine("paso por donde quiero");
         }
         else if (this.Type == "Followup")
         {
