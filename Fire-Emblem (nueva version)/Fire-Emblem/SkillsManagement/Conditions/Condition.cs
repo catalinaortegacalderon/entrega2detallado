@@ -22,6 +22,11 @@ public class Condition
     {
         return this.Priority;
     }
+    
+    public void ChangePriorityBecauseOfSecondCategoryEffect(int priority)
+    {
+        this.Priority = priority;
+    }
 }
 
 public class AlwaysTrue : Condition
@@ -91,9 +96,7 @@ public class UseCertainWeaponAndStartCombat : Condition
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        Console.WriteLine("verficando");
         if (this._weapons.Contains(myUnit.Weapon) && iAmAttacking) return true;
-        Console.WriteLine("false");
         return false;
     }
 }

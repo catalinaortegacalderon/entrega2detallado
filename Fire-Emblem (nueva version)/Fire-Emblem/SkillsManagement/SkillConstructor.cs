@@ -368,5 +368,9 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new BackAtYou();
         }
+        else if (skillString == "Lunar Brace")
+        { 
+            skills[skillsCounter] = new LunarBrace();
+        }
     }
 }
