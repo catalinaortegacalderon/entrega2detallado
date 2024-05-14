@@ -1,34 +1,51 @@
+using System.Diagnostics;
+
 namespace Fire_Emblem;
 
 public class PercentualDamageReductionDeterminedByStatDifference : Effect
 {
     private string stat;
-    private string multiplicator;
+    private int multiplicator;
     
-    public PercentualDamageReduction(string stat, int multiplicator) : base()
+    public PercentualDamageReductionDeterminedByStatDifference(string stat, int multiplicator) : base()
     {
         this.stat = stat;
         this.multiplicator = this.multiplicator;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
-    { //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
-        double recutionPercentaje;
-        if this.
-        if (this.Type == "All")
+    { 
+        Console.WriteLine("aplicando efecto dragonwall");
+        //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
+        double redutionPercentage = 1;
+        if (this.stat == "Spd")
         {
-            myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * this.percentaje;
+            Console.WriteLine("pase por spd");
+            int myTotalSpd = 
+                myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralization.Spd 
+                           + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralization.Spd;
+            int opponentsTotalSpd =
+                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralization.Spd
+                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralization.Spd;
+            redutionPercentage =  1 - (((myTotalSpd - opponentsTotalSpd) * this.multiplicator)/100);
         }
-        else if (this.Type == "First Attack")
+        else if (this.stat == "Res")
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack = myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack * this.percentaje;
+            int myTotalRes =
+                myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralization.Res
+                           + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralization.Res;
+            int opponentsTotalRes =
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralization.Res
+                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralization.Res;
+            redutionPercentage =  1 - (((myTotalRes - opponentsTotalRes) * this.multiplicator)/100);
+            Console.WriteLine("pase por res");
         }
-        else if (this.Type == "Followup")
+        if (redutionPercentage < 0.6)
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFollowup = myUnit.DamageEffects.PorcentualReductionRivalsFollowup * this.percentaje;
+            redutionPercentage = 0.6;
         }
-        myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * this.percentaje;
+        Console.WriteLine(redutionPercentage);
+        myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * redutionPercentage;
     }
-{
     
 }
