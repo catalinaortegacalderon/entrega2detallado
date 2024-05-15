@@ -400,7 +400,11 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new RemoteSturdy();
         }
-        else if (skillString == " Poetic Justice")
+        else if (skillString == "Poetic Justice")
+        { 
+            skills[skillsCounter] = new PoeticJustice();
+        }
+        else if (skillString == "Laguz Friend:")
         { 
             skills[skillsCounter] = new PoeticJustice();
         }
@@ -416,15 +420,15 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new Prescience();
         }
-        else if (skillString == " Extra Chivalry")
+        else if (skillString == "Extra Chivalry")
         { 
             skills[skillsCounter] = new ExtraChilvary();
         }
-        else if (skillString == "Guard Bearing:")
+        else if (skillString == "Guard Bearing")
         { 
             skills[skillsCounter] = new GuardBearing();
         }
-        else if (skillString == "Divine Recreation:")
+        else if (skillString == "Divine Recreation")
         { 
             skills[skillsCounter] = new DivineRecreation();
         }
