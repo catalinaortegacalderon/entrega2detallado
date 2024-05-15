@@ -52,7 +52,23 @@ public class OwnHpLessThan : Condition
         }
         return false;
     }
-    
+}
+
+public class OwnHpBiggerThan : Condition
+{
+    private double _amount;
+    public OwnHpBiggerThan(double amount) : base()
+    {
+        this._amount = amount;
+    }
+    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    {
+        if (Math.Round((double)myUnit.CurrentHp / myUnit.HpMax,2) >= this._amount)
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 public class UnitStartsCombat : Condition

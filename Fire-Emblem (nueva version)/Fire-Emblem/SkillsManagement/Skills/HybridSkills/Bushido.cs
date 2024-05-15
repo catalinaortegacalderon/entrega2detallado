@@ -9,7 +9,7 @@ public Bushido() : base()
     this.Conditions[1] = new CompareTotalSpd();
     this.Effects = new Effect[2];
     this.Effects[0] = new ExtraDamageReduction(7, "All");
-    this.Effects[1] = new PercentualDamageReductionDeterminedByStatDifference("Spd", 4); ;
+    this.Effects[1] = new PercentualDamageReductionDeterminedByStatDifference("Spd", 4);
 
 }
 }

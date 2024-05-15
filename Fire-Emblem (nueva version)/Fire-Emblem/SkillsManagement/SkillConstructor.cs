@@ -376,5 +376,13 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new Bushido();
         }
+        else if (skillString == "Moon-Twin Wing")
+        { 
+            skills[skillsCounter] = new MoonTwinWing();
+        }
+        else if (skillString == "Blue Skies")
+        { 
+            skills[skillsCounter] = new BlueSkies();
+        }
     }
 }
