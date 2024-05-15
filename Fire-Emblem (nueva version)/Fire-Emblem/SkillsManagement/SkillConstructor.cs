@@ -384,5 +384,49 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new BlueSkies();
         }
+        else if (skillString == "Aegis Shield")
+        { 
+            skills[skillsCounter] = new AegisShield();
+        }
+        else if (skillString == "Remote Sparrow")
+        { 
+            skills[skillsCounter] = new RemoteSparrow();
+        }
+        else if (skillString == "Remote Mirror")
+        { 
+            skills[skillsCounter] = new RemoteMirror();
+        }
+        else if (skillString == "Remote Sturdy")
+        { 
+            skills[skillsCounter] = new RemoteSturdy();
+        }
+        else if (skillString == " Poetic Justice")
+        { 
+            skills[skillsCounter] = new PoeticJustice();
+        }
+        else if (skillString == "Chivalry")
+        { 
+            skills[skillsCounter] = new Chivalry();
+        }
+        else if (skillString == "Dragon’s Wrath")
+        { 
+            skills[skillsCounter] = new DragonsWrath();
+        }
+        else if (skillString == "Prescience")
+        { 
+            skills[skillsCounter] = new Prescience();
+        }
+        else if (skillString == " Extra Chivalry")
+        { 
+            skills[skillsCounter] = new ExtraChilvary();
+        }
+        else if (skillString == "Guard Bearing:")
+        { 
+            skills[skillsCounter] = new GuardBearing();
+        }
+        else if (skillString == "Divine Recreation:")
+        { 
+            skills[skillsCounter] = new DivineRecreation();
+        }
     }
 }
