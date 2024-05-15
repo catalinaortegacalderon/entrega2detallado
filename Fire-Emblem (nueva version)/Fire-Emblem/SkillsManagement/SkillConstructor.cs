@@ -372,5 +372,9 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new LunarBrace();
         }
+        else if (skillString == "Bushido")
+        { 
+            skills[skillsCounter] = new Bushido();
+        }
     }
 }
