@@ -1,17 +1,17 @@
 namespace Fire_Emblem;
 
-public class CompareTotalRes : SecondCategoryCondition
+public class CompareMyAtkWithOpponentsRes : SecondCategoryCondition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        int myTotalRes =
-            myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralization.Res
-                              + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralization.Res;
+        int myTotalAtk =
+            myUnit.Atk + myUnit.ActiveBonus.Attk * myUnit.ActiveBonusNeutralization.Attk
+                       + myUnit.ActivePenalties.Attk * myUnit.ActivePenaltiesNeutralization.Attk;
         int opponentsTotalRes =
             opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralization.Res
                               + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralization.Res;
 
-        if (myTotalRes > opponentsTotalRes)
+        if (myTotalAtk > opponentsTotalRes)
         {
             return true;
         }

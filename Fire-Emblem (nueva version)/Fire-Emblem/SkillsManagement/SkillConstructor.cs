@@ -412,7 +412,7 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new Chivalry();
         }
-        else if (skillString == "Dragon’s Wrath")
+        else if (skillString == "Dragon's Wrath")
         { 
             skills[skillsCounter] = new DragonsWrath();
         }
