@@ -320,7 +320,6 @@ public class SoulbladeEffect : Effect
         {
             opponentsUnit.ActiveBonus.Res += resChange;
         }
-        
     }
 }
 

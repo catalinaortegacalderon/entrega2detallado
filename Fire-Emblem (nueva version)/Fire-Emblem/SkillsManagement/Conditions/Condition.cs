@@ -89,30 +89,16 @@ public class OpponentStartsCombat : Condition
     }
 }
 
-public class UseCertainWeapon : Condition
+public class UseCertainWeapons : Condition
 {
-    private string _usedWeapon;
-    public UseCertainWeapon(string weapon) : base()
+    private string[] _usedWeapon;
+    public UseCertainWeapons(string[] weapon) : base()
     {
         this._usedWeapon = weapon;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (myUnit.Weapon == this._usedWeapon) return true;
-        return false;
-    }
-}
-
-public class UseCertainWeaponAndStartCombat : Condition
-{
-    private string[] _weapons;
-    public UseCertainWeaponAndStartCombat(string[] weapon) : base()
-    {
-        this._weapons = weapon;
-    }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
-    {
-        if (this._weapons.Contains(myUnit.Weapon) && iAmAttacking) return true;
+        if (this._usedWeapon.Contains(myUnit.Weapon)) return true;
         return false;
     }
 }

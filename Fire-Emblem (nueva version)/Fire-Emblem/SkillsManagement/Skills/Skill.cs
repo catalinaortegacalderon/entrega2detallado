@@ -181,8 +181,8 @@ namespace Fire_Emblem;
         public TomePrecision() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapon("Magic");
-            this.Conditions[1] = new UseCertainWeapon("Magic");
+            this.Conditions[0] = new UseCertainWeapons(["Magic"]);
+            this.Conditions[1] = new UseCertainWeapons(["Magic"]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",6); 
             this.Effects[1] = new ChangeStatsIn("Spd", 6); 
@@ -212,8 +212,8 @@ namespace Fire_Emblem;
         public DeadlyBlade() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeaponAndStartCombat(["Sword"]);
-            this.Conditions[1] = new UseCertainWeaponAndStartCombat(["Sword"]);
+            this.Conditions[0] = new AndCondition([new UnitStartsCombat(), new UseCertainWeapons(["Sword"])]);
+            this.Conditions[1] = new AndCondition([new UnitStartsCombat(), new UseCertainWeapons(["Sword"])]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 8); 
             this.Effects[1] = new ChangeStatsIn("Spd", 8); 
@@ -561,8 +561,8 @@ namespace Fire_Emblem;
         public Agility(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapon(weapon);
-            this.Conditions[1] = new UseCertainWeapon(weapon);
+            this.Conditions[0] = new UseCertainWeapons([weapon]);
+            this.Conditions[1] = new UseCertainWeapons([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd", 12); 
             this.Effects[1] = new ChangeStatsIn( "Atk", -6); 
@@ -574,8 +574,8 @@ namespace Fire_Emblem;
         public Power(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapon(weapon);
-            this.Conditions[1] = new UseCertainWeapon(weapon);
+            this.Conditions[0] = new UseCertainWeapons([weapon]);
+            this.Conditions[1] = new UseCertainWeapons([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 10); 
             this.Effects[1] = new ChangeStatsIn( "Def", -10); 
@@ -587,8 +587,8 @@ namespace Fire_Emblem;
         public Focus(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapon(weapon);
-            this.Conditions[1] = new UseCertainWeapon(weapon);
+            this.Conditions[0] = new UseCertainWeapons([weapon]);
+            this.Conditions[1] = new UseCertainWeapons([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",10); 
             this.Effects[1] = new ChangeStatsIn( "Res", -10); 
@@ -792,7 +792,7 @@ namespace Fire_Emblem;
         public Soulblade() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UseCertainWeapon("Sword");
+            this.Conditions[0] = new UseCertainWeapons(["Sword"]);
             this.Effects = new Effect[1];
             this.Effects[0] = new SoulbladeEffect();
         }

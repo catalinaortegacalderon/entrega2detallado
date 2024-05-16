@@ -20,7 +20,6 @@ public class ExtraDamageReduction: Effect
         else if (this.Type == "First Attack")
         {
             myUnit.DamageEffects.ExtraDamageFirstAttack= myUnit.DamageEffects.ExtraDamageFirstAttack + this.amount;
-            Console.WriteLine("paso por donde quiero");
         }
         else if (this.Type == "Followup")
         {

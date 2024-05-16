@@ -8,9 +8,8 @@ public class PoeticJustice : Skill
         this.Conditions[0] = new AlwaysTrue();
         this.Conditions[1] = new AlwaysTrue();
         this.Conditions[1].ChangePriorityBecauseOfSecondCategoryEffect(2);
-        this.Effects = new Effect[3];
+        this.Effects = new Effect[2];
         this.Effects[0] = new ChangeRivalsStatsIn("Spd",-4);
-        // arreglar esto, depende del damage del rival
-        this.Effects[2] = new PercentualDamageReduction(0.7, "All");
+        this.Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentaje( "All",  "Atk", 0.15);
     }
 }
