@@ -180,11 +180,11 @@ public class CurrentOponentIsAlsoTheLastOponent: Condition
     
 }
 
-public class RivalStartsCombatOrHasFullHP: Condition
+public class RivalHasFullHP: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
     {
-        if (opponentsUnit.CurrentHp == opponentsUnit.HpMax || iAmAttacking == false) return true;
+        if (opponentsUnit.CurrentHp == opponentsUnit.HpMax) return true;
         return false;
     }
     

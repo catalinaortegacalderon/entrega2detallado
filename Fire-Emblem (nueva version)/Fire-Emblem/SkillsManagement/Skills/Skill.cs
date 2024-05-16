@@ -526,8 +526,8 @@ namespace Fire_Emblem;
         public BeliefInLove() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new RivalStartsCombatOrHasFullHP();
-            this.Conditions[1] = new RivalStartsCombatOrHasFullHP();
+            this.Conditions[0] = new OrCondition([new RivalHasFullHP(), new OpponentStartsCombat()] );
+            this.Conditions[1] = new OrCondition([new RivalHasFullHP(), new OpponentStartsCombat()] );
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -5); 
             this.Effects[1] = new ChangeRivalsStatsIn( "Def", -5); 
