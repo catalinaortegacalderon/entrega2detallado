@@ -404,9 +404,9 @@ public class SkillConstructor
         { 
             skills[skillsCounter] = new PoeticJustice();
         }
-        else if (skillString == "Laguz Friend:")
+        else if (skillString == "Laguz Friend")
         { 
-            skills[skillsCounter] = new PoeticJustice();
+            skills[skillsCounter] = new LaguzFriend();
         }
         else if (skillString == "Chivalry")
         { 
