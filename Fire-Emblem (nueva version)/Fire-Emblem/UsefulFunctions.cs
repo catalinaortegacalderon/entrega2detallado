@@ -1,6 +1,7 @@
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
+using Fire_Emblem_Model;
 
 public class UsefulFunctions
 {

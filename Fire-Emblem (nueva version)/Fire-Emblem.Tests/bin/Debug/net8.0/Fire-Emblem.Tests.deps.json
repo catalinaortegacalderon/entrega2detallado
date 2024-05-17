@@ -1024,10 +1024,19 @@
       "xunit.runner.visualstudio/2.5.3": {},
       "Fire-Emblem/1.0.0": {
         "dependencies": {
+          "Fire-Emblem-Model": "1.0.0",
           "Fire-Emblem-View": "1.0.0"
         },
         "runtime": {
           "Fire-Emblem.dll": {}
+        }
+      },
+      "Fire-Emblem-Model/1.0.0": {
+        "dependencies": {
+          "Fire-Emblem-View": "1.0.0"
+        },
+        "runtime": {
+          "Fire-Emblem-Model.dll": {}
         }
       },
       "Fire-Emblem-View/1.0.0": {
@@ -1667,6 +1676,11 @@
       "hashPath": "xunit.runner.visualstudio.2.5.3.nupkg.sha512"
     },
     "Fire-Emblem/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fire-Emblem-Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

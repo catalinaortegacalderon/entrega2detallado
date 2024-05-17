@@ -214,3 +214,8 @@ C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva 
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\obj\Debug\net8.0\Fire-Emblem.Tests.pdb
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\obj\Debug\net8.0\Fire-Emblem.Tests.genruntimeconfig.cache
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\obj\Debug\net8.0\ref\Fire-Emblem.Tests.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.deps.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.runtimeconfig.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.exe
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem.Tests\bin\Debug\net8.0\Fire-Emblem-Model.pdb

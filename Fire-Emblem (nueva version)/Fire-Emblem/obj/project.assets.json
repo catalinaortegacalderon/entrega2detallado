@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Fire-Emblem-Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Fire-Emblem-View": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Fire-Emblem-Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fire-Emblem-Model.dll": {}
+        }
+      },
       "Fire-Emblem-View/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "Fire-Emblem-Model/1.0.0": {
+      "type": "project",
+      "path": "../Fire-Emblem-Model/Fire-Emblem-Model.csproj",
+      "msbuildProject": "../Fire-Emblem-Model/Fire-Emblem-Model.csproj"
+    },
     "Fire-Emblem-View/1.0.0": {
       "type": "project",
       "path": "../Fire-Emblem-View/Fire-Emblem-View.csproj",
@@ -23,6 +41,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Fire-Emblem-Model >= 1.0.0",
       "Fire-Emblem-View >= 1.0.0"
     ]
   },
@@ -51,6 +70,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+            "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
+              "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
+            },
             "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
               "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj"
             }

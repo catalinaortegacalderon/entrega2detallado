@@ -1,5 +1,6 @@
 namespace Fire_Emblem;
 using Fire_Emblem_View;
+using Fire_Emblem_Model;
 
 public class GameAttacksController
 {
