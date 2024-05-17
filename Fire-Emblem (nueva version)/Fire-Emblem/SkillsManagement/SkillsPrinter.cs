@@ -62,14 +62,3 @@ public class SkillsPrinter
         
     }
 }
-
-//33 Edelgard realizar´ a +75 da~ no extra en cada ataque
-//34 Edelgard realizar´ a +11 da~ no extra en su primer ataque
-//35 Edelgard realizar´ a +185 da~no extra en su Follow-Up
-//36 Edelgard reducir´a el da~no de los ataques del rival en un 48%
-//    37 Edelgard reducir´a el da~no del primer ataque del rival en un 63%
-//    38 Edelgard reducir´a el da~no del Follow-Up del rival en un 10%
- //   39 Edelgard recibir´a-24 da~no en cada ataque
-
- 
- // OBLIGATORIO: EMPEZAR A USAR LOGS DE FIRST ATTACK, SECOND ATTACK, RIVALS ATACK ....
