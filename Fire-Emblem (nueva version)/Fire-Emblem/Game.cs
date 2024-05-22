@@ -27,7 +27,7 @@ public class Game
         {
             TryToPlay();
         }
-        catch (ApplicationException)
+        catch (InvalidTeamException)
         {
             _view.WriteLine("Archivo de equipos no válido");
         }
@@ -51,7 +51,7 @@ public class Game
         int fileNumInput = Convert.ToInt32(_view.ReadLine());
         if (!Utils.CheckIfGameIsValid(files[fileNumInput]))
         { 
-            throw new ApplicationException("Invalid team.");
+            throw new InvalidTeamException();
         }
         return files[fileNumInput]; 
     }
