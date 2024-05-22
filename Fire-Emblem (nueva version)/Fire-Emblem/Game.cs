@@ -23,9 +23,15 @@ public class Game
 
     public void Play()
     {
-        if (VerifyIfTeamsAreValid(out var files, out var fileNumberInput)) return;
+        if (VerifyIfTeamsAreValid(out var files, out var fileNumberInput))
+        {
+            return;
+        }
         _gameAttacksController = UsefulFunctions.BuildGameController(files[fileNumberInput], _view);
-        while (_gameAttacksController.IsGameTerminated() == false) PlayOneRound();
+        while (_gameAttacksController.IsGameTerminated() == false)
+        {
+            PlayOneRound();
+        }
         _view.WriteLine("Player " + (_gameAttacksController.GetWinner()) + " ganó");
     }
 
