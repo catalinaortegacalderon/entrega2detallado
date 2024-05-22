@@ -3,7 +3,7 @@ using Fire_Emblem_View;
 using System.Text.Json;
 using Fire_Emblem_Model;
 
-public class UsefulFunctions
+public class Utils
 {
     public static bool CheckIfGameIsValid(string file)
     {

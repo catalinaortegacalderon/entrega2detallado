@@ -7,7 +7,7 @@ public class Game
 {
     private View _view;
     private string _teamsFolder;
-    private GameAttacksController _gameAttacksController;
+    private GameAttacksController _attackController;
     private string _currentRoundsPlayer1LooserUnitsName;
     private string _currentRoundsPlayer2LooserUnitsName;
     private int _currentUnitNumberOfPlayer1;
@@ -23,29 +23,50 @@ public class Game
 
     public void Play()
     {
-        if (VerifyIfTeamsAreValid(out var files, out var fileNumberInput))
+        try
         {
-            return;
+            TryToPlay();
         }
-        _gameAttacksController = UsefulFunctions.BuildGameController(files[fileNumberInput], _view);
-        while (_gameAttacksController.IsGameTerminated() == false)
+        catch (ApplicationException)
+        {
+            _view.WriteLine("Archivo de equipos no válido");
+        }
+    }
+
+    public void TryToPlay()
+    {
+        string teamFile = GetTeamFile();
+        _attackController = Utils.BuildGameController(teamFile, _view);
+        while (_attackController.IsGameTerminated() == false)
         {
             PlayOneRound();
         }
-        _view.WriteLine("Player " + (_gameAttacksController.GetWinner()) + " ganó");
+        _view.WriteLine("Player " + (_attackController.GetWinner()) + " ganó");
     }
-
+    
+    private string GetTeamFile() 
+    { 
+        string[] files = ReadTeamsFiles();
+        ShowTeamFilesToUser(files);
+        int fileNumInput = Convert.ToInt32(_view.ReadLine());
+        if (!Utils.CheckIfGameIsValid(files[fileNumInput]))
+        { 
+            throw new ApplicationException("Invalid team.");
+        }
+        return files[fileNumInput]; 
+    }
+    
     private void PlayOneRound()
     {
         SetRoundsParameters();
-        if (_gameAttacksController.GetCurrentAttacker() == 0) Player1StartsRound();
-        else if (_gameAttacksController.GetCurrentAttacker() == 1) Player2StartsRound();
+        if (_attackController.GetCurrentAttacker() == 0) Player1StartsRound();
+        else if (_attackController.GetCurrentAttacker() == 1) Player2StartsRound();
         _currentRound++;
     }
 
     private void SetRoundsParameters()
     {
-        _gameAttacksController.RestartRound();
+        _attackController.RestartRound();
         _currentRoundsPlayer1LooserUnitsName = "";
         _currentRoundsPlayer2LooserUnitsName = "";
     }
@@ -54,33 +75,33 @@ public class Game
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _gameAttacksController.SetCurrentAttacker(1);
-        _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.SetCurrentAttacker(1);
+        _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer1First();
         UpdateGameLogs();
-        _gameAttacksController.SetCurrentAttacker(1);
+        _attackController.SetCurrentAttacker(1);
     }
     
     private void Player2StartsRound()
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _gameAttacksController.SetCurrentAttacker(0);
-        _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.SetCurrentAttacker(0);
+        _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHpPrintingPlayer2First();
         UpdateGameLogs();
-        _gameAttacksController.SetCurrentAttacker(0);
+        _attackController.SetCurrentAttacker(0);
     }
 
     private void AskBothPlayersForTheChosenUnit()
     {
-        if (_gameAttacksController.GetCurrentAttacker() == 0)
+        if (_attackController.GetCurrentAttacker() == 0)
         {
             _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
             _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
@@ -94,16 +115,10 @@ public class Game
 
     private bool VerifyIfTeamsAreValid(out string[] files, out int fileNumberInput)
     {
-        _view.WriteLine("Elige un archivo para cargar los equipos");
-        files = Directory.GetFiles(_teamsFolder);
-        int filesCounter = 0;
-        foreach (string archivo in files)
-        {
-            _view.WriteLine(filesCounter + ": " + Path.GetFileName(archivo));
-            filesCounter++;
-        }
+        files = ReadTeamsFiles();
+        ShowTeamFilesToUser(files);
         fileNumberInput = Convert.ToInt32(_view.ReadLine());
-        if (UsefulFunctions.CheckIfGameIsValid(files[fileNumberInput]) == false)
+        if (Utils.CheckIfGameIsValid(files[fileNumberInput]) == false)
         {
             _view.WriteLine("Archivo de equipos no válido");
             return true;
@@ -111,11 +126,29 @@ public class Game
         return false;
     }
 
+    private void ShowTeamFilesToUser(string[] files)
+    {
+        _view.WriteLine("Elige un archivo para cargar los equipos");
+        int filesCounter = 0;
+        foreach (string archivo in files)
+        {
+            _view.WriteLine(filesCounter + ": " + Path.GetFileName(archivo));
+            filesCounter++;
+        }
+    }
+
+    private string[] ReadTeamsFiles()
+    {
+        string[] files = Directory.GetFiles(_teamsFolder);
+        Array.Sort(files);
+        return files;
+    }
+
     private void PrintRound()
     {
-        string playerNumberString  = (_gameAttacksController.GetCurrentAttacker() == 0) ? "1" :  "2";
-        int numberOfThePlayersUnit  = (_gameAttacksController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
-        _view.WriteLine("Round " + _currentRound + ": " + _gameAttacksController.GetPlayers()[_gameAttacksController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
+        string playerNumberString  = (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
+        int numberOfThePlayersUnit  = (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
+        _view.WriteLine("Round " + _currentRound + ": " + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
     }
 
     private int AskAPlayerForTheChosenUnit(int playerNumber)
@@ -129,7 +162,7 @@ public class Game
         int unitNumberCounter = 0;
         string playerNumberString  = (playerNumber == 0) ? "1" :  "2";
         _view.WriteLine("Player "+ playerNumberString+ " selecciona una opción");
-        foreach (Unit unit in _gameAttacksController.GetPlayers()[playerNumber].Units)
+        foreach (Unit unit in _attackController.GetPlayers()[playerNumber].Units)
         {
             if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
             unitNumberCounter++;
@@ -140,13 +173,13 @@ public class Game
     {
         if (SecondPlayerCanDoAFollowup())
         {
-            _gameAttacksController.SetCurrentAttacker(1);
-            _currentRoundsPlayer1LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.SetCurrentAttacker(1);
+            _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (FirstPlayerCanDoAFollowup())
         {
-            _gameAttacksController.SetCurrentAttacker(0);
-            _currentRoundsPlayer2LooserUnitsName = _gameAttacksController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.SetCurrentAttacker(0);
+            _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
         {
@@ -157,28 +190,28 @@ public class Game
     private bool FirstPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
-               _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
-               + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-               +_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
+               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
+               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
+               _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
+               + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
+               +_attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
     }
 
     private bool SecondPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
-               5 + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
-                 + _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-                 +_gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _gameAttacksController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
+               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
+               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
+               5 + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
+                 + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
+                 +_attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
     }
 
     private void ResetUnitsBonus()
     {
-        _gameAttacksController.ResetAllSkills();
+        _attackController.ResetAllSkills();
     }
     
     private void UpdateGameLogs()
@@ -189,7 +222,7 @@ public class Game
 
     private void UpdateAttacks()
     {
-        _gameAttacksController.UpdateAttacks();
+        _attackController.UpdateAttacks();
     }
 
     private bool Player2LoosesRound()
@@ -209,7 +242,7 @@ public class Game
 
     private void UpdateLastOponent()
     {
-        _gameAttacksController.UpdateLastOpponents();
+        _attackController.UpdateLastOpponents();
     }
 
     private void ShowLeftoverHpPrintingPlayer1First()
@@ -272,7 +305,7 @@ public class Game
         {
             unitNumber = _currentUnitNumberOfPlayer2;
         }
-        return _gameAttacksController.GetPlayers()[player].Units[unitNumber].Name;
+        return _attackController.GetPlayers()[player].Units[unitNumber].Name;
     }
     
     private int GetPlayersHp(int player)
@@ -283,7 +316,7 @@ public class Game
         {
             unitNumber = _currentUnitNumberOfPlayer2;
         }
-        return _gameAttacksController.GetPlayers()[player].Units[unitNumber].CurrentHp;
+        return _attackController.GetPlayers()[player].Units[unitNumber].CurrentHp;
     }
     
 }
