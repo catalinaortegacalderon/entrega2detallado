@@ -4,7 +4,6 @@ using System.Collections;
 namespace Fire_Emblem_Model.GameDataStructures.Lists;
 
 
-
 public class UnitsList : IEnumerable<Unit>
 {
     private List<Unit> _units = new List<Unit>(3);

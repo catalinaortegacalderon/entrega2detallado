@@ -7,5 +7,5 @@ public class Player
     public List<Unit> Units = new List<Unit>(3);
     
     // abajo es la lista encapsulada
-    public UnitsList UnitsList = new UnitsList();
+    //public UnitsList Units = new UnitsList();
 }

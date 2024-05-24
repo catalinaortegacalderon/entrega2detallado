@@ -111,19 +111,32 @@ public class Utils
     {
         var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);
         CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
-        var firstPlayer = CreatePlayers(unitCounters, units, out var secondPlayer);
-        return new GameAttacksController(firstPlayer, secondPlayer);
+        Player[] players = CreatePlayers(unitCounters, units);
+        //var firstPlayer = CreatePlayers(unitCounters, units, out var secondPlayer);
+        //return new GameAttacksController(firstPlayer, secondPlayer);
+        return new GameAttacksController(players[0], players[1]);
     }
 
-    private static Player CreatePlayers(int[] unitCounters, Unit[][] units, out Player jugador2)
+    private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)
     {
+        
         Player jugador1 = new Player();
+        Player jugador2 = new Player();
         jugador1.AmountOfUnits = unitCounters[0];
+        //int unitCounter = 0;
+        //foreach (var unit in units)
+        //{
+        //    jugador1.Units.AddUnit(unitCounter, units[0].ToList()[unitCounter]);
+        //    unitCounter++;
+        //
+        //}
         jugador1.Units = units[0].ToList();
+        // OJO, ARRAY DISTINTO DE LISTA, ARRAY TIENE LARGO FIJO, LISTA NO
         jugador2 = new Player();
         jugador2.AmountOfUnits = unitCounters[1];
         jugador2.Units = units[1].ToList();
-        return jugador1;
+        
+        return new Player[]{jugador1, jugador2};
     }
 
     private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)
