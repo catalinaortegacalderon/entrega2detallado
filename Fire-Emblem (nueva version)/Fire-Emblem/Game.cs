@@ -148,6 +148,7 @@ public class Game
     {
         string playerNumberString  = (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
         int numberOfThePlayersUnit  = (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
+        // train wrecks: poner variables entregmedio
         _view.WriteLine("Round " + _currentRound + ": " + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
     }
 

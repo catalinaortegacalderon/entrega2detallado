@@ -168,7 +168,6 @@ public class Utils
                     Convert.ToInt32(unit.Def), Convert.ToInt32(unit.Res));
             }
         }
-
         return unitInfo;
     }
 

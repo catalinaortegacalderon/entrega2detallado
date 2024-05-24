@@ -3,11 +3,17 @@ using Fire_Emblem_Model;
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 
+// mover a view
+
 public class SkillsPrinter
 {
     public static void PrintBonus(View view, Unit unit)
     {
-        if (unit.ActiveBonus.Attk > 0) view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.Attk);
+        if (unit.ActiveBonus.Attk > 0)
+        {
+            view.WriteLine(unit.Name + " obtiene Atk+" 
+                                     + unit.ActiveBonus.Attk);
+        }
         if (unit.ActiveBonus.Spd > 0) view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.Spd);
         if (unit.ActiveBonus.Def > 0) view.WriteLine(unit.Name + " obtiene Def+" + unit.ActiveBonus.Def);
         if (unit.ActiveBonus.Res > 0) view.WriteLine(unit.Name + " obtiene Res+" + unit.ActiveBonus.Res);

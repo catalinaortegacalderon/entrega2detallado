@@ -5,6 +5,7 @@ using Fire_Emblem_Model;
 public class GameAttacksController
 {
     public Player[] Players = new Player[2];
+    //public Player[] Players;
     private int _currentAttacker;
     private bool _gameIsTerminated;
     private int _winner;
