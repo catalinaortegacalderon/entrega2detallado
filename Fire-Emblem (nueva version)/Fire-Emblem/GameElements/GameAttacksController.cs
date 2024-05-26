@@ -131,6 +131,8 @@ public class GameAttacksController
             _currentDefensiveUnit = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
 
         }
+        _currentAttackingUnit.IsAttacking = true;
+        _currentDefensiveUnit.IsAttacking = false;
     }
 
     private void SetDefendorsNewHp(int secondPlayersCurrentUnitNumber, int attackValue)
