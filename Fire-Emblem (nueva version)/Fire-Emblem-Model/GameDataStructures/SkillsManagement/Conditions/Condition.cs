@@ -163,7 +163,7 @@ public class CurrentOpponentIsAlsoTheLastOpponentCondition: Condition
     
 }
 
-public class OpponentHasFullHPCondition: Condition
+public class OpponentHasFullHpCondition: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -173,25 +173,10 @@ public class OpponentHasFullHPCondition: Condition
     
 }
 
-public class OpponentStartsCombatWithCertainWeapon: Condition
+public class OpponentUsesCertainWeaponCondition: Condition
 {
     private String[] _weapons;
-    public OpponentStartsCombatWithCertainWeapon(String[] weapons) : base()
-    {
-        this._weapons = weapons;
-    }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
-    {
-        if (!myUnit.IsAttacking && this._weapons.Contains(opponentsUnit.Weapon)) return true;
-        return false;
-    }
-    
-}
-
-public class OpponentUsesCertainWeapon: Condition
-{
-    private String[] _weapons;
-    public OpponentUsesCertainWeapon(String[] weapons) : base()
+    public OpponentUsesCertainWeaponCondition(String[] weapons) : base()
     {
         this._weapons = weapons;
     }
@@ -214,6 +199,23 @@ public class OpponentStartsAttackOrHasHpGreaterThan : Condition
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
         if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage || !myUnit.IsAttacking)
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
+public class OpponentHasHpGreaterThan : Condition
+{
+    private double _percentage;
+    public OpponentHasHpGreaterThan(double percentage) : base()
+    {
+        this._percentage = percentage;
+    }
+    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    {
+        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage)
         {
             return true;
         }

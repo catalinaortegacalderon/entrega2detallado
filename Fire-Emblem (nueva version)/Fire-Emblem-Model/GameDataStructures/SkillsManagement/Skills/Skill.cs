@@ -526,8 +526,8 @@ namespace Fire_Emblem_Model;
         public BeliefInLove() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OrCondition([new OpponentHasFullHPCondition(), new OpponentStartsCombatCondition()] );
-            this.Conditions[1] = new OrCondition([new OpponentHasFullHPCondition(), new OpponentStartsCombatCondition()] );
+            this.Conditions[0] = new OrCondition([new OpponentHasFullHpCondition(), new OpponentStartsCombatCondition()] );
+            this.Conditions[1] = new OrCondition([new OpponentHasFullHpCondition(), new OpponentStartsCombatCondition()] );
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -5); 
             this.Effects[1] = new ChangeRivalsStatsIn( "Def", -5); 
@@ -600,9 +600,9 @@ namespace Fire_Emblem_Model;
         public CloseDef() : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
-            this.Conditions[1] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
-            this.Conditions[2] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[0] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[1] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[2] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( "Def",8); 
             this.Effects[1] = new ChangeStatsIn( "Res", 8); 
@@ -615,9 +615,9 @@ namespace Fire_Emblem_Model;
         public DistantDef() : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new OpponentStartsCombatWithCertainWeapon(["Magic", "Bow"]);
-            this.Conditions[1] = new OpponentStartsCombatWithCertainWeapon(["Magic", "Bow"]);
-            this.Conditions[2] = new OpponentStartsCombatWithCertainWeapon(["Magic", "Bow"]);
+            this.Conditions[0] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Magic", "Bow"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[1] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Magic", "Bow"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[2] = new AndCondition([ new OpponentUsesCertainWeaponCondition(["Magic", "Bow"]), new OpponentStartsCombatCondition()]);
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( "Def", 8); 
             this.Effects[1] = new ChangeStatsIn( "Res", 8); 
@@ -708,11 +708,11 @@ namespace Fire_Emblem_Model;
         public DragonSkin() : base()
         {
             this.Conditions = new Condition[5];
-            this.Conditions[0] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[1] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[2] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[3] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[4] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[0] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[1] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[2] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[3] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[4] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
             this.Effects = new Effect[5];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Spd", 6); 
