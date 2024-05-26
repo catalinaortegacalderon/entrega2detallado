@@ -1,3 +1,5 @@
+using Fire_Emblem_Model.GameDataStructures.Lists;
+
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 using Fire_Emblem_Model;
@@ -64,7 +66,7 @@ public class GameAttacksController
         {
             loosersName = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
-            EliminateLooserUnitOfPlayer1();
+            EliminateLooserUnit(Players[0], _firstPlayersCurrentUnitNumber);
             return loosersName;
         }
         else
@@ -81,7 +83,7 @@ public class GameAttacksController
         {
             loosersName = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
-            EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
+            EliminateLooserUnit(Players[1], _secondPlayersCurrentUnitNumber);
             return loosersName;
         }
         else
@@ -93,18 +95,26 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
-        ActivateAttackersUnitSkills();
+        ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
+        //ActivateAttackersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
         ActivateDefensorsUnitSkills();
     }
 
-    private void EliminateLooserUnitOfPlayer1()
+    private void EliminateLooserUnit(Player player, int unitIndex)
     {
-        Players[0].Units.EliminateUnit(_firstPlayersCurrentUnitNumber);
-        Players[0].AmountOfUnits = Players[0].AmountOfUnits - 1;
-        if (Players[0].AmountOfUnits == 0)
+        player.Units.EliminateUnit(unitIndex);
+        player.AmountOfUnits = player.AmountOfUnits - 1;
+        if (player.AmountOfUnits == 0)
         {
+            if (player.PlayerNumber == 0)
+            {
+                this._winner = 1;
+            }
+            else
+            {
+                this._winner = 0;
+            }
             this._gameIsTerminated = true;
-            this._winner = 1;
         }
     }
 
@@ -128,26 +138,15 @@ public class GameAttacksController
         _currentDefensiveUnit.CurrentHp -= attackValue;
     }
 
-    private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
+    private void ActivateOnePlayersUnitSkills(Unit targetUnit, Unit opponentsUnit)
     {
-        Players[1].Units.EliminateUnit(_secondPlayersCurrentUnitNumber);
-        Players[1].AmountOfUnits = Players[1].AmountOfUnits - 1;
-        if (Players[1].AmountOfUnits == 0)
+        foreach (Skill skill in targetUnit.Skills)
         {
-            this._gameIsTerminated = true;
-            this._winner = 0;
+            skill.ApplyFirstCategorySkills(targetUnit, opponentsUnit, true);
         }
-    }
-
-    private void ActivateAttackersUnitSkills()
-    {
-        foreach (Skill habilidad in _currentAttackingUnit.Skills)
+        foreach (Skill skill in targetUnit.Skills)
         {
-            habilidad.ApplyFirstCategorySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
-        }
-        foreach (Skill habilidad in _currentAttackingUnit.Skills)
-        {
-            habilidad.ApplySecondCategorySkills(_currentAttackingUnit, _currentDefensiveUnit, true);
+            skill.ApplySecondCategorySkills(targetUnit, opponentsUnit, true);
         }
     }
     private void ActivateDefensorsUnitSkills()

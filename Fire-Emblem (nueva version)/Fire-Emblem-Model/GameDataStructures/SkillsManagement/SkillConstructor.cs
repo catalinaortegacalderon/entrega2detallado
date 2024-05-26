@@ -12,7 +12,6 @@ public class SkillConstructor
         if (skillString == "HP +15")
         {
             skills.AddSkill(skillsCounter, new HpPlus15());
-            //skills.GetSkillByIndex(skillsCounter) = new HpPlus15());
         }
         else if (skillString == "Speed +5")
         {

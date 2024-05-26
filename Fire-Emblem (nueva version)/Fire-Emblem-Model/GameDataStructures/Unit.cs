@@ -15,6 +15,7 @@ public class Unit
     public int Spd;
     public int Def;
     public int Res;
+    public int Role;
     public BonusPenaltiesAndNeutralizations ActiveBonus = DataStructuresFunctions.CreateStructure(0);
     public BonusPenaltiesAndNeutralizations ActivePenalties = DataStructuresFunctions.CreateStructure(0);
     public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = DataStructuresFunctions.CreateStructure(1);
