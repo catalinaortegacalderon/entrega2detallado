@@ -12,9 +12,4 @@
       <ProjectReference Include="..\Fire-Emblem-View\Fire-Emblem-View.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="GameDataStructures\SkillsManagement\Effects\NeutralizationEffects\" />
-      <Folder Include="GameDataStructures\SkillsManagement\Effects\SpecificSkillEffects\" />
-    </ItemGroup>
-
 </Project>

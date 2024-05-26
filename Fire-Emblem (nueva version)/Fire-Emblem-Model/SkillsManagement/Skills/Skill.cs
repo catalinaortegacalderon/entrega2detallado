@@ -63,7 +63,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsInEffect( "Atk",6);
-            this.Effects[1] = new ChangeRivalsStatsInEffect("Atk", 6);
+            this.Effects[1] = new ChangeOpponentsStatsInEffect("Atk", 6);
         }
     }
 
@@ -458,7 +458,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Spd", -4); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Spd", -4); 
         }
     }
 
@@ -469,7 +469,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new OpponentStartsCombatCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Atk", -4); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -4); 
         }
     }
 
@@ -480,7 +480,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new OpponentIsAManCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Spd", -8); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Spd", -8); 
         }
     }
 
@@ -491,7 +491,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new OpponentIsAManCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Atk", -8); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -8); 
         }
     }
 
@@ -503,8 +503,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
             this.Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Atk", -3); 
-            this.Effects[1] = new ChangeRivalsStatsInEffect( "Spd", -3); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -3); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Spd", -3); 
         }
     }
 
@@ -517,7 +517,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new AlwaysTrueCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ReduceRivalsDefInPercentajeForFirstAttackEffect( 0.5); 
-            this.Effects[1] = new ReduceRivalsResInPercentageForFirstAttackEffect( 0.5); 
+            this.Effects[1] = new ReduceOpponentsResInPercentageForFirstAttackEffect( 0.5); 
         }
     }
 
@@ -529,8 +529,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new OrCondition([new OpponentHasFullHpCondition(), new OpponentStartsCombatCondition()] );
             this.Conditions[1] = new OrCondition([new OpponentHasFullHpCondition(), new OpponentStartsCombatCondition()] );
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Atk", -5); 
-            this.Effects[1] = new ChangeRivalsStatsInEffect( "Def", -5); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -5); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Def", -5); 
         }
     }
 
@@ -542,7 +542,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new NeutralizeOponentsBonusEffect(); 
+            this.Effects[0] = new NeutralizeOpponentsBonusEffect(); 
         }
     }
 
@@ -606,7 +606,7 @@ namespace Fire_Emblem_Model;
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsInEffect( "Def",8); 
             this.Effects[1] = new ChangeStatsInEffect( "Res", 8); 
-            this.Effects[2] = new NeutralizeOponentsBonusEffect(); 
+            this.Effects[2] = new NeutralizeOpponentsBonusEffect(); 
         }
     }
 
@@ -621,7 +621,7 @@ namespace Fire_Emblem_Model;
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsInEffect( "Def", 8); 
             this.Effects[1] = new ChangeStatsInEffect( "Res", 8); 
-            this.Effects[2] = new NeutralizeOponentsBonusEffect(); 
+            this.Effects[2] = new NeutralizeOpponentsBonusEffect(); 
         }
     }
 
@@ -635,8 +635,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[2] = new AlwaysTrueCondition();
             this.Conditions[3] = new AlwaysTrueCondition();
             this.Effects = new Effect[4];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( firstStat, -3); 
-            this.Effects[1] = new ChangeRivalsStatsInEffect( secondStat, -3); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( firstStat, -3); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( secondStat, -3); 
             this.Effects[2] = new NeutralizeOneOfOpponentsBonusEffect( firstStat); 
             this.Effects[3] = new NeutralizeOneOfOpponentsBonusEffect( secondStat); 
         }
@@ -718,7 +718,7 @@ namespace Fire_Emblem_Model;
             this.Effects[1] = new ChangeStatsInEffect( "Spd", 6); 
             this.Effects[2] = new ChangeStatsInEffect( "Def", 6);
             this.Effects[3] = new ChangeStatsInEffect( "Res", 6);
-            this.Effects[4] = new NeutralizeOponentsBonusEffect();
+            this.Effects[4] = new NeutralizeOpponentsBonusEffect();
         }
     }
 
@@ -734,12 +734,12 @@ namespace Fire_Emblem_Model;
             this.Conditions[4] = new AlwaysTrueCondition();
             this.Conditions[5] = new AlwaysTrueCondition();
             this.Effects = new Effect[6];
-            this.Effects[0] = new ChangeRivalsStatsInEffect( "Atk", -5); 
-            this.Effects[1] = new ChangeRivalsStatsInEffect( "Spd", -5); 
-            this.Effects[2] = new ChangeRivalsStatsInEffect( "Def", -5);
-            this.Effects[3] = new ChangeRivalsStatsInEffect( "Res", -5);
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -5); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Spd", -5); 
+            this.Effects[2] = new ChangeOpponentsStatsInEffect( "Def", -5);
+            this.Effects[3] = new ChangeOpponentsStatsInEffect( "Res", -5);
             this.Effects[4] = new NeutralizePenaltiesEffect();
-            this.Effects[5] = new NeutralizeOponentsBonusEffect();
+            this.Effects[5] = new NeutralizeOpponentsBonusEffect();
         }
     }
 
