@@ -1,6 +1,6 @@
 namespace ConsoleApp1.DataTypes;
 
-public enum StatType
+public enum Weapon
 {
-    Atk, Res, 
+    
 }
