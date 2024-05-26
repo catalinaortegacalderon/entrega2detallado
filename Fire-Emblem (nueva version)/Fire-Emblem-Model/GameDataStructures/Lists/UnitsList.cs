@@ -6,7 +6,6 @@ namespace Fire_Emblem_Model.GameDataStructures.Lists;
 
 public class UnitsList : IEnumerable<Unit>
 {
-    //private List<Unit> _units = new List<Unit>(3);
     private List<Unit> _units = new List<Unit> { new Unit(), new Unit(), new Unit() };
     
     public void Construct()
@@ -21,7 +20,6 @@ public class UnitsList : IEnumerable<Unit>
     
     public void AddUnit(int index, Unit unit)
     {
-        //_units.Add(unit);
         _units[index] = unit;
     }
 
@@ -32,17 +30,15 @@ public class UnitsList : IEnumerable<Unit>
     
     public IEnumerator<Unit> GetEnumerator()
     {
-        // Loop through each Unit in the Units list
         foreach (Unit unit in _units)
         {
-            // Yield the current Unit for iteration
             yield return unit;
         }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return _units.GetEnumerator(); // Forward to the generic implementation
+        return _units.GetEnumerator();
     }
     
 }
