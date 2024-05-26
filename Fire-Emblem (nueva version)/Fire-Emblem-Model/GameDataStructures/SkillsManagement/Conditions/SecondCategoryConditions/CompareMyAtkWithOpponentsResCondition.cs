@@ -1,6 +1,6 @@
 namespace Fire_Emblem_Model;
 
-public class CompareMyAtkWithOpponentsRes : SecondCategoryCondition
+public class CompareMyAtkWithOpponentsResCondition : SecondCategoryCondition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {

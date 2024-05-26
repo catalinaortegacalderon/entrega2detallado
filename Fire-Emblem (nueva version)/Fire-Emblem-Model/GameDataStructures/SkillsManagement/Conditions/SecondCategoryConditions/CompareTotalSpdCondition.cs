@@ -1,5 +1,5 @@
 namespace Fire_Emblem_Model;
-public class CompareTotalSpd : SecondCategoryCondition
+public class CompareTotalSpdCondition : SecondCategoryCondition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {

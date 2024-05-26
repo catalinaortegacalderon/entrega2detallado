@@ -1,15 +1,15 @@
 namespace Fire_Emblem_Model;
 
-public class RivalStartsAttackAndMyHpIsLessThanCondition : Condition
+public class OpponentHasHpGreaterThanCondition : Condition
 {
     private double _percentage;
-    public RivalStartsAttackAndMyHpIsLessThanCondition(double percentage) : base()
+    public OpponentHasHpGreaterThanCondition(double percentage) : base()
     {
         this._percentage = percentage;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
-        if (myUnit.CurrentHp <= myUnit.HpMax * this._percentage && !myUnit.IsAttacking)
+        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage)
         {
             return true;
         }

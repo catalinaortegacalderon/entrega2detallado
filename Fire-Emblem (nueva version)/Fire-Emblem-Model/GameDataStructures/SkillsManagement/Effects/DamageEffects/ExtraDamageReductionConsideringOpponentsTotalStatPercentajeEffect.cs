@@ -1,13 +1,13 @@
 
 namespace Fire_Emblem_Model;
 
-public class ExtraDamageReductionConsideringOpponentsTotalStatPercentaje: Effect
+public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: Effect
 {
     private string _type;
     private string _stat;
     private double _percentage;
     
-    public ExtraDamageReductionConsideringOpponentsTotalStatPercentaje( string type, string stat, double percentage) : base()
+    public ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( string type, string stat, double percentage) : base()
     {
         this._type = type;
         this._stat = stat;

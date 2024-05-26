@@ -24,19 +24,9 @@ public class Effect
     }
 }
 
-public class EmptyEffect : Effect
+public class ChangeHpInEffect : Effect
 {
-
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
-    {
-        return;
-    }
-}
-
-public class ChangeHpIn : Effect
-{
-    public ChangeHpIn(int amount) : base()
+    public ChangeHpInEffect(int amount) : base()
     {
         this.Amount = amount;
     }
@@ -53,10 +43,10 @@ public class ChangeHpIn : Effect
     }
 }
 
-public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
+public class ReduceRivalsDefInPercentajeForFirstAttackEffect : Effect
 {
     private double _reductionPercentaje;
-    public ReduceRivalsDefInPercentajeForFirstAttack(double reduction) : base()
+    public ReduceRivalsDefInPercentajeForFirstAttackEffect(double reduction) : base()
     {
         this._reductionPercentaje = reduction;
     }
@@ -69,10 +59,10 @@ public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
     }
 }
 
-public class ReduceRivalsResInPercentageForFirstAttack : Effect
+public class ReduceRivalsResInPercentageForFirstAttackEffect : Effect
 {
     private double _reductionPercentage;
-    public ReduceRivalsResInPercentageForFirstAttack(double reduction) : base()
+    public ReduceRivalsResInPercentageForFirstAttackEffect(double reduction) : base()
     {
         this._reductionPercentage = reduction;
     }
@@ -86,7 +76,7 @@ public class ReduceRivalsResInPercentageForFirstAttack : Effect
 }
 
 
-public class NeutralizeOponentsBonus : Effect
+public class NeutralizeOponentsBonusEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         
@@ -101,7 +91,7 @@ public class NeutralizeOponentsBonus : Effect
 }
 
 
-public class NeutralizePenalties : Effect
+public class NeutralizePenaltiesEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         
@@ -113,10 +103,10 @@ public class NeutralizePenalties : Effect
     }
 }
 
-public class ChangeStatsIn : Effect
+public class ChangeStatsInEffect : Effect
 {
     private String _stat;
-    public ChangeStatsIn(String stat, int amount) : base()
+    public ChangeStatsInEffect(String stat, int amount) : base()
     {
         this.Amount = amount;
         this._stat = stat;
@@ -148,11 +138,11 @@ public class ChangeStatsIn : Effect
     }
 }
 
-public class ChangeStatsInBasePercentage : Effect
+public class ChangeStatsInBasePercentageEffect : Effect
 {
     private String _stat;
     private double _percentage;
-    public ChangeStatsInBasePercentage(String stat, double percentage) : base()
+    public ChangeStatsInBasePercentageEffect(String stat, double percentage) : base()
     {
         this._percentage =  percentage;
         this._stat = stat;
@@ -185,10 +175,10 @@ public class ChangeStatsInBasePercentage : Effect
 }
 
 
-public class ChangeRivalsStatsIn : Effect
+public class ChangeRivalsStatsInEffect : Effect
 {
     private String _stat;
-    public ChangeRivalsStatsIn(String stat, int amount) : base()
+    public ChangeRivalsStatsInEffect(String stat, int amount) : base()
     {
         this.Amount = amount;
         this._stat = stat;
@@ -220,10 +210,10 @@ public class ChangeRivalsStatsIn : Effect
     }
 }
 
-public class NeutralizeOneOfOpponentsBonus : Effect
+public class NeutralizeOneOfOpponentsBonusEffect : Effect
 {
     private String _stat;
-    public NeutralizeOneOfOpponentsBonus(String stat) : base()
+    public NeutralizeOneOfOpponentsBonusEffect(String stat) : base()
     {
         this._stat = stat;
     }
@@ -238,10 +228,10 @@ public class NeutralizeOneOfOpponentsBonus : Effect
     }
 }
 
-public class NeutralizeOneOfMyBonus : Effect
+public class NeutralizeOneOfMyBonusEffect : Effect
 {
     private String _stat;
-    public NeutralizeOneOfMyBonus(String stat) : base()
+    public NeutralizeOneOfMyBonusEffect(String stat) : base()
     {
         this._stat = stat;
     }
@@ -256,11 +246,11 @@ public class NeutralizeOneOfMyBonus : Effect
     }
 }
 
-public class ChangeStatInPercentageOnlyForFirstAttack : Effect
+public class ChangeStatInPercentageOnlyForFirstAttackEffect : Effect
 {
     private String _stat;
     private double _percentage;
-    public ChangeStatInPercentageOnlyForFirstAttack(String stat, Double percentage) : base()
+    public ChangeStatInPercentageOnlyForFirstAttackEffect(String stat, Double percentage) : base()
     {
         this._stat = stat;
         this._percentage = percentage;
@@ -278,12 +268,12 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
     }
 }
 
-public class ChangeStatsInBasePlusOnePointForEvery : Effect
+public class ChangeStatsInBasePlusOnePointForEveryEffect : Effect
 {
     private string _stat;
     private int _baseIncrease;
     private int _divisor;
-    public ChangeStatsInBasePlusOnePointForEvery(String stat, int baseIncrease, int divisor) : base()
+    public ChangeStatsInBasePlusOnePointForEveryEffect(String stat, int baseIncrease, int divisor) : base()
     {
         this._stat = stat;
         this._divisor = divisor;

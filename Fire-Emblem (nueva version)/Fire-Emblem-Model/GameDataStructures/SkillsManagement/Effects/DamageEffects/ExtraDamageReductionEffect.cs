@@ -1,11 +1,11 @@
 namespace Fire_Emblem_Model;
 
-public class ExtraDamageReduction: Effect
+public class ExtraDamageReductionEffect: Effect
 {
     private string Type;
     private int amount;
     
-    public ExtraDamageReduction(int amount, string type) : base()
+    public ExtraDamageReductionEffect(int amount, string type) : base()
     {
         this.amount = amount;
         this.Type = type;

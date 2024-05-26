@@ -1,8 +1,8 @@
 namespace Fire_Emblem_Model;
 
-public class AbsolutDamageReduction : Effect
+public class AbsolutDamageReductionEffect : Effect
 {
-    public AbsolutDamageReduction(int amount) : base()
+    public AbsolutDamageReductionEffect(int amount) : base()
     {
         this.Amount = amount;
     }

@@ -1,6 +1,6 @@
 namespace Fire_Emblem_Model;
 
-public class UnitHasWeaponAdvantage : Condition
+public class MyUnitHasWeaponAdvantageCondition : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {

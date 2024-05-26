@@ -1,14 +1,10 @@
-
 namespace Fire_Emblem_Model;
 
-public class SecondCategoryEffect : Effect
+public class EmptyEffect : Effect
 {
-    
-    protected SecondCategoryEffect()
-    {
-        this.Priority = 2;
-    }
+
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         return;
     }

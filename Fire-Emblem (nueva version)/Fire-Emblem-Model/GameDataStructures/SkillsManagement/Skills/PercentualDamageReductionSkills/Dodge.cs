@@ -5,8 +5,8 @@ public class Dodge : Skill
     public Dodge() : base() 
     {
     this.Conditions = new Condition[1];
-    this.Conditions[0] = new CompareTotalSpd(); 
+    this.Conditions[0] = new CompareTotalSpdCondition(); 
     this.Effects = new Effect[1];
-    this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifference("Spd", 4); 
+    this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect("Spd", 4); 
     }
 }

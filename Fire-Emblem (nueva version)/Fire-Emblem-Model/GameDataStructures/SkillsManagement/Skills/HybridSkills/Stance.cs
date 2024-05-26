@@ -13,8 +13,8 @@ public class Stance : Skill
         this.Conditions[1] = new OpponentStartsCombatCondition();
         this.Conditions[2] = new OpponentStartsCombatCondition();
         this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeStatsIn(statThatChanges1, amount1); 
-        this.Effects[1] = new ChangeStatsIn(statThatChanges2, amount2); 
-        this.Effects[2] = new PercentualDamageReduction(0.9, "Followup"); 
+        this.Effects[0] = new ChangeStatsInEffect(statThatChanges1, amount1); 
+        this.Effects[1] = new ChangeStatsInEffect(statThatChanges2, amount2); 
+        this.Effects[2] = new PercentualDamageReductionEffect(0.9, "Followup"); 
     }
 }

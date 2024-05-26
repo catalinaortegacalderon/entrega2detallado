@@ -3,12 +3,12 @@ using System.Runtime.CompilerServices;
 
 namespace Fire_Emblem_Model;
 
-public class PercentualDamageReduction : Effect
+public class PercentualDamageReductionEffect : Effect
 {
     private string Type;
     private double percentaje;
     
-    public PercentualDamageReduction(double amount, string type) : base()
+    public PercentualDamageReductionEffect(double amount, string type) : base()
     {
         this.percentaje = amount;
         this.Type = type;

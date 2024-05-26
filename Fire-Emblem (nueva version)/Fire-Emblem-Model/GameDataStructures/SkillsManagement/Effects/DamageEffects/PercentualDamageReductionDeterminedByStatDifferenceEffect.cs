@@ -2,12 +2,12 @@ using System.Diagnostics;
 
 namespace Fire_Emblem_Model;
 
-public class PercentualDamageReductionDeterminedByStatDifference : Effect
+public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
 {
     private string stat;
     private int multiplicator;
     
-    public PercentualDamageReductionDeterminedByStatDifference(string stat, int multiplicator) : base()
+    public PercentualDamageReductionDeterminedByStatDifferenceEffect(string stat, int multiplicator) : base()
     {
         this.stat = stat;
         this.multiplicator = multiplicator;

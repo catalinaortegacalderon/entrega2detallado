@@ -9,9 +9,9 @@ public class AegisShield : Skill
         this.Conditions[1] = new AlwaysTrueCondition();
         this.Conditions[2] = new AlwaysTrueCondition();
         this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeStatsIn("Def", 6);
-        this.Effects[1] = new ChangeStatsIn("Res", 3);
-        this.Effects[2] = new PercentualDamageReduction(0.5, "First Attack");
+        this.Effects[0] = new ChangeStatsInEffect("Def", 6);
+        this.Effects[1] = new ChangeStatsInEffect("Res", 3);
+        this.Effects[2] = new PercentualDamageReductionEffect(0.5, "First Attack");
     }
     
 }
