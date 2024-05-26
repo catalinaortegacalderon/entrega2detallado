@@ -1,3 +1,5 @@
+using Fire_Emblem_Model.GameDataStructures.Lists;
+
 namespace Fire_Emblem_Model;
 
 public class SkillConstructor
@@ -5,292 +7,294 @@ public class SkillConstructor
     public static void Construct(Unit[][] units, int currentPlayerNumber, int[] unitCounters,
         string skillString, int skillsCounter)
     {
-        Skill[] skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
+        
+        SkillsList skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
         if (skillString == "HP +15")
         {
-            skills[skillsCounter] = new HpPlus15();
+            skills.AddSkill(skillsCounter, new HpPlus15());
+            //skills.GetSkillByIndex(skillsCounter) = new HpPlus15());
         }
         else if (skillString == "Speed +5")
         {
-            skills[skillsCounter] = new SpeedPlus5();
+            skills.AddSkill(skillsCounter, new SpeedPlus5());
         }
 
         else if (skillString == "Resolve")
         {
-            skills[skillsCounter] = new Resolve();
+            skills.AddSkill(skillsCounter, new Resolve());
         }
         else if (skillString == "Armored Blow")
         {
-            skills[skillsCounter] = new ArmoredBlow();
+            skills.AddSkill(skillsCounter, new ArmoredBlow());
         }
 
         else if (skillString == "Fair Fight")
         {
-            skills[skillsCounter] = new FairFight();
+            skills.AddSkill(skillsCounter, new FairFight());
         }
         else if (skillString == "Atk/Def +5")
         {
-            skills[skillsCounter] = new AtkAndDefPlus5();
+            skills.AddSkill(skillsCounter, new AtkAndDefPlus5());
         }
         else if (skillString == "Atk/Res +5")
         {
-            skills[skillsCounter] = new AtkAndResPlus5();
+            skills.AddSkill(skillsCounter, new AtkAndResPlus5());
         }
         else if (skillString == "Spd/Res +5")
         {
-            skills[skillsCounter] = new SpdAndResPlus5();
+            skills.AddSkill(skillsCounter, new SpdAndResPlus5());
         }
         else if (skillString == "Attack +6")
         {
-            skills[skillsCounter] = new AttackPlus6();
+            skills.AddSkill(skillsCounter, new AttackPlus6());
         }
         else if (skillString == "Bracing Blow")
         {
-            skills[skillsCounter] = new BracingBlow();
+            skills.AddSkill(skillsCounter, new BracingBlow());
         }
             
         else if (skillString == "Will to Win")
         {
-            skills[skillsCounter] = new WillToWin();
+            skills.AddSkill(skillsCounter, new WillToWin());
         }
         else if (skillString == "Tome Precision")
         {
-            skills[skillsCounter] = new TomePrecision();
+            skills.AddSkill(skillsCounter, new TomePrecision());
         }
         else if (skillString == "Defense +5")
         {
-            skills[skillsCounter] = new DefensePlus5();
+            skills.AddSkill(skillsCounter, new DefensePlus5());
         }
         else if (skillString == "Resistance +5")
         {
-            skills[skillsCounter] = new ResistancePlus5();
+            skills.AddSkill(skillsCounter, new ResistancePlus5());
         }
         else if (skillString == "Deadly Blade")
         {
-            skills[skillsCounter] = new DeadlyBlade();
+            skills.AddSkill(skillsCounter, new DeadlyBlade());
         }
         else if (skillString == "Death Blow")
         {
-            skills[skillsCounter] = new DeathBlow();
+            skills.AddSkill(skillsCounter, new DeathBlow());
         }
         else if (skillString == "Darting Blow")
         {
-            skills[skillsCounter] = new DartingBlow();
+            skills.AddSkill(skillsCounter, new DartingBlow());
         }
         else if (skillString == "Warding Blow")
         {
-            skills[skillsCounter] = new WardingBlow();
+            skills.AddSkill(skillsCounter, new WardingBlow());
         }
         else if (skillString == "Swift Sparrow")
         {
-            skills[skillsCounter] = new SwiftSparrow();
+            skills.AddSkill(skillsCounter, new SwiftSparrow());
         }
         else if (skillString == "Sturdy Blow")
         {
-            skills[skillsCounter] = new SturdyBlow();
+            skills.AddSkill(skillsCounter, new SturdyBlow());
         }
         else if (skillString == "Mirror Strike")
         {
-            skills[skillsCounter] = new MirrorStrike();
+            skills.AddSkill(skillsCounter, new MirrorStrike());
         }
         else if (skillString == "Steady Blow")
         {
-            skills[skillsCounter] = new SteadyBlow();
+            skills.AddSkill(skillsCounter, new SteadyBlow());
         }
         else if (skillString == "Swift Strike")
         {
-            skills[skillsCounter] = new SwiftStrike();
+            skills.AddSkill(skillsCounter, new SwiftStrike());
         }
         else if (skillString == "Brazen Atk/Spd")
         {
-            skills[skillsCounter] = new BrazenAtkSpd();
+            skills.AddSkill(skillsCounter, new BrazenAtkSpd());
         }
         else if (skillString == "Brazen Atk/Def")
         {
-            skills[skillsCounter] = new BrazenAtkDef();
+            skills.AddSkill(skillsCounter, new BrazenAtkDef());
         }
         else if (skillString == "Brazen Atk/Res")
         {
-            skills[skillsCounter] = new BrazenAtkRes();
+            skills.AddSkill(skillsCounter, new BrazenAtkRes());
         }
         else if (skillString == "Brazen Spd/Def")
         {
-            skills[skillsCounter] = new BrazenSpdDef();
+            skills.AddSkill(skillsCounter, new BrazenSpdDef());
         }
         else if (skillString == "Brazen Spd/Res")
         {
-            skills[skillsCounter] = new BrazenSpdRes();
+            skills.AddSkill(skillsCounter, new BrazenSpdRes());
         }
         else if (skillString == "Brazen Def/Res")
         {
-            skills[skillsCounter] = new BrazenDefRes();
+            skills.AddSkill(skillsCounter, new BrazenDefRes());
         }
         else if (skillString == "Fire Boost")
         {
-            skills[skillsCounter] = new FireBoost();
+            skills.AddSkill(skillsCounter, new FireBoost());
         }
         else if (skillString == "Wind Boost")
         {
-            skills[skillsCounter] = new WindBoost();
+            skills.AddSkill(skillsCounter, new WindBoost());
         }
         else if (skillString == "Earth Boost")
         {
-            skills[skillsCounter] = new EarthBoost();
+            skills.AddSkill(skillsCounter, new EarthBoost());
         }
         else if (skillString == "Water Boost")
         {
-            skills[skillsCounter] = new WaterBoost();
+            skills.AddSkill(skillsCounter, new WaterBoost());
         }
         else if (skillString == "Chaos Style")
         {
-            skills[skillsCounter] = new ChaosStyle();
+            skills.AddSkill(skillsCounter, new ChaosStyle());
         }
         else if (skillString == "Blinding Flash")
         {
-            skills[skillsCounter] = new BlindingFlash();
+            skills.AddSkill(skillsCounter, new BlindingFlash());
         }
         else if (skillString == "Not *Quite*")
         {
-            skills[skillsCounter] = new NotQuite();
+            skills.AddSkill(skillsCounter, new NotQuite());
         }
         else if (skillString == "Stunning Smile")
         {
-            skills[skillsCounter] = new StunningSmile();
+            skills.AddSkill(skillsCounter, new StunningSmile());
         }
         else if (skillString == "Disarming Sigh")
         {
-            skills[skillsCounter] = new DisarmingSigh();
+            skills.AddSkill(skillsCounter, new DisarmingSigh());
         }
         else if (skillString == "Charmer")
         {
-            skills[skillsCounter] = new Charmer();
+            skills.AddSkill(skillsCounter, new Charmer());
         }
         else if (skillString == "Luna")
         {
-            skills[skillsCounter] = new Luna();
+            skills.AddSkill(skillsCounter, new Luna());
         }
         else if (skillString == "Belief in Love")
         {
-            skills[skillsCounter] = new BeliefInLove();
+            skills.AddSkill(skillsCounter, new BeliefInLove());
         }
         else if (skillString == "Beorc's Blessing")
         {
-            skills[skillsCounter] = new BeorcsBlessing();
+            skills.AddSkill(skillsCounter, new BeorcsBlessing());
         }
         else if (skillString == "Agnea's Arrow")
         {
-            skills[skillsCounter] = new AgneasArrow();
+            skills.AddSkill(skillsCounter, new AgneasArrow());
         }
         else if (skillString == "Sword Agility")
         {
-            skills[skillsCounter] = new Agility("Sword");
+            skills.AddSkill(skillsCounter, new Agility("Sword"));
         }
         else if (skillString == "Lance Power")
         {
-            skills[skillsCounter] = new Power("Lance");
+            skills.AddSkill(skillsCounter, new Power("Lance"));
         }
         else if (skillString == "Sword Power")
         {
-            skills[skillsCounter] = new Power("Sword");
+            skills.AddSkill(skillsCounter, new Power("Sword"));
         }
         else if (skillString == "Bow Focus")
         {
-            skills[skillsCounter] = new Focus("Bow");
+            skills.AddSkill(skillsCounter, new Focus("Bow"));
         }
         else if (skillString == "Lance Agility")
         {
-            skills[skillsCounter] = new Agility("Lance");
+            skills.AddSkill(skillsCounter, new Agility("Lance"));
         }
         else if (skillString == "Axe Power")
         {
-            skills[skillsCounter] = new Power("Axe");
+            skills.AddSkill(skillsCounter, new Power("Axe"));
         }
         else if (skillString == "Bow Agility")
         {
-            skills[skillsCounter] = new Agility("Bow");
+            skills.AddSkill(skillsCounter, new Agility("Bow"));
         }
         else if (skillString == "Sword Focus")
         {
-            skills[skillsCounter] = new Focus("Sword");
+            skills.AddSkill(skillsCounter, new Focus("Sword"));
         }
         else if (skillString == "Close Def")
         {
-            skills[skillsCounter] = new CloseDef();
+            skills.AddSkill(skillsCounter, new CloseDef());
         }
         else if (skillString == "Distant Def")
         {
-            skills[skillsCounter] = new DistantDef();
+            skills.AddSkill(skillsCounter, new DistantDef());
         }
         else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
         {
-            skills[skillsCounter] = new Lull(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+            skills.AddSkill(skillsCounter, new Lull(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]));
         }
         else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
         {
-            skills[skillsCounter] = new Fort(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]);
+            skills.AddSkill(skillsCounter, new Fort(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
+                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]));
         }
         else if (skillString == "Life and Death")
         {
-            skills[skillsCounter] = new LifeAndDeath();
+            skills.AddSkill(skillsCounter, new LifeAndDeath());
         }
         else if (skillString == "Solid Ground")
         {
-            skills[skillsCounter] = new SolidGround();
+            skills.AddSkill(skillsCounter, new SolidGround());
         }
         else if (skillString == "Still Water")
         {
-            skills[skillsCounter] = new StillWater();
+            skills.AddSkill(skillsCounter, new StillWater());
         }
         else if (skillString == "Dragonskin")
         {
-            skills[skillsCounter] = new DragonSkin();
+            skills.AddSkill(skillsCounter, new DragonSkin());
         }
         else if (skillString == "Light and Dark")
         {
-            skills[skillsCounter] = new LightAndDark();
+            skills.AddSkill(skillsCounter, new LightAndDark());
         }
         else if (skillString == "Single-Minded")
         {
-            skills[skillsCounter] = new SingleMinded();
+            skills.AddSkill(skillsCounter, new SingleMinded());
         }
         else if (skillString == "Ignis")
         {
-            skills[skillsCounter] = new Ignis();
+            skills.AddSkill(skillsCounter, new Ignis());
         }
         else if (skillString == "Perceptive")
         {
-            skills[skillsCounter] = new Perceptive();
+            skills.AddSkill(skillsCounter, new Perceptive());
         }
         else if (skillString == "Wrath")
         {
-            skills[skillsCounter] = new Wrath();
+            skills.AddSkill(skillsCounter, new Wrath());
         }
         else if (skillString == "Soulblade")
         {
-            skills[skillsCounter] = new Soulblade();
+            skills.AddSkill(skillsCounter, new Soulblade());
         }
         else if (skillString == "Sandstorm")
         {
-            skills[skillsCounter] = new Sandstorm();
+            skills.AddSkill(skillsCounter, new Sandstorm());
         }
         else if (skillString == "Gentility")
         {
-            skills[skillsCounter] = new Gentility();
+            skills.AddSkill(skillsCounter, new Gentility());
         }
         else if (skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard")
         {
-            skills[skillsCounter] = new Guard(skillString.Split(" ")[0]);
+            skills.AddSkill(skillsCounter, new Guard(skillString.Split(" ")[0]));
         }
         else if (skillString == "Sympathetic")
         {
-            skills[skillsCounter] = new Sympathetic();
+            skills.AddSkill(skillsCounter, new Sympathetic());
         }
         // con armsshield me falla un tests mas que sin, ver despues porque
         else if (skillString == "Arms Shield")
         {
-            skills[skillsCounter] = new ArmsShield();
+            skills.AddSkill(skillsCounter, new ArmsShield());
         }
         // tal vez separar posture aca
         else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture"))
@@ -298,137 +302,137 @@ public class SkillConstructor
             // tal vez codigo rep aca
             if (skillString.Split(" ")[0] == "Fierce")
             {
-                skills[skillsCounter] = new Stance("Atk", "", 8, 0);
+                skills.AddSkill(skillsCounter, new Stance("Atk", "", 8, 0));
             }
 
             if (skillString.Split(" ")[0] == "Darting")
             {
-                skills[skillsCounter] = new Stance("Spd", "", 8, 0);
+                skills.AddSkill(skillsCounter, new Stance("Spd", "", 8, 0));
             }
 
             if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Stance")
             {
-                skills[skillsCounter] = new Stance("Def", "", 8, 0);
+                skills.AddSkill(skillsCounter, new Stance("Def", "", 8, 0));
             }
 
             if (skillString.Split(" ")[0] == "Warding")
             {
-                skills[skillsCounter] = new Stance("Res", "", 8, 0);
+                skills.AddSkill(skillsCounter, new Stance("Res", "", 8, 0));
             }
 
             if (skillString.Split(" ")[0] == "Kestrel")
             {
-                skills[skillsCounter] = new Stance("Atk", "Spd", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Atk", "Spd", 6, 6));
             }
 
             if (skillString.Split(" ")[0] == "Sturdy")
             {
-                skills[skillsCounter] = new Stance("Atk", "Def", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Atk", "Def", 6, 6));
             }
 
             if (skillString.Split(" ")[0] == "Mirror")
             {
-                skills[skillsCounter] = new Stance("Atk", "Res", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Atk", "Res", 6, 6));
             }
 
             if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture")
             {
-                skills[skillsCounter] = new Stance("Spd", "Def", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Spd", "Def", 6, 6));
             }
 
             if (skillString.Split(" ")[0] == "Swift")
             {
-                skills[skillsCounter] = new Stance("Spd", "Res", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Spd", "Res", 6, 6));
             }
 
             if (skillString.Split(" ")[0] == "Bracing")
             {
-                skills[skillsCounter] = new Stance("Def", "Res", 6, 6);
+                skills.AddSkill(skillsCounter, new Stance("Def", "Res", 6, 6));
             }
         }
         else if (skillString == "Dragon Wall")
         { 
-            skills[skillsCounter] = new DragonWall();
+            skills.AddSkill(skillsCounter, new DragonWall());
         }
         else if (skillString == "Dodge")
         { 
-            skills[skillsCounter] = new Dodge();
+            skills.AddSkill(skillsCounter, new Dodge());
         }
         else if (skillString == "Golden Lotus")
         { 
-            skills[skillsCounter] = new GoldenLotus();
+            skills.AddSkill(skillsCounter, new GoldenLotus());
         }
         else if (skillString == "Bravery")
         { 
-            skills[skillsCounter] = new Bravery();
+            skills.AddSkill(skillsCounter, new Bravery());
         }
         else if (skillString == "Back at You")
         { 
-            skills[skillsCounter] = new BackAtYou();
+            skills.AddSkill(skillsCounter, new BackAtYou());
         }
         else if (skillString == "Lunar Brace")
         { 
-            skills[skillsCounter] = new LunarBrace();
+            skills.AddSkill(skillsCounter, new LunarBrace());
         }
         else if (skillString == "Bushido")
         { 
-            skills[skillsCounter] = new Bushido();
+            skills.AddSkill(skillsCounter, new Bushido());
         }
         else if (skillString == "Moon-Twin Wing")
         { 
-            skills[skillsCounter] = new MoonTwinWing();
+            skills.AddSkill(skillsCounter, new MoonTwinWing());
         }
         else if (skillString == "Blue Skies")
         { 
-            skills[skillsCounter] = new BlueSkies();
+            skills.AddSkill(skillsCounter, new BlueSkies());
         }
         else if (skillString == "Aegis Shield")
         { 
-            skills[skillsCounter] = new AegisShield();
+            skills.AddSkill(skillsCounter, new AegisShield());
         }
         else if (skillString == "Remote Sparrow")
         { 
-            skills[skillsCounter] = new RemoteSparrow();
+            skills.AddSkill(skillsCounter, new RemoteSparrow());
         }
         else if (skillString == "Remote Mirror")
         { 
-            skills[skillsCounter] = new RemoteMirror();
+            skills.AddSkill(skillsCounter, new RemoteMirror());
         }
         else if (skillString == "Remote Sturdy")
         { 
-            skills[skillsCounter] = new RemoteSturdy();
+            skills.AddSkill(skillsCounter, new RemoteSturdy());
         }
         else if (skillString == "Poetic Justice")
         { 
-            skills[skillsCounter] = new PoeticJustice();
+            skills.AddSkill(skillsCounter, new PoeticJustice());
         }
         else if (skillString == "Laguz Friend")
         { 
-            skills[skillsCounter] = new LaguzFriend();
+            skills.AddSkill(skillsCounter, new LaguzFriend());
         }
         else if (skillString == "Chivalry")
         { 
-            skills[skillsCounter] = new Chivalry();
+            skills.AddSkill(skillsCounter, new Chivalry());
         }
         else if (skillString == "Dragon's Wrath")
         { 
-            skills[skillsCounter] = new DragonsWrath();
+            skills.AddSkill(skillsCounter, new DragonsWrath());
         }
         else if (skillString == "Prescience")
         { 
-            skills[skillsCounter] = new Prescience();
+            skills.AddSkill(skillsCounter, new Prescience());
         }
         else if (skillString == "Extra Chivalry")
         { 
-            skills[skillsCounter] = new ExtraChilvary();
+            skills.AddSkill(skillsCounter, new ExtraChilvary());
         }
         else if (skillString == "Guard Bearing")
         { 
-            skills[skillsCounter] = new GuardBearing();
+            skills.AddSkill(skillsCounter, new GuardBearing());
         }
         else if (skillString == "Divine Recreation")
         { 
-            skills[skillsCounter] = new DivineRecreation();
+            skills.AddSkill(skillsCounter, new DivineRecreation());
         }
     }
 }

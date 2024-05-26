@@ -1,6 +1,7 @@
-using System.Runtime.CompilerServices;
+using Fire_Emblem_Model.GameDataStructures.Lists;
+
 namespace Fire_Emblem_Model;
-using Fire_Emblem;
+
 
 
 public class Unit
@@ -20,5 +21,6 @@ public class Unit
     public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = DataStructuresFunctions.CreateStructure(1);
     public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
     public GameLogs GameLogs = new GameLogs();
-    public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
+    public SkillsList Skills = new SkillsList();
+    //public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
 }
