@@ -12,7 +12,8 @@ public class Effect
     {
         this.Priority = 1;
     }
-    public virtual void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public virtual void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         return;
     }
@@ -26,7 +27,8 @@ public class Effect
 public class EmptyEffect : Effect
 {
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         return;
     }
@@ -39,7 +41,8 @@ public class ChangeHpIn : Effect
         this.Amount = amount;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (!myUnit.ActiveBonus.HpBonusActivated)
         {
@@ -58,7 +61,8 @@ public class ReduceRivalsDefInPercentajeForFirstAttack : Effect
         this._reductionPercentaje = reduction;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * _reductionPercentaje));
         opponentsUnit.ActivePenalties.DefFirstAttack  -= reduction;
@@ -73,7 +77,8 @@ public class ReduceRivalsResInPercentageForFirstAttack : Effect
         this._reductionPercentage = reduction;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Res * _reductionPercentage));
         opponentsUnit.ActivePenalties.ResFirstAttack  -= reduction;
@@ -83,7 +88,8 @@ public class ReduceRivalsResInPercentageForFirstAttack : Effect
 
 public class NeutralizeOponentsBonus : Effect
 {
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         opponentsUnit.ActiveBonusNeutralization.Attk = 0;
         opponentsUnit.ActiveBonusNeutralization.AtkFollowup = 0; 
@@ -97,7 +103,8 @@ public class NeutralizeOponentsBonus : Effect
 
 public class NeutralizePenalties : Effect
 {
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         myUnit.ActivePenaltiesNeutralization.Attk = 0;
         myUnit.ActivePenaltiesNeutralization.Spd = 0;
@@ -115,7 +122,8 @@ public class ChangeStatsIn : Effect
         this._stat = stat;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat == "Atk")
         {
@@ -150,7 +158,8 @@ public class ChangeStatsInBasePercentage : Effect
         this._stat = stat;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat == "Atk")
         {
@@ -185,7 +194,8 @@ public class ChangeRivalsStatsIn : Effect
         this._stat = stat;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat == "Atk")
         {
@@ -218,7 +228,8 @@ public class NeutralizeOneOfOpponentsBonus : Effect
         this._stat = stat;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
         else if (_stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
@@ -235,7 +246,8 @@ public class NeutralizeOneOfMyBonus : Effect
         this._stat = stat;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat=="Atk" ) myUnit.ActiveBonusNeutralization.Attk  = 0;
         else if (_stat == "Def" ) myUnit.ActiveBonusNeutralization.Def = 0;
@@ -254,7 +266,8 @@ public class ChangeStatInPercentageOnlyForFirstAttack : Effect
         this._percentage = percentage;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         Amount = 0;
         if (_stat == "Atk")
@@ -277,7 +290,8 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
         this._baseIncrease = baseIncrease;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         if (_stat == "Spd")
         {
@@ -291,7 +305,8 @@ public class ChangeStatsInBasePlusOnePointForEvery : Effect
 public class WrathEffect : Effect
 {
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         int amount = myUnit.HpMax - myUnit.CurrentHp;
         if (amount > 30) amount = 30;
@@ -303,7 +318,8 @@ public class WrathEffect : Effect
 public class SoulbladeEffect : Effect
 {
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         double refDesAverage = (opponentsUnit.Def + opponentsUnit.Res) / 2;
         int refDesAverageInt = Convert.ToInt32(Math.Truncate(refDesAverage));
@@ -325,7 +341,8 @@ public class SoulbladeEffect : Effect
 public class SandstormEffect : Effect
 {
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
+        
     {
         int amount = Convert.ToInt32(Math.Truncate(1.5 * myUnit.Def)) - ((myUnit.Atk));
         if (amount < 0) myUnit.ActivePenalties.AtkFollowup += amount;

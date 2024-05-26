@@ -8,7 +8,7 @@ public class SecondCategoryEffect : Effect
     {
         this.Priority = 2;
     }
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         return;
     }

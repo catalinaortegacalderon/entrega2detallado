@@ -7,9 +7,9 @@ public class RivalStartsAttackAndMyHpIsLessThan : Condition
     {
         this._percentage = percentage;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
-        if (myUnit.CurrentHp <= myUnit.HpMax * this._percentage && !iAmAttacking)
+        if (myUnit.CurrentHp <= myUnit.HpMax * this._percentage && !myUnit.IsAttacking)
         {
             return true;
         }

@@ -9,26 +9,26 @@ namespace Fire_Emblem_Model;
         protected Condition[] Conditions;
         protected Effect[] Effects;
 
-        public void ApplyFirstCategorySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
+        public void ApplyFirstCategorySkills(Unit myUnit, Unit oponentsUnit)
         {
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, oponentsUnit,attacking) && this.Conditions[i].GetPriority() == 1)
+                if (this.Conditions[i].Verify(myUnit, oponentsUnit) && this.Conditions[i].GetPriority() == 1)
                 {
-                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit,attacking);
+                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit);
                 }
             }
         }
         
-        public void ApplySecondCategorySkills(Unit myUnit, Unit oponentsUnit, bool attacking)
+        public void ApplySecondCategorySkills(Unit myUnit, Unit oponentsUnit)
         {
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, oponentsUnit,attacking) && this.Conditions[i].GetPriority() == 2)
+                if (this.Conditions[i].Verify(myUnit, oponentsUnit) && this.Conditions[i].GetPriority() == 2)
                 {
-                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit,attacking);
+                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit);
                 }
             }
         }

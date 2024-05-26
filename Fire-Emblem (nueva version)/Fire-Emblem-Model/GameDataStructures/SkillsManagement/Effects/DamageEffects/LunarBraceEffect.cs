@@ -2,7 +2,7 @@ namespace Fire_Emblem_Model;
 
 public class LunarBraceEffect : Effect
 {
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         int amount = opponentsUnit.Def + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralization.Def
                                        + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenalties.Def;

@@ -14,7 +14,7 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentaje: Effect
         this._percentage = percentage;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         int amount = 0;
         if (this._stat == "Res")

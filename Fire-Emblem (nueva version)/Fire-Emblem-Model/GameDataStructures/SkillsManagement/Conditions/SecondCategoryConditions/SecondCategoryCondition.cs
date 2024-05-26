@@ -6,15 +6,7 @@ public class SecondCategoryCondition: Condition
     {
         this.Priority = 2;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
-    {
-        return true;
-    }
-}
-
-public class CertainSelfUnitStatBiggerThanCertainRivalStat: SecondCategoryCondition
-{
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
         return true;
     }

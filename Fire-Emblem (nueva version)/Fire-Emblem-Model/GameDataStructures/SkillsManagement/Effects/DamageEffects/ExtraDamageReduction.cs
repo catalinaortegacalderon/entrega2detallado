@@ -11,7 +11,7 @@ public class ExtraDamageReduction: Effect
         this.Type = type;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     { 
         if (this.Type == "All")
         {

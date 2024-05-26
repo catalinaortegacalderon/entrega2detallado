@@ -14,7 +14,7 @@ public class PercentualDamageReduction : Effect
         this.Type = type;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     { //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
         if (this.Type == "All")
         {

@@ -2,7 +2,7 @@ namespace Fire_Emblem_Model;
 
 public class CompareMyAtkWithOpponentsRes : SecondCategoryCondition
 {
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
         int myTotalAtk =
             myUnit.Atk + myUnit.ActiveBonus.Attk * myUnit.ActiveBonusNeutralization.Attk

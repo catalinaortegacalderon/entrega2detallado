@@ -13,7 +13,7 @@ public class PercentualDamageReductionDeterminedByStatDifference : Effect
         this.multiplicator = multiplicator;
     }
 
-    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit, bool attacking)
+    public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     { 
         //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
         double redutionPercentage = 1;

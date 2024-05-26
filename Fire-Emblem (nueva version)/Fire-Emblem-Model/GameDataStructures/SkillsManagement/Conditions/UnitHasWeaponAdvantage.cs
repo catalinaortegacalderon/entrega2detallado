@@ -2,7 +2,7 @@ namespace Fire_Emblem_Model;
 
 public class UnitHasWeaponAdvantage : Condition
 {
-    public override bool Verify(Unit myUnit, Unit opponentsUnit, bool iAmAttacking)
+    public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
         string attackingWeapon = myUnit.Weapon;
         string defensiveWeapon = opponentsUnit.Weapon;
