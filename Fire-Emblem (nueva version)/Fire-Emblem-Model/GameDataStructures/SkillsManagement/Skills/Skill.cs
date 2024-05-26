@@ -38,7 +38,7 @@ namespace Fire_Emblem_Model;
     {
         public EmptySkill() : base()
         {
-            this.Conditions = new Condition[] { new AlwaysTrue() };
+            this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             this.Effects = new Effect[] { new EmptyEffect() };
         }
     }
@@ -48,7 +48,7 @@ namespace Fire_Emblem_Model;
         public HpPlus15() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeHpIn(15);
         }
@@ -59,8 +59,8 @@ namespace Fire_Emblem_Model;
         public FairFight() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",6);
             this.Effects[1] = new ChangeRivalsStatsIn("Atk", 6);
@@ -72,8 +72,8 @@ namespace Fire_Emblem_Model;
         public Resolve() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.75); 
-            this.Conditions[1] = new OwnHpLessThan(0.75);
+            this.Conditions[0] = new OwnHpLessThanCondition(0.75); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.75);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn("Def", 7); 
             this.Effects[1] = new ChangeStatsIn( "Res", 7); 
@@ -84,7 +84,7 @@ namespace Fire_Emblem_Model;
     {
         public SpeedPlus5() : base()
         {
-            this.Conditions = new Condition[] { new AlwaysTrue() };
+            this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Spd", 5) };
         }
     }
@@ -93,7 +93,7 @@ namespace Fire_Emblem_Model;
     {
         public ArmoredBlow() : base()
         {
-            this.Conditions = new Condition[] { new UnitStartsCombat() };
+            this.Conditions = new Condition[] { new UnitStartsCombatCondition() };
             this.Effects = new Effect[] { new ChangeStatsIn("Def", 8) };
         }
     }
@@ -104,8 +104,8 @@ namespace Fire_Emblem_Model;
         public AtkAndDefPlus5() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new AlwaysTrue(); 
-            this.Conditions[1] = new AlwaysTrue(); 
+            this.Conditions[0] = new AlwaysTrueCondition(); 
+            this.Conditions[1] = new AlwaysTrueCondition(); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn("Atk", 5); 
             this.Effects[1] = new ChangeStatsIn( "Def", 5);
@@ -118,8 +118,8 @@ namespace Fire_Emblem_Model;
         public AtkAndResPlus5() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new AlwaysTrue(); 
-            this.Conditions[1] = new AlwaysTrue(); 
+            this.Conditions[0] = new AlwaysTrueCondition(); 
+            this.Conditions[1] = new AlwaysTrueCondition(); 
 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 5); 
@@ -133,8 +133,8 @@ namespace Fire_Emblem_Model;
         public SpdAndResPlus5 () : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new AlwaysTrue(); 
-            this.Conditions[1] = new AlwaysTrue(); 
+            this.Conditions[0] = new AlwaysTrueCondition(); 
+            this.Conditions[1] = new AlwaysTrueCondition(); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd", 5); 
             this.Effects[1] = new ChangeStatsIn("Res", 5);
@@ -147,7 +147,7 @@ namespace Fire_Emblem_Model;
     {
         public AttackPlus6() : base()
         {
-            this.Conditions = new Condition[] { new AlwaysTrue() };
+            this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Atk", 6) };
         }
     }
@@ -157,8 +157,8 @@ namespace Fire_Emblem_Model;
         public BracingBlow() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Def", 6);
             this.Effects[1] = new ChangeStatsIn( "Res",6);
@@ -170,7 +170,7 @@ namespace Fire_Emblem_Model;
         public WillToWin() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new OwnHpLessThan(0.5); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.5); 
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn( "Atk", 8); 
         }
@@ -181,8 +181,8 @@ namespace Fire_Emblem_Model;
         public TomePrecision() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapons(["Magic"]);
-            this.Conditions[1] = new UseCertainWeapons(["Magic"]);
+            this.Conditions[0] = new UseCertainWeaponsCondition(["Magic"]);
+            this.Conditions[1] = new UseCertainWeaponsCondition(["Magic"]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",6); 
             this.Effects[1] = new ChangeStatsIn("Spd", 6); 
@@ -193,7 +193,7 @@ namespace Fire_Emblem_Model;
     {
         public DefensePlus5() : base()
         {
-            this.Conditions = new Condition[] { new AlwaysTrue() };
+            this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Def", 5) };
         }
     }
@@ -202,7 +202,7 @@ namespace Fire_Emblem_Model;
     {
         public ResistancePlus5() : base()
         {
-            this.Conditions = new Condition[] { new AlwaysTrue() };
+            this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             this.Effects = new Effect[] { new ChangeStatsIn( "Res", 5) };
         }
     }
@@ -212,8 +212,8 @@ namespace Fire_Emblem_Model;
         public DeadlyBlade() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new AndCondition([new UnitStartsCombat(), new UseCertainWeapons(["Sword"])]);
-            this.Conditions[1] = new AndCondition([new UnitStartsCombat(), new UseCertainWeapons(["Sword"])]);
+            this.Conditions[0] = new AndCondition([new UnitStartsCombatCondition(), new UseCertainWeaponsCondition(["Sword"])]);
+            this.Conditions[1] = new AndCondition([new UnitStartsCombatCondition(), new UseCertainWeaponsCondition(["Sword"])]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 8); 
             this.Effects[1] = new ChangeStatsIn("Spd", 8); 
@@ -225,7 +225,7 @@ namespace Fire_Emblem_Model;
         public DeathBlow() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn("Atk", 8);
         }
@@ -236,7 +236,7 @@ namespace Fire_Emblem_Model;
         public DartingBlow() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn( "Spd", 8);
         }
@@ -247,7 +247,7 @@ namespace Fire_Emblem_Model;
         public WardingBlow() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn("Res", 8);
         }
@@ -258,8 +258,8 @@ namespace Fire_Emblem_Model;
         public SwiftSparrow() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6);
             this.Effects[1] = new ChangeStatsIn( "Spd", 6);
@@ -271,8 +271,8 @@ namespace Fire_Emblem_Model;
         public SturdyBlow() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6);
             this.Effects[1] = new ChangeStatsIn( "Def",6);
@@ -284,8 +284,8 @@ namespace Fire_Emblem_Model;
         public MirrorStrike() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",6);
             this.Effects[1] = new ChangeStatsIn( "Res", 6);
@@ -297,8 +297,8 @@ namespace Fire_Emblem_Model;
         public SteadyBlow() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd", 6);
             this.Effects[1] = new ChangeStatsIn( "Def", 6);
@@ -310,8 +310,8 @@ namespace Fire_Emblem_Model;
         public SwiftStrike() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UnitStartsCombat();
-            this.Conditions[1] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
+            this.Conditions[1] = new UnitStartsCombatCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd", 6);
             this.Effects[1] = new ChangeStatsIn( "Res", 6);
@@ -323,8 +323,8 @@ namespace Fire_Emblem_Model;
         public BrazenAtkSpd() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",10); 
             this.Effects[1] = new ChangeStatsIn( "Spd", 10); 
@@ -336,8 +336,8 @@ namespace Fire_Emblem_Model;
         public BrazenAtkDef() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",10); 
             this.Effects[1] = new ChangeStatsIn( "Def", 10); 
@@ -349,8 +349,8 @@ namespace Fire_Emblem_Model;
         public BrazenAtkRes() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 10); 
             this.Effects[1] = new ChangeStatsIn( "Res",10); 
@@ -362,8 +362,8 @@ namespace Fire_Emblem_Model;
         public BrazenSpdDef() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd",10); 
             this.Effects[1] = new ChangeStatsIn( "Def", 10); 
@@ -375,8 +375,8 @@ namespace Fire_Emblem_Model;
         public BrazenSpdRes() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd",10); 
             this.Effects[1] = new ChangeStatsIn( "Res",10); 
@@ -388,8 +388,8 @@ namespace Fire_Emblem_Model;
         public BrazenDefRes() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OwnHpLessThan(0.8); 
-            this.Conditions[1] = new OwnHpLessThan(0.8); 
+            this.Conditions[0] = new OwnHpLessThanCondition(0.8); 
+            this.Conditions[1] = new OwnHpLessThanCondition(0.8); 
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Def",10); 
             this.Effects[1] = new ChangeStatsIn( "Res", 10); 
@@ -402,7 +402,7 @@ namespace Fire_Emblem_Model;
         public Boost() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new MyHpIsLessThanRivalsHpPlus(3); 
+            this.Conditions[0] = new MyHpIsLessThanOpponentsHpPlusCondition(3); 
             this.Effects = new Effect[1];
         }
     }
@@ -445,7 +445,7 @@ namespace Fire_Emblem_Model;
         public ChaosStyle() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AttackBetweenSpecificWeapons("fisica", "magia");
+            this.Conditions[0] = new AttackBetweenSpecificWeaponsCondition("fisica", "magia");
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn( "Spd", 3); 
         }
@@ -456,7 +456,7 @@ namespace Fire_Emblem_Model;
         public BlindingFlash() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeRivalsStatsIn( "Spd", -4); 
         }
@@ -467,7 +467,7 @@ namespace Fire_Emblem_Model;
         public NotQuite() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new OpponentStartsCombat();
+            this.Conditions[0] = new OpponentStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -4); 
         }
@@ -478,7 +478,7 @@ namespace Fire_Emblem_Model;
         public StunningSmile() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new OponentIsAMan();
+            this.Conditions[0] = new OpponentIsAManCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeRivalsStatsIn( "Spd", -8); 
         }
@@ -489,7 +489,7 @@ namespace Fire_Emblem_Model;
         public DisarmingSigh() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new OponentIsAMan();
+            this.Conditions[0] = new OpponentIsAManCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -8); 
         }
@@ -500,8 +500,8 @@ namespace Fire_Emblem_Model;
         public Charmer() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new CurrentOponentIsAlsoTheLastOponent();
-            this.Conditions[1] = new CurrentOponentIsAlsoTheLastOponent();
+            this.Conditions[0] = new CurrentOpponentIsAlsoTheLastOpponentCondition();
+            this.Conditions[1] = new CurrentOpponentIsAlsoTheLastOpponentCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -3); 
             this.Effects[1] = new ChangeRivalsStatsIn( "Spd", -3); 
@@ -513,8 +513,8 @@ namespace Fire_Emblem_Model;
         public Luna() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
             this.Effects = new Effect[2];
             this.Effects[0] = new ReduceRivalsDefInPercentajeForFirstAttack( 0.5); 
             this.Effects[1] = new ReduceRivalsResInPercentageForFirstAttack( 0.5); 
@@ -526,8 +526,8 @@ namespace Fire_Emblem_Model;
         public BeliefInLove() : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new OrCondition([new RivalHasFullHP(), new OpponentStartsCombat()] );
-            this.Conditions[1] = new OrCondition([new RivalHasFullHP(), new OpponentStartsCombat()] );
+            this.Conditions[0] = new OrCondition([new OpponentHasFullHPCondition(), new OpponentStartsCombatCondition()] );
+            this.Conditions[1] = new OrCondition([new OpponentHasFullHPCondition(), new OpponentStartsCombatCondition()] );
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -5); 
             this.Effects[1] = new ChangeRivalsStatsIn( "Def", -5); 
@@ -540,7 +540,7 @@ namespace Fire_Emblem_Model;
         public BeorcsBlessing() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new NeutralizeOponentsBonus(); 
         }
@@ -551,7 +551,7 @@ namespace Fire_Emblem_Model;
         public AgneasArrow() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new NeutralizePenalties(); 
         }
@@ -561,8 +561,8 @@ namespace Fire_Emblem_Model;
         public Agility(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapons([weapon]);
-            this.Conditions[1] = new UseCertainWeapons([weapon]);
+            this.Conditions[0] = new UseCertainWeaponsCondition([weapon]);
+            this.Conditions[1] = new UseCertainWeaponsCondition([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Spd", 12); 
             this.Effects[1] = new ChangeStatsIn( "Atk", -6); 
@@ -574,8 +574,8 @@ namespace Fire_Emblem_Model;
         public Power(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapons([weapon]);
-            this.Conditions[1] = new UseCertainWeapons([weapon]);
+            this.Conditions[0] = new UseCertainWeaponsCondition([weapon]);
+            this.Conditions[1] = new UseCertainWeaponsCondition([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk", 10); 
             this.Effects[1] = new ChangeStatsIn( "Def", -10); 
@@ -587,8 +587,8 @@ namespace Fire_Emblem_Model;
         public Focus(String weapon) : base()
         {
             this.Conditions = new Condition[2];
-            this.Conditions[0] = new UseCertainWeapons([weapon]);
-            this.Conditions[1] = new UseCertainWeapons([weapon]);
+            this.Conditions[0] = new UseCertainWeaponsCondition([weapon]);
+            this.Conditions[1] = new UseCertainWeaponsCondition([weapon]);
             this.Effects = new Effect[2];
             this.Effects[0] = new ChangeStatsIn( "Atk",10); 
             this.Effects[1] = new ChangeStatsIn( "Res", -10); 
@@ -600,9 +600,9 @@ namespace Fire_Emblem_Model;
         public CloseDef() : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new OpponentStartsCombatWithCertainWeapon(["Sword", "Lance", "Axe"]);
-            this.Conditions[1] = new OpponentStartsCombatWithCertainWeapon(["Sword", "Lance", "Axe"]);
-            this.Conditions[2] = new OpponentStartsCombatWithCertainWeapon(["Sword", "Lance", "Axe"]);
+            this.Conditions[0] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[1] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
+            this.Conditions[2] = new AndCondition([ new OpponentUsesCertainWeapon(["Sword", "Lance", "Axe"]), new OpponentStartsCombatCondition()]);
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( "Def",8); 
             this.Effects[1] = new ChangeStatsIn( "Res", 8); 
@@ -630,10 +630,10 @@ namespace Fire_Emblem_Model;
         public Lull(String firstStat, String secondStat) : base()
         {
             this.Conditions = new Condition[4];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
-            this.Conditions[3] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
+            this.Conditions[3] = new AlwaysTrueCondition();
             this.Effects = new Effect[4];
             this.Effects[0] = new ChangeRivalsStatsIn( firstStat, -3); 
             this.Effects[1] = new ChangeRivalsStatsIn( secondStat, -3); 
@@ -647,9 +647,9 @@ namespace Fire_Emblem_Model;
         public Fort(String firstStat, String secondStat) : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( firstStat, 6); 
             this.Effects[1] = new ChangeStatsIn( secondStat, 6); 
@@ -662,10 +662,10 @@ namespace Fire_Emblem_Model;
         public LifeAndDeath() : base()
         {
             this.Conditions = new Condition[4];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
-            this.Conditions[3] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
+            this.Conditions[3] = new AlwaysTrueCondition();
             this.Effects = new Effect[4];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Spd", 6); 
@@ -679,9 +679,9 @@ namespace Fire_Emblem_Model;
         public SolidGround() : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Def", 6); 
@@ -694,9 +694,9 @@ namespace Fire_Emblem_Model;
         public StillWater() : base()
         {
             this.Conditions = new Condition[3];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Res", 6); 
@@ -708,11 +708,11 @@ namespace Fire_Emblem_Model;
         public DragonSkin() : base()
         {
             this.Conditions = new Condition[5];
-            this.Conditions[0] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[1] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[2] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[3] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
-            this.Conditions[4] = new RivalStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[0] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[1] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[2] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[3] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
+            this.Conditions[4] = new OpponentStartsAttackOrHasHpGreaterThan(0.75);
             this.Effects = new Effect[5];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Spd", 6); 
@@ -727,12 +727,12 @@ namespace Fire_Emblem_Model;
         public LightAndDark() : base()
         {
             this.Conditions = new Condition[6];
-            this.Conditions[0] = new AlwaysTrue();
-            this.Conditions[1] = new AlwaysTrue();
-            this.Conditions[2] = new AlwaysTrue();
-            this.Conditions[3] = new AlwaysTrue();
-            this.Conditions[4] = new AlwaysTrue();
-            this.Conditions[5] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
+            this.Conditions[1] = new AlwaysTrueCondition();
+            this.Conditions[2] = new AlwaysTrueCondition();
+            this.Conditions[3] = new AlwaysTrueCondition();
+            this.Conditions[4] = new AlwaysTrueCondition();
+            this.Conditions[5] = new AlwaysTrueCondition();
             this.Effects = new Effect[6];
             this.Effects[0] = new ChangeRivalsStatsIn( "Atk", -5); 
             this.Effects[1] = new ChangeRivalsStatsIn( "Spd", -5); 
@@ -748,7 +748,7 @@ namespace Fire_Emblem_Model;
         public SingleMinded() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new CurrentOponentIsAlsoTheLastOponent();
+            this.Conditions[0] = new CurrentOpponentIsAlsoTheLastOpponentCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsIn( "Atk", 8); 
         }
@@ -759,7 +759,7 @@ namespace Fire_Emblem_Model;
         public Ignis() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatInPercentageOnlyForFirstAttack( "Atk", 0.5); 
         }
@@ -770,7 +770,7 @@ namespace Fire_Emblem_Model;
         public Perceptive() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UnitStartsCombat();
+            this.Conditions[0] = new UnitStartsCombatCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsInBasePlusOnePointForEvery( "Spd", 12, 4);
         }
@@ -781,7 +781,7 @@ namespace Fire_Emblem_Model;
         public Wrath() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new WrathEffect();
         }
@@ -792,7 +792,7 @@ namespace Fire_Emblem_Model;
         public Soulblade() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new UseCertainWeapons(["Sword"]);
+            this.Conditions[0] = new UseCertainWeaponsCondition(["Sword"]);
             this.Effects = new Effect[1];
             this.Effects[0] = new SoulbladeEffect();
         }
@@ -803,7 +803,7 @@ namespace Fire_Emblem_Model;
         public Sandstorm() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AlwaysTrue();
+            this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
             this.Effects[0] = new SandstormEffect();
         }

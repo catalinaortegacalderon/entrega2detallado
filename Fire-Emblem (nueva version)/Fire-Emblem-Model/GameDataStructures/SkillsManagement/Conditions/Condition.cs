@@ -2,9 +2,6 @@ using System.Runtime.CompilerServices;
 
 namespace Fire_Emblem_Model;
 
-// cambiar rival por oponent, ser consistente
-//hay oponent y opponent con dos p
-
 public class Condition
 {
     protected int Priority;
@@ -29,7 +26,7 @@ public class Condition
     }
 }
 
-public class AlwaysTrue : Condition
+public class AlwaysTrueCondition : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -37,10 +34,10 @@ public class AlwaysTrue : Condition
     }
 }
 
-public class OwnHpLessThan : Condition
+public class OwnHpLessThanCondition : Condition
 {
     private double _amount;
-    public OwnHpLessThan(double amount) : base()
+    public OwnHpLessThanCondition(double amount) : base()
     {
         this._amount = amount;
     }
@@ -54,10 +51,10 @@ public class OwnHpLessThan : Condition
     }
 }
 
-public class OwnHpBiggerThan : Condition
+public class OwnHpBiggerThanCondition : Condition
 {
     private double _amount;
-    public OwnHpBiggerThan(double amount) : base()
+    public OwnHpBiggerThanCondition(double amount) : base()
     {
         this._amount = amount;
     }
@@ -71,7 +68,7 @@ public class OwnHpBiggerThan : Condition
     }
 }
 
-public class UnitStartsCombat : Condition
+public class UnitStartsCombatCondition : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -80,7 +77,7 @@ public class UnitStartsCombat : Condition
     }
 }
 
-public class OpponentStartsCombat : Condition
+public class OpponentStartsCombatCondition : Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -89,10 +86,10 @@ public class OpponentStartsCombat : Condition
     }
 }
 
-public class UseCertainWeapons : Condition
+public class UseCertainWeaponsCondition : Condition
 {
     private string[] _usedWeapon;
-    public UseCertainWeapons(string[] weapon) : base()
+    public UseCertainWeaponsCondition(string[] weapon) : base()
     {
         this._usedWeapon = weapon;
     }
@@ -103,10 +100,10 @@ public class UseCertainWeapons : Condition
     }
 }
 
-public class MyHpIsLessThanRivalsHpPlus: Condition
+public class MyHpIsLessThanOpponentsHpPlusCondition: Condition
 {
     private int _increaseAmountIn;
-    public MyHpIsLessThanRivalsHpPlus(int increaseAmountIn) : base()
+    public MyHpIsLessThanOpponentsHpPlusCondition(int increaseAmountIn) : base()
     {
         this._increaseAmountIn = increaseAmountIn;
     }
@@ -117,13 +114,13 @@ public class MyHpIsLessThanRivalsHpPlus: Condition
     }
 }
 
-public class AttackBetweenSpecificWeapons : Condition
+public class AttackBetweenSpecificWeaponsCondition : Condition
 {
     
     private string _firstWeaponType;
     private string _secondWeaponType;
         
-    public AttackBetweenSpecificWeapons(string firstWeaponType, string secondWeaponType) : base()
+    public AttackBetweenSpecificWeaponsCondition(string firstWeaponType, string secondWeaponType) : base()
     {
         this._firstWeaponType = firstWeaponType;
         this._secondWeaponType = secondWeaponType;
@@ -146,7 +143,7 @@ public class AttackBetweenSpecificWeapons : Condition
     }
 }
 
-public class OponentIsAMan: Condition
+public class OpponentIsAManCondition: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -156,7 +153,7 @@ public class OponentIsAMan: Condition
     
 }
 
-public class CurrentOponentIsAlsoTheLastOponent: Condition
+public class CurrentOpponentIsAlsoTheLastOpponentCondition: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -166,7 +163,7 @@ public class CurrentOponentIsAlsoTheLastOponent: Condition
     
 }
 
-public class RivalHasFullHP: Condition
+public class OpponentHasFullHPCondition: Condition
 {
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
@@ -207,10 +204,10 @@ public class OpponentUsesCertainWeapon: Condition
     }
 }
 
-public class RivalStartsAttackOrHasHpGreaterThan : Condition
+public class OpponentStartsAttackOrHasHpGreaterThan : Condition
 {
     private double _percentage;
-    public RivalStartsAttackOrHasHpGreaterThan(double percentage) : base()
+    public OpponentStartsAttackOrHasHpGreaterThan(double percentage) : base()
     {
         this._percentage = percentage;
     }

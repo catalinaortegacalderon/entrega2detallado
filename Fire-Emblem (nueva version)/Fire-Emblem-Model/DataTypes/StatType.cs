@@ -2,5 +2,5 @@ namespace ConsoleApp1.DataTypes;
 
 public enum StatType
 {
-    Atk, Res, 
+    Atk, Res, Def, Spd
 }

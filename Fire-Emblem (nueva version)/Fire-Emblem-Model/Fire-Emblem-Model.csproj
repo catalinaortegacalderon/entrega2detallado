@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Fire-Emblem-View\Fire-Emblem-View.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GameDataStructures\SkillsManagement\Conditions\FirstCategoryCondition\" />
+    </ItemGroup>
+
 </Project>
