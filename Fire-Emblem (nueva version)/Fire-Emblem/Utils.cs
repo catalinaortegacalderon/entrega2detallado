@@ -7,11 +7,16 @@ public class Utils
 {
     public static bool CheckIfGameIsValid(string file)
     {
-        if (!CheckIfThereAreNoEmptyTeams(file)) return false;
-        if (!CheckIfThereAreMaximumThreeUnitsPerTeam(file)) return false;
-        if (!CheckIfThereAreNoRepeatedUnits(file)) return false;
-        if (!CheckIfThereAreMaxTwoSkillsPerUnit(file)) return false;
-        if (!CheckIfThereAreNoRepeatedSkills(file)) return false;
+        if (!CheckIfThereAreNoEmptyTeams(file)) 
+            return false;
+        if (!CheckIfThereAreMaximumThreeUnitsPerTeam(file)) 
+            return false;
+        if (!CheckIfThereAreNoRepeatedUnits(file)) 
+            return false;
+        if (!CheckIfThereAreMaxTwoSkillsPerUnit(file)) 
+            return false;
+        if (!CheckIfThereAreNoRepeatedSkills(file)) 
+            return false;
         return true;
     }
     
@@ -120,23 +125,28 @@ public class Utils
     private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)
     {
         
-        Player jugador1 = new Player();
-        Player jugador2 = new Player();
-        jugador1.AmountOfUnits = unitCounters[0];
-        //int unitCounter = 0;
-        //foreach (var unit in units)
-        //{
-        //    jugador1.Units.AddUnit(unitCounter, units[0].ToList()[unitCounter]);
-        //    unitCounter++;
-        //
-        //}
-        jugador1.Units = units[0].ToList();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.AmountOfUnits = unitCounters[0];
+        player2.AmountOfUnits = unitCounters[1];
+        int unitCounterplayer1 = 0;
+        foreach (var unit in units[0])
+        {
+            player1.Units.AddUnit(unitCounterplayer1, unit);
+            unitCounterplayer1++;
+        }
+        int unitCounterplayer2 = 0;
+        foreach (var unit in units[1])
+        {
+            player2.Units.AddUnit(unitCounterplayer2, unit);
+            unitCounterplayer2++;
+        }
+        Console.WriteLine("pase por a");
+        //jugador1.Units = units[0].ToList();
+        //jugador2.Units = units[1].ToList();
         // OJO, ARRAY DISTINTO DE LISTA, ARRAY TIENE LARGO FIJO, LISTA NO
-        jugador2 = new Player();
-        jugador2.AmountOfUnits = unitCounters[1];
-        jugador2.Units = units[1].ToList();
-        
-        return new Player[]{jugador1, jugador2};
+        // TAL VEZ NO USAR ARRAYS
+        return new Player[]{player1, player2};
     }
 
     private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)

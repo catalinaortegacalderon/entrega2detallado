@@ -60,16 +60,16 @@ public class GameAttacksController
     private string Player2Attacks()
     {
         string loosersName;
-        if (_attackValue >= Players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp)
+        if (_attackValue >= Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp)
         {
-            loosersName = Players[0].Units[_firstPlayersCurrentUnitNumber].Name;
+            loosersName = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
             EliminateLooserUnitOfPlayer1();
             return loosersName;
         }
         else
         {
-            Players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp = Players[0].Units[_firstPlayersCurrentUnitNumber].CurrentHp - _attackValue;
+            Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp - _attackValue;
         }
         return "";
     }
@@ -77,9 +77,9 @@ public class GameAttacksController
     private string Player1Attacks(int attackValue)
     {
         string loosersName;
-        if (attackValue >= Players[1].Units[_secondPlayersCurrentUnitNumber].CurrentHp)
+        if (attackValue >= Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).CurrentHp)
         {
-            loosersName = Players[1].Units[_secondPlayersCurrentUnitNumber].Name;
+            loosersName = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
             EliminateLooserUnitOfPlayer2(_secondPlayersCurrentUnitNumber);
             return loosersName;
@@ -99,7 +99,7 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer1()
     {
-        Players[0].Units.RemoveAt(_firstPlayersCurrentUnitNumber);
+        Players[0].Units.EliminateUnit(_firstPlayersCurrentUnitNumber);
         Players[0].AmountOfUnits = Players[0].AmountOfUnits - 1;
         if (Players[0].AmountOfUnits == 0)
         {
@@ -112,13 +112,13 @@ public class GameAttacksController
     {
         if (_currentAttacker == 0)
         {
-            _currentAttackingUnit = Players[0].Units[_firstPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = Players[1].Units[_secondPlayersCurrentUnitNumber];
+            _currentAttackingUnit = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
         }
         else
         {
-            _currentAttackingUnit = Players[1].Units[_secondPlayersCurrentUnitNumber];
-            _currentDefensiveUnit = Players[0].Units[_firstPlayersCurrentUnitNumber];
+            _currentAttackingUnit = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
 
         }
     }
@@ -130,7 +130,7 @@ public class GameAttacksController
 
     private void EliminateLooserUnitOfPlayer2(int secondPlayersCurrentUnitNumber)
     {
-        Players[1].Units.RemoveAt(_secondPlayersCurrentUnitNumber);
+        Players[1].Units.EliminateUnit(_secondPlayersCurrentUnitNumber);
         Players[1].AmountOfUnits = Players[1].AmountOfUnits - 1;
         if (Players[1].AmountOfUnits == 0)
         {

@@ -149,7 +149,7 @@ public class Game
         string playerNumberString  = (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
         int numberOfThePlayersUnit  = (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
         // train wrecks: poner variables entregmedio
-        _view.WriteLine("Round " + _currentRound + ": " + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units[numberOfThePlayersUnit].Name + " (Player " + playerNumberString + ") comienza");
+        _view.WriteLine("Round " + _currentRound + ": " + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units.GetUnitByIndex(numberOfThePlayersUnit).Name + " (Player " + playerNumberString + ") comienza");
     }
 
     private int AskAPlayerForTheChosenUnit(int playerNumber)
@@ -191,23 +191,23 @@ public class Game
     private bool FirstPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd + 5 <=
-               _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
-               + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-               +_attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).Spd 
+               + _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActiveBonus.Spd * _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActiveBonusNeutralization.Spd
+               + _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActivePenalties.Spd * _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActivePenaltiesNeutralization.Spd + 5 <=
+               _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).Spd 
+               + _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActiveBonus.Spd * _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActiveBonusNeutralization.Spd
+               +_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActivePenalties.Spd * _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActivePenaltiesNeutralization.Spd;
     }
 
     private bool SecondPlayerCanDoAFollowup()
     {
         return ThereAreNoLoosers() &&
-               _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].Spd 
-               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonus.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActiveBonusNeutralization.Spd
-               + _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenalties.Spd * _attackController.GetPlayers()[1].Units[_currentUnitNumberOfPlayer2].ActivePenaltiesNeutralization.Spd >=
-               5 + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].Spd 
-                 + _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonus.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActiveBonusNeutralization.Spd
-                 +_attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenalties.Spd * _attackController.GetPlayers()[0].Units[_currentUnitNumberOfPlayer1].ActivePenaltiesNeutralization.Spd;
+               _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).Spd 
+               + _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActiveBonus.Spd * _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActiveBonusNeutralization.Spd
+               + _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActivePenalties.Spd * _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).ActivePenaltiesNeutralization.Spd >=
+               5 + _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).Spd 
+                 + _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActiveBonus.Spd * _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActiveBonusNeutralization.Spd
+                 +_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActivePenalties.Spd * _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).ActivePenaltiesNeutralization.Spd;
     }
 
     private void ResetUnitsBonus()
@@ -306,7 +306,7 @@ public class Game
         {
             unitNumber = _currentUnitNumberOfPlayer2;
         }
-        return _attackController.GetPlayers()[player].Units[unitNumber].Name;
+        return _attackController.GetPlayers()[player].Units.GetUnitByIndex(unitNumber).Name;
     }
     
     private int GetPlayersHp(int player)
@@ -317,7 +317,7 @@ public class Game
         {
             unitNumber = _currentUnitNumberOfPlayer2;
         }
-        return _attackController.GetPlayers()[player].Units[unitNumber].CurrentHp;
+        return _attackController.GetPlayers()[player].Units.GetUnitByIndex(unitNumber).CurrentHp;
     }
     
 }
