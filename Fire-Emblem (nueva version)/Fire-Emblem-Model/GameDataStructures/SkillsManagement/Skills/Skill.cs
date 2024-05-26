@@ -708,11 +708,11 @@ namespace Fire_Emblem_Model;
         public DragonSkin() : base()
         {
             this.Conditions = new Condition[5];
-            this.Conditions[0] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
-            this.Conditions[1] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
-            this.Conditions[2] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
-            this.Conditions[3] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
-            this.Conditions[4] = new OrCondition([new OpponentHasHpGreaterThan(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[0] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[1] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[2] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[3] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), new OpponentStartsCombatCondition()]);
+            this.Conditions[4] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), new OpponentStartsCombatCondition()]);
             this.Effects = new Effect[5];
             this.Effects[0] = new ChangeStatsIn( "Atk", 6); 
             this.Effects[1] = new ChangeStatsIn( "Spd", 6); 

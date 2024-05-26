@@ -182,23 +182,21 @@ public class OpponentUsesCertainWeaponCondition: Condition
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
-        Console.WriteLine("paso por el verify");
         if (this._weapons.Contains(opponentsUnit.Weapon)) return true;
-        Console.WriteLine("false");
         return false;
     }
 }
 
-public class OpponentStartsAttackOrHasHpGreaterThan : Condition
+public class OpponentHasHpGreaterThanCondition : Condition
 {
     private double _percentage;
-    public OpponentStartsAttackOrHasHpGreaterThan(double percentage) : base()
+    public OpponentHasHpGreaterThanCondition(double percentage) : base()
     {
         this._percentage = percentage;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
-        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage || !myUnit.IsAttacking)
+        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage)
         {
             return true;
         }
@@ -206,16 +204,16 @@ public class OpponentStartsAttackOrHasHpGreaterThan : Condition
     }
 }
 
-public class OpponentHasHpGreaterThan : Condition
+public class MyHpIsLessThanCondition : Condition
 {
     private double _percentage;
-    public OpponentHasHpGreaterThan(double percentage) : base()
+    public MyHpIsLessThanCondition(double percentage) : base()
     {
         this._percentage = percentage;
     }
     public override bool Verify(Unit myUnit, Unit opponentsUnit)
     {
-        if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage)
+        if (myUnit.CurrentHp <= myUnit.HpMax * this._percentage)
         {
             return true;
         }
