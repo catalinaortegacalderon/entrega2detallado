@@ -1,9 +1,8 @@
 using ConsoleApp1.DataTypes;
-using Fire_Emblem_Model.GameDataStructures.Lists;
-
-namespace Fire_Emblem;
 using Fire_Emblem_View;
 using Fire_Emblem_Model;
+
+namespace Fire_Emblem;
 
 public class GameAttacksController
 {
@@ -11,13 +10,14 @@ public class GameAttacksController
     private int _currentAttacker;
     private bool _gameIsTerminated;
     private int _winner;
-    private bool _roundIsTerminated = false;
+    private bool _roundIsTerminated;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
     private int _numberOfThisRoundsCurrentAttack;
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
+    private AttackCalculator _attackCalculator;
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer)
     {
@@ -32,9 +32,13 @@ public class GameAttacksController
         if (this._gameIsTerminated || this._roundIsTerminated) 
             return;
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
-        if (_numberOfThisRoundsCurrentAttack == 1) 
+        if (_numberOfThisRoundsCurrentAttack == 1)
+        {
+            ActivateSkills();
             PrintStartingParameters(view);
-        _attackValue = CalculateAttack();
+        }
+        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, _numberOfThisRoundsCurrentAttack);
+        _attackValue = this._attackCalculator.CalculateAttack();
         PrintWhoAttacksWho(view);
         MakeTheDamage();
     }
@@ -42,7 +46,6 @@ public class GameAttacksController
     private void PrintStartingParameters(View view)
     {
         PrintAdvantages(view);
-        ActivateSkills();
         PrintSkillsInfo(view);
     }
 
@@ -72,22 +75,6 @@ public class GameAttacksController
         else
         {
             SetDefensorsNewHp();
-        }
-    }
-
-    private void Player1Attacks()
-    {
-        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
-        {
-            this._roundIsTerminated = true;
-            SetDefensorsNewHp();
-            EliminateLooserUnit();
-            return;
-        }
-        else
-        {
-            SetDefensorsNewHp();
-            return;
         }
     }
 
@@ -142,10 +129,8 @@ public class GameAttacksController
 
     private void SetDefensorsNewHp()
     {
-        Console.WriteLine("paso por set defensors new hp");
         if (_currentDefensiveUnit.CurrentHp < _attackValue)
         {
-            Console.WriteLine("paso por donde quiero, set hp a 0");
             _currentDefensiveUnit.CurrentHp = 0;
             return;
         }
@@ -180,96 +165,7 @@ public class GameAttacksController
     }
     
     // CALCULAR ATAQUE SERA UNA CLASE DISTINTA
-
-    public int CalculateAttack()
-    {
-        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
-        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
-        int rivalsDefOrRes = CalculateRivalsDefOrRes(attackingWeapon);
-        double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
-        int unitsAtk = CalculateUnitsAtk();
-        _currentAttackingUnit.GameLogs.AmountOfAttacks++;
-        double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
-        if ((finalDamage) < 0) return 0;
-        return Convert.ToInt32(Math.Truncate(finalDamage));
-    }
-
-    private int CalculateUnitsAtk()
-    {
-        int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Attk * _currentAttackingUnit.ActiveBonusNeutralization.Attk + _currentAttackingUnit.ActivePenalties.Attk * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
-        if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
-        {
-            unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack * _currentAttackingUnit.ActiveBonusNeutralization.Attk +
-                          _currentAttackingUnit.ActivePenalties.AtkFirstAttack * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
-        }
-        if (_numberOfThisRoundsCurrentAttack == 3)
-        {
-            unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup * _currentAttackingUnit.ActiveBonusNeutralization.Attk
-                          + _currentAttackingUnit.ActivePenalties.AtkFollowup * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
-        }
-        return unitsAtk;
-    }
-
-    private static double CalculateWtb(Weapon defensiveWeapon, Weapon attackingWeapon)
-    {
-        double wtb;
-        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) wtb = 1;
-        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) wtb = 1.2;
-        else
-        {
-            wtb = 0.8;
-        }
-        return wtb;
-    }
-
-    private int CalculateRivalsDefOrRes(Weapon attackingWeapon)
-    {
-        int rivalsDefOrRes;
-        if (attackingWeapon == Weapon.Magic)
-        {
-            rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.Res *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
-            if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.ResFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
-        }
-        else
-        {
-            rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def * _currentDefensiveUnit.ActiveBonusNeutralization.Def + _currentDefensiveUnit.ActivePenalties.Def *_currentDefensiveUnit.ActivePenaltiesNeutralization.Def;
-            if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.Def + _currentDefensiveUnit.ActivePenalties.DefFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.Def;
-        }
-
-        return rivalsDefOrRes;
-    }
-    private double CalculateFinalDamage(double initialDamage)
-    {
-        double finalDamage  = initialDamage;
-        if (_numberOfThisRoundsCurrentAttack == 1)
-        {
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
-                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-            
-        }
-        else if (_numberOfThisRoundsCurrentAttack == 2)
-        {
-            finalDamage  = initialDamage;
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
-                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-            
-        }
-        else if (_numberOfThisRoundsCurrentAttack == 3)
-        {
-            finalDamage  = initialDamage;
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction * _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFollowup +
-                _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-        }
-        //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO
-        return finalDamage;
-    }
-
+    
     public void PrintAdvantages(View view)
     {
         Weapon attackingWeapon = _currentAttackingUnit.Weapon;
