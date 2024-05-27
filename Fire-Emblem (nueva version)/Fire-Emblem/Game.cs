@@ -8,8 +8,6 @@ public class Game
     private readonly View _view;
     private readonly string _teamsFolder;
     private GameAttacksController _attackController;
-    private string _currentRoundsPlayer1LooserUnitsName;
-    private string _currentRoundsPlayer2LooserUnitsName;
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
     private int _currentRound;
@@ -58,7 +56,7 @@ public class Game
     
     private void PlayOneRound()
     {
-        SetRoundsParameters();
+        _attackController.RestartRound();
         if (IsPlayer1TheRoundStarter())
         {
             _attackController.SetCurrentAttacker(0);
@@ -73,29 +71,18 @@ public class Game
         _currentRound++;
     }
 
-    private void SetRoundsParameters()
-    {
-        _attackController.RestartRound();
-        _currentRoundsPlayer1LooserUnitsName = "";
-        _currentRoundsPlayer2LooserUnitsName = "";
-    }
-
     private void StartRound()
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
-        Console.WriteLine("paso por antes de llamar a eliminate player 1 starst round");
         EliminateLooserUnit();
-        //player.Units.EliminateUnit(unitIndex);
-        // aca vamos a eliminar las unidades
-        //_attackController.ChangeAttacker();
         _attackController.SetCurrentAttacker(1);
     }
     
@@ -163,12 +150,12 @@ public class Game
         if (SecondPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(1);
-            _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (FirstPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(0);
-            _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
         {
@@ -290,6 +277,5 @@ public class Game
         }
         return _attackController.GetPlayers()[player].Units.GetUnitByIndex(unitNumber).CurrentHp;
     }
-    
     
 }
