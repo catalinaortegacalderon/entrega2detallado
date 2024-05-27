@@ -5,8 +5,8 @@ using System.Text.Json;
 
 public class Game
 {
-    private View _view;
-    private string _teamsFolder;
+    private readonly View _view;
+    private readonly string _teamsFolder;
     private GameAttacksController _attackController;
     private string _currentRoundsPlayer1LooserUnitsName;
     private string _currentRoundsPlayer2LooserUnitsName;
@@ -33,7 +33,7 @@ public class Game
         }
     }
 
-    public void TryToPlay()
+    private void TryToPlay()
     {
         string teamFile = GetTeamFile();
         _attackController = Utils.BuildGameController(teamFile, _view);
@@ -80,8 +80,13 @@ public class Game
         _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
-        ShowLeftoverHpPrintingPlayer1First();
+        ShowLeftoverHp();
         UpdateGameLogs();
+        Console.WriteLine("paso por antes de llamar a eliminate player 1 starst round");
+        EliminateLooserUnit();
+        //player.Units.EliminateUnit(unitIndex);
+        // aca vamos a eliminar las unidades
+        //_attackController.ChangeAttacker();
         _attackController.SetCurrentAttacker(1);
     }
     
@@ -94,8 +99,10 @@ public class Game
         _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
-        ShowLeftoverHpPrintingPlayer2First();
+        ShowLeftoverHp();
         UpdateGameLogs();
+        EliminateLooserUnit();
+        // aca vamos a eliminar las unidades
         _attackController.SetCurrentAttacker(0);
     }
 
@@ -113,26 +120,13 @@ public class Game
         }
     }
 
-    private bool VerifyIfTeamsAreValid(out string[] files, out int fileNumberInput)
-    {
-        files = ReadTeamsFiles();
-        ShowTeamFilesToUser(files);
-        fileNumberInput = Convert.ToInt32(_view.ReadLine());
-        if (Utils.CheckIfGameIsValid(files[fileNumberInput]) == false)
-        {
-            _view.WriteLine("Archivo de equipos no válido");
-            return true;
-        }
-        return false;
-    }
-
     private void ShowTeamFilesToUser(string[] files)
     {
         _view.WriteLine("Elige un archivo para cargar los equipos");
         int filesCounter = 0;
-        foreach (string archivo in files)
+        foreach (string file in files)
         {
-            _view.WriteLine(filesCounter + ": " + Path.GetFileName(archivo));
+            _view.WriteLine(filesCounter + ": " + Path.GetFileName(file));
             filesCounter++;
         }
     }
@@ -226,19 +220,29 @@ public class Game
         _attackController.UpdateAttacks();
     }
 
-    private bool Player2LoosesRound()
+    private void EliminateLooserUnit()
     {
-        return _currentRoundsPlayer2LooserUnitsName != "";
+        Console.WriteLine("paso por eliminate loosers unit");
+        Console.WriteLine(_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp);
+        Console.WriteLine(_attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).CurrentHp);
+        if (_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp == 0)
+        {
+            Console.WriteLine("elimino");
+            _attackController.GetPlayers()[0].Units.EliminateUnit(_currentUnitNumberOfPlayer1);
+        }
+        if (_attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).CurrentHp == 0)
+        {
+            Console.WriteLine("elimino");
+            _attackController.GetPlayers()[1].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
+        }
+        return;
     }
-
-    private bool Player1LoosesRound()
-    {
-        return _currentRoundsPlayer1LooserUnitsName != "";
-    }
+    
 
     private bool ThereAreNoLoosers()
     {
-        return _currentRoundsPlayer1LooserUnitsName == "" && _currentRoundsPlayer2LooserUnitsName == "";
+        return _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).CurrentHp != 0 && 
+               _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp != 0;
     }
 
     private void UpdateLastOponent()
@@ -246,9 +250,9 @@ public class Game
         _attackController.UpdateLastOpponents();
     }
 
-    private void ShowLeftoverHpPrintingPlayer1First()
+    private void ShowLeftoverHp()
     {
-        if (ThereAreNoLoosers())
+        if (IsPlayer1TheRoundStarter())
         {
             _view.WriteLine(GetPlayersName(0) +
                             " (" + GetPlayersHp(0) +
@@ -256,25 +260,7 @@ public class Game
                             " (" + GetPlayersHp(1) +
                             ")");
         }
-        else if (Player1LoosesRound())
-        {
-            _view.WriteLine(_currentRoundsPlayer1LooserUnitsName +
-                            " (0) : " + GetPlayersName(1) +
-                            " (" + GetPlayersHp(1) +
-                            ")");
-        }
         else
-        {
-            _view.WriteLine(GetPlayersName(0) +
-                            " (" + GetPlayersHp(0) +
-                            ") : " + _currentRoundsPlayer2LooserUnitsName +
-                            " (0)");
-        }
-    }
-    
-        private void ShowLeftoverHpPrintingPlayer2First()
-    {
-        if (ThereAreNoLoosers())
         {
             _view.WriteLine(GetPlayersName(1) +
                             " (" + GetPlayersHp(1) +
@@ -282,20 +268,11 @@ public class Game
                             " (" + GetPlayersHp(0) +
                             ")");
         }
-        else if (Player1LoosesRound())
-        {
-            _view.WriteLine(GetPlayersName(1) +
-                            " (" + GetPlayersHp(1) +
-                            ") : " + _currentRoundsPlayer1LooserUnitsName +
-                            " (0)");
-        }
-        else
-        {
-            _view.WriteLine(_currentRoundsPlayer2LooserUnitsName +
-                            " (0) : " + GetPlayersName(0) +
-                            " (" + GetPlayersHp(0) +
-                            ")");
-        }
+    }
+
+    private bool IsPlayer1TheRoundStarter()
+    {
+        return _currentRound % 2 == 1;
     }
 
     private string GetPlayersName(int player)
@@ -319,5 +296,6 @@ public class Game
         }
         return _attackController.GetPlayers()[player].Units.GetUnitByIndex(unitNumber).CurrentHp;
     }
+    
     
 }

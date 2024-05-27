@@ -7,8 +7,7 @@ using Fire_Emblem_Model;
 
 public class GameAttacksController
 {
-    public Player[] Players = new Player[2];
-    //public Player[] Players;
+    private readonly Player[] _players = new Player[2];
     private int _currentAttacker;
     private bool _gameIsTerminated;
     private int _winner;
@@ -23,19 +22,22 @@ public class GameAttacksController
     public GameAttacksController(Player firstPlayer, Player secondPlayer)
     {
         this._currentAttacker = 0;
-        this.Players[0] = firstPlayer;
-        this.Players[1] = secondPlayer;
+        this._players[0] = firstPlayer;
+        this._players[1] = secondPlayer;
         this._gameIsTerminated = false;
     }
 
     public string Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
-        if (this._gameIsTerminated || this._roundIsTerminated) return "";
+        if (this._gameIsTerminated || this._roundIsTerminated) 
+            return "";
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
-        if (_numberOfThisRoundsCurrentAttack == 1) PrintStartingParameters(view);
+        if (_numberOfThisRoundsCurrentAttack == 1) 
+            PrintStartingParameters(view);
         _attackValue = CalculateAttack();
         PrintWhoAttacksWho(view);
-        if (_currentAttacker == 0) return Player1Attacks(_attackValue);
+        if (_currentAttacker == 0) 
+            return Player1Attacks();
         else { return Player2Attacks(); }
     }
 
@@ -63,33 +65,36 @@ public class GameAttacksController
     private string Player2Attacks()
     {
         string loosersName;
-        if (_attackValue >= Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp)
+        if (_attackValue >= _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp)
         {
-            loosersName = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).Name;
+            loosersName = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
-            EliminateLooserUnit(Players[0], _firstPlayersCurrentUnitNumber);
+            SetDefensorsNewHp();
+            EliminateLooserUnit(_players[0], _firstPlayersCurrentUnitNumber);
             return loosersName;
         }
         else
         {
-            Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp - _attackValue;
+            SetDefensorsNewHp();
+            //_players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp - _attackValue;
         }
         return "";
     }
 
-    private string Player1Attacks(int attackValue)
+    private string Player1Attacks()
     {
         string loosersName;
-        if (attackValue >= Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).CurrentHp)
+        if (_attackValue >= _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).CurrentHp)
         {
-            loosersName = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).Name;
+            loosersName = _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
-            EliminateLooserUnit(Players[1], _secondPlayersCurrentUnitNumber);
+            SetDefensorsNewHp();
+            EliminateLooserUnit(_players[1], _secondPlayersCurrentUnitNumber);
             return loosersName;
         }
         else
         {
-            SetDefendorsNewHp(_secondPlayersCurrentUnitNumber, attackValue);
+            SetDefensorsNewHp();
             return "";
         }
     }
@@ -97,13 +102,15 @@ public class GameAttacksController
     private void ActivateSkills()
     {
         ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
-        //ActivateAttackersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
-        ActivateDefensorsUnitSkills();
+        ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
     }
 
     private void EliminateLooserUnit(Player player, int unitIndex)
     {
-        player.Units.EliminateUnit(unitIndex);
+        // NO LA ELIMINARE ACA
+        //player.Units.EliminateUnit(unitIndex);
+        
+        //CAMBIAR ESTE NOMBRE
         player.AmountOfUnits = player.AmountOfUnits - 1;
         if (player.AmountOfUnits == 0)
         {
@@ -123,22 +130,29 @@ public class GameAttacksController
     {
         if (_currentAttacker == 0)
         {
-            _currentAttackingUnit = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
-            _currentDefensiveUnit = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
+            _currentAttackingUnit = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
         }
         else
         {
-            _currentAttackingUnit = Players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
-            _currentDefensiveUnit = Players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
+            _currentAttackingUnit = _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber);
 
         }
         _currentAttackingUnit.IsAttacking = true;
         _currentDefensiveUnit.IsAttacking = false;
     }
 
-    private void SetDefendorsNewHp(int secondPlayersCurrentUnitNumber, int attackValue)
+    private void SetDefensorsNewHp()
     {
-        _currentDefensiveUnit.CurrentHp -= attackValue;
+        Console.WriteLine("paso por set defensors new hp");
+        if (_currentDefensiveUnit.CurrentHp < _attackValue)
+        {
+            Console.WriteLine("paso por donde quiero, set hp a 0");
+            _currentDefensiveUnit.CurrentHp = 0;
+            return;
+        }
+        _currentDefensiveUnit.CurrentHp -= _attackValue;
     }
 
     private void ActivateOnePlayersUnitSkills(Unit targetUnit, Unit opponentsUnit)
@@ -150,17 +164,6 @@ public class GameAttacksController
         foreach (Skill skill in targetUnit.Skills)
         {
             skill.ApplySecondCategorySkills(targetUnit, opponentsUnit);
-        }
-    }
-    private void ActivateDefensorsUnitSkills()
-    {
-        foreach (Skill habilidad in _currentDefensiveUnit.Skills)
-        {
-            habilidad.ApplyFirstCategorySkills(_currentDefensiveUnit, _currentAttackingUnit);
-        }
-        foreach (Skill habilidad in _currentDefensiveUnit.Skills)
-        {
-            habilidad.ApplySecondCategorySkills(_currentDefensiveUnit, _currentAttackingUnit);
         }
     }
 
@@ -345,6 +348,18 @@ public class GameAttacksController
     {
         this._currentAttacker = value;
     }
+    public void ChangeAttacker()
+    {
+        if (this._currentAttacker == 0)
+        {
+            this._currentAttacker = 1;
+        }
+        else
+        {
+            this._currentAttacker = 0;
+        }
+    }
+    
 
     public void UpdateAttacks()
     {
@@ -365,7 +380,7 @@ public class GameAttacksController
 
     public Player[] GetPlayers()
     {
-        return this.Players;
+        return this._players;
     }
     
 }
