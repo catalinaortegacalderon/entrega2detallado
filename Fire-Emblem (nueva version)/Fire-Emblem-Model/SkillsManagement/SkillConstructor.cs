@@ -1,4 +1,7 @@
+using ConsoleApp1.DataTypes;
 using Fire_Emblem_Model.GameDataStructures.Lists;
+using Microsoft.VisualBasic.CompilerServices;
+using Fire_Emblem;
 
 namespace Fire_Emblem_Model;
 
@@ -186,35 +189,35 @@ public class SkillConstructor
         }
         else if (skillString == "Sword Agility")
         {
-            skills.AddSkill(skillsCounter, new Agility("Sword"));
+            skills.AddSkill(skillsCounter, new Agility(Weapon.Sword));
         }
         else if (skillString == "Lance Power")
         {
-            skills.AddSkill(skillsCounter, new Power("Lance"));
+            skills.AddSkill(skillsCounter, new Power(Weapon.Lance));
         }
         else if (skillString == "Sword Power")
         {
-            skills.AddSkill(skillsCounter, new Power("Sword"));
+            skills.AddSkill(skillsCounter, new Power(Weapon.Sword));
         }
         else if (skillString == "Bow Focus")
         {
-            skills.AddSkill(skillsCounter, new Focus("Bow"));
+            skills.AddSkill(skillsCounter, new Focus(Weapon.Bow));
         }
         else if (skillString == "Lance Agility")
         {
-            skills.AddSkill(skillsCounter, new Agility("Lance"));
+            skills.AddSkill(skillsCounter, new Agility(Weapon.Lance));
         }
         else if (skillString == "Axe Power")
         {
-            skills.AddSkill(skillsCounter, new Power("Axe"));
+            skills.AddSkill(skillsCounter, new Power(Weapon.Axe));
         }
         else if (skillString == "Bow Agility")
         {
-            skills.AddSkill(skillsCounter, new Agility("Bow"));
+            skills.AddSkill(skillsCounter, new Agility(Weapon.Bow));
         }
         else if (skillString == "Sword Focus")
         {
-            skills.AddSkill(skillsCounter, new Focus("Sword"));
+            skills.AddSkill(skillsCounter, new Focus(Weapon.Sword));
         }
         else if (skillString == "Close Def")
         {
@@ -284,7 +287,7 @@ public class SkillConstructor
         }
         else if (skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard")
         {
-            skills.AddSkill(skillsCounter, new Guard(skillString.Split(" ")[0]));
+            CreateGuard(skillString, skillsCounter, skills);
         }
         else if (skillString == "Sympathetic")
         {
@@ -433,5 +436,33 @@ public class SkillConstructor
         { 
             skills.AddSkill(skillsCounter, new DivineRecreation());
         }
+    }
+
+    private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
+    {
+        Weapon weapon = Weapon.Empty;
+        string weaponString = skillString.Split(" ")[0];
+        if (weaponString == "Magic")
+        {
+            weapon =  Weapon.Magic;
+        }
+        if (weaponString == "Axe")
+        {
+            weapon = Weapon.Axe;
+        }
+        if (weaponString == "Lance")
+        {
+            weapon = Weapon.Lance;
+        }
+
+        if (weaponString == "Bow")
+        {
+            weapon = Weapon.Bow;
+        }
+        if (weaponString == "Sword")
+        {
+            weapon = Weapon.Sword;
+        }
+        skills.AddSkill(skillsCounter, new Guard(weapon)) ;
     }
 }

@@ -1,9 +1,11 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class MyUnitUsesCertainWeaponsCondition : Condition
 {
-    private string[] _usedWeapon;
-    public MyUnitUsesCertainWeaponsCondition(string[] weapon) : base()
+    private Weapon[] _usedWeapon;
+    public MyUnitUsesCertainWeaponsCondition(Weapon[] weapon) : base()
     {
         this._usedWeapon = weapon;
     }

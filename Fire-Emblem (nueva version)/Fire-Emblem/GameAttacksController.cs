@@ -210,7 +210,7 @@ public class GameAttacksController
         return unitsAtk;
     }
 
-    private static double CalculateWtb(Weapon defensiveWeapon, string attackingWeapon)
+    private static double CalculateWtb(Weapon defensiveWeapon, Weapon attackingWeapon)
     {
         double wtb;
         if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) wtb = 1;
@@ -222,10 +222,10 @@ public class GameAttacksController
         return wtb;
     }
 
-    private int CalculateRivalsDefOrRes(string attackingWeapon)
+    private int CalculateRivalsDefOrRes(Weapon attackingWeapon)
     {
         int rivalsDefOrRes;
-        if (attackingWeapon == "Magic")
+        if (attackingWeapon == Weapon.Magic)
         {
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.Res *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
             if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2) rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.ResFirstAttack *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
@@ -287,9 +287,9 @@ public class GameAttacksController
         }
     }
 
-    private static bool AttackerHasAdvantage(string attackingWeapon, string defensiveWeapon)
+    private static bool AttackerHasAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {
-        return (attackingWeapon == "Sword" & defensiveWeapon == "Axe") || (attackingWeapon == "Lance" & defensiveWeapon == "Sword") || (attackingWeapon == "Axe" & defensiveWeapon == "Lance");
+        return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || (attackingWeapon == Weapon.Lance & defensiveWeapon == Weapon.Sword) || (attackingWeapon == Weapon.Axe & defensiveWeapon == Weapon.Lance);
     }
 
     private static bool ThereIsNoAdvantage(Weapon defensiveWeapon, Weapon attackingWeapon)

@@ -1,9 +1,11 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class OpponentUsesCertainWeaponCondition: Condition
 {
-    private String[] _weapons;
-    public OpponentUsesCertainWeaponCondition(String[] weapons) : base()
+    private Weapon[] _weapons;
+    public OpponentUsesCertainWeaponCondition(Weapon[] weapons) : base()
     {
         this._weapons = weapons;
     }

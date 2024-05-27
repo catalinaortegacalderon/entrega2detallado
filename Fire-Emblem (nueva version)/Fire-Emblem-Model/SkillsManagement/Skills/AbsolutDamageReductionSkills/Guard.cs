@@ -1,8 +1,10 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class Guard : Skill
 {
-    public Guard(String weapon) : base()
+    public Guard(Weapon weapon) : base()
     {
         this.Conditions = new Condition[1];
         this.Conditions[0] = new OpponentUsesCertainWeaponCondition([weapon]); 

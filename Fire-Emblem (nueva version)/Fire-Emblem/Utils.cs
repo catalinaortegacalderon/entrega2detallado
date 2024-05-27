@@ -144,11 +144,6 @@ public class Utils
             player2.Units.AddUnit(unitCounterplayer2, unit);
             unitCounterplayer2++;
         }
-        Console.WriteLine("pase por a");
-        //jugador1.Units = units[0].ToList();
-        //jugador2.Units = units[1].ToList();
-        // OJO, ARRAY DISTINTO DE LISTA, ARRAY TIENE LARGO FIJO, LISTA NO
-        // TAL VEZ NO USAR ARRAYS
         return new Player[]{player1, player2};
     }
 
@@ -210,7 +205,7 @@ public class Utils
     private static void SetUnitValues(Unit unit, string name, string weapon, string gender, int currentHp,int maxHp, int attk, int spd, int def, int res)
     {
         unit.Name = name;
-        unit.Weapon = weapon;
+        unit.Weapon = ConvertWeaponStringToWeaponType(weapon);
         unit.Gender = gender;
         unit.HpMax = maxHp;
         unit.CurrentHp = currentHp;
@@ -220,7 +215,7 @@ public class Utils
         unit.Res = res;
     }
 
-    public Weapon ConvertWeaponStringToWeaponType(string weapon)
+    public static Weapon ConvertWeaponStringToWeaponType(string weapon)
     {
         if (weapon == "Magic")
         {
@@ -237,6 +232,10 @@ public class Utils
         if (weapon == "Bow")
         {
             return Weapon.Bow;
+        }
+        if (weapon == "Sword")
+        {
+            return Weapon.Sword;
         }
         return Weapon.Empty;
     }

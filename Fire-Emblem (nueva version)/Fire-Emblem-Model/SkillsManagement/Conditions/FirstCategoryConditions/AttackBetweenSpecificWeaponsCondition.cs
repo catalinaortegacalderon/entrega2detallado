@@ -22,7 +22,7 @@ public class AttackBetweenSpecificWeaponsCondition : Condition
             {
                 return true;
             }
-            if (opponentsUnit.Weapon == Weapon.Magic && (myUnit.Weapon== "Bow" || myUnit.Weapon=="Axe" || myUnit.Weapon== "Sword" || myUnit.Weapon=="Lance")){
+            if (opponentsUnit.Weapon == Weapon.Magic && (myUnit.Weapon == Weapon.Bow || myUnit.Weapon == Weapon.Axe || myUnit.Weapon == Weapon.Sword || myUnit.Weapon == Weapon.Lance)){
                 return true;
             }
         }
