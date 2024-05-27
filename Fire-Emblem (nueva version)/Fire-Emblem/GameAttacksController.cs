@@ -27,18 +27,16 @@ public class GameAttacksController
         this._gameIsTerminated = false;
     }
 
-    public string Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
+    public void Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (this._gameIsTerminated || this._roundIsTerminated) 
-            return "";
+            return;
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         if (_numberOfThisRoundsCurrentAttack == 1) 
             PrintStartingParameters(view);
         _attackValue = CalculateAttack();
         PrintWhoAttacksWho(view);
-        if (_currentAttacker == 0) 
-            return Player1Attacks();
-        else { return Player2Attacks(); }
+        MakeTheDamage();
     }
 
     private void PrintStartingParameters(View view)
@@ -62,40 +60,34 @@ public class GameAttacksController
         SetAttackingAndDefensiveUnits();
     }
 
-    private string Player2Attacks()
+    private void MakeTheDamage()
     {
-        string loosersName;
-        if (_attackValue >= _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp)
+        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
         {
-            loosersName = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
             SetDefensorsNewHp();
-            EliminateLooserUnit(_players[0], _firstPlayersCurrentUnitNumber);
-            return loosersName;
+            EliminateLooserUnit();
+            return;
         }
         else
         {
             SetDefensorsNewHp();
-            //_players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp = _players[0].Units.GetUnitByIndex(_firstPlayersCurrentUnitNumber).CurrentHp - _attackValue;
         }
-        return "";
     }
 
-    private string Player1Attacks()
+    private void Player1Attacks()
     {
-        string loosersName;
-        if (_attackValue >= _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).CurrentHp)
+        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
         {
-            loosersName = _players[1].Units.GetUnitByIndex(_secondPlayersCurrentUnitNumber).Name;
             this._roundIsTerminated = true;
             SetDefensorsNewHp();
-            EliminateLooserUnit(_players[1], _secondPlayersCurrentUnitNumber);
-            return loosersName;
+            EliminateLooserUnit();
+            return;
         }
         else
         {
             SetDefensorsNewHp();
-            return "";
+            return;
         }
     }
 
@@ -105,12 +97,17 @@ public class GameAttacksController
         ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
     }
 
-    private void EliminateLooserUnit(Player player, int unitIndex)
+    private void EliminateLooserUnit()
     {
-        // NO LA ELIMINARE ACA
-        //player.Units.EliminateUnit(unitIndex);
-        
-        //CAMBIAR ESTE NOMBRE
+        Player player;
+        if (_currentAttacker == 0)
+        {
+            player = _players[1];
+        }
+        else
+        {
+            player = _players[0];
+        }
         player.AmountOfUnits = player.AmountOfUnits - 1;
         if (player.AmountOfUnits == 0)
         {
@@ -246,11 +243,6 @@ public class GameAttacksController
         double finalDamage  = initialDamage;
         if (_numberOfThisRoundsCurrentAttack == 1)
         {
-            //finalDamage =
-            //    (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage) *
-            //    _currentDefensiveUnit.DamageEffects.PorcentualReduction +
-            //    _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-            //finalDamage  = initialDamage;
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
                 _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
@@ -360,7 +352,6 @@ public class GameAttacksController
         }
     }
     
-
     public void UpdateAttacks()
     {
         _currentAttackingUnit.GameLogs.AmountOfAttacks = 0;
@@ -371,11 +362,6 @@ public class GameAttacksController
     {
         _currentAttackingUnit.GameLogs.LastOpponentName = _currentDefensiveUnit.Name;
         _currentDefensiveUnit.GameLogs.LastOpponentName = _currentAttackingUnit.Name;
-    }
-    
-    public string GetAttackersName()
-    {
-        return _currentAttackingUnit.Name;
     }
 
     public Player[] GetPlayers()

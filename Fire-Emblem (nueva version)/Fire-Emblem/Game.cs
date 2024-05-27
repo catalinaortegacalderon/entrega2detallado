@@ -277,5 +277,4 @@ public class Game
         }
         return _attackController.GetPlayers()[player].Units.GetUnitByIndex(unitNumber).CurrentHp;
     }
-    
 }
