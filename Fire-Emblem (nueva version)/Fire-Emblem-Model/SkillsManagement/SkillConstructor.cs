@@ -229,13 +229,15 @@ public class SkillConstructor
         }
         else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
         {
-            skills.AddSkill(skillsCounter, new Lull(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]));
+            skills.AddSkill(skillsCounter, new Lull(
+                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1]),
+                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2])));
         }
         else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
         {
-            skills.AddSkill(skillsCounter, new Fort(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1],
-                skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2]));
+            skills.AddSkill(skillsCounter, new Fort( 
+                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1]),
+                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2])));
         }
         else if (skillString == "Life and Death")
         {
@@ -301,56 +303,7 @@ public class SkillConstructor
         // tal vez separar posture aca
         else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture"))
         {
-            // tal vez codigo rep aca
-            if (skillString.Split(" ")[0] == "Fierce")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Atk", "", 8, 0));
-            }
-
-            if (skillString.Split(" ")[0] == "Darting")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Spd", "", 8, 0));
-            }
-
-            if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Stance")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Def", "", 8, 0));
-            }
-
-            if (skillString.Split(" ")[0] == "Warding")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Res", "", 8, 0));
-            }
-
-            if (skillString.Split(" ")[0] == "Kestrel")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Atk", "Spd", 6, 6));
-            }
-
-            if (skillString.Split(" ")[0] == "Sturdy")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Atk", "Def", 6, 6));
-            }
-
-            if (skillString.Split(" ")[0] == "Mirror")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Atk", "Res", 6, 6));
-            }
-
-            if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Spd", "Def", 6, 6));
-            }
-
-            if (skillString.Split(" ")[0] == "Swift")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Spd", "Res", 6, 6));
-            }
-
-            if (skillString.Split(" ")[0] == "Bracing")
-            {
-                skills.AddSkill(skillsCounter, new Stance("Def", "Res", 6, 6));
-            }
+            CreateStance(skillString, skillsCounter, skills);
         }
         else if (skillString == "Dragon Wall")
         { 
@@ -438,6 +391,69 @@ public class SkillConstructor
         }
     }
 
+    private static void CreateStance(string skillString, int skillsCounter, SkillsList skills)
+    {
+        if (skillString.Split(" ")[0] == "Fierce")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Atk, 
+                StatType.None, 8, 0));
+        }
+
+        if (skillString.Split(" ")[0] == "Darting")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Spd, 
+                StatType.None, 8, 0));
+        }
+
+        if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Stance")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Def, 
+                StatType.None, 8, 0));
+        }
+
+        if (skillString.Split(" ")[0] == "Warding")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Res, 
+                StatType.None, 8, 0));
+        }
+
+        if (skillString.Split(" ")[0] == "Kestrel")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Atk, 
+                StatType.Spd, 6, 6));
+        }
+
+        if (skillString.Split(" ")[0] == "Sturdy")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Atk, 
+                StatType.Def, 6, 6));
+        }
+
+        if (skillString.Split(" ")[0] == "Mirror")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Atk, 
+                StatType.Res, 6, 6));
+        }
+
+        if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Spd, 
+                StatType.Def, 6, 6));
+        }
+
+        if (skillString.Split(" ")[0] == "Swift")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Spd, 
+                StatType.Res, 6, 6));
+        }
+
+        if (skillString.Split(" ")[0] == "Bracing")
+        {
+            skills.AddSkill(skillsCounter, new Stance(StatType.Def, 
+                StatType.Res, 6, 6));
+        }
+    }
+
     private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
     {
         Weapon weapon = Weapon.Empty;
@@ -464,5 +480,27 @@ public class SkillConstructor
             weapon = Weapon.Sword;
         }
         skills.AddSkill(skillsCounter, new Guard(weapon)) ;
+    }
+    
+    private static StatType ConvertStatStringToStatType(string statString)
+    {
+        StatType stat = StatType.None;
+        if (statString == "Atk")
+        {
+            stat = StatType.Atk;
+        }
+        else if (statString == "Res")
+        {
+            stat = StatType.Res;
+        }
+        else if (statString == "Def")
+        {
+            stat = StatType.Def;
+        }
+        else if (statString == "Spd")
+        {
+            stat = StatType.Spd;
+        }
+        return stat;
     }
 }

@@ -44,8 +44,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new AlwaysTrueCondition(); 
 
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 5); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 5);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 5); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 5);
             
         }
     }
@@ -59,8 +59,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new AlwaysTrueCondition(); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 5); 
-            this.Effects[1] = new ChangeStatsInEffect("Res", 5);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 5); 
+            this.Effects[1] = new ChangeStatsInEffect(StatType.Res, 5);
             
         }
     }
@@ -72,7 +72,7 @@ namespace Fire_Emblem_Model;
         {
             this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             
-            this.Effects = new Effect[] { new ChangeStatsInEffect( "Atk", 6) };
+            this.Effects = new Effect[] { new ChangeStatsInEffect( StatType.Atk, 6) };
         }
     }
 
@@ -85,8 +85,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Def", 6);
-            this.Effects[1] = new ChangeStatsInEffect( "Res",6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Def, 6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res,6);
         }
     }
 
@@ -98,7 +98,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyHpIsLessThanCondition(0.5); 
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 8); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 8); 
         }
     }
 
@@ -111,8 +111,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk",6); 
-            this.Effects[1] = new ChangeStatsInEffect("Spd", 6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,6); 
+            this.Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6); 
         }
     }
 
@@ -122,7 +122,7 @@ namespace Fire_Emblem_Model;
         {
             this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             
-            this.Effects = new Effect[] { new ChangeStatsInEffect( "Def", 5) };
+            this.Effects = new Effect[] { new ChangeStatsInEffect( StatType.Def, 5) };
         }
     }
 
@@ -132,7 +132,7 @@ namespace Fire_Emblem_Model;
         {
             this.Conditions = new Condition[] { new AlwaysTrueCondition() };
             
-            this.Effects = new Effect[] { new ChangeStatsInEffect( "Res", 5) };
+            this.Effects = new Effect[] { new ChangeStatsInEffect( StatType.Res, 5) };
         }
     }
 
@@ -147,8 +147,8 @@ namespace Fire_Emblem_Model;
                 new MyUnitUsesCertainWeaponsCondition([Weapon.Sword])]);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 8); 
-            this.Effects[1] = new ChangeStatsInEffect("Spd", 8); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 8); 
+            this.Effects[1] = new ChangeStatsInEffect(StatType.Spd, 8); 
         }
     }
 
@@ -160,7 +160,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect("Atk", 8);
+            this.Effects[0] = new ChangeStatsInEffect(StatType.Atk, 8);
         }
     }
 
@@ -172,7 +172,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 8);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 8);
         }
     }
 
@@ -184,7 +184,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect("Res", 8);
+            this.Effects[0] = new ChangeStatsInEffect(StatType.Res, 8);
         }
     }
 
@@ -197,8 +197,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6);
-            this.Effects[1] = new ChangeStatsInEffect( "Spd", 6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 6);
         }
     }
 
@@ -211,8 +211,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6);
-            this.Effects[1] = new ChangeStatsInEffect( "Def",6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def,6);
         }
     }
 
@@ -225,8 +225,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk",6);
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 6);
         }
     }
 
@@ -239,8 +239,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 6);
-            this.Effects[1] = new ChangeStatsInEffect( "Def", 6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def, 6);
         }
     }
 
@@ -253,8 +253,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 6);
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 6);
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 6);
         }
     }
 
@@ -267,8 +267,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Spd", 10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 10); 
         }
     }
 
@@ -281,8 +281,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Def", 10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def, 10); 
         }
     }
 
@@ -295,8 +295,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res",10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res,10); 
         }
     }
 
@@ -309,8 +309,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Def", 10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def, 10); 
         }
     }
 
@@ -323,8 +323,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res",10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res,10); 
         }
     }
 
@@ -337,8 +337,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyHpIsLessThanCondition(0.8); 
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Def",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Def,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 10); 
         }
     }
 
@@ -359,7 +359,7 @@ namespace Fire_Emblem_Model;
     {
         public FireBoost() : base()
         {
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
         }
     }
 
@@ -367,7 +367,7 @@ namespace Fire_Emblem_Model;
     {
         public WindBoost() : base()
         {
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 6); 
         }
     }
 
@@ -375,7 +375,7 @@ namespace Fire_Emblem_Model;
     {
         public EarthBoost() : base()
         {
-            this.Effects[0] = new ChangeStatsInEffect( "Def", 6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Def, 6); 
         }
     }
 
@@ -383,7 +383,7 @@ namespace Fire_Emblem_Model;
     {
         public WaterBoost() : base()
         {
-            this.Effects[0] = new ChangeStatsInEffect( "Res", 6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Res, 6); 
         }
     }
 
@@ -395,7 +395,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new AttackBetweenSpecificWeaponsCondition("fisica", "magia");
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 3); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 3); 
         }
     }
 
@@ -407,7 +407,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Spd", -4); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Spd, -4); 
         }
     }
 
@@ -419,7 +419,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new OpponentStartsCombatCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -4); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -4); 
         }
     }
 
@@ -431,7 +431,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new OpponentIsAManCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Spd", -8); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Spd, -8); 
         }
     }
 
@@ -443,7 +443,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[0] = new OpponentIsAManCondition();
             
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -8); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -8); 
         }
     }
 
@@ -456,8 +456,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -3); 
-            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Spd", -3); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -3); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( StatType.Spd, -3); 
         }
     }
 
@@ -486,8 +486,8 @@ namespace Fire_Emblem_Model;
                 new OpponentStartsCombatCondition()] );
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -5); 
-            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Def", -5); 
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -5); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( StatType.Def, -5); 
         }
     }
 
@@ -524,8 +524,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Spd", 12); 
-            this.Effects[1] = new ChangeStatsInEffect( "Atk", -6); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 12); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Atk, -6); 
         }
     }
 
@@ -538,8 +538,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Def", -10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def, -10); 
         }
     }
 
@@ -552,8 +552,8 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk",10); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", -10); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,10); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, -10); 
         }
     }
 
@@ -570,8 +570,8 @@ namespace Fire_Emblem_Model;
                 Weapon.Lance, Weapon.Axe]), new OpponentStartsCombatCondition()]);
             
             this.Effects = new Effect[3];
-            this.Effects[0] = new ChangeStatsInEffect( "Def",8); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 8); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Def,8); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 8); 
             this.Effects[2] = new NeutralizeOpponentsBonusEffect(); 
         }
     }
@@ -589,15 +589,15 @@ namespace Fire_Emblem_Model;
                 Weapon.Bow]), new OpponentStartsCombatCondition()]);
             
             this.Effects = new Effect[3];
-            this.Effects[0] = new ChangeStatsInEffect( "Def", 8); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 8); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Def, 8); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 8); 
             this.Effects[2] = new NeutralizeOpponentsBonusEffect(); 
         }
     }
 
     public class Lull : Skill
     {
-        public Lull(String firstStat, String secondStat) : base()
+        public Lull(StatType firstStat, StatType secondStat) : base()
         {
             this.Conditions = new Condition[4];
             this.Conditions[0] = new AlwaysTrueCondition();
@@ -615,7 +615,7 @@ namespace Fire_Emblem_Model;
 
     public class Fort : Skill
     {
-        public Fort(String firstStat, String secondStat) : base()
+        public Fort(StatType firstStat, StatType secondStat) : base()
         {
             this.Conditions = new Condition[3];
             this.Conditions[0] = new AlwaysTrueCondition();
@@ -625,7 +625,7 @@ namespace Fire_Emblem_Model;
             this.Effects = new Effect[3];
             this.Effects[0] = new ChangeStatsInEffect( firstStat, 6); 
             this.Effects[1] = new ChangeStatsInEffect( secondStat, 6); 
-            this.Effects[2] = new ChangeStatsInEffect( "Atk", -2); ; 
+            this.Effects[2] = new ChangeStatsInEffect( StatType.Atk, -2); ; 
         }
     }
 
@@ -640,10 +640,10 @@ namespace Fire_Emblem_Model;
             this.Conditions[3] = new AlwaysTrueCondition();
             
             this.Effects = new Effect[4];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6); 
-            this.Effects[1] = new ChangeStatsInEffect( "Spd", 6); 
-            this.Effects[2] = new ChangeStatsInEffect( "Def", -5);
-            this.Effects[3] = new ChangeStatsInEffect( "Res", -5);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 6); 
+            this.Effects[2] = new ChangeStatsInEffect( StatType.Def, -5);
+            this.Effects[3] = new ChangeStatsInEffect( StatType.Res, -5);
         }
     }
 
@@ -657,9 +657,9 @@ namespace Fire_Emblem_Model;
             this.Conditions[2] = new AlwaysTrueCondition();
             
             this.Effects = new Effect[3];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6); 
-            this.Effects[1] = new ChangeStatsInEffect( "Def", 6); 
-            this.Effects[2] = new ChangeStatsInEffect( "Res", -5);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Def, 6); 
+            this.Effects[2] = new ChangeStatsInEffect( StatType.Res, -5);
         }
     }
 
@@ -673,9 +673,9 @@ namespace Fire_Emblem_Model;
             this.Conditions[2] = new AlwaysTrueCondition();
             
             this.Effects = new Effect[3];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6); 
-            this.Effects[1] = new ChangeStatsInEffect( "Res", 6); 
-            this.Effects[2] = new ChangeStatsInEffect( "Def", -5);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 6); 
+            this.Effects[2] = new ChangeStatsInEffect( StatType.Def, -5);
         }
     }
     public class DragonSkin : Skill
@@ -695,10 +695,10 @@ namespace Fire_Emblem_Model;
                 new OpponentStartsCombatCondition()]);
             
             this.Effects = new Effect[5];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 6); 
-            this.Effects[1] = new ChangeStatsInEffect( "Spd", 6); 
-            this.Effects[2] = new ChangeStatsInEffect( "Def", 6);
-            this.Effects[3] = new ChangeStatsInEffect( "Res", 6);
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
+            this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 6); 
+            this.Effects[2] = new ChangeStatsInEffect( StatType.Def, 6);
+            this.Effects[3] = new ChangeStatsInEffect( StatType.Res, 6);
             this.Effects[4] = new NeutralizeOpponentsBonusEffect();
         }
     }
@@ -716,10 +716,10 @@ namespace Fire_Emblem_Model;
             this.Conditions[5] = new AlwaysTrueCondition();
             
             this.Effects = new Effect[6];
-            this.Effects[0] = new ChangeOpponentsStatsInEffect( "Atk", -5); 
-            this.Effects[1] = new ChangeOpponentsStatsInEffect( "Spd", -5); 
-            this.Effects[2] = new ChangeOpponentsStatsInEffect( "Def", -5);
-            this.Effects[3] = new ChangeOpponentsStatsInEffect( "Res", -5);
+            this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -5); 
+            this.Effects[1] = new ChangeOpponentsStatsInEffect( StatType.Spd, -5); 
+            this.Effects[2] = new ChangeOpponentsStatsInEffect( StatType.Def, -5);
+            this.Effects[3] = new ChangeOpponentsStatsInEffect( StatType.Res, -5);
             this.Effects[4] = new NeutralizePenaltiesEffect();
             this.Effects[5] = new NeutralizeOpponentsBonusEffect();
         }
@@ -732,7 +732,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInEffect( "Atk", 8); 
+            this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 8); 
         }
     }
 
@@ -743,7 +743,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new AlwaysTrueCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatInPercentageOnlyForFirstAttackEffect( "Atk", 0.5); 
+            this.Effects[0] = new ChangeStatInPercentageOnlyForFirstAttackEffect( StatType.Atk, 0.5); 
         }
     }
 
@@ -754,7 +754,7 @@ namespace Fire_Emblem_Model;
             this.Conditions = new Condition[1];
             this.Conditions[0] = new MyUnitStartsCombatCondition();
             this.Effects = new Effect[1];
-            this.Effects[0] = new ChangeStatsInBasePlusOnePointForEveryEffect( "Spd", 12, 4);
+            this.Effects[0] = new ChangeStatsInBasePlusOnePointForEveryEffect( StatType.Spd, 12, 4);
         }
     }
 

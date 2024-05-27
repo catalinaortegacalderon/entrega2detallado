@@ -1,13 +1,15 @@
 
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: Effect
 {
     private string _type;
-    private string _stat;
+    private StatType _stat;
     private double _percentage;
     
-    public ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( string type, string stat, double percentage) : base()
+    public ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( string type, StatType stat, double percentage) : base()
     {
         this._type = type;
         this._stat = stat;
@@ -17,25 +19,25 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         int amount = 0;
-        if (this._stat == "Res")
+        if (this._stat == StatType.Res)
         {
             amount =
                 opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralization.Res
                                   + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralization.Res;
         }
-        if (this._stat == "Atk")
+        if (this._stat == StatType.Atk)
         {
             amount =
                 opponentsUnit.Atk + opponentsUnit.ActiveBonus.Attk * opponentsUnit.ActiveBonusNeutralization.Attk
                                   + opponentsUnit.ActivePenalties.Attk * opponentsUnit.ActivePenaltiesNeutralization.Attk;
         }
-        if (this._stat == "Def")
+        if (this._stat == StatType.Def)
         {
             amount =
                 opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralization.Def
                                   + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralization.Def;
         }
-        if (this._stat == "Spd")
+        if (this._stat == StatType.Spd)
         {
             amount =
                 opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralization.Spd

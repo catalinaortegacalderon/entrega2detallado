@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 // ARREGLAR NOMBRES DE PARAMS QUE RECIBE LA FUNCION
@@ -6,7 +8,7 @@ namespace Fire_Emblem_Model;
 
 public class Stance : Skill
 {
-    public Stance(String statThatChanges1, string statThatChanges2, int amount1, int amount2) : base()
+    public Stance(StatType statThatChanges1, StatType statThatChanges2, int amount1, int amount2) : base()
     {
         this.Conditions = new Condition[3];
         this.Conditions[0] = new OpponentStartsCombatCondition();

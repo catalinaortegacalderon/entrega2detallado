@@ -1,9 +1,11 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class NeutralizeOneOfOpponentsBonusEffect : Effect
 {
-    private String _stat;
-    public NeutralizeOneOfOpponentsBonusEffect(String stat) : base()
+    private StatType _stat;
+    public NeutralizeOneOfOpponentsBonusEffect(StatType stat) : base()
     {
         this._stat = stat;
     }
@@ -11,9 +13,9 @@ public class NeutralizeOneOfOpponentsBonusEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         
     {
-        if (_stat=="Atk" ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
-        else if (_stat == "Def" ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
-        else if (_stat == "Res" ) opponentsUnit.ActiveBonusNeutralization.Res = 0;
-        else if (_stat == "Spd" ) opponentsUnit.ActiveBonusNeutralization.Spd = 0;
+        if (_stat== StatType.Atk ) opponentsUnit.ActiveBonusNeutralization.Attk  = 0;
+        else if (_stat == StatType.Def ) opponentsUnit.ActiveBonusNeutralization.Def = 0;
+        else if (_stat == StatType.Res ) opponentsUnit.ActiveBonusNeutralization.Res = 0;
+        else if (_stat == StatType.Spd ) opponentsUnit.ActiveBonusNeutralization.Spd = 0;
     }
 }

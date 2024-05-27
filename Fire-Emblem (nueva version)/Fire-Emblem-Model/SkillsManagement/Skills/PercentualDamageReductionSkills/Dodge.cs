@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class Dodge : Skill
@@ -7,6 +9,6 @@ public class Dodge : Skill
     this.Conditions = new Condition[1];
     this.Conditions[0] = new CompareTotalSpdCondition(); 
     this.Effects = new Effect[1];
-    this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect("Spd", 4); 
+    this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4); 
     }
 }

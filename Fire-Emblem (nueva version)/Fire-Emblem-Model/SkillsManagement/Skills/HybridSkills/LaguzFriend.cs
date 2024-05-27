@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class LaguzFriend : Skill
@@ -12,10 +14,10 @@ public class LaguzFriend : Skill
         this.Conditions[4] = new AlwaysTrueCondition();
         this.Effects = new Effect[5];
         this.Effects[0] = new PercentualDamageReductionEffect(0.5, "All");
-        this.Effects[1] = new ChangeStatsInBasePercentageEffect("Def", -0.5);
-        this.Effects[2] = new ChangeStatsInBasePercentageEffect("Res", -0.5);
-        this.Effects[3] = new NeutralizeOneOfMyBonusEffect("Def");
-        this.Effects[4] = new NeutralizeOneOfMyBonusEffect("Res");
+        this.Effects[1] = new ChangeStatsInBasePercentageEffect(StatType.Def, -0.5);
+        this.Effects[2] = new ChangeStatsInBasePercentageEffect(StatType.Res, -0.5);
+        this.Effects[3] = new NeutralizeOneOfMyBonusEffect(StatType.Def);
+        this.Effects[4] = new NeutralizeOneOfMyBonusEffect(StatType.Res);
     }
     
 }

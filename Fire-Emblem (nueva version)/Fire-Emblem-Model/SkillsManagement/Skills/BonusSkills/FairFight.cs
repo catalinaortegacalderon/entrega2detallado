@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class FairFight : Skill
@@ -8,7 +10,7 @@ public class FairFight : Skill
         this.Conditions[0] = new MyUnitStartsCombatCondition();
         this.Conditions[1] = new MyUnitStartsCombatCondition();
         this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect( "Atk",6);
-        this.Effects[1] = new ChangeOpponentsStatsInEffect("Atk", 6);
+        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,6);
+        this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, 6);
     }
 }

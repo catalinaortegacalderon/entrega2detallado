@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class MoonTwinWing : Skill
@@ -9,9 +11,9 @@ public class MoonTwinWing : Skill
         this.Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
         this.Conditions[2] = new AndCondition([new CompareTotalSpdCondition(), new MyHpIsBiggerThanCondition(0.25)]);
         this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect("Spd", -5);
-        this.Effects[1] = new ChangeOpponentsStatsInEffect("Atk", -5);
-        this.Effects[2] = new PercentualDamageReductionDeterminedByStatDifferenceEffect("Spd", 4);
+        this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
+        this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
+        this.Effects[2] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
 
     }
 }

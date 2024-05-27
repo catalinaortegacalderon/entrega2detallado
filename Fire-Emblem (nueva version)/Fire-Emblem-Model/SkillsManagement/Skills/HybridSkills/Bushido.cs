@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 public class Bushido : Skill
 {
@@ -8,7 +10,7 @@ public Bushido() : base()
     this.Conditions[1] = new CompareTotalSpdCondition();
     this.Effects = new Effect[2];
     this.Effects[0] = new ExtraDamageReductionEffect(7, "All");
-    this.Effects[1] = new PercentualDamageReductionDeterminedByStatDifferenceEffect("Spd", 4);
+    this.Effects[1] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
 
 }
 }

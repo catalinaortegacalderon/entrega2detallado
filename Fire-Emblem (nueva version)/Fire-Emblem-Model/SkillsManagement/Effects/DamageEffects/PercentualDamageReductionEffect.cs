@@ -15,7 +15,8 @@ public class PercentualDamageReductionEffect : Effect
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-    { //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
+    {
+        //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
         if (this.Type == "All")
         {
             myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * this.percentaje;
@@ -23,7 +24,6 @@ public class PercentualDamageReductionEffect : Effect
         else if (this.Type == "First Attack")
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack = myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack * this.percentaje;
-            Console.WriteLine("paso por donde quiero");
         }
         else if (this.Type == "Followup")
         {

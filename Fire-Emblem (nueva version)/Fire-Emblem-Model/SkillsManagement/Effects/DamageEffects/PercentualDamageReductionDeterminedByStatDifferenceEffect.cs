@@ -1,13 +1,14 @@
 using System.Diagnostics;
+using ConsoleApp1.DataTypes;
 
 namespace Fire_Emblem_Model;
 
 public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
 {
-    private string stat;
+    private StatType stat;
     private int multiplicator;
     
-    public PercentualDamageReductionDeterminedByStatDifferenceEffect(string stat, int multiplicator) : base()
+    public PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType stat, int multiplicator) : base()
     {
         this.stat = stat;
         this.multiplicator = multiplicator;
@@ -17,7 +18,7 @@ public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
     { 
         //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
         double redutionPercentage = 1;
-        if (this.stat == "Spd")
+        if (this.stat == StatType.Spd)
         {
             double myTotalSpd = 
                 myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralization.Spd 
@@ -27,7 +28,7 @@ public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
                                   + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralization.Spd;
             redutionPercentage =  1 - (((myTotalSpd - opponentsTotalSpd) * this.multiplicator)/100);
         }
-        else if (this.stat == "Res")
+        else if (this.stat == StatType.Res)
         {
             double myTotalRes =
                 myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralization.Res
