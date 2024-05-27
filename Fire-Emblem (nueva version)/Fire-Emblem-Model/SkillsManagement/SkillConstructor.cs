@@ -460,7 +460,7 @@ public class SkillConstructor
         Weapon weapon = Weapon.Empty;
         string weaponString = skillString.Split(" ")[0];
         if (weaponString == "Magic")
-        {
+        { 
             weapon =  Weapon.Magic;
         }
         if (weaponString == "Axe")
