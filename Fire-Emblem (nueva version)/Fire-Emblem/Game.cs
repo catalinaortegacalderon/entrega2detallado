@@ -59,8 +59,17 @@ public class Game
     private void PlayOneRound()
     {
         SetRoundsParameters();
-        if (_attackController.GetCurrentAttacker() == 0) Player1StartsRound();
-        else if (_attackController.GetCurrentAttacker() == 1) Player2StartsRound();
+        if (IsPlayer1TheRoundStarter())
+        {
+            _attackController.SetCurrentAttacker(0);
+            StartRound();
+        }
+        else 
+        {
+            _attackController.SetCurrentAttacker(1);
+            StartRound();
+        }
+        
         _currentRound++;
     }
 
@@ -71,12 +80,12 @@ public class Game
         _currentRoundsPlayer2LooserUnitsName = "";
     }
 
-    private void Player1StartsRound()
+    private void StartRound()
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
         _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _attackController.SetCurrentAttacker(1);
+        _attackController.ChangeAttacker();
         _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
@@ -90,21 +99,6 @@ public class Game
         _attackController.SetCurrentAttacker(1);
     }
     
-    private void Player2StartsRound()
-    {
-        AskBothPlayersForTheChosenUnit();
-        PrintRound();
-        _currentRoundsPlayer1LooserUnitsName = _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        _attackController.SetCurrentAttacker(0);
-        _currentRoundsPlayer2LooserUnitsName = _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        Followup();
-        ResetUnitsBonus();
-        ShowLeftoverHp();
-        UpdateGameLogs();
-        EliminateLooserUnit();
-        // aca vamos a eliminar las unidades
-        _attackController.SetCurrentAttacker(0);
-    }
 
     private void AskBothPlayersForTheChosenUnit()
     {
