@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using Fire_Emblem_Model.GameDataStructures.Lists;
 
 namespace Fire_Emblem;
@@ -182,8 +183,8 @@ public class GameAttacksController
 
     public int CalculateAttack()
     {
-        string attackingWeapon = _currentAttackingUnit.Weapon;
-        string defensiveWeapon = _currentDefensiveUnit.Weapon;
+        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
+        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
         int rivalsDefOrRes = CalculateRivalsDefOrRes(attackingWeapon);
         double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
         int unitsAtk = CalculateUnitsAtk();
@@ -209,7 +210,7 @@ public class GameAttacksController
         return unitsAtk;
     }
 
-    private static double CalculateWtb(string defensiveWeapon, string attackingWeapon)
+    private static double CalculateWtb(Weapon defensiveWeapon, string attackingWeapon)
     {
         double wtb;
         if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) wtb = 1;
@@ -276,8 +277,8 @@ public class GameAttacksController
 
     public void PrintAdvantages(View view)
     {
-        string attackingWeapon = _currentAttackingUnit.Weapon;
-        string defensiveWeapon = _currentDefensiveUnit.Weapon;
+        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
+        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
         if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
         else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ")");
         else
@@ -291,9 +292,9 @@ public class GameAttacksController
         return (attackingWeapon == "Sword" & defensiveWeapon == "Axe") || (attackingWeapon == "Lance" & defensiveWeapon == "Sword") || (attackingWeapon == "Axe" & defensiveWeapon == "Lance");
     }
 
-    private static bool ThereIsNoAdvantage(string defensiveWeapon, string attackingWeapon)
+    private static bool ThereIsNoAdvantage(Weapon defensiveWeapon, Weapon attackingWeapon)
     {
-        return defensiveWeapon == attackingWeapon || attackingWeapon == "Magic" || defensiveWeapon == "Magic" || defensiveWeapon == "Bow" || attackingWeapon == "Bow";
+        return defensiveWeapon == attackingWeapon || attackingWeapon == Weapon.Magic || defensiveWeapon == Weapon.Magic || defensiveWeapon == Weapon.Bow || attackingWeapon == Weapon.Bow;
     }
 
     public void ResetAllSkills()

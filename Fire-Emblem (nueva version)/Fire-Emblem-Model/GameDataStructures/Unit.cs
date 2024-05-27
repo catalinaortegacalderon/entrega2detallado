@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using Fire_Emblem_Model.GameDataStructures.Lists;
 
 namespace Fire_Emblem_Model;
@@ -7,7 +8,7 @@ namespace Fire_Emblem_Model;
 public class Unit
 {
     public string Name = "";
-    public string Weapon;
+    public Weapon Weapon;
     public string Gender;
     public int HpMax;
     public int CurrentHp = 0;

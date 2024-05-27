@@ -1,8 +1,9 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class AttackBetweenSpecificWeaponsCondition : Condition
 {
-    
     private string _firstWeaponType;
     private string _secondWeaponType;
         
@@ -17,11 +18,11 @@ public class AttackBetweenSpecificWeaponsCondition : Condition
         
         if( myUnit.IsAttacking && ((_firstWeaponType == "magia" && _secondWeaponType == "fisica")|| (_secondWeaponType == "magia" && _firstWeaponType == "fisica"))) 
         { 
-            if (myUnit.Weapon == "Magic" && (opponentsUnit.Weapon == "Bow" || opponentsUnit.Weapon == "Axe" || opponentsUnit.Weapon == "Sword" || opponentsUnit.Weapon == "Lance"))
+            if (myUnit.Weapon == Weapon.Magic && (opponentsUnit.Weapon == Weapon.Bow || opponentsUnit.Weapon == Weapon.Axe || opponentsUnit.Weapon == Weapon.Sword || opponentsUnit.Weapon == Weapon.Lance))
             {
                 return true;
             }
-            if (opponentsUnit.Weapon == "Magic" && (myUnit.Weapon== "Bow" || myUnit.Weapon=="Axe" || myUnit.Weapon== "Sword" || myUnit.Weapon=="Lance")){
+            if (opponentsUnit.Weapon == Weapon.Magic && (myUnit.Weapon== "Bow" || myUnit.Weapon=="Axe" || myUnit.Weapon== "Sword" || myUnit.Weapon=="Lance")){
                 return true;
             }
         }

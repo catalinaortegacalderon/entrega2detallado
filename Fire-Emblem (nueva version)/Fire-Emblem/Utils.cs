@@ -2,6 +2,7 @@ namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
 using Fire_Emblem_Model;
+using ConsoleApp1.DataTypes;
 
 public class Utils
 {
@@ -217,5 +218,26 @@ public class Utils
         unit.Spd = spd;
         unit.Def = def;
         unit.Res = res;
+    }
+
+    public Weapon ConvertWeaponStringToWeaponType(string weapon)
+    {
+        if (weapon == "Magic")
+        {
+            return Weapon.Magic;
+        }
+        if (weapon == "Axe")
+        {
+            return Weapon.Axe;
+        }
+        if (weapon == "Lance")
+        {
+            return Weapon.Lance;
+        }
+        if (weapon == "Bow")
+        {
+            return Weapon.Bow;
+        }
+        return Weapon.Empty;
     }
 }
