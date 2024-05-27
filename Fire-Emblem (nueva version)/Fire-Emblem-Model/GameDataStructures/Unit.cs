@@ -22,7 +22,8 @@ public class Unit
     public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = DataStructuresFunctions.CreateStructure(1);
     public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = DataStructuresFunctions.CreateStructure(1);
     public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
-    public GameLogs GameLogs = new GameLogs();
+    public string LastOpponentName = "";
+    //public GameLogs GameLogs = new GameLogs();
     public SkillsList Skills = new SkillsList();
     //public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
 }

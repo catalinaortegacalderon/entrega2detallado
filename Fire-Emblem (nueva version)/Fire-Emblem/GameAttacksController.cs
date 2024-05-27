@@ -13,7 +13,6 @@ public class GameAttacksController
     private bool _roundIsTerminated;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
-    private int _numberOfThisRoundsCurrentAttack;
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
@@ -32,12 +31,12 @@ public class GameAttacksController
         if (this._gameIsTerminated || this._roundIsTerminated) 
             return;
         SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
-        if (_numberOfThisRoundsCurrentAttack == 1)
+        if (numberOfCurrentAttack == 1)
         {
             ActivateSkills();
             PrintStartingParameters(view);
         }
-        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, _numberOfThisRoundsCurrentAttack);
+        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, numberOfCurrentAttack);
         _attackValue = this._attackCalculator.CalculateAttack();
         PrintWhoAttacksWho(view);
         MakeTheDamage();
@@ -57,7 +56,6 @@ public class GameAttacksController
     private void SetAttacksParameters(int numberOfCurrentAttack, int firstPlayersCurrentUnitNumber,
         int secondPlayersCurrentUnitNumber)
     {
-        _numberOfThisRoundsCurrentAttack = numberOfCurrentAttack;
         this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
         this._secondPlayersCurrentUnitNumber = secondPlayersCurrentUnitNumber;
         SetAttackingAndDefensiveUnits();
@@ -248,16 +246,10 @@ public class GameAttacksController
         }
     }
     
-    public void UpdateAttacks()
-    {
-        _currentAttackingUnit.GameLogs.AmountOfAttacks = 0;
-        _currentDefensiveUnit.GameLogs.AmountOfAttacks = 0;
-    }
-    
     public void UpdateLastOpponents()
     {
-        _currentAttackingUnit.GameLogs.LastOpponentName = _currentDefensiveUnit.Name;
-        _currentDefensiveUnit.GameLogs.LastOpponentName = _currentAttackingUnit.Name;
+        _currentAttackingUnit.LastOpponentName = _currentDefensiveUnit.Name;
+        _currentDefensiveUnit.LastOpponentName = _currentAttackingUnit.Name;
     }
 
     public Player[] GetPlayers()

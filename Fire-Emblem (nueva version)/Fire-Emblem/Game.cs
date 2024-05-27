@@ -81,7 +81,7 @@ public class Game
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHp();
-        UpdateGameLogs();
+        UpdateLastOponent();
         EliminateLooserUnit();
         _attackController.SetCurrentAttacker(1);
     }
@@ -188,17 +188,6 @@ public class Game
     private void ResetUnitsBonus()
     {
         _attackController.ResetAllSkills();
-    }
-    
-    private void UpdateGameLogs()
-    {
-        UpdateLastOponent();
-        UpdateAttacks();
-    }
-
-    private void UpdateAttacks()
-    {
-        _attackController.UpdateAttacks();
     }
 
     private void EliminateLooserUnit()

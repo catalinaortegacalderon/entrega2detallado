@@ -28,7 +28,6 @@ public class AttackCalculator
         int rivalsDefOrRes = CalculateRivalsDefOrRes(attackingWeapon);
         double wtb = CalculateWtb(defensiveWeapon, attackingWeapon);
         int unitsAtk = CalculateUnitsAtk();
-        _currentAttackingUnit.GameLogs.AmountOfAttacks++;
         double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
         if ((finalDamage) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(finalDamage));
