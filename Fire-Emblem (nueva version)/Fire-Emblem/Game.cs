@@ -1,4 +1,6 @@
-﻿namespace Fire_Emblem;
+﻿using ConsoleApp1.DataTypes;
+
+namespace Fire_Emblem;
 using Fire_Emblem_View;
 using Fire_Emblem_Model;
 using System.Text.Json;
@@ -75,9 +77,9 @@ public class Game
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _attackController.Attack(1, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.FirstAttack , _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _attackController.Attack(2, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.SecondAttack, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHp();
@@ -150,12 +152,12 @@ public class Game
         if (SecondPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(1);
-            _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(AttackType.FollowUp, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (FirstPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(0);
-            _attackController.Attack(3, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(AttackType.FollowUp, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
         {

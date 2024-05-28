@@ -8,13 +8,13 @@ public class AttackCalculator
 {
     private readonly Unit _currentAttackingUnit;
     private readonly Unit _currentDefensiveUnit;
-    private readonly int _numberOfThisRoundsCurrentAttack;
+    private readonly AttackType _typeOfThisRoundsCurrentAttack;
 
-    public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, int attackNumber)
+    public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
         this._currentAttackingUnit = attackingUnit;
         this._currentDefensiveUnit = defensiveUnit;
-        this._numberOfThisRoundsCurrentAttack = attackNumber;
+        this._typeOfThisRoundsCurrentAttack = attackType;
     }
     
     public int CalculateAttack()
@@ -32,12 +32,12 @@ public class AttackCalculator
         int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Attk 
             * _currentAttackingUnit.ActiveBonusNeutralization.Attk + _currentAttackingUnit.ActivePenalties.Attk 
             * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
-        if (_numberOfThisRoundsCurrentAttack == 1 || _numberOfThisRoundsCurrentAttack == 2)
+        if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack || _typeOfThisRoundsCurrentAttack == AttackType.SecondAttack)
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack * _currentAttackingUnit.ActiveBonusNeutralization.Attk +
                           _currentAttackingUnit.ActivePenalties.AtkFirstAttack * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
         }
-        if (_numberOfThisRoundsCurrentAttack == 3)
+        if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup * _currentAttackingUnit.ActiveBonusNeutralization.Attk
                           + _currentAttackingUnit.ActivePenalties.AtkFollowup * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
@@ -66,7 +66,7 @@ public class AttackCalculator
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res 
                 * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.Res 
                 *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
-            if (_numberOfThisRoundsCurrentAttack is 1 or 2)
+            if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack 
                     * _currentDefensiveUnit.ActiveBonusNeutralization.Res + _currentDefensiveUnit.ActivePenalties.ResFirstAttack 
@@ -78,7 +78,7 @@ public class AttackCalculator
             rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def 
                 * _currentDefensiveUnit.ActiveBonusNeutralization.Def + _currentDefensiveUnit.ActivePenalties.Def 
                 *_currentDefensiveUnit.ActivePenaltiesNeutralization.Def;
-            if (_numberOfThisRoundsCurrentAttack is 1 or 2)
+            if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack 
                     * _currentDefensiveUnit.ActiveBonusNeutralization.Def + _currentDefensiveUnit.ActivePenalties.DefFirstAttack 
@@ -90,7 +90,7 @@ public class AttackCalculator
     private double CalculateFinalDamage(double initialDamage)
     {
         double finalDamage  = initialDamage;
-        if (_numberOfThisRoundsCurrentAttack == 1)
+        if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
@@ -98,7 +98,7 @@ public class AttackCalculator
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
-        else if (_numberOfThisRoundsCurrentAttack == 2)
+        else if (_typeOfThisRoundsCurrentAttack == AttackType.SecondAttack)
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
@@ -106,7 +106,7 @@ public class AttackCalculator
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
-        else if (_numberOfThisRoundsCurrentAttack == 3)
+        else if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup) *

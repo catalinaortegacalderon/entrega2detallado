@@ -26,17 +26,17 @@ public class GameAttacksController
         this._gameIsTerminated = false;
     }
 
-    public void Attack(int numberOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
+    public void Attack(AttackType typeOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (this._gameIsTerminated || this._roundIsTerminated) 
             return;
-        SetAttacksParameters(numberOfCurrentAttack, firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
-        if (numberOfCurrentAttack == 1)
+        SetAttacksParameters(firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
+        if (typeOfCurrentAttack == AttackType.FirstAttack)
         {
             ActivateSkills();
             PrintStartingParameters(view);
         }
-        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, numberOfCurrentAttack);
+        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, typeOfCurrentAttack);
         _attackValue = this._attackCalculator.CalculateAttack();
         PrintWhoAttacksWho(view);
         MakeTheDamage();
@@ -53,7 +53,7 @@ public class GameAttacksController
         view.WriteLine(_currentAttackingUnit.Name + " ataca a " + _currentDefensiveUnit.Name + " con " + _attackValue + " de daño");
     }
 
-    private void SetAttacksParameters(int numberOfCurrentAttack, int firstPlayersCurrentUnitNumber,
+    private void SetAttacksParameters(int firstPlayersCurrentUnitNumber,
         int secondPlayersCurrentUnitNumber)
     {
         this._firstPlayersCurrentUnitNumber = firstPlayersCurrentUnitNumber;
