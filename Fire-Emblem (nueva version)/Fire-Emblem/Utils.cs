@@ -206,7 +206,14 @@ public class Utils
     {
         unit.Name = name;
         unit.Weapon = ConvertWeaponStringToWeaponType(weapon);
-        unit.Gender = gender;
+        if (gender == "Male")
+        {
+            unit.Gender = Gender.Male;
+        }
+        else
+        {
+            unit.Gender = Gender.Female;
+        }
         unit.HpMax = maxHp;
         unit.CurrentHp = currentHp;
         unit.Atk = attk;

@@ -9,7 +9,7 @@ public class Unit
 {
     public string Name = "";
     public Weapon Weapon;
-    public string Gender;
+    public Gender Gender;
     public int HpMax;
     public int CurrentHp = 0;
     public int Atk;
