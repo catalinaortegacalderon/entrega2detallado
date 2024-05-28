@@ -392,7 +392,7 @@ namespace Fire_Emblem_Model;
         public ChaosStyle() : base()
         {
             this.Conditions = new Condition[1];
-            this.Conditions[0] = new AttackBetweenSpecificWeaponsCondition("fisica", "magia");
+            this.Conditions[0] = new ChaosStyleCondition();
             
             this.Effects = new Effect[1];
             this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 3); 
