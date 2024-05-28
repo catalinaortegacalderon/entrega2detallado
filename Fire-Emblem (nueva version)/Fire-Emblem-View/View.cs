@@ -40,9 +40,15 @@ public class View
         //SkillsPrinter.Print(this,  unit, command);
     }
     
-    public void PrintAllSkills(Unit unit)
+    public void ShowAttack(String attackersName, String defensorsName, int damage)
+    {
+        _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
+    }
+    
+    public void ShowAllSkills(Unit unit)
     {
         SkillsPrinter.PrintAll(this,  unit);
     }
+    
     
 }

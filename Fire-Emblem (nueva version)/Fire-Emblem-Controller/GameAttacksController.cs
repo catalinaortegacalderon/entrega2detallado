@@ -52,7 +52,8 @@ public class GameAttacksController
 
     private void PrintWhoAttacksWho(View view)
     {
-        view.WriteLine(_currentAttackingUnit.Name + " ataca a " + _currentDefensiveUnit.Name + " con " + _attackValue + " de daño");
+        view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
+        //view.WriteLine(_currentAttackingUnit.Name + " ataca a " + _currentDefensiveUnit.Name + " con " + _attackValue + " de daño");
     }
 
     private void SetAttacksParameters(int firstPlayersCurrentUnitNumber,
@@ -155,8 +156,8 @@ public class GameAttacksController
 
     private void PrintSkillsInfo(View view)
     {
-        view.PrintAllSkills( _currentAttackingUnit);
-        view.PrintAllSkills( _currentDefensiveUnit);
+        view.ShowAllSkills( _currentAttackingUnit);
+        view.ShowAllSkills( _currentDefensiveUnit);
     }
     
     public void PrintAdvantages(View view)

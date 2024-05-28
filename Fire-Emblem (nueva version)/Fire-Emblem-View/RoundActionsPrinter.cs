@@ -11,8 +11,10 @@ public class RoundActionsPrinter
     {
         if (command == PrinterCommands.ShowWinner)
             view.WriteLine("ganadorr");
-        //else if command == P
-
+        else if (command == PrinterCommands.ShowLeftOverHp)
+            view.WriteLine("ganadorr");
+        else if (command == PrinterCommands.ShowWinner)
+            view.WriteLine("ganadorr");
     }
 
 }
