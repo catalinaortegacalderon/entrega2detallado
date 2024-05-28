@@ -379,7 +379,6 @@ public class SkillConstructor
         }
         else if (skillString == "Extra Chivalry")
         { 
-            Console.WriteLine("construyendo");
             skills.AddSkill(skillsCounter, new ExtraChivalry());
         }
         else if (skillString == "Guard Bearing")

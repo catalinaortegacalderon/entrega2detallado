@@ -188,26 +188,17 @@ public class GameAttacksController
 
     public void ResetAllSkills()
     {
-        ResetAttackersSkills();
-        ResetDefensorsSkills();
+        ResetOnePlayersSkills(_currentAttackingUnit);
+        ResetOnePlayersSkills(_currentDefensiveUnit);
     }
 
-    private void ResetAttackersSkills()
+    private void ResetOnePlayersSkills(Unit unit)
     {
-        DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActiveBonus, 0);
-        DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActivePenalties, 0);
-        DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActiveBonusNeutralization, 1);
-        DataStructuresFunctions.SetStructureTo(_currentAttackingUnit.ActivePenaltiesNeutralization, 1);
-        DataStructuresFunctions.ResetDamageStructure(_currentAttackingUnit.DamageEffects);
-    }
-
-    private void ResetDefensorsSkills()
-    {
-        DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActiveBonus, 0);
-        DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenalties, 0);
-        DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActiveBonusNeutralization, 1);
-        DataStructuresFunctions.SetStructureTo(_currentDefensiveUnit.ActivePenaltiesNeutralization, 1);
-        DataStructuresFunctions.ResetDamageStructure(_currentDefensiveUnit.DamageEffects);
+        DataStructuresFunctions.SetStructureTo(unit.ActiveBonus, 0);
+        DataStructuresFunctions.SetStructureTo(unit.ActivePenalties, 0);
+        DataStructuresFunctions.SetStructureTo(unit.ActiveBonusNeutralization, 1);
+        DataStructuresFunctions.SetStructureTo(unit.ActivePenaltiesNeutralization, 1);
+        DataStructuresFunctions.ResetDamageStructure(unit.DamageEffects);
     }
 
     public bool IsGameTerminated()

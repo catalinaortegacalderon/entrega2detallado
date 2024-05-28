@@ -20,15 +20,15 @@ public class PercentualDamageReductionEffect : Effect
         //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
         if (this.Type == DamageEffectCategory.All)
         {
-            myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * this.percentaje;
+            myUnit.DamageEffects.PercentageReduction = myUnit.DamageEffects.PercentageReduction * this.percentaje;
         }
         else if (this.Type == DamageEffectCategory.FirstAttack)
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack = myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack * this.percentaje;
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack = myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack * this.percentaje;
         }
         else if (this.Type == DamageEffectCategory.FollowUp)
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFollowup = myUnit.DamageEffects.PorcentualReductionRivalsFollowup * this.percentaje;
+            myUnit.DamageEffects.PercentageReductionOpponentsFollowup = myUnit.DamageEffects.PercentageReductionOpponentsFollowup * this.percentaje;
         }
     }
 }

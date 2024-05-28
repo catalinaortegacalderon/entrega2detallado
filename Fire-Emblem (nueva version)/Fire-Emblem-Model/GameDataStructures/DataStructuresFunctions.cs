@@ -33,9 +33,9 @@ public class DataStructuresFunctions
         dataStructure.ExtraDamage = 0;
         dataStructure.ExtraDamageFirstAttack = 0;
         dataStructure.ExtraDamageFollowup = 0;
-        dataStructure.PorcentualReduction = 1;
-        dataStructure.PorcentualReductionRivalsFirstAttack = 1;
-        dataStructure.PorcentualReductionRivalsFollowup = 1;
+        dataStructure.PercentageReduction = 1;
+        dataStructure.PercentageReductionOpponentsFirstAttack = 1;
+        dataStructure.PercentageReductionOpponentsFollowup = 1;
         dataStructure.AbsolutDamageReduction = 0;
     }
     

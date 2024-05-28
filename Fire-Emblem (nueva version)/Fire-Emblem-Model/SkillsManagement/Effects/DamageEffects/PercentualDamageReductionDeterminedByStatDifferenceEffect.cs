@@ -42,7 +42,7 @@ public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
         {
             redutionPercentage = 0.6;
         }
-        myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * redutionPercentage;
+        myUnit.DamageEffects.PercentageReduction = myUnit.DamageEffects.PercentageReduction * redutionPercentage;
     }
     
 }

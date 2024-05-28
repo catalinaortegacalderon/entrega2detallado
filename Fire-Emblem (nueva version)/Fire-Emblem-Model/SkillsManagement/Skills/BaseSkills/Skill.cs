@@ -10,26 +10,26 @@ namespace Fire_Emblem_Model;
         protected Condition[] Conditions;
         protected Effect[] Effects;
 
-        public void ApplyFirstCategorySkills(Unit myUnit, Unit oponentsUnit)
+        public void ApplyFirstCategorySkills(Unit myUnit, Unit opponentsUnit)
         {
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, oponentsUnit) && this.Conditions[i].GetPriority() == 1)
+                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 1)
                 {
-                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit);
+                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }
             }
         }
         
-        public void ApplySecondCategorySkills(Unit myUnit, Unit oponentsUnit)
+        public void ApplySecondCategorySkills(Unit myUnit, Unit opponentsUnit)
         {
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, oponentsUnit) && this.Conditions[i].GetPriority() == 2)
+                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 2)
                 {
-                    this.Effects[i].ApplyEffect(myUnit, oponentsUnit);
+                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }
             }
         }
@@ -470,7 +470,7 @@ namespace Fire_Emblem_Model;
             this.Conditions[1] = new AlwaysTrueCondition();
             
             this.Effects = new Effect[2];
-            this.Effects[0] = new ReduceRivalsDefInPercentajeForFirstAttackEffect( 0.5); 
+            this.Effects[0] = new ReduceOpponentsDefInPercentajeForFirstAttackEffect( 0.5); 
             this.Effects[1] = new ReduceOpponentsResInPercentageForFirstAttackEffect( 0.5); 
         }
     }
@@ -790,23 +790,6 @@ namespace Fire_Emblem_Model;
             this.Effects[0] = new SandstormEffect();
         }
     }
-
-// SKILLS E3, TAL VEZ SEPARAR SKILLS POR TIPO (BONUS, HIBRIDAS...)
-
-// REDUCCION DE DAÑO ABSOLUTA
-
-// HARE LA SEPARACIÓN AL TIRO
-
- //   public class Gentility : Skill
-  //  {
-   //     public Gentility() : base()
-    //    {
-     //       this.Conditions = new Condition[1];
-   //         this.Conditions[0] = new OpponentStartsCombatWithCertainWeapon(["Axe"]);
-   //         this.Effects = new Effect[1];
-    //        this.Effects[0] = new SandstormEffect();
-    //    }
-   // }
 
 
     

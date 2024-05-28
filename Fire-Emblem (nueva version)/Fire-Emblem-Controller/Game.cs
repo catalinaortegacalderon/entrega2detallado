@@ -79,7 +79,7 @@ public class Game
         _attackController.Attack(AttackType.FirstAttack , _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
         _attackController.Attack(AttackType.SecondAttack, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
-        Followup();
+        FollowUp();
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
@@ -146,7 +146,7 @@ public class Game
         }
     }
     
-    private void Followup()
+    private void FollowUp()
     {
         if (SecondPlayerCanDoAFollowup())
         {
@@ -193,17 +193,12 @@ public class Game
 
     private void EliminateLooserUnit()
     {
-        Console.WriteLine("paso por eliminate loosers unit");
-        Console.WriteLine(_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp);
-        Console.WriteLine(_attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).CurrentHp);
         if (_attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp == 0)
         {
-            Console.WriteLine("elimino");
             _attackController.GetPlayers()[0].Units.EliminateUnit(_currentUnitNumberOfPlayer1);
         }
         if (_attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).CurrentHp == 0)
         {
-            Console.WriteLine("elimino");
             _attackController.GetPlayers()[1].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
         }
         return;

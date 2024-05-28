@@ -19,7 +19,7 @@ public class AttackCalculator
     
     public int CalculateAttack()
     {
-        int rivalsDefOrRes = CalculateRivalsDefOrRes();
+        int rivalsDefOrRes = CalculateOpponentsDefOrRes();
         double wtb = CalculateWtb();
         int unitsAtk = CalculateUnitsAtk();
         double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
@@ -57,7 +57,7 @@ public class AttackCalculator
         return wtb;
     }
 
-    private int CalculateRivalsDefOrRes()
+    private int CalculateOpponentsDefOrRes()
     {
         Weapon attackingWeapon = _currentAttackingUnit.Weapon;
         int rivalsDefOrRes;
@@ -94,7 +94,7 @@ public class AttackCalculator
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
+                _currentDefensiveUnit.DamageEffects.PercentageReduction *  _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack +
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
@@ -102,7 +102,7 @@ public class AttackCalculator
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction *  _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFirstAttack +
+                _currentDefensiveUnit.DamageEffects.PercentageReduction *  _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack +
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
@@ -110,7 +110,7 @@ public class AttackCalculator
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup) *
-                _currentDefensiveUnit.DamageEffects.PorcentualReduction * _currentDefensiveUnit.DamageEffects.PorcentualReductionRivalsFollowup +
+                _currentDefensiveUnit.DamageEffects.PercentageReduction * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup +
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
         }
         //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO

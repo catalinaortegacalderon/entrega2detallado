@@ -21,15 +21,15 @@ public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
         
         if (this.Type == DamageEffectCategory.All)
         {
-            myUnit.DamageEffects.PorcentualReduction *= finalPercentage;
+            myUnit.DamageEffects.PercentageReduction *= finalPercentage;
         }
         else if (this.Type == DamageEffectCategory.FirstAttack)
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack *= finalPercentage;
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= finalPercentage;
         }
         else if (this.Type == DamageEffectCategory.FollowUp)
         {
-            myUnit.DamageEffects.PorcentualReductionRivalsFollowup *= finalPercentage;
+            myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= finalPercentage;
         }
     }
 }

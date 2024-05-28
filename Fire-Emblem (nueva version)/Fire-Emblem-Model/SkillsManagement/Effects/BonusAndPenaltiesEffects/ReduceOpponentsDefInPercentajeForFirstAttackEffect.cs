@@ -1,9 +1,9 @@
 namespace Fire_Emblem_Model;
 
-public class ReduceRivalsDefInPercentajeForFirstAttackEffect : Effect
+public class ReduceOpponentsDefInPercentajeForFirstAttackEffect : Effect
 {
     private double _reductionPercentaje;
-    public ReduceRivalsDefInPercentajeForFirstAttackEffect(double reduction) : base()
+    public ReduceOpponentsDefInPercentajeForFirstAttackEffect(double reduction) : base()
     {
         this._reductionPercentaje = reduction;
     }

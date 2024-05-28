@@ -10,6 +10,6 @@ public class GuardBearingEffect : Effect
         {
             percentage = 0.4;
         }
-        myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * percentage;
+        myUnit.DamageEffects.PercentageReduction = myUnit.DamageEffects.PercentageReduction * percentage;
     }
 }

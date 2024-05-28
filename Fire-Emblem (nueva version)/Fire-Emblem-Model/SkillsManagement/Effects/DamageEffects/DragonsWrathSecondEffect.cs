@@ -14,7 +14,6 @@ public class DragonsWrathSecondEffect : Effect
         
         int amount = Convert.ToInt32(Math.Truncate((unitsAtk - rivalsRes) * 0.25));
         myUnit.DamageEffects.ExtraDamageFirstAttack +=  amount;
-        Console.WriteLine(amount);
     }
 }
 
