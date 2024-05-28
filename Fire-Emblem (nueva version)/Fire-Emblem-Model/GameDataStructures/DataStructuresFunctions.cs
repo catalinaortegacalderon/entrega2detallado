@@ -2,6 +2,8 @@ namespace Fire_Emblem_Model;
 
 public class DataStructuresFunctions
 {
+    
+    // REVISAR ESTO, PUEDEN TENER CONSTRUCTOR?
     public static BonusPenaltiesAndNeutralizations CreateStructure(int startValuesIn)
     {
         BonusPenaltiesAndNeutralizations dataStructure = new BonusPenaltiesAndNeutralizations();
