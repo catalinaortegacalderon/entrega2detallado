@@ -5,11 +5,11 @@ namespace Fire_Emblem_Model;
 
 public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: Effect
 {
-    private string _type;
+    private DamageEffectCategory _type;
     private StatType _stat;
     private double _percentage;
     
-    public ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( string type, StatType stat, double percentage) : base()
+    public ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect(DamageEffectCategory type, StatType stat, double percentage) : base()
     {
         this._type = type;
         this._stat = stat;
@@ -44,15 +44,15 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: 
                                   + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralization.Spd;
         }
         amount = Convert.ToInt32(Math.Truncate(amount * this._percentage));
-        if (this._type == "All")
+        if (this._type == DamageEffectCategory.All)
         {
             myUnit.DamageEffects.ExtraDamage = myUnit.DamageEffects.ExtraDamage + amount;
         }
-        else if (this._type == "First Attack")
+        else if (this._type == DamageEffectCategory.FirstAttack)
         {
             myUnit.DamageEffects.ExtraDamageFirstAttack= myUnit.DamageEffects.ExtraDamageFirstAttack + amount;
         }
-        else if (this._type == "Followup")
+        else if (this._type == DamageEffectCategory.FollowUp)
         {
             myUnit.DamageEffects.ExtraDamageFollowup = myUnit.DamageEffects.ExtraDamageFollowup + amount;
         }

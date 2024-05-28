@@ -13,7 +13,7 @@ public class AegisShield : Skill
         this.Effects = new Effect[3];
         this.Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
         this.Effects[1] = new ChangeStatsInEffect(StatType.Res, 3);
-        this.Effects[2] = new PercentualDamageReductionEffect(0.5, "First Attack");
+        this.Effects[2] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
     }
     
 }

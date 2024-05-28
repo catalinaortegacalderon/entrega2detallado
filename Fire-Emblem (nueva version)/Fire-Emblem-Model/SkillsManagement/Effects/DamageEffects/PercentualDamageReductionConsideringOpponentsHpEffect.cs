@@ -1,13 +1,14 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using ConsoleApp1.DataTypes;
 
 namespace Fire_Emblem_Model;
 
 public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
 {
-    private string Type;
+    private DamageEffectCategory Type;
     
-    public PercentualDamageReductionConsideringOpponentsHpEffect(string type) : base()
+    public PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory type) : base()
     {
         this.Type = type;
     }
@@ -18,16 +19,15 @@ public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
         percentualReduction = Math.Truncate(100.0 * percentualReduction) / 100.0;
         double finalPercentage = 1 - percentualReduction;
         
-        if (this.Type == "All")
+        if (this.Type == DamageEffectCategory.All)
         {
-            Console.WriteLine("paso por all");
             myUnit.DamageEffects.PorcentualReduction *= finalPercentage;
         }
-        else if (this.Type == "First Attack")
+        else if (this.Type == DamageEffectCategory.FirstAttack)
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack *= finalPercentage;
         }
-        else if (this.Type == "Followup")
+        else if (this.Type == DamageEffectCategory.FollowUp)
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFollowup *= finalPercentage;
         }

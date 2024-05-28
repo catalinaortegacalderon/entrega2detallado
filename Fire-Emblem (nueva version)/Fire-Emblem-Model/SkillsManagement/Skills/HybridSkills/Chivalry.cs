@@ -1,3 +1,5 @@
+using ConsoleApp1.DataTypes;
+
 namespace Fire_Emblem_Model;
 
 public class Chivalry : Skill
@@ -9,7 +11,7 @@ public class Chivalry : Skill
         this.Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), new OpponentHasFullHpCondition()]);
         this.Effects = new Effect[2];
         this.Effects[0] = new AbsolutDamageReductionEffect(2);
-        this.Effects[1] = new ExtraDamageReductionEffect(2, "All");
+        this.Effects[1] = new ExtraDamageReductionEffect(2, DamageEffectCategory.All);
     }
     
 }

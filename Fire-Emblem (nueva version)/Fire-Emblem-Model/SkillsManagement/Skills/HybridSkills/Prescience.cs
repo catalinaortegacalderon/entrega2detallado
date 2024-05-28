@@ -13,6 +13,6 @@ public class Prescience : Skill
         this.Effects = new Effect[3];
         this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk,-5);
         this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Res,-5);
-        this.Effects[2] = new PercentualDamageReductionEffect(0.7, "First Attack");
+        this.Effects[2] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
     }
 }

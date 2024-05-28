@@ -14,6 +14,6 @@ public class RemoteMirror : Skill
         this.Effects = new Effect[3];
         this.Effects[0] = new ChangeStatsInEffect(StatType.Atk,7);
         this.Effects[1] = new ChangeStatsInEffect(StatType.Res,10);
-        this.Effects[2] = new PercentualDamageReductionEffect(0.7, "First Attack");
+        this.Effects[2] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
     }
 }

@@ -9,6 +9,6 @@ public class GoldenLotus :  Skill
         this.Conditions = new Condition[1];
         this.Conditions[0] = new OpponentUsesCertainWeaponCondition([Weapon.Sword, Weapon.Axe, Weapon.Lance, Weapon.Bow]); 
         this.Effects = new Effect[1];
-        this.Effects[0] = new PercentualDamageReductionEffect(0.5,"First Attack"); 
+        this.Effects[0] = new PercentualDamageReductionEffect(0.5,DamageEffectCategory.FirstAttack); 
     }
 }

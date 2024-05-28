@@ -1,14 +1,15 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using ConsoleApp1.DataTypes;
 
 namespace Fire_Emblem_Model;
 
 public class PercentualDamageReductionEffect : Effect
 {
-    private string Type;
+    private DamageEffectCategory Type;
     private double percentaje;
     
-    public PercentualDamageReductionEffect(double amount, string type) : base()
+    public PercentualDamageReductionEffect(double amount, DamageEffectCategory type) : base()
     {
         this.percentaje = amount;
         this.Type = type;
@@ -17,15 +18,15 @@ public class PercentualDamageReductionEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
-        if (this.Type == "All")
+        if (this.Type == DamageEffectCategory.All)
         {
             myUnit.DamageEffects.PorcentualReduction = myUnit.DamageEffects.PorcentualReduction * this.percentaje;
         }
-        else if (this.Type == "First Attack")
+        else if (this.Type == DamageEffectCategory.FirstAttack)
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack = myUnit.DamageEffects.PorcentualReductionRivalsFirstAttack * this.percentaje;
         }
-        else if (this.Type == "Followup")
+        else if (this.Type == DamageEffectCategory.FollowUp)
         {
             myUnit.DamageEffects.PorcentualReductionRivalsFollowup = myUnit.DamageEffects.PorcentualReductionRivalsFollowup * this.percentaje;
         }

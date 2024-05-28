@@ -17,6 +17,6 @@ public class Stance : Skill
         this.Effects = new Effect[3];
         this.Effects[0] = new ChangeStatsInEffect(statThatChanges1, amount1); 
         this.Effects[1] = new ChangeStatsInEffect(statThatChanges2, amount2); 
-        this.Effects[2] = new PercentualDamageReductionEffect(0.9, "Followup"); 
+        this.Effects[2] = new PercentualDamageReductionEffect(0.9, DamageEffectCategory.FollowUp); 
     }
 }

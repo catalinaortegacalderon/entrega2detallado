@@ -15,6 +15,6 @@ public class ExtraChivalry : Skill
         this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
         this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);
         this.Effects[2] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
-        this.Effects[3] = new PercentualDamageReductionConsideringOpponentsHpEffect("All");
+        this.Effects[3] = new PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory.All);
     }
 }
