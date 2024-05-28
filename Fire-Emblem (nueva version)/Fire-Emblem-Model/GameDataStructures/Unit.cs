@@ -23,6 +23,8 @@ public class Unit
     public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = DataStructuresFunctions.CreateStructure(1);
     public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
     public string LastOpponentName = "";
+    public bool HasStartedACombat = false;
+    public bool HasBeenBeenInACombatStartedByTheOpponent = false;
     //public GameLogs GameLogs = new GameLogs();
     public SkillsList Skills = new SkillsList();
     //public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };

@@ -69,7 +69,6 @@ public class Game
             _attackController.SetCurrentAttacker(1);
             StartRound();
         }
-        
         _currentRound++;
     }
 
@@ -83,7 +82,7 @@ public class Game
         Followup();
         ResetUnitsBonus();
         ShowLeftoverHp();
-        UpdateLastOponent();
+        UpdateGameLogs();
         EliminateLooserUnit();
         _attackController.SetCurrentAttacker(1);
     }
@@ -217,9 +216,20 @@ public class Game
                _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).CurrentHp != 0;
     }
 
-    private void UpdateLastOponent()
+    private void UpdateGameLogs()
     {
+        //PONER ESTO MAS BONITO, CAMBIAR NOMBRE
         _attackController.UpdateLastOpponents();
+        if (IsPlayer1TheRoundStarter())
+        {
+            _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).HasBeenBeenInACombatStartedByTheOpponent = true;
+            _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).HasStartedACombat= true;
+        }
+        else
+        {
+            _attackController.GetPlayers()[1].Units.GetUnitByIndex(_currentUnitNumberOfPlayer2).HasStartedACombat = true;
+            _attackController.GetPlayers()[0].Units.GetUnitByIndex(_currentUnitNumberOfPlayer1).HasBeenBeenInACombatStartedByTheOpponent = true;
+        }
     }
 
     private void ShowLeftoverHp()
