@@ -5,6 +5,7 @@ namespace Fire_Emblem_View;
 
 public class SkillsPrinter
 {
+    // tal vez no hacer estatico
     public static void PrintAll(View view, Unit unit)
     {
         PrintBonus(view, unit);
