@@ -6,7 +6,7 @@ public class SecondCategoryCondition: Condition
     {
         this.Priority = 2;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return true;
     }

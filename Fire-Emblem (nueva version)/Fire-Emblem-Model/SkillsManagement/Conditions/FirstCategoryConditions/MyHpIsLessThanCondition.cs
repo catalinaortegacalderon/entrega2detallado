@@ -7,7 +7,7 @@ public class MyHpIsLessThanCondition : Condition
     {
         this._amount = amount;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         if (myUnit.CurrentHp <= myUnit.HpMax * this._amount)
         {

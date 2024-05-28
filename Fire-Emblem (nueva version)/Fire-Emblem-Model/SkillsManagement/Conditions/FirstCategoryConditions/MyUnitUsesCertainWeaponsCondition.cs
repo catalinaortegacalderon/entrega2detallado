@@ -9,7 +9,7 @@ public class MyUnitUsesCertainWeaponsCondition : Condition
     {
         this._usedWeapon = weapon;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         if (this._usedWeapon.Contains(myUnit.Weapon)) return true;
         return false;

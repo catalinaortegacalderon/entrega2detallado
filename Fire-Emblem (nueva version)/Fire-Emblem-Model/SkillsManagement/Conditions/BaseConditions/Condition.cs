@@ -10,7 +10,7 @@ public class Condition
     {
         this.Priority = 1;
     }
-    public virtual bool Verify(Unit myUnit, Unit opponentsUnit)
+    public virtual bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return true;
     }

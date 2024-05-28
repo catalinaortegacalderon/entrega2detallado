@@ -15,7 +15,7 @@ namespace Fire_Emblem_Model;
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 1)
+                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 1)
                 {
                     this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }
@@ -27,7 +27,7 @@ namespace Fire_Emblem_Model;
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 2)
+                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 2)
                 {
                     this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }
@@ -39,7 +39,7 @@ namespace Fire_Emblem_Model;
             if (this.Conditions.Length == 0) return;
             for (int i = 0; i < this.Conditions.Length; i++)
             {
-                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 3)
+                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 3)
                 {
                     this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }

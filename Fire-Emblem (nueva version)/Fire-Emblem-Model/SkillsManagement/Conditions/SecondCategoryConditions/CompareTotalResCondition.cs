@@ -2,7 +2,7 @@ namespace Fire_Emblem_Model;
 
 public class CompareTotalResCondition : SecondCategoryCondition
 {
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         int myTotalRes =
             myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralization.Res

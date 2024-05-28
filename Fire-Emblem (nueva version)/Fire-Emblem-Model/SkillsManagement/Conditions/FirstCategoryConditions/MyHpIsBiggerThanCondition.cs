@@ -7,7 +7,7 @@ public class MyHpIsBiggerThanCondition : Condition
     {
         this._amount = amount;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         if (Math.Round((double)myUnit.CurrentHp / myUnit.HpMax,2) >= this._amount)
         {

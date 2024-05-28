@@ -12,11 +12,11 @@ public class OrCondition : Condition
         this.conditions = conditions;
     }
 
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         foreach (Condition condition in this.conditions)
         {
-            if (condition.Verify(myUnit, opponentsUnit) == true)
+            if (condition.DoesItHold(myUnit, opponentsUnit) == true)
             {
                 return true;
             }

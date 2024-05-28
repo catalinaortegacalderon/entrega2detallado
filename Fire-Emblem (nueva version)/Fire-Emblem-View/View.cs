@@ -34,7 +34,7 @@ public class View
     public string[] GetScript()
         => _view.GetScript();
     
-    public void RoundInfoPrinter(SkillsPrinterCommands command, Unit unit)
+    public void RoundInfoPrinter(PrinterCommands command, Unit unit)
     {
         // editar esto
         //SkillsPrinter.Print(this,  unit, command);

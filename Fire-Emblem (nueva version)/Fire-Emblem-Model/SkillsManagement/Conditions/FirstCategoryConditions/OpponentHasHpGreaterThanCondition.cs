@@ -7,7 +7,7 @@ public class OpponentHasHpGreaterThanCondition : Condition
     {
         this._percentage = percentage;
     }
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         if (opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage)
         {

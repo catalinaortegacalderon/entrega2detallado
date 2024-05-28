@@ -4,12 +4,18 @@ namespace Fire_Emblem_Model;
 
 public class MyUnitHasWeaponAdvantageCondition : Condition
 {
-    public override bool Verify(Unit myUnit, Unit opponentsUnit)
+    public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         Weapon attackingWeapon = myUnit.Weapon;
         Weapon defensiveWeapon = opponentsUnit.Weapon;
-        return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || 
-               (attackingWeapon == Weapon.Lance & defensiveWeapon == Weapon.Sword) || 
-               (attackingWeapon == Weapon.Axe & defensiveWeapon == Weapon.Lance);
+        return HasWeaponAdvantage(attackingWeapon, defensiveWeapon);
+    }
+
+    private bool HasWeaponAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
+    {
+        bool hasWeaponAdvantage = (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || 
+                                  (attackingWeapon == Weapon.Lance & defensiveWeapon == Weapon.Sword) || 
+                                  (attackingWeapon == Weapon.Axe & defensiveWeapon == Weapon.Lance);
+        return hasWeaponAdvantage;
     }
 }
