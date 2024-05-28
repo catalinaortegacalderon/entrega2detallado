@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using Fire_Emblem_Model;
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem_View;
 
@@ -49,6 +49,8 @@ public class View
     {
         SkillsPrinter.PrintAll(this,  unit);
     }
+    
+    
     
     
 }

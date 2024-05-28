@@ -1,4 +1,4 @@
-namespace Fire_Emblem_Model.DataTypes;
+namespace ConsoleApp1.DataTypes;
 
 public enum DamageEffectCategory
 {

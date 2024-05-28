@@ -1,8 +1,10 @@
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement;
+
 namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
-using Fire_Emblem_Model;
-using Fire_Emblem_Model.DataTypes;
 
 public class Utils
 {
@@ -51,6 +53,7 @@ public class Utils
     
     private static bool CheckIfThereAreNoRepeatedUnits(string file)
     {
+        // todo: cambiar nombres de check por is, has ...
         int[] unitCounter = new int[] {0, 0};
         int currentPlayer = 0; 
         string[][] units = new string[][] { new string[] { "", "", "" }, new string[] { "", "", "" } };
@@ -148,6 +151,7 @@ public class Utils
 
     private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)
     {
+        // todo: arreglar identacion, hay tres niveles
         string[] allLines = File.ReadAllLines(file);
         foreach (string line in allLines)
         {

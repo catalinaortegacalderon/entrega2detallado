@@ -1,8 +1,8 @@
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
 {

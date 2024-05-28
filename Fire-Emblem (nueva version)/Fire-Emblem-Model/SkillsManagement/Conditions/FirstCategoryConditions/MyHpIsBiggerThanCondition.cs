@@ -1,4 +1,7 @@
-namespace Fire_Emblem_Model;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
+
+namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyHpIsBiggerThanCondition : Condition
 {

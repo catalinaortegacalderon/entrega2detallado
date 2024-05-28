@@ -1,5 +1,4 @@
-using System.Runtime.CompilerServices;
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.GameDataStructures;
 
 public class BonusPenaltiesAndNeutralizations
 {

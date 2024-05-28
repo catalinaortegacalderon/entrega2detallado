@@ -1,6 +1,12 @@
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
+using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
+using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
+using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
+using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
+using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 public class RemoteSparrow : Skill
 {
     public RemoteSparrow() : base()

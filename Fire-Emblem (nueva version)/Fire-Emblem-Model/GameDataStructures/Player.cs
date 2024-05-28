@@ -1,6 +1,7 @@
-namespace Fire_Emblem_Model;
-using System.Collections.Generic;
-using Fire_Emblem_Model.GameDataStructures.Lists;
+using ConsoleApp1.EncapsulatedLists;
+
+namespace ConsoleApp1.GameDataStructures;
+
 public class Player
 {
     public int PlayerNumber;

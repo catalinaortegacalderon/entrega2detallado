@@ -1,6 +1,6 @@
-using System.Runtime.CompilerServices;
+using ConsoleApp1.GameDataStructures;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 public class Effect
 {

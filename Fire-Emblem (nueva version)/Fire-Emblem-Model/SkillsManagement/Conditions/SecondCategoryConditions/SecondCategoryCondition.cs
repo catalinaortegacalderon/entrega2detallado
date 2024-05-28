@@ -1,4 +1,7 @@
-namespace Fire_Emblem_Model;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
+
+namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
 public class SecondCategoryCondition: Condition
 {

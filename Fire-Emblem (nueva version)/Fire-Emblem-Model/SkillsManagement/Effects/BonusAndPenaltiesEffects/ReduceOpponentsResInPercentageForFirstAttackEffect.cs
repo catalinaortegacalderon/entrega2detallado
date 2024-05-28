@@ -1,4 +1,7 @@
-namespace Fire_Emblem_Model;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
+
+namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
 public class ReduceOpponentsResInPercentageForFirstAttackEffect : Effect
 {

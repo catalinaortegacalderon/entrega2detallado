@@ -1,7 +1,7 @@
-using Fire_Emblem_Model.DataTypes;
-using Fire_Emblem_Model;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
 
-namespace Fire_Emblem;
+namespace ConsoleApp1;
 
 public class AttackCalculator
 {
@@ -23,12 +23,35 @@ public class AttackCalculator
         if ((finalDamage) < 0) return 0;
         return Convert.ToInt32(Math.Truncate(finalDamage));
     }
+    
+    public int CalculateAttackForDivineRecreation()
+    {
+        // este es el inical, solo cambia final damage
+        var initialDamage = CalculateInitialDamage();
+        double finalDamage = CalculateFinalDamage2(initialDamage);
+        if ((finalDamage) < 0) return 0;
+        return Convert.ToInt32(Math.Truncate(finalDamage));
+    }
+    
 
     public double CalculateInitialDamage()
     {
         int rivalsDefOrRes = CalculateOpponentsDefOrRes();
         double wtb = CalculateWtb();
         int unitsAtk = CalculateUnitsAtk();
+        var initialDamage = unitsAtk * wtb - rivalsDefOrRes;
+        return initialDamage;
+    }
+    
+    public double CalculateInitialDamageWithoutBonusAndPenalties()
+    {
+        int rivalsDefOrRes = _currentDefensiveUnit.Def;
+        if (_currentAttackingUnit.Weapon == Weapon.Magic)
+        {
+            rivalsDefOrRes = _currentDefensiveUnit.Res; 
+        }
+        double wtb = CalculateWtb();
+        int unitsAtk = _currentAttackingUnit.Atk;
         var initialDamage = unitsAtk * wtb - rivalsDefOrRes;
         return initialDamage;
     }
@@ -118,6 +141,36 @@ public class AttackCalculator
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage + _currentAttackingUnit.DamageEffects.ExtraDamageFollowup) *
                 _currentDefensiveUnit.DamageEffects.PercentageReduction * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup +
                 _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
+        }
+        //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO
+        return finalDamage;
+    }
+    
+    private double CalculateFinalDamage2(double initialDamage)
+    {
+        
+        // ES SIN LA ABSOLUTA NI PORCENTUAL     si extra
+        double finalDamage  = initialDamage;
+        if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
+        {
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
+                 _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack);
+
+        }
+        else if (_typeOfThisRoundsCurrentAttack == AttackType.SecondAttack)
+        {
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
+                 _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack);
+
+        }
+        else if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
+        {
+            finalDamage =
+                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
+                 _currentAttackingUnit.DamageEffects.ExtraDamageFollowup);
+
         }
         //TIRAR EXCEPCION TAL VEZ SI EL NUMBER OF ATTACK ES DISTINTO
         return finalDamage;

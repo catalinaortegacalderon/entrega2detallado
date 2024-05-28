@@ -1,5 +1,4 @@
-using Fire_Emblem_Model;
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem_View;
 

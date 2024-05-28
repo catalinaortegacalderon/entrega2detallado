@@ -1,7 +1,6 @@
-using System.Runtime.CompilerServices;
-using Fire_Emblem;
+using ConsoleApp1.GameDataStructures;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
 public class OrCondition : Condition
 {

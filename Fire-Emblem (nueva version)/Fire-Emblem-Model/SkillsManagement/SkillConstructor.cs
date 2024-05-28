@@ -1,8 +1,13 @@
-using Fire_Emblem_Model.DataTypes;
-using Fire_Emblem_Model.GameDataStructures.Lists;
-using Fire_Emblem;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.EncapsulatedLists;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Skills.AbsolutDamageReductionSkills;
+using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+using ConsoleApp1.SkillsManagement.Skills.ExtraDamageSkills;
+using ConsoleApp1.SkillsManagement.Skills.HybridSkills;
+using ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement;
 
 public class SkillConstructor
 {

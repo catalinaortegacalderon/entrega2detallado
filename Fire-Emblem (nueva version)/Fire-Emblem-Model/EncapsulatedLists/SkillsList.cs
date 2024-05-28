@@ -1,7 +1,8 @@
 using System.Collections;
+using ConsoleApp1.SkillsManagement.Skills.BaseSkills;
+using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
-
-namespace Fire_Emblem_Model.GameDataStructures.Lists;
+namespace ConsoleApp1.EncapsulatedLists;
 
 
 public class SkillsList : IEnumerable<Skill>

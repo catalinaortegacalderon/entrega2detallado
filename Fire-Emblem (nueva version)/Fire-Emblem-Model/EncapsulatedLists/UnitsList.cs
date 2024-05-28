@@ -1,7 +1,7 @@
 using System.Collections;
+using ConsoleApp1.GameDataStructures;
 
-
-namespace Fire_Emblem_Model.GameDataStructures.Lists;
+namespace ConsoleApp1.EncapsulatedLists;
 
 
 public class UnitsList : IEnumerable<Unit>

@@ -1,4 +1,6 @@
-namespace Fire_Emblem_Model;
+using ConsoleApp1.GameDataStructures;
+
+namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 public class SandstormEffect : Effect
 {

@@ -1,8 +1,9 @@
-﻿using Fire_Emblem_Model.DataTypes;
+﻿using ConsoleApp1.DataTypes;
+using ConsoleApp1.Exceptions;
+using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem;
 using Fire_Emblem_View;
-using Fire_Emblem_Model;
 using System.Text.Json;
 
 public class Game
@@ -76,9 +77,13 @@ public class Game
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _attackController.Attack(AttackType.FirstAttack , _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.FirstAttack , 
+            _currentUnitNumberOfPlayer1, 
+            _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _attackController.Attack(AttackType.SecondAttack, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.SecondAttack, 
+            _currentUnitNumberOfPlayer1, 
+            _currentUnitNumberOfPlayer2);
         FollowUp();
         ResetUnitsBonus();
         ShowLeftoverHp();
@@ -105,8 +110,8 @@ public class Game
     private void ShowTeamFilesToUser(string[] files)
     {
         _view.WriteLine("Elige un archivo para cargar los equipos");
-        int filesCounter = 0;
-        foreach (string file in files)
+        var filesCounter = 0;
+        foreach (var file in files)
         {
             _view.WriteLine(filesCounter + ": " + Path.GetFileName(file));
             filesCounter++;
@@ -115,15 +120,19 @@ public class Game
 
     private string[] ReadTeamsFiles()
     {
-        string[] files = Directory.GetFiles(_teamsFolder);
+        var files = Directory.GetFiles(_teamsFolder);
         Array.Sort(files);
         return files;
     }
 
     private void PrintRound()
     {
-        string playerNumberString  = (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
-        int numberOfThePlayersUnit  = (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  _currentUnitNumberOfPlayer2;
+        string playerNumberString  = 
+            (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
+        int numberOfThePlayersUnit  = 
+            (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  
+                _currentUnitNumberOfPlayer2;
+        
         // train wrecks: poner variables entregmedio
         _view.WriteLine("Round " + _currentRound + ": " + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units.GetUnitByIndex(numberOfThePlayersUnit).Name + " (Player " + playerNumberString + ") comienza");
     }

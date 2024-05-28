@@ -1,6 +1,8 @@
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 using Fire_Emblem_View;
-using Fire_Emblem_Model;
 
 namespace Fire_Emblem;
 
@@ -28,7 +30,8 @@ public class GameAttacksController
         this._view = view;
     }
 
-    public void Attack(AttackType typeOfCurrentAttack, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
+    public void Attack(AttackType typeOfCurrentAttack, 
+        int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (this._gameIsTerminated || this._roundIsTerminated) 
             return;
@@ -40,7 +43,8 @@ public class GameAttacksController
             ActivateSkills();
             PrintStartingParameters();
         }
-        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, typeOfCurrentAttack);
+        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, 
+            _currentDefensiveUnit, typeOfCurrentAttack);
         _attackValue = this._attackCalculator.CalculateAttack();
         ShowWhoAttacksWho();
         MakeTheDamage();
@@ -48,7 +52,7 @@ public class GameAttacksController
 
     private void PrintStartingParameters()
     {
-        PrintAdvantages();
+        ShowAdvantages();
         PrintSkillsInfo();
     }
 
@@ -162,7 +166,7 @@ public class GameAttacksController
         _view.ShowAllSkills( _currentDefensiveUnit);
     }
     
-    public void PrintAdvantages()
+    public void ShowAdvantages()
     {
         Weapon attackingWeapon = _currentAttackingUnit.Weapon;
         Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
@@ -219,6 +223,15 @@ public class GameAttacksController
     public int GetCurrentAttacker()
     {
         return this._currentAttacker;
+    }
+    
+    public Unit GetCurrentAttackingUnit()
+    {
+        return this._currentAttackingUnit;
+    }
+    public Unit GetCurrentDefensiveUnit()
+    {
+        return this._currentDefensiveUnit;
     }
     
     public void SetCurrentAttacker(int value)

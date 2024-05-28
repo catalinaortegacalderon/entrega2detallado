@@ -1,8 +1,12 @@
-using System.Net.Mail;
-using System.Runtime.CompilerServices;
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.GameDataStructures;
+using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
+using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
+using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
+using ConsoleApp1.SkillsManagement.Effects.NeutralizationEffects;
+using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 
     public abstract class Skill

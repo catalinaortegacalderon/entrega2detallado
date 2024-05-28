@@ -1,6 +1,7 @@
-using Fire_Emblem_Model.DataTypes;
+using ConsoleApp1.DataTypes;
+using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
-namespace Fire_Emblem_Model;
+namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class WindBoost : Boost
 {
