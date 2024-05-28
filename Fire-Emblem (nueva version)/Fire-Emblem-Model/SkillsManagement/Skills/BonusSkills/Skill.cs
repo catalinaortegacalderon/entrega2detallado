@@ -13,6 +13,18 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
     {
         protected Condition[] Conditions;
         protected Effect[] Effects;
+        
+        public void ApplySkillsOfACertainPriority(Unit myUnit, Unit opponentsUnit, int priority)
+        {
+            if (this.Conditions.Length == 0) return;
+            for (int i = 0; i < this.Conditions.Length; i++)
+            {
+                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == priority)
+                {
+                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
+                }
+            }
+        }
 
         public void ApplyFirstCategorySkills(Unit myUnit, Unit opponentsUnit)
         {

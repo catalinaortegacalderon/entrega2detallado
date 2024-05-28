@@ -9,6 +9,7 @@ public class LunarBraceEffect : Effect
     {
         int amount = opponentsUnit.Def + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralization.Def
                                        + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenalties.Def;
+        Console.WriteLine(amount);
         myUnit.DamageEffects.ExtraDamage = myUnit.DamageEffects.ExtraDamage + (int)Math.Truncate(0.3 * amount);
     }
 }

@@ -87,8 +87,22 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
+        
+        // TODO: CAMBIAR TARGET UNIT, NO ES TAN DESCRIPTIVO
         ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
         ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
+        
+        foreach (Skill skill in _currentAttackingUnit.Skills)
+        {
+            skill.ApplySkillsOfACertainPriority(_currentAttackingUnit, _currentDefensiveUnit, 4);
+            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
+        }
+        
+        foreach (Skill skill in _currentDefensiveUnit.Skills)
+        {
+            skill.ApplySkillsOfACertainPriority(_currentDefensiveUnit, _currentAttackingUnit, 4);
+            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
+        }
     }
 
     private void EliminateLooserUnit()
@@ -148,7 +162,9 @@ public class GameAttacksController
     {
         foreach (Skill skill in targetUnit.Skills)
         {
-            skill.ApplyFirstCategorySkills(targetUnit, opponentsUnit);
+            // todo: arreglar esto
+            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 1);
+            //skill.ApplyFirstCategorySkills(targetUnit, opponentsUnit);
         }
         foreach (Skill skill in targetUnit.Skills)
         {
@@ -157,7 +173,9 @@ public class GameAttacksController
         foreach (Skill skill in targetUnit.Skills)
         {
             skill.ApplyThirdCategorySkills(targetUnit, opponentsUnit);
+            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
         }
+        // LA CATEGORIA 4 NECESITA QUE SE APLIQUEN LAS SKILLS DEL RIVAL PRIMERO
     }
 
     private void PrintSkillsInfo()
