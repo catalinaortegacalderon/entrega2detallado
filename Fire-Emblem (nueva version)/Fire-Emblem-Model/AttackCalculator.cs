@@ -1,5 +1,4 @@
 using Fire_Emblem_Model.DataTypes;
-using Fire_Emblem_View;
 using Fire_Emblem_Model;
 
 namespace Fire_Emblem;

@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Fire-Emblem-Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Fire-Emblem-Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Fire-Emblem-Model.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Fire-Emblem-Model/1.0.0": {
+      "type": "project",
+      "path": "../Fire-Emblem-Model/Fire-Emblem-Model.csproj",
+      "msbuildProject": "../Fire-Emblem-Model/Fire-Emblem-Model.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Fire-Emblem-Model >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\catal\\.nuget\\packages\\": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
+              "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

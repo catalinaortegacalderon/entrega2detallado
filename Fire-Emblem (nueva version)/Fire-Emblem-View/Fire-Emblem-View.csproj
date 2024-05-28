@@ -7,4 +7,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fire-Emblem-Model\Fire-Emblem-Model.csproj" />
+    </ItemGroup>
+
 </Project>

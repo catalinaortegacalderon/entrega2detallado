@@ -22,3 +22,10 @@ C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva 
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\refint\Fire-Emblem-View.dll
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.pdb
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\ref\Fire-Emblem-View.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-Model.deps.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-Model.runtimeconfig.json
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-Model.exe
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-Model.dll
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-Model.pdb
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.csproj.AssemblyReference.cache
+C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emb.867EB350.Up2Date

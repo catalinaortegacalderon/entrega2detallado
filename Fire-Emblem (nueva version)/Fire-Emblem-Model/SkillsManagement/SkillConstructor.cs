@@ -1,6 +1,5 @@
 using Fire_Emblem_Model.DataTypes;
 using Fire_Emblem_Model.GameDataStructures.Lists;
-using Microsoft.VisualBasic.CompilerServices;
 using Fire_Emblem;
 
 namespace Fire_Emblem_Model;

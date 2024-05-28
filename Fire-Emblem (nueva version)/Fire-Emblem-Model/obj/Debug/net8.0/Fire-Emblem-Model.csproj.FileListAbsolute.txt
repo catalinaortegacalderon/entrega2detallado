@@ -3,15 +3,11 @@ C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva 
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.AssemblyInfo.cs
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.csproj.CoreCompileInputs.cache
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.sourcelink.json
-C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.csproj.AssemblyReference.cache
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-Model.exe
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-Model.deps.json
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-Model.runtimeconfig.json
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-Model.dll
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-Model.pdb
-C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-View.dll
-C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\bin\Debug\net8.0\Fire-Emblem-View.pdb
-C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emb.D2539209.Up2Date
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.dll
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\refint\Fire-Emblem-Model.dll
 C:\Users\catal\Desktop\entrega 3 detallado\entrega2detallado\Fire-Emblem (nueva version)\Fire-Emblem-Model\obj\Debug\net8.0\Fire-Emblem-Model.pdb
