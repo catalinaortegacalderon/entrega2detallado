@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ConsoleApp1.DataTypes;
+namespace Fire_Emblem_Model.DataTypes;
 
 public enum DamageEffectCategory
 {

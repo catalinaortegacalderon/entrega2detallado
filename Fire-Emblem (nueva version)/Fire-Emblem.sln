@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fire-Emblem", "Fire-Emblem\Fire-Emblem.csproj", "{F16EC73B-D117-4A32-A42D-E11794CB0029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fire-Emblem-Controller", "Fire-Emblem-Controller\Fire-Emblem-Controller.csproj", "{F16EC73B-D117-4A32-A42D-E11794CB0029}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fire-Emblem.Tests", "Fire-Emblem.Tests\Fire-Emblem.Tests.csproj", "{9FBCF5A4-C132-4338-ABE6-9AD9584A5F74}"
 EndProject

@@ -1,6 +1,6 @@
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
-using ConsoleApp1.DataTypes;
+using Fire_Emblem_Model.DataTypes;
 
 namespace Fire_Emblem_Model;
 

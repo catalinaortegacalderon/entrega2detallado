@@ -23,7 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Fire-Emblem-View\Fire-Emblem-View.csproj" />
-      <ProjectReference Include="..\Fire-Emblem\Fire-Emblem.csproj" />
+      <ProjectReference Include="..\Fire-Emblem-Controller\Fire-Emblem-Controller.csproj" />
     </ItemGroup>
 
 </Project>

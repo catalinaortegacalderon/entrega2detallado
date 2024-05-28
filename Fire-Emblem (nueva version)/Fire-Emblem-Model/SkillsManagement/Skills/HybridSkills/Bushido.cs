@@ -1,4 +1,4 @@
-using ConsoleApp1.DataTypes;
+using Fire_Emblem_Model.DataTypes;
 
 namespace Fire_Emblem_Model;
 public class Bushido : Skill

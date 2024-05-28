@@ -1,4 +1,4 @@
-using ConsoleApp1.DataTypes;
+using Fire_Emblem_Model.DataTypes;
 using Fire_Emblem_Model.GameDataStructures.Lists;
 
 namespace Fire_Emblem_Model;
