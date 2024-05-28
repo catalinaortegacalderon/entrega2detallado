@@ -115,12 +115,11 @@ public class Utils
     
     public static GameAttacksController BuildGameController(string file, View view)
     {
+        // ACA HAY UN OUT VAR SACALO
         var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);
         CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
         Player[] players = CreatePlayers(unitCounters, units);
-        //var firstPlayer = CreatePlayers(unitCounters, units, out var secondPlayer);
-        //return new GameAttacksController(firstPlayer, secondPlayer);
-        return new GameAttacksController(players[0], players[1]);
+        return new GameAttacksController(players[0], players[1], view);
     }
 
     private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)

@@ -17,16 +17,18 @@ public class GameAttacksController
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
     private AttackCalculator _attackCalculator;
+    private View _view;
 
-    public GameAttacksController(Player firstPlayer, Player secondPlayer)
+    public GameAttacksController(Player firstPlayer, Player secondPlayer, View view)
     {
         this._currentAttacker = 0;
         this._players[0] = firstPlayer;
         this._players[1] = secondPlayer;
         this._gameIsTerminated = false;
+        this._view = view;
     }
 
-    public void Attack(AttackType typeOfCurrentAttack, View view, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
+    public void Attack(AttackType typeOfCurrentAttack, int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (this._gameIsTerminated || this._roundIsTerminated) 
             return;
@@ -36,24 +38,24 @@ public class GameAttacksController
             _currentAttackingUnit.StartedTheRound = true;
             _currentDefensiveUnit.StartedTheRound = false;
             ActivateSkills();
-            PrintStartingParameters(view);
+            PrintStartingParameters();
         }
         this._attackCalculator = new AttackCalculator(_currentAttackingUnit, _currentDefensiveUnit, typeOfCurrentAttack);
         _attackValue = this._attackCalculator.CalculateAttack();
-        PrintWhoAttacksWho(view);
+        ShowWhoAttacksWho();
         MakeTheDamage();
     }
 
-    private void PrintStartingParameters(View view)
+    private void PrintStartingParameters()
     {
-        PrintAdvantages(view);
-        PrintSkillsInfo(view);
+        PrintAdvantages();
+        PrintSkillsInfo();
     }
 
-    private void PrintWhoAttacksWho(View view)
+    private void ShowWhoAttacksWho()
     {
-        view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
-        //view.WriteLine(_currentAttackingUnit.Name + " ataca a " + _currentDefensiveUnit.Name + " con " + _attackValue + " de daño");
+        _view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
+       
     }
 
     private void SetAttacksParameters(int firstPlayersCurrentUnitNumber,
@@ -154,21 +156,23 @@ public class GameAttacksController
         }
     }
 
-    private void PrintSkillsInfo(View view)
+    private void PrintSkillsInfo()
     {
-        view.ShowAllSkills( _currentAttackingUnit);
-        view.ShowAllSkills( _currentDefensiveUnit);
+        _view.ShowAllSkills( _currentAttackingUnit);
+        _view.ShowAllSkills( _currentDefensiveUnit);
     }
     
-    public void PrintAdvantages(View view)
+    public void PrintAdvantages()
     {
         Weapon attackingWeapon = _currentAttackingUnit.Weapon;
         Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
-        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ")");
+        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) 
+            _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) 
+            _view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ")");
         else
         {
-            view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ")");
+            _view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ")");
         }
     }
 

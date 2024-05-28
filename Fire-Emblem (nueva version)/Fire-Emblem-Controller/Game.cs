@@ -76,9 +76,9 @@ public class Game
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _attackController.Attack(AttackType.FirstAttack , _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.FirstAttack , _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _attackController.Attack(AttackType.SecondAttack, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+        _attackController.Attack(AttackType.SecondAttack, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         FollowUp();
         ResetUnitsBonus();
         ShowLeftoverHp();
@@ -151,12 +151,12 @@ public class Game
         if (SecondPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(1);
-            _attackController.Attack(AttackType.FollowUp, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(AttackType.FollowUp, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (FirstPlayerCanDoAFollowup())
         {
             _attackController.SetCurrentAttacker(0);
-            _attackController.Attack(AttackType.FollowUp, _view, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.Attack(AttackType.FollowUp, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
         {
