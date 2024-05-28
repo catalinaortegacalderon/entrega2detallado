@@ -1,12 +1,19 @@
 using Fire_Emblem_Model;
+using Fire_Emblem_Model.DataTypes;
 
-namespace Fire_Emblem;
-using Fire_Emblem_View;
-
-// mover a view
+namespace Fire_Emblem_View;
 
 public class SkillsPrinter
 {
+    public static void PrintAll(View view, Unit unit)
+    {
+        PrintBonus(view, unit);
+        PrintPenalties(view, unit);
+        PrintBonusNetralization(view, unit);
+        PrintPenaltyNetralization(view, unit);
+        PrintDamageEffects(view, unit);
+    }
+
     public static void PrintBonus(View view, Unit unit)
     {
         if (unit.ActiveBonus.Attk > 0)
