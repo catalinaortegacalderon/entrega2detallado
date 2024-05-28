@@ -13,8 +13,12 @@ public class GameView
 
     public void AnounceWinner()
     {
-        
+        _view.WriteLine("ganador essss");
     }
+    public string ReadLine() => _view.ReadLine();
 
-    
+    public void WriteLine(string message)
+    {
+        _view.WriteLine(message);
+    }
 }
