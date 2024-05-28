@@ -6,7 +6,7 @@ public class GuardBearingEffect : Effect
 
     {
         double percentage = 0.7;
-        if (!myUnit.HasStartedACombat || !myUnit.HasBeenBeenInACombatStartedByTheOpponent )
+        if ((!myUnit.HasStartedACombat && myUnit.IsAttacking) || (!myUnit.HasBeenBeenInACombatStartedByTheOpponent && opponentsUnit.IsAttacking) )
         {
             percentage = 0.4;
         }
