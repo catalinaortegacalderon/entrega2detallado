@@ -19,12 +19,19 @@ public class AttackCalculator
     
     public int CalculateAttack()
     {
+        var initialDamage = CalculateInitialDamage();
+        double finalDamage = CalculateFinalDamage(initialDamage);
+        if ((finalDamage) < 0) return 0;
+        return Convert.ToInt32(Math.Truncate(finalDamage));
+    }
+
+    public double CalculateInitialDamage()
+    {
         int rivalsDefOrRes = CalculateOpponentsDefOrRes();
         double wtb = CalculateWtb();
         int unitsAtk = CalculateUnitsAtk();
-        double finalDamage = CalculateFinalDamage(unitsAtk * wtb - rivalsDefOrRes);
-        if ((finalDamage) < 0) return 0;
-        return Convert.ToInt32(Math.Truncate(finalDamage));
+        var initialDamage = unitsAtk * wtb - rivalsDefOrRes;
+        return initialDamage;
     }
 
     private int CalculateUnitsAtk()

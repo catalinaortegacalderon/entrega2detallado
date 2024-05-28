@@ -11,4 +11,3 @@ public class SecondCategoryCondition: Condition
         return true;
     }
 }
-

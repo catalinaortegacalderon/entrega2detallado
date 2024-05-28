@@ -33,6 +33,8 @@ public class GameAttacksController
         SetAttacksParameters(firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         if (typeOfCurrentAttack == AttackType.FirstAttack)
         {
+            _currentAttackingUnit.StartedTheRound = true;
+            _currentDefensiveUnit.StartedTheRound = false;
             ActivateSkills();
             PrintStartingParameters(view);
         }
@@ -144,6 +146,10 @@ public class GameAttacksController
         foreach (Skill skill in targetUnit.Skills)
         {
             skill.ApplySecondCategorySkills(targetUnit, opponentsUnit);
+        }
+        foreach (Skill skill in targetUnit.Skills)
+        {
+            skill.ApplyThirdCategorySkills(targetUnit, opponentsUnit);
         }
     }
 

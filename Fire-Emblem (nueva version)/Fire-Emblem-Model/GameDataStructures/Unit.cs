@@ -25,6 +25,7 @@ public class Unit
     public string LastOpponentName = "";
     public bool HasStartedACombat = false;
     public bool HasBeenBeenInACombatStartedByTheOpponent = false;
+    public bool StartedTheRound;
     //public GameLogs GameLogs = new GameLogs();
     public SkillsList Skills = new SkillsList();
     //public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };

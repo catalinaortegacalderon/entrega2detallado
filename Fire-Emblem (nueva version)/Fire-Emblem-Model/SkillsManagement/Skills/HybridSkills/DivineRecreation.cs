@@ -13,6 +13,7 @@ public class DivineRecreation : Skill
         this.Conditions[3] = new OpponentHasHpGreaterThanCondition(0.5);
         this.Conditions[4] = new OpponentHasHpGreaterThanCondition(0.5);
         this.Conditions[5] = new OpponentHasHpGreaterThanCondition(0.5);
+        this.Conditions[5].ChangePriorityBecauseEffectPriorityIsBigger(3);
         this.Effects = new Effect[6];
         this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd,-4);
         this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def,-4);

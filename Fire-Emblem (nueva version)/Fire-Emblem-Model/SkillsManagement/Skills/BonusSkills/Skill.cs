@@ -33,6 +33,18 @@ namespace Fire_Emblem_Model;
                 }
             }
         }
+        
+        public void ApplyThirdCategorySkills(Unit myUnit, Unit opponentsUnit)
+        {
+            if (this.Conditions.Length == 0) return;
+            for (int i = 0; i < this.Conditions.Length; i++)
+            {
+                if (this.Conditions[i].Verify(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 3)
+                {
+                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
+                }
+            }
+        }
     }
 
     public class NotQuite : Skill

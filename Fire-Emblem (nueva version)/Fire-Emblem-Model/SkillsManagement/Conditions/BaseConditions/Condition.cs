@@ -20,7 +20,7 @@ public class Condition
         return this.Priority;
     }
     
-    public void ChangePriorityBecauseOfSecondCategoryEffect(int priority)
+    public void ChangePriorityBecauseEffectPriorityIsBigger(int priority)
     {
         this.Priority = priority;
     }

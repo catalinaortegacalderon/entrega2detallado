@@ -67,6 +67,5 @@ public class SkillsPrinter
             + "%");
         if (unit.DamageEffects.AbsolutDamageReduction != 0) view.WriteLine(unit.Name + " recibirá " + unit.DamageEffects.AbsolutDamageReduction
             + " daño en cada ataque");
-        
     }
 }
