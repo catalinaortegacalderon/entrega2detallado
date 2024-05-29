@@ -50,7 +50,4 @@ public class View
         SkillsPrinter.PrintAll(this,  unit);
     }
     
-    
-    
-    
 }

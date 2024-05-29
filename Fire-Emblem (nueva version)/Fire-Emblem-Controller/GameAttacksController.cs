@@ -19,9 +19,9 @@ public class GameAttacksController
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
     private AttackCalculator _attackCalculator;
-    private View _view;
+    private GameView _view;
 
-    public GameAttacksController(Player firstPlayer, Player secondPlayer, View view)
+    public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
     {
         this._currentAttacker = 0;
         this._players[0] = firstPlayer;

@@ -116,7 +116,7 @@ public class Utils
         return false;
     }
     
-    public static GameAttacksController BuildGameController(string file, View view)
+    public static GameAttacksController BuildGameController(string file, GameView view)
     {
         // ACA HAY UN OUT VAR SACALO
         var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);

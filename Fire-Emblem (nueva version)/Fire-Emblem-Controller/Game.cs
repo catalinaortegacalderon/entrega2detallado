@@ -8,14 +8,14 @@ using System.Text.Json;
 
 public class Game
 {
-    private readonly View _view;
+    private readonly GameView _view;
     private readonly string _teamsFolder;
     private GameAttacksController _attackController;
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
     private int _currentRound;
     
-    public Game(View view, string teamsFolder)
+    public Game(GameView view, string teamsFolder)
     {
         _view = view;
         _teamsFolder = teamsFolder;
