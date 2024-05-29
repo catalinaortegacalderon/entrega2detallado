@@ -27,7 +27,7 @@ public class GameView : IView
     {
         _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
     }
-    
+
     public void ShowAllSkills(Unit unit)
     {
         SkillsPrinter.PrintAll(_view,  unit);
@@ -38,9 +38,13 @@ public class GameView : IView
         throw new NotImplementedException();
     }
 
-    public void ShowHp(string characterName, int hp)
+    public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
     {
-        throw new NotImplementedException();
+        _view.WriteLine(roundStarterUnit.Name +
+                        " (" + roundStarterUnit.CurrentHp +
+                        ") : " + opponentsUnit.Name +
+                        " (" + opponentsUnit.CurrentHp +
+                        ")");
     }
 
     public void ShowSkills(string characterName, string[] skills)
