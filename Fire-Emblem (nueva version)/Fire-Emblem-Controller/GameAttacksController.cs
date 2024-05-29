@@ -58,7 +58,8 @@ public class GameAttacksController
 
     private void ShowWhoAttacksWho()
     {
-        _view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
+        _view.ShowAttack(_currentAttackingUnit.Name, 
+            _currentDefensiveUnit.Name, _attackValue);
        
     }
 
@@ -87,42 +88,27 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
-        var ConditionEffectPairs = GetAllConditionEffectPairs();
-        var priorizedList = PiorizeConditionSkillPairs(ConditionEffectPairs);
-        ApplyAllEffects(priorizedList);
-        // TODO: CAMBIAR TARGET UNIT, NO ES TAN DESCRIPTIVO
-        //ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
-        //ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
-        
-        foreach (Skill skill in _currentAttackingUnit.Skills)
-        {
-            //skill.ApplySkillsOfACertainPriority(_currentAttackingUnit, _currentDefensiveUnit, 4);
-            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
-        }
-        
-        foreach (Skill skill in _currentDefensiveUnit.Skills)
-        {
-            //skill.ApplySkillsOfACertainPriority(_currentDefensiveUnit, _currentAttackingUnit, 4);
-            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
-        }
+        var conditionEffectPairs = GetAllConditionEffectPairs();
+        var prioritizedList = PiorizeConditionSkillPairs(conditionEffectPairs);
+        ApplyAllEffects(prioritizedList);
     }
     
     private List<ConditionEffectPair> GetAllConditionEffectPairs(){
         List<ConditionEffectPair> conditionEffectPairs = new List<ConditionEffectPair> {};
         foreach (Skill skill in _currentAttackingUnit.Skills)
         {
-            //if (skill.Conditions.Length > 0) 
             for (int i = 0; i < skill.Conditions.Length; i++)
             {
-                conditionEffectPairs.Add(new ConditionEffectPair(_currentAttackingUnit, _currentDefensiveUnit, skill, i));
+                conditionEffectPairs.Add(new ConditionEffectPair(_currentAttackingUnit,
+                    _currentDefensiveUnit, skill, i));
             }
         }
         foreach (Skill skill in _currentDefensiveUnit.Skills)
         {
-            //if (skill.Conditions.Length > 0) 
             for (int i = 0; i < skill.Conditions.Length; i++)
             {
-                conditionEffectPairs.Add(new ConditionEffectPair(_currentDefensiveUnit, _currentAttackingUnit, skill, i));
+                conditionEffectPairs.Add(new ConditionEffectPair(_currentDefensiveUnit, 
+                    _currentAttackingUnit, skill, i));
             }
         }
         return conditionEffectPairs;
@@ -135,16 +121,14 @@ public class GameAttacksController
         return prioritizedList;
     }
     
-    private void ApplyAllEffects(List<ConditionEffectPair> priorizedList){
-        foreach (var VARIABLE in priorizedList)
+    private void ApplyAllEffects(List<ConditionEffectPair> prioritizedList){
+        foreach (ConditionEffectPair conditionEffectPair in prioritizedList)
         {
-            Console.WriteLine(VARIABLE.Condition.GetPriority());
-        }
-        foreach (ConditionEffectPair conditionEffectPair in priorizedList)
-        {
-            if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair, conditionEffectPair.OpponentsUnit))
+            if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair, 
+                    conditionEffectPair.OpponentsUnit))
             {
-                conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair, conditionEffectPair.OpponentsUnit);
+                conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair, 
+                    conditionEffectPair.OpponentsUnit);
             }
         }
     }
@@ -201,27 +185,7 @@ public class GameAttacksController
         }
         _currentDefensiveUnit.CurrentHp -= _attackValue;
     }
-
-    private void ActivateOnePlayersUnitSkills(Unit targetUnit, Unit opponentsUnit)
-    {
-        foreach (Skill skill in targetUnit.Skills)
-        {
-            // todo: arreglar esto
-            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 1);
-            //skill.ApplyFirstCategorySkills(targetUnit, opponentsUnit);
-        }
-        foreach (Skill skill in targetUnit.Skills)
-        {
-            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 2);
-        }
-        foreach (Skill skill in targetUnit.Skills)
-        {
-            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 3);
-            //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
-        }
-        // LA CATEGORIA 4 NECESITA QUE SE APLIQUEN LAS SKILLS DEL RIVAL PRIMERO
-    }
-
+    
     private void PrintSkillsInfo()
     {
         _view.ShowAllSkills( _currentAttackingUnit);
@@ -230,26 +194,34 @@ public class GameAttacksController
     
     public void ShowAdvantages()
     {
-        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
-        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
+        var attackingWeapon = _currentAttackingUnit.Weapon;
+        var defensiveWeapon = _currentDefensiveUnit.Weapon;
+        
         if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) 
             _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
         else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) 
-            _view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ")");
+            _view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + 
+                            ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" 
+                            + _currentDefensiveUnit.Weapon + ")");
         else
         {
-            _view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + ")");
+            _view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + 
+                            ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" 
+                            + _currentAttackingUnit.Weapon + ")");
         }
     }
 
     private static bool AttackerHasAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {
-        return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || (attackingWeapon == Weapon.Lance & defensiveWeapon == Weapon.Sword) || (attackingWeapon == Weapon.Axe & defensiveWeapon == Weapon.Lance);
+        return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || (attackingWeapon == 
+            Weapon.Lance & defensiveWeapon == Weapon.Sword) || (attackingWeapon == Weapon.Axe & defensiveWeapon 
+            == Weapon.Lance);
     }
 
     private static bool ThereIsNoAdvantage(Weapon defensiveWeapon, Weapon attackingWeapon)
     {
-        return defensiveWeapon == attackingWeapon || attackingWeapon == Weapon.Magic || defensiveWeapon == Weapon.Magic || defensiveWeapon == Weapon.Bow || attackingWeapon == Weapon.Bow;
+        return defensiveWeapon == attackingWeapon || attackingWeapon == Weapon.Magic || defensiveWeapon == 
+            Weapon.Magic || defensiveWeapon == Weapon.Bow || attackingWeapon == Weapon.Bow;
     }
 
     public void ResetAllSkills()
@@ -285,15 +257,6 @@ public class GameAttacksController
     public int GetCurrentAttacker()
     {
         return this._currentAttacker;
-    }
-    
-    public Unit GetCurrentAttackingUnit()
-    {
-        return this._currentAttackingUnit;
-    }
-    public Unit GetCurrentDefensiveUnit()
-    {
-        return this._currentDefensiveUnit;
     }
     
     public void SetCurrentAttacker(int value)
