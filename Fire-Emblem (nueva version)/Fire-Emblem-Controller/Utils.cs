@@ -1,10 +1,10 @@
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement;
-
-namespace Fire_Emblem;
 using Fire_Emblem_View;
 using System.Text.Json;
+
+namespace Fire_Emblem;
 
 public class Utils
 {

@@ -11,11 +11,7 @@ public class GameView : IView
     {
         _view = view;
     }
-
-    public void AnounceWinner()
-    {
-        _view.WriteLine("ganador essss");
-    }
+    
     public string ReadLine() => _view.ReadLine();
 
     public void WriteLine(string message)
@@ -28,14 +24,19 @@ public class GameView : IView
         _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
     }
 
+    public void AnnounceTeamsAreNotValid()
+    {
+        _view.WriteLine("Archivo de equipos no válido");
+    }
+
     public void ShowAllSkills(Unit unit)
     {
         SkillsPrinter.PrintAll(_view,  unit);
     }
 
-    public void AnnounceWinner(string winnerName)
+    public void AnnounceWinner(int winnersNumber)
     {
-        throw new NotImplementedException();
+        _view.WriteLine("Player " + (winnersNumber) + " ganó");
     }
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
@@ -45,11 +46,6 @@ public class GameView : IView
                         ") : " + opponentsUnit.Name +
                         " (" + opponentsUnit.CurrentHp +
                         ")");
-    }
-
-    public void ShowSkills(string characterName, string[] skills)
-    {
-        throw new NotImplementedException();
     }
 
     public string AskUserForOption(string prompt, string[] options)

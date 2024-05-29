@@ -31,7 +31,7 @@ public class Game
         }
         catch (InvalidTeamException)
         {
-            _view.WriteLine("Archivo de equipos no válido");
+            _view.AnnounceTeamsAreNotValid();
         }
     }
 
@@ -43,7 +43,7 @@ public class Game
         {
             PlayOneRound();
         }
-        _view.WriteLine("Player " + (_attackController.GetWinner()) + " ganó");
+        _view.AnnounceWinner(_attackController.GetWinner());
     }
     
     private string GetTeamFile() 
@@ -148,7 +148,8 @@ public class Game
         
         // todo: train wrecks: poner variables entregmedio
         _view.WriteLine("Round " + _currentRound + ": " 
-                        + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].Units.GetUnitByIndex(numberOfThePlayersUnit).Name 
+                        + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].
+                            Units.GetUnitByIndex(numberOfThePlayersUnit).Name 
                         + " (Player " + playerNumberString + ") comienza");
     }
 

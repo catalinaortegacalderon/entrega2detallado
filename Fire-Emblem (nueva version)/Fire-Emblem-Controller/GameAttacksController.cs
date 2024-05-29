@@ -87,21 +87,65 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
-        
+        var ConditionEffectPairs = GetAllConditionEffectPairs();
+        var priorizedList = PiorizeConditionSkillPairs(ConditionEffectPairs);
+        ApplyAllEffects(priorizedList);
         // TODO: CAMBIAR TARGET UNIT, NO ES TAN DESCRIPTIVO
-        ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
-        ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
+        //ActivateOnePlayersUnitSkills(_currentAttackingUnit, _currentDefensiveUnit);
+        //ActivateOnePlayersUnitSkills(_currentDefensiveUnit, _currentAttackingUnit);
         
         foreach (Skill skill in _currentAttackingUnit.Skills)
         {
-            skill.ApplySkillsOfACertainPriority(_currentAttackingUnit, _currentDefensiveUnit, 4);
+            //skill.ApplySkillsOfACertainPriority(_currentAttackingUnit, _currentDefensiveUnit, 4);
             //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
         }
         
         foreach (Skill skill in _currentDefensiveUnit.Skills)
         {
-            skill.ApplySkillsOfACertainPriority(_currentDefensiveUnit, _currentAttackingUnit, 4);
+            //skill.ApplySkillsOfACertainPriority(_currentDefensiveUnit, _currentAttackingUnit, 4);
             //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
+        }
+    }
+    
+    private List<ConditionEffectPair> GetAllConditionEffectPairs(){
+        List<ConditionEffectPair> conditionEffectPairs = new List<ConditionEffectPair> {};
+        foreach (Skill skill in _currentAttackingUnit.Skills)
+        {
+            //if (skill.Conditions.Length > 0) 
+            for (int i = 0; i < skill.Conditions.Length; i++)
+            {
+                conditionEffectPairs.Add(new ConditionEffectPair(_currentAttackingUnit, _currentDefensiveUnit, skill, i));
+            }
+        }
+        foreach (Skill skill in _currentDefensiveUnit.Skills)
+        {
+            //if (skill.Conditions.Length > 0) 
+            for (int i = 0; i < skill.Conditions.Length; i++)
+            {
+                conditionEffectPairs.Add(new ConditionEffectPair(_currentDefensiveUnit, _currentAttackingUnit, skill, i));
+            }
+        }
+        return conditionEffectPairs;
+    }
+    
+    private List<ConditionEffectPair> PiorizeConditionSkillPairs(List<ConditionEffectPair> conditionEffectPairs){
+        List<ConditionEffectPair> prioritizedList = conditionEffectPairs
+            .OrderBy(pair => pair.Condition.GetPriority())
+            .ToList();
+        return prioritizedList;
+    }
+    
+    private void ApplyAllEffects(List<ConditionEffectPair> priorizedList){
+        foreach (var VARIABLE in priorizedList)
+        {
+            Console.WriteLine(VARIABLE.Condition.GetPriority());
+        }
+        foreach (ConditionEffectPair conditionEffectPair in priorizedList)
+        {
+            if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair, conditionEffectPair.OpponentsUnit))
+            {
+                conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair, conditionEffectPair.OpponentsUnit);
+            }
         }
     }
 
@@ -168,11 +212,11 @@ public class GameAttacksController
         }
         foreach (Skill skill in targetUnit.Skills)
         {
-            skill.ApplySecondCategorySkills(targetUnit, opponentsUnit);
+            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 2);
         }
         foreach (Skill skill in targetUnit.Skills)
         {
-            skill.ApplyThirdCategorySkills(targetUnit, opponentsUnit);
+            skill.ApplySkillsOfACertainPriority(targetUnit, opponentsUnit, 3);
             //skill.ApplyThirdCategorySkills(opponentsUnit, targetUnit);
         }
         // LA CATEGORIA 4 NECESITA QUE SE APLIQUEN LAS SKILLS DEL RIVAL PRIMERO

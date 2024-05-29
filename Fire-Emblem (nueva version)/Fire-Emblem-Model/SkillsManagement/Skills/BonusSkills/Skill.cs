@@ -11,8 +11,10 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
     public abstract class Skill
     {
-        protected Condition[] Conditions;
-        protected Effect[] Effects;
+        
+        //todo: cambiar esto a protected y crear getters
+        public Condition[] Conditions;
+        public Effect[] Effects;
         
         public void ApplySkillsOfACertainPriority(Unit myUnit, Unit opponentsUnit, int priority)
         {
@@ -25,42 +27,7 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
                 }
             }
         }
-
-        public void ApplyFirstCategorySkills(Unit myUnit, Unit opponentsUnit)
-        {
-            if (this.Conditions.Length == 0) return;
-            for (int i = 0; i < this.Conditions.Length; i++)
-            {
-                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 1)
-                {
-                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
-                }
-            }
-        }
         
-        public void ApplySecondCategorySkills(Unit myUnit, Unit opponentsUnit)
-        {
-            if (this.Conditions.Length == 0) return;
-            for (int i = 0; i < this.Conditions.Length; i++)
-            {
-                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 2)
-                {
-                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
-                }
-            }
-        }
-        
-        public void ApplyThirdCategorySkills(Unit myUnit, Unit opponentsUnit)
-        {
-            if (this.Conditions.Length == 0) return;
-            for (int i = 0; i < this.Conditions.Length; i++)
-            {
-                if (this.Conditions[i].DoesItHold(myUnit, opponentsUnit) && this.Conditions[i].GetPriority() == 3)
-                {
-                    this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
-                }
-            }
-        }
     }
 
     public class NotQuite : Skill
