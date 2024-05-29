@@ -7,16 +7,16 @@ namespace ConsoleApp1.GameDataStructures;
 
 public class ConditionEffectPair
 {
-    public Condition Condition;
-    public Effect Effect;
-    public Unit UnitThatHasThePair;
-    public Unit OpponentsUnit;
+    public readonly Condition Condition;
+    public readonly Effect Effect;
+    public readonly Unit UnitThatHasThePair;
+    public readonly Unit OpponentsUnit;
 
     public ConditionEffectPair(Unit unitThatHasThePair, Unit opponentsUnit, Skill skill,  int pairIndex)
     {
         this.UnitThatHasThePair = unitThatHasThePair;
         this.OpponentsUnit = opponentsUnit;
-        this.Condition = skill.Conditions[pairIndex];
-        this.Effect = skill.Effects[pairIndex];
+        this.Condition = skill.GetCondition(pairIndex);
+        this.Effect = skill.GetEffect(pairIndex);
     }
 }

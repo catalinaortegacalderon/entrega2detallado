@@ -11,10 +11,8 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
     public abstract class Skill
     {
-        
-        //todo: cambiar esto a protected y crear getters
-        public Condition[] Conditions;
-        public Effect[] Effects;
+        protected Condition[] Conditions;
+        protected Effect[] Effects;
         
         public void ApplySkillsOfACertainPriority(Unit myUnit, Unit opponentsUnit, int priority)
         {
@@ -26,6 +24,21 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
                     this.Effects[i].ApplyEffect(myUnit, opponentsUnit);
                 }
             }
+        }
+
+        public Condition GetCondition(int index)
+        {
+            return this.Conditions[index];
+        }
+        
+        public Effect GetEffect(int index)
+        {
+            return this.Effects[index];
+        }
+
+        public int GetConditionLength()
+        {
+            return this.Conditions.Length;
         }
         
     }

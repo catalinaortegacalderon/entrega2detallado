@@ -4,6 +4,7 @@ namespace Fire_Emblem_View
 {
     public interface IView
     {
+        void ShowTeamFilesToUser(string[] files);
         void AnnounceWinner(int winnersNumber);
         void ShowAttack(string attacker, string defender, int damage);
         void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);

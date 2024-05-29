@@ -77,7 +77,7 @@ public class GameAttacksController
         {
             this._roundIsTerminated = true;
             SetDefensorsNewHp();
-            EliminateLooserUnit();
+            ReduceUnitAmount();
             return;
         }
         else
@@ -97,7 +97,7 @@ public class GameAttacksController
         List<ConditionEffectPair> conditionEffectPairs = new List<ConditionEffectPair> {};
         foreach (Skill skill in _currentAttackingUnit.Skills)
         {
-            for (int i = 0; i < skill.Conditions.Length; i++)
+            for (int i = 0; i < skill.GetConditionLength(); i++)
             {
                 conditionEffectPairs.Add(new ConditionEffectPair(_currentAttackingUnit,
                     _currentDefensiveUnit, skill, i));
@@ -105,7 +105,7 @@ public class GameAttacksController
         }
         foreach (Skill skill in _currentDefensiveUnit.Skills)
         {
-            for (int i = 0; i < skill.Conditions.Length; i++)
+            for (int i = 0; i < skill.GetConditionLength(); i++)
             {
                 conditionEffectPairs.Add(new ConditionEffectPair(_currentDefensiveUnit, 
                     _currentAttackingUnit, skill, i));
@@ -133,8 +133,9 @@ public class GameAttacksController
         }
     }
 
-    private void EliminateLooserUnit()
+    private void ReduceUnitAmount()
     {
+        // TODO: ARREGLAR, HACE DOS COSAS
         Player player;
         if (_currentAttacker == 0)
         {
@@ -144,7 +145,7 @@ public class GameAttacksController
         {
             player = _players[0];
         }
-        player.AmountOfUnits = player.AmountOfUnits - 1;
+        player.AmountOfUnits -= 1;
         if (player.AmountOfUnits == 0)
         {
             if (player.PlayerNumber == 0)
@@ -191,24 +192,20 @@ public class GameAttacksController
         _view.ShowAllSkills( _currentAttackingUnit);
         _view.ShowAllSkills( _currentDefensiveUnit);
     }
-    
-    public void ShowAdvantages()
+
+    private void ShowAdvantages()
     {
+        
+        //todo: mejorar esto
         var attackingWeapon = _currentAttackingUnit.Weapon;
         var defensiveWeapon = _currentDefensiveUnit.Weapon;
-        
-        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon)) 
-            _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+
+        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon))
+            _view.AnnounceThereIsNoAdvantage();
         else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) 
-            _view.WriteLine(_currentAttackingUnit.Name + " (" + _currentAttackingUnit.Weapon + 
-                            ") tiene ventaja con respecto a " + _currentDefensiveUnit.Name + " (" 
-                            + _currentDefensiveUnit.Weapon + ")");
+            _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
         else
-        {
-            _view.WriteLine(_currentDefensiveUnit.Name + " (" + _currentDefensiveUnit.Weapon + 
-                            ") tiene ventaja con respecto a " + _currentAttackingUnit.Name + " (" 
-                            + _currentAttackingUnit.Weapon + ")");
-        }
+            _view.AnnounceAdvantage(_currentDefensiveUnit, _currentAttackingUnit);
     }
 
     private static bool AttackerHasAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)

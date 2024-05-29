@@ -18,6 +18,23 @@ public class GameView : IView
     {
         _view.WriteLine(message);
     }
+
+    public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
+    {
+        _view.WriteLine("Round " + currentRound + ": " 
+                        + attackersName + " (Player " + playersNumber + ") comienza");
+    }
+    
+    public void ShowTeamFilesToUser(string[] files)
+    {
+        _view.WriteLine("Elige un archivo para cargar los equipos");
+        var filesCounter = 0;
+        foreach (var file in files)
+        {
+            _view.WriteLine(filesCounter + ": " + Path.GetFileName(file));
+            filesCounter++;
+        }
+    }
     
     public void ShowAttack(String attackersName, String defensorsName, int damage)
     {
@@ -37,6 +54,18 @@ public class GameView : IView
     public void AnnounceWinner(int winnersNumber)
     {
         _view.WriteLine("Player " + (winnersNumber) + " ganó");
+    }
+    
+    public void AnnounceThereIsNoAdvantage()
+    {
+        _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+    }
+    
+    public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
+    {
+        _view.WriteLine(unitWithAdvantage.Name + " (" + unitWithAdvantage.Weapon + 
+                        ") tiene ventaja con respecto a " + unitWithoutAdvantage.Name + " (" 
+                        + unitWithoutAdvantage.Weapon + ")");
     }
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)

@@ -46,10 +46,10 @@ public class Game
         _view.AnnounceWinner(_attackController.GetWinner());
     }
     
-    private string GetTeamFile() 
-    { 
+    private string GetTeamFile()
+    {
         string[] files = ReadTeamsFiles();
-        ShowTeamFilesToUser(files);
+        _view.ShowTeamFilesToUser(files);
         int fileNumInput = Convert.ToInt32(_view.ReadLine());
         if (!Utils.CheckIfGameIsValid(files[fileNumInput]))
         { 
@@ -116,18 +116,6 @@ public class Game
             .GetUnitByIndex(_currentUnitNumberOfPlayer1);
         _currentUnitOfPlayer2 = _attackController.GetPlayers()[1].Units
             .GetUnitByIndex(_currentUnitNumberOfPlayer2);
-
-    }
-
-    private void ShowTeamFilesToUser(string[] files)
-    {
-        _view.WriteLine("Elige un archivo para cargar los equipos");
-        var filesCounter = 0;
-        foreach (var file in files)
-        {
-            _view.WriteLine(filesCounter + ": " + Path.GetFileName(file));
-            filesCounter++;
-        }
     }
 
     private string[] ReadTeamsFiles()
@@ -139,18 +127,23 @@ public class Game
 
     private void PrintRound()
     {
-        // todo: arreglar este train wreck
-        string playerNumberString  = 
-            (_attackController.GetCurrentAttacker() == 0) ? "1" :  "2";
-        int numberOfThePlayersUnit  = 
-            (_attackController.GetCurrentAttacker() == 0) ? _currentUnitNumberOfPlayer1 :  
-                _currentUnitNumberOfPlayer2;
         
-        // todo: train wrecks: poner variables entregmedio
-        _view.WriteLine("Round " + _currentRound + ": " 
-                        + _attackController.GetPlayers()[_attackController.GetCurrentAttacker()].
-                            Units.GetUnitByIndex(numberOfThePlayersUnit).Name 
-                        + " (Player " + playerNumberString + ") comienza");
+        int playersNumber  = 
+            (_attackController.GetCurrentAttacker() == 0) ? 1 :  2;
+        _view.ShowRoundInformation(_currentRound, GetCurrentAttackersName(), playersNumber);
+    }
+
+    private string GetCurrentAttackersName()
+    {
+        if (IsPlayer1TheRoundStarter())
+        {
+            return _currentUnitOfPlayer1.Name;
+        }
+        else
+        {
+            return _currentUnitOfPlayer2.Name;
+        }
+        
     }
 
     private int AskAPlayerForTheChosenUnit(int playerNumber)
