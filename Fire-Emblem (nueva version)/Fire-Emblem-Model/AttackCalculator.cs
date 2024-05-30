@@ -8,6 +8,7 @@ public class AttackCalculator
     private readonly Unit _currentAttackingUnit;
     private readonly Unit _currentDefensiveUnit;
     private readonly AttackType _typeOfThisRoundsCurrentAttack;
+    // PONER WTB
 
     public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
@@ -19,7 +20,15 @@ public class AttackCalculator
     public int CalculateAttack()
     {
         var initialDamage = CalculateInitialDamage();
-        var finalDamage = CalculateFinalDamage(initialDamage);
+        Console.WriteLine("initial damage");
+        Console.WriteLine(initialDamage);
+        double finalDamage = CalculateFinalDamage(initialDamage);
+        finalDamage = Convert.ToInt32(Math.Floor(finalDamage));
+        // ACA
+        Console.WriteLine("final damage");
+        Console.WriteLine(finalDamage);
+        
+        
         if ((finalDamage) < 0) 
             return 0;
         return Convert.ToInt32(Math.Truncate(finalDamage));
@@ -33,12 +42,17 @@ public class AttackCalculator
         return Convert.ToInt32(Math.Truncate(finalDamage));
     }
     
-    private double CalculateInitialDamage()
+    private int CalculateInitialDamage()
     {
         int rivalsDefOrRes = CalculateOpponentsDefOrRes();
         double wtb = CalculateWtb();
         int unitsAtk = CalculateUnitsAtk();
-        var initialDamage = unitsAtk * wtb - rivalsDefOrRes;
+        //TRUNCAR TODO PARA ABAJO
+        var initialDamage = Convert.ToInt32(Math.Floor(unitsAtk * wtb - rivalsDefOrRes));
+        Console.WriteLine("calculando initial damage dentro de calculadora");
+        Console.WriteLine("def or res" + rivalsDefOrRes);
+        Console.WriteLine("wtb" + wtb);
+        Console.WriteLine("units atack" + unitsAtk);
         return initialDamage;
     }
 
@@ -68,6 +82,7 @@ public class AttackCalculator
 
     private double CalculateWtb()
     {
+        // todo: wtb 
         double wtb;
         if (ThereIsNoAdvantage()) wtb = 1;
         else if (AttackerHasAdvantage()) wtb = 1.2;
@@ -115,7 +130,7 @@ public class AttackCalculator
         return rivalsDefOrRes;
     }
     
-    private double CalculateFinalDamage(double initialDamage)
+    private int CalculateFinalDamage(double initialDamage)
     {
         double finalDamage  = initialDamage;
         if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
@@ -147,10 +162,12 @@ public class AttackCalculator
                 * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup 
                 + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
         }
-        return finalDamage;
+        var newDamage = Math . Round ( finalDamage , 9) ; // redondeamos al noveno decimal
+        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); // trun
+        return damage;
     }
     
-    private double CalculateFinalDamageForDivineRecreation(double initialDamage)
+    private int CalculateFinalDamageForDivineRecreation(double initialDamage)
     {
         
         // todo: ES SIN LA ABSOLUTA NI PORCENTUAL     si extra
@@ -176,7 +193,9 @@ public class AttackCalculator
                  _currentAttackingUnit.DamageEffects.ExtraDamageFollowup);
 
         }
-        return finalDamage;
+        var newDamage = Math . Round ( finalDamage , 9) ; // redondeamos al noveno decimal
+        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); // trun
+        return damage;
     }
     
     // todo: ESTOS DOS METODOS LOS REPITO EN GAMES ATTACK CONTROLLER

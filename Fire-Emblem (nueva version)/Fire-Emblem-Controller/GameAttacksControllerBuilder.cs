@@ -33,7 +33,9 @@ public class GameAttacksControllerBuilder
             else if (line == "Player 2 Team") currentPlayer = 1;
             else
             {
-                var unitInfo = CreateUnits(line, units, currentPlayer, unitCounters);
+                var unitsOfThePlayer = units[currentPlayer];
+                var playersUnitCounter = unitCounters[currentPlayer];
+                var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
                 
                 CreateSkills(units, currentPlayer, unitCounters, unitInfo);
                 unitCounters[currentPlayer]++;
@@ -41,7 +43,7 @@ public class GameAttacksControllerBuilder
         }
     }
 
-    private static string[] CreateUnits(string line, Unit[][] units, int currentPlayer, int[] unitCounters)
+    private static string[] CreateUnits(string line, Unit[] unitsListOfTheCurrentPlayer, int unitCounter)
     {
         string[] unitInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
         string unitsName = unitInfo[0].Replace(" ", "");
@@ -51,11 +53,11 @@ public class GameAttacksControllerBuilder
         {
             if (unitsName == unit.Name)
             {
-                units[currentPlayer][unitCounters[currentPlayer]] = new Unit(unit.Name,
+                
+                unitsListOfTheCurrentPlayer[unitCounter] = new Unit(unit.Name,
                     unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
                     Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
                     Convert.ToInt32(unit.Def), Convert.ToInt32(unit.Res));
-                // todo: trainwreck
             }
         }
         return unitInfo;

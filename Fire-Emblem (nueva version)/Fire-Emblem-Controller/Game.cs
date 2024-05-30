@@ -63,6 +63,7 @@ public class Game
         _attackController.RestartRound();
         if (IsPlayer1TheRoundStarter())
         {
+            // MODIFICAR ESTE 0 Y 1
             _attackController.SetCurrentAttacker(0);
             StartRound();
         }
