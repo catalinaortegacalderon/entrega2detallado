@@ -91,7 +91,7 @@ public class GameAttacksController
     {
         var conditionEffectPairs = GetAllConditionEffectPairs();
         var prioritizedList = PiorizeConditionSkillPairs(conditionEffectPairs);
-        ApplyAllEffects(prioritizedList);
+        ApplyAllValidEffects(prioritizedList);
     }
     
     private List<ConditionEffectPair> GetAllConditionEffectPairs(){
@@ -122,7 +122,7 @@ public class GameAttacksController
         return prioritizedList;
     }
     
-    private void ApplyAllEffects(List<ConditionEffectPair> prioritizedList){
+    private void ApplyAllValidEffects(List<ConditionEffectPair> prioritizedList){
         foreach (ConditionEffectPair conditionEffectPair in prioritizedList)
         {
             if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair, 
@@ -230,10 +230,14 @@ public class GameAttacksController
 
     private void ResetOnePlayersSkills(Unit unit)
     {
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonus, 0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenalties, 0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonusNeutralizator, 1);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenaltiesNeutralizator, 1);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonus,
+            0);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenalties,
+            0);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonusNeutralizator, 
+            1);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenaltiesNeutralizator,
+            1);
         DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
     }
 

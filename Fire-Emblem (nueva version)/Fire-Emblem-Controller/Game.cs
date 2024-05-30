@@ -157,13 +157,15 @@ public class Game
         if (CanDoAFollowup( _currentUnitOfPlayer2, _currentUnitOfPlayer1))
         {
             _attackController.SetCurrentAttacker(1);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1,
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1,
                 _currentUnitNumberOfPlayer2);
         }
         else if (CanDoAFollowup( _currentUnitOfPlayer1, _currentUnitOfPlayer2))
         {
             _attackController.SetCurrentAttacker(0);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1, 
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
@@ -184,7 +186,6 @@ public class Game
                + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizator.Spd
                + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizator.Spd;
     }
-    
 
     private void ResetUnitsBonus()
     {

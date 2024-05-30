@@ -34,9 +34,7 @@ public class GameAttacksControllerBuilder
             else
             {
                 var unitInfo = CreateUnits(line, units, currentPlayer, unitCounters);
-                if (unitInfo.Length > 1) CreateSkills(units, currentPlayer, unitCounters,
-                    unitInfo[1].Split(new char[] { ',' }, 
-                        StringSplitOptions.RemoveEmptyEntries));
+                CreateSkills(units, currentPlayer, unitCounters,unitInfo);
                 unitCounters[currentPlayer]++;
             }
         }
@@ -63,12 +61,20 @@ public class GameAttacksControllerBuilder
     }
 
     private static void CreateSkills( Unit[][] listOfThePlayersUnits, int currentPlayer, 
-        int[] unitCounters, string[] listOfSkillNames)
+        int[] unitCounters, string[] unitInfo)
     {
+        bool unitHasSkills = unitInfo.Length > 1;
+        if (!unitHasSkills)
+            return;
+
+        var listOfSkillNames = unitInfo[1].Split(new char[] { ',' },
+            StringSplitOptions.RemoveEmptyEntries);
+        
         int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            SkillConstructor.Construct(listOfThePlayersUnits, currentPlayer, unitCounters, skillName, skillsCounter);
+            SkillConstructor.Construct(listOfThePlayersUnits, currentPlayer, 
+                unitCounters, skillName, skillsCounter);
             skillsCounter++;
         }
     }
