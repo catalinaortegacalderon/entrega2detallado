@@ -51,11 +51,11 @@ public class GameAttacksControllerBuilder
         {
             if (unitsName == unit.Name)
             {
-                // todo: trainwreck
-                SetUnitValues(units[currentPlayer][unitCounters[currentPlayer]], unit.Name,
+                units[currentPlayer][unitCounters[currentPlayer]] = new Unit(unit.Name,
                     unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
                     Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
                     Convert.ToInt32(unit.Def), Convert.ToInt32(unit.Res));
+                // todo: trainwreck
             }
         }
         return unitInfo;
@@ -74,11 +74,10 @@ public class GameAttacksControllerBuilder
         int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            //SkillsList skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
-            var currentPlayer = listOfThePlayersUnits[currentPlayerNumber];
-            var currentPlayersUnitConter = unitCounters[currentPlayerNumber];
-            var currentPlayersUnit = currentPlayer[currentPlayersUnitConter];
-            SkillsList skills = currentPlayersUnit.Skills;
+            var currentPlayerListOfUnits = listOfThePlayersUnits[currentPlayerNumber];
+            var currentPlayersUnitNumber = unitCounters[currentPlayerNumber];
+            var currentPlayersUnit = currentPlayerListOfUnits[currentPlayersUnitNumber];
+            var skills = currentPlayersUnit.Skills;
             SkillConstructor.Construct(skills, skillName, skillsCounter);
             skillsCounter++;
         }

@@ -33,4 +33,54 @@ public class Unit
     public bool StartedTheRound;
     public bool IsAttacking;
 
+    public Unit()
+    {
+    }
+    
+    public Unit(string name, string weapon, string gender, 
+        int currentHp,int maxHp, int attk, int spd, int def, int res)
+    {
+        this.Name = name;
+        this.Weapon = ConvertWeaponStringToWeaponType(weapon);
+        if (gender == "Male")
+        {
+            this.Gender = Gender.Male;
+        }
+        else
+        {
+            this.Gender = Gender.Female;
+        }
+        this.HpMax = maxHp;
+        this.CurrentHp = currentHp;
+        this.Atk = attk;
+        this.Spd = spd;
+        this.Def = def;
+        this.Res = res;
+    }
+
+    private static Weapon ConvertWeaponStringToWeaponType(string weapon)
+    {
+        if (weapon == "Magic")
+        {
+            return Weapon.Magic;
+        }
+        if (weapon == "Axe")
+        {
+            return Weapon.Axe;
+        }
+        if (weapon == "Lance")
+        {
+            return Weapon.Lance;
+        }
+        if (weapon == "Bow")
+        {
+            return Weapon.Bow;
+        }
+        if (weapon == "Sword")
+        {
+            return Weapon.Sword;
+        }
+        return Weapon.Empty;
+    }
+
 }
