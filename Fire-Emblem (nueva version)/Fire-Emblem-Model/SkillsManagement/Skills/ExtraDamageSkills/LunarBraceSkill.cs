@@ -12,6 +12,7 @@ public class LunarBraceSkill : Skill
 { 
     public LunarBraceSkill() : base() 
     {
+        Console.WriteLine("creando lunar brace");
         // todo: arreglar este , necesito que se apliquen los efectos del otro primero pero creo que el problema es otro
         this.Conditions = new Condition[1];
         this.Conditions[0] = new  AndCondition([new MyUnitUsesCertainWeaponsCondition([Weapon.Sword, Weapon.Bow, 

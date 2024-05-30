@@ -7,6 +7,7 @@ public class LunarBraceEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
+        Console.WriteLine("aplicadno efecto lunar brace effect");
         int amount = opponentsUnit.Def + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizator.Def
                                        + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenalties.Def;
         Console.WriteLine(amount);

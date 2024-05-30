@@ -8,6 +8,10 @@ public class AttackCalculator
     private readonly Unit _currentAttackingUnit;
     private readonly Unit _currentDefensiveUnit;
     private readonly AttackType _typeOfThisRoundsCurrentAttack;
+    private readonly double _wtbValueForNoAdvantage = 1;
+    private readonly double _wtbValueForAttackersAdvantage = 1.2;
+    private readonly double _wtbValueForDefensorsAdvantage = 0.8;
+    
     // PONER WTB
 
     public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
@@ -19,6 +23,11 @@ public class AttackCalculator
     
     public int CalculateAttack()
     {
+        // CALCULAR INITIA DAMAAGE
+        // truncar
+        // calcular final damage
+        // truncar
+        //NO ESTA IMPLEMENTADO PARA DIVINE RECREATION
         var initialDamage = CalculateInitialDamage();
         Console.WriteLine("initial damage");
         Console.WriteLine(initialDamage);
@@ -84,11 +93,11 @@ public class AttackCalculator
     {
         // todo: wtb 
         double wtb;
-        if (ThereIsNoAdvantage()) wtb = 1;
-        else if (AttackerHasAdvantage()) wtb = 1.2;
+        if (ThereIsNoAdvantage()) wtb = _wtbValueForNoAdvantage;
+        else if (AttackerHasAdvantage()) wtb = _wtbValueForAttackersAdvantage;
         else
         {
-            wtb = 0.8;
+            wtb = _wtbValueForDefensorsAdvantage;
         }
         return wtb;
     }
