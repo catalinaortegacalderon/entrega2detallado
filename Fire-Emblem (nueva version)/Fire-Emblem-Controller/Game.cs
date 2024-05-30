@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.DataTypes;
+﻿using ConsoleApp1;
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
@@ -37,8 +38,8 @@ public class Game
 
     private void TryToPlay()
     {
-        string teamFile = GetTeamFile();
-        _attackController = Utils.BuildGameController(teamFile, _view);
+        var teamFile = GetTeamFile();
+        _attackController = GameAttacksControllerBuilder.BuildGameController(teamFile, _view);
         while (_attackController.IsGameTerminated() == false)
         {
             PlayOneRound();
@@ -48,10 +49,9 @@ public class Game
     
     private string GetTeamFile()
     {
-        // arreglar esto
-        string[] files = ReadTeamsFiles();
-        int fileNumInput = _view.AskPlayerForTheChosenFile(files);
-        if (!Utils.CheckIfGameIsValid(files[fileNumInput]))
+        var files = ReadTeamsFiles();
+        var fileNumInput = _view.AskPlayerForTheChosenFile(files);
+        if (!FileChecker.IsGameValid(files[fileNumInput]))
         { 
             throw new InvalidTeamException();
         }
