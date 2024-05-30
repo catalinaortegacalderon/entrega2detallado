@@ -12,21 +12,20 @@ public class GameAttacksControllerBuilder
     public static GameAttacksController BuildGameController(string file, GameView view)
     {
         int[] unitCounters = new int[] {0, 0};
-        int currentPlayer = 0;
         var units = new Unit[2][];
         units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
         units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
         
-        CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
+        CreateUnitsAndSkills(file, units, unitCounters);
         
         Player[] players = CreatePlayers(unitCounters, units);
         
         return new GameAttacksController(players[0], players[1], view);
     }
 
-    private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)
+    private static void CreateUnitsAndSkills(string file, Unit[][] units, int[] unitCounters)
     {
-        // todo: arreglar identacion, hay tres niveles
+        int currentPlayer = 0;
         string[] allLines = File.ReadAllLines(file);
         foreach (string line in allLines)
         {
@@ -35,7 +34,8 @@ public class GameAttacksControllerBuilder
             else
             {
                 var unitInfo = CreateUnits(line, units, currentPlayer, unitCounters);
-                CreateSkills(units, currentPlayer, unitCounters,unitInfo);
+                
+                CreateSkills(units, currentPlayer, unitCounters, unitInfo);
                 unitCounters[currentPlayer]++;
             }
         }
@@ -81,52 +81,6 @@ public class GameAttacksControllerBuilder
             SkillConstructor.Construct(skills, skillName, skillsCounter);
             skillsCounter++;
         }
-    }
-    
-    private static void SetUnitValues(Unit unit, string name, string weapon, string gender, 
-        int currentHp,int maxHp, int attk, int spd, int def, int res)
-    {
-        unit.Name = name;
-        unit.Weapon = ConvertWeaponStringToWeaponType(weapon);
-        if (gender == "Male")
-        {
-            unit.Gender = Gender.Male;
-        }
-        else
-        {
-            unit.Gender = Gender.Female;
-        }
-        unit.HpMax = maxHp;
-        unit.CurrentHp = currentHp;
-        unit.Atk = attk;
-        unit.Spd = spd;
-        unit.Def = def;
-        unit.Res = res;
-    }
-
-    private static Weapon ConvertWeaponStringToWeaponType(string weapon)
-    {
-        if (weapon == "Magic")
-        {
-            return Weapon.Magic;
-        }
-        if (weapon == "Axe")
-        {
-            return Weapon.Axe;
-        }
-        if (weapon == "Lance")
-        {
-            return Weapon.Lance;
-        }
-        if (weapon == "Bow")
-        {
-            return Weapon.Bow;
-        }
-        if (weapon == "Sword")
-        {
-            return Weapon.Sword;
-        }
-        return Weapon.Empty;
     }
     
     private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)
