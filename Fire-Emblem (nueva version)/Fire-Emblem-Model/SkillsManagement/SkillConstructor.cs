@@ -231,17 +231,17 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new DistantDef());
         }
-        else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Lull")
+        else if (DoesStringContain(skillString, "Lull"))
         {
             skills.AddSkill(skillsCounter, new Lull(
-                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1]),
-                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2])));
+                GetStatFromString(skillString, 1),
+                GetStatFromString(skillString, 2)));
         }
-        else if (skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[0] == "Fort.")
+        else if (DoesStringContain(skillString, "Fort."))
         {
-            skills.AddSkill(skillsCounter, new Fort( 
-                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[1]),
-                ConvertStatStringToStatType(skillString.Split(new char[] { ' ', '/' }, StringSplitOptions.RemoveEmptyEntries)[2])));
+            skills.AddSkill(skillsCounter, new Fort(
+                GetStatFromString(skillString, 1),
+                GetStatFromString(skillString, 2)));
         }
         else if (skillString == "Life and Death")
         {
@@ -299,13 +299,12 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new Sympathetic());
         }
-        // con armsshield me falla un tests mas que sin, ver despues porque
         else if (skillString == "Arms Shield")
         {
             skills.AddSkill(skillsCounter, new ArmsShield());
         }
-        // tal vez separar posture aca
-        else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" || skillString.Split(" ")[1] == "Posture"))
+        else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" 
+                                                        || skillString.Split(" ")[1] == "Posture"))
         {
             CreateStance(skillString, skillsCounter, skills);
         }
@@ -393,6 +392,19 @@ public class SkillConstructor
         { 
             skills.AddSkill(skillsCounter, new DivineRecreation());
         }
+    }
+
+    private static StatType GetStatFromString(string skillString, int statNumber)
+    {
+        var statAsString = skillString.Split(new char[] { ' ', '/' }, 
+            StringSplitOptions.RemoveEmptyEntries)[statNumber];
+        return ConvertStatStringToStatType(statAsString);
+    }
+
+    private static bool DoesStringContain(string skillString, string skillName)
+    {
+        return skillString.Split(new char[] { ' ', '/' }, 
+            StringSplitOptions.RemoveEmptyEntries)[0] == skillName;
     }
 
     private static void CreateStance(string skillString, int skillsCounter, SkillsList skills)
