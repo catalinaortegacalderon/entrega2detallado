@@ -13,11 +13,8 @@ namespace ConsoleApp1.SkillsManagement;
 
 public class SkillConstructor
 {
-    public static void Construct(Unit[][] units, int currentPlayerNumber, int[] unitCounters,
-        string skillString, int skillsCounter)
+    public static void Construct( SkillsList skills, string skillString, int skillsCounter)
     {
-        
-        SkillsList skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
         if (skillString == "HP +15")
         {
             skills.AddSkill(skillsCounter, new HpPlus15Skill());

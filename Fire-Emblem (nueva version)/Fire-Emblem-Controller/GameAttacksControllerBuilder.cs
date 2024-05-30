@@ -3,6 +3,7 @@ using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement;
 using Fire_Emblem_View;
 using System.Text.Json;
+using ConsoleApp1.EncapsulatedLists;
 
 namespace Fire_Emblem;
 
@@ -60,7 +61,7 @@ public class GameAttacksControllerBuilder
         return unitInfo;
     }
 
-    private static void CreateSkills( Unit[][] listOfThePlayersUnits, int currentPlayer, 
+    private static void CreateSkills( Unit[][] listOfThePlayersUnits, int currentPlayerNumber, 
         int[] unitCounters, string[] unitInfo)
     {
         bool unitHasSkills = unitInfo.Length > 1;
@@ -73,8 +74,12 @@ public class GameAttacksControllerBuilder
         int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            SkillConstructor.Construct(listOfThePlayersUnits, currentPlayer, 
-                unitCounters, skillName, skillsCounter);
+            //SkillsList skills = units[currentPlayerNumber][unitCounters[currentPlayerNumber]].Skills;
+            var currentPlayer = listOfThePlayersUnits[currentPlayerNumber];
+            var currentPlayersUnitConter = unitCounters[currentPlayerNumber];
+            var currentPlayersUnit = currentPlayer[currentPlayersUnitConter];
+            SkillsList skills = currentPlayersUnit.Skills;
+            SkillConstructor.Construct(skills, skillName, skillsCounter);
             skillsCounter++;
         }
     }
