@@ -10,35 +10,17 @@ public class GameAttacksControllerBuilder
 {
     public static GameAttacksController BuildGameController(string file, GameView view)
     {
-        // ACA HAY UN OUT VAR SACALO
-        var unitCounters = InitializeParametersToCreateController(out var currentPlayer, out var units);
-        CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
-        Player[] players = CreatePlayers(unitCounters, units);
-        return new GameAttacksController(players[0], players[1], view);
-    }
-
-    private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)
-    {
+        int[] unitCounters = new int[] {0, 0};
+        int currentPlayer = 0;
+        var units = new Unit[2][];
+        units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
         
-        Player player1 = new Player();
-        Player player2 = new Player();
-        player1.AmountOfUnits = unitCounters[0];
-        player1.PlayerNumber = 0;
-        player2.AmountOfUnits = unitCounters[1];
-        player2.PlayerNumber = 1;
-        int unitCounterplayer1 = 0;
-        foreach (var unit in units[0])
-        {
-            player1.Units.AddUnit(unitCounterplayer1, unit);
-            unitCounterplayer1++;
-        }
-        int unitCounterplayer2 = 0;
-        foreach (var unit in units[1])
-        {
-            player2.Units.AddUnit(unitCounterplayer2, unit);
-            unitCounterplayer2++;
-        }
-        return new Player[]{player1, player2};
+        CreateUnitsAndSkills(file, currentPlayer, units, unitCounters);
+        
+        Player[] players = CreatePlayers(unitCounters, units);
+        
+        return new GameAttacksController(players[0], players[1], view);
     }
 
     private static void CreateUnitsAndSkills(string file, int currentPlayer, Unit[][] units, int[] unitCounters)
@@ -60,16 +42,6 @@ public class GameAttacksControllerBuilder
         }
     }
 
-    private static int[] InitializeParametersToCreateController(out int currentPlayer, out Unit[][] units)
-    {
-        int[] unitCounters = new int[] {0, 0};
-        currentPlayer = 0;
-        units = new Unit[2][];
-        units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        return unitCounters;
-    }
-
     private static string[] CreateUnits(string line, Unit[][] units, int currentPlayer, int[] unitCounters)
     {
         string[] unitInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
@@ -80,6 +52,7 @@ public class GameAttacksControllerBuilder
         {
             if (unitsName == unit.Name)
             {
+                // todo: trainwreck
                 SetUnitValues(units[currentPlayer][unitCounters[currentPlayer]], unit.Name,
                     unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
                     Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
@@ -144,5 +117,29 @@ public class GameAttacksControllerBuilder
             return Weapon.Sword;
         }
         return Weapon.Empty;
+    }
+    
+    private static Player[] CreatePlayers(int[] unitCounters, Unit[][] units)
+    {
+        
+        Player player1 = new Player();
+        Player player2 = new Player();
+        player1.AmountOfUnits = unitCounters[0];
+        player1.PlayerNumber = 0;
+        player2.AmountOfUnits = unitCounters[1];
+        player2.PlayerNumber = 1;
+        int unitCounterplayer1 = 0;
+        foreach (var unit in units[0])
+        {
+            player1.Units.AddUnit(unitCounterplayer1, unit);
+            unitCounterplayer1++;
+        }
+        int unitCounterplayer2 = 0;
+        foreach (var unit in units[1])
+        {
+            player2.Units.AddUnit(unitCounterplayer2, unit);
+            unitCounterplayer2++;
+        }
+        return new Player[]{player1, player2};
     }
 }
