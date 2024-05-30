@@ -48,9 +48,9 @@ public class Game
     
     private string GetTeamFile()
     {
+        // arreglar esto
         string[] files = ReadTeamsFiles();
-        _view.ShowTeamFilesToUser(files);
-        int fileNumInput = Convert.ToInt32(_view.ReadLine());
+        int fileNumInput = _view.AskPlayerForTheChosenFile(files);
         if (!Utils.CheckIfGameIsValid(files[fileNumInput]))
         { 
             throw new InvalidTeamException();
@@ -96,15 +96,21 @@ public class Game
 
     private void AskBothPlayersForTheChosenUnit()
     {
+        // todo: arreglar trainwreck
         if (_attackController.GetCurrentAttacker() == 0)
         {
-            _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
-            _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
+            
+            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(0, 
+                _attackController.GetPlayers()[0].Units);
+            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(1, 
+                _attackController.GetPlayers()[1].Units);
         }
         else
         {
-            _currentUnitNumberOfPlayer2 = AskAPlayerForTheChosenUnit(1);
-            _currentUnitNumberOfPlayer1 = AskAPlayerForTheChosenUnit(0);
+            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(1, 
+                _attackController.GetPlayers()[1].Units);
+            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(0, 
+                _attackController.GetPlayers()[0].Units);
         }
         SetUnits();
     }
@@ -145,24 +151,6 @@ public class Game
         }
         
     }
-
-    private int AskAPlayerForTheChosenUnit(int playerNumber)
-    {
-        PrintUnitOptions(playerNumber);
-        int chosenUnitNumber = Convert.ToInt32(_view.ReadLine());
-        return chosenUnitNumber;
-    }
-    private void PrintUnitOptions(int playerNumber)
-    {
-        int unitNumberCounter = 0;
-        string playerNumberString  = (playerNumber == 0) ? "1" :  "2";
-        _view.WriteLine("Player "+ playerNumberString+ " selecciona una opción");
-        foreach (Unit unit in _attackController.GetPlayers()[playerNumber].Units)
-        {
-            if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
-            unitNumberCounter++;
-        }
-    }
     
     private void FollowUp()
     {
@@ -180,7 +168,7 @@ public class Game
         }
         else if (ThereAreNoLoosers())
         {
-            _view.WriteLine("Ninguna unidad puede hacer un follow up");
+            _view.AnnounceNoUnitCanDoAFollowup();
         }
     }
 

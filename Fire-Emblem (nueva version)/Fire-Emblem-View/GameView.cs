@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem_View;
@@ -11,21 +12,14 @@ public class GameView : IView
     {
         _view = view;
     }
-    
-    public string ReadLine() => _view.ReadLine();
 
-    public void WriteLine(string message)
+    public int AskPlayerForTheChosenFile(string[] files)
     {
-        _view.WriteLine(message);
-    }
-
-    public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
-    {
-        _view.WriteLine("Round " + currentRound + ": " 
-                        + attackersName + " (Player " + playersNumber + ") comienza");
+        ShowTeamFilesToUser(files);
+        return Convert.ToInt32(_view.ReadLine());
     }
     
-    public void ShowTeamFilesToUser(string[] files)
+    private void ShowTeamFilesToUser(string[] files)
     {
         _view.WriteLine("Elige un archivo para cargar los equipos");
         var filesCounter = 0;
@@ -36,29 +30,34 @@ public class GameView : IView
         }
     }
     
-    public void ShowAttack(String attackersName, String defensorsName, int damage)
-    {
-        _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
-    }
-
     public void AnnounceTeamsAreNotValid()
     {
         _view.WriteLine("Archivo de equipos no válido");
     }
-
-    public void ShowAllSkills(Unit unit)
+    
+    public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)
     {
-        SkillsPrinter.PrintAll(_view,  unit);
-    }
-
-    public void AnnounceWinner(int winnersNumber)
-    {
-        _view.WriteLine("Player " + (winnersNumber) + " ganó");
+        PrintUnitOptions(playerNumber, units);
+        int chosenUnitNumber = Convert.ToInt32(_view.ReadLine());
+        return chosenUnitNumber;
     }
     
-    public void AnnounceThereIsNoAdvantage()
+    private void PrintUnitOptions(int playerNumber, UnitsList units)
     {
-        _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+        int unitNumberCounter = 0;
+        string playerNumberString  = (playerNumber == 0) ? "1" :  "2";
+        _view.WriteLine("Player "+ playerNumberString+ " selecciona una opción");
+        foreach (Unit unit in units)
+        {
+            if (unit.Name != "") _view.WriteLine(unitNumberCounter + ": " + unit.Name);
+            unitNumberCounter++;
+        }
+    }
+    
+    public void ShowRoundInformation(int currentRound, string attackersName, int playersNumber)
+    {
+        _view.WriteLine("Round " + currentRound + ": " 
+                        + attackersName + " (Player " + playersNumber + ") comienza");
     }
     
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
@@ -66,6 +65,26 @@ public class GameView : IView
         _view.WriteLine(unitWithAdvantage.Name + " (" + unitWithAdvantage.Weapon + 
                         ") tiene ventaja con respecto a " + unitWithoutAdvantage.Name + " (" 
                         + unitWithoutAdvantage.Weapon + ")");
+    }
+    
+    public void AnnounceThereIsNoAdvantage()
+    {
+        _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
+    }
+    
+    public void ShowAllSkills(Unit unit)
+    {
+        SkillsPrinter.PrintAll(_view,  unit);
+    }
+    
+    public void ShowAttack(String attackersName, String defensorsName, int damage)
+    {
+        _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
+    }
+    
+    public void AnnounceNoUnitCanDoAFollowup()
+    {
+        _view.WriteLine("Ninguna unidad puede hacer un follow up");
     }
 
     public void ShowHp(Unit roundStarterUnit, Unit opponentsUnit)
@@ -76,9 +95,9 @@ public class GameView : IView
                         " (" + opponentsUnit.CurrentHp +
                         ")");
     }
-
-    public string AskUserForOption(string prompt, string[] options)
+    
+    public void AnnounceWinner(int winnersNumber)
     {
-        throw new NotImplementedException();
+        _view.WriteLine("Player " + (winnersNumber) + " ganó");
     }
 }

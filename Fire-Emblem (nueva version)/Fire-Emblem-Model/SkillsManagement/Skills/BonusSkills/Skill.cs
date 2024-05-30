@@ -422,7 +422,3 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
             this.Effects[0] = new SandstormEffect();
         }
     }
-
-
-    
-    

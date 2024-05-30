@@ -1,15 +1,20 @@
+using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem_View
 {
     public interface IView
     {
-        void ShowTeamFilesToUser(string[] files);
-        void AnnounceWinner(int winnersNumber);
-        void ShowAttack(string attacker, string defender, int damage);
-        void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);
-        void ShowAllSkills(Unit unit);
-        string AskUserForOption(string prompt, string[] options);
+        int AskPlayerForTheChosenFile(string[] files);
         void AnnounceTeamsAreNotValid();
+        int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units);
+        void ShowRoundInformation(int currentRound, string attackersName, int playersNumber);
+        void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage);
+        void AnnounceThereIsNoAdvantage();
+        void ShowAllSkills(Unit unit);
+        void ShowAttack(String attackersName, String defensorsName, int damage);
+        void AnnounceNoUnitCanDoAFollowup();
+        void ShowHp(Unit roundStarterUnit, Unit opponentsUnit);
+        void AnnounceWinner(int winnersNumber);
     }
 }
