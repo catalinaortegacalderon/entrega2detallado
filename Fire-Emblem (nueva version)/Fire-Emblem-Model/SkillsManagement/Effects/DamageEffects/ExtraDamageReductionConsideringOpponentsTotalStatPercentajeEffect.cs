@@ -24,26 +24,26 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: 
         if (this._stat == StatType.Res)
         {
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralization.Res
-                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralization.Res;
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizator.Res
+                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizator.Res;
         }
         if (this._stat == StatType.Atk)
         {
             amount =
-                opponentsUnit.Atk + opponentsUnit.ActiveBonus.Attk * opponentsUnit.ActiveBonusNeutralization.Attk
-                                  + opponentsUnit.ActivePenalties.Attk * opponentsUnit.ActivePenaltiesNeutralization.Attk;
+                opponentsUnit.Atk + opponentsUnit.ActiveBonus.Attk * opponentsUnit.ActiveBonusNeutralizator.Attk
+                                  + opponentsUnit.ActivePenalties.Attk * opponentsUnit.ActivePenaltiesNeutralizator.Attk;
         }
         if (this._stat == StatType.Def)
         {
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralization.Def
-                                  + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralization.Def;
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizator.Def
+                                  + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizator.Def;
         }
         if (this._stat == StatType.Spd)
         {
             amount =
-                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralization.Spd
-                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralization.Spd;
+                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizator.Spd
+                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizator.Spd;
         }
         amount = Convert.ToInt32(Math.Truncate(amount * this._percentage));
         if (this._type == DamageEffectCategory.All)

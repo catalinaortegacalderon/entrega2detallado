@@ -45,23 +45,23 @@ public class AttackCalculator
     private int CalculateUnitsAtk()
     {
         int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Attk 
-            * _currentAttackingUnit.ActiveBonusNeutralization.Attk 
+            * _currentAttackingUnit.ActiveBonusNeutralizator.Attk 
             + _currentAttackingUnit.ActivePenalties.Attk 
-            * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
+            * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         
         if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack 
-                        * _currentAttackingUnit.ActiveBonusNeutralization.Attk 
+                        * _currentAttackingUnit.ActiveBonusNeutralizator.Attk 
                         + _currentAttackingUnit.ActivePenalties.AtkFirstAttack 
-                        * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
+                        * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         }
         if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup 
-                        * _currentAttackingUnit.ActiveBonusNeutralization.Attk
+                        * _currentAttackingUnit.ActiveBonusNeutralizator.Attk
                         + _currentAttackingUnit.ActivePenalties.AtkFollowup 
-                        * _currentAttackingUnit.ActivePenaltiesNeutralization.Attk;
+                        * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         }
         return unitsAtk;
     }
@@ -86,29 +86,29 @@ public class AttackCalculator
         if (attackingWeapon == Weapon.Magic)
         {
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res 
-                * _currentDefensiveUnit.ActiveBonusNeutralization.Res 
+                * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
                 + _currentDefensiveUnit.ActivePenalties.Res 
-                *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
+                *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
             if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack 
-                    * _currentDefensiveUnit.ActiveBonusNeutralization.Res 
+                    * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
                     + _currentDefensiveUnit.ActivePenalties.ResFirstAttack 
-                    *_currentDefensiveUnit.ActivePenaltiesNeutralization.Res;
+                    *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
             }
         }
         else
         {
             rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def 
-                * _currentDefensiveUnit.ActiveBonusNeutralization.Def
+                * _currentDefensiveUnit.ActiveBonusNeutralizator.Def
                 + _currentDefensiveUnit.ActivePenalties.Def 
-                *_currentDefensiveUnit.ActivePenaltiesNeutralization.Def;
+                *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
             if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack 
-                    * _currentDefensiveUnit.ActiveBonusNeutralization.Def 
+                    * _currentDefensiveUnit.ActiveBonusNeutralizator.Def 
                     + _currentDefensiveUnit.ActivePenalties.DefFirstAttack 
-                    *_currentDefensiveUnit.ActivePenaltiesNeutralization.Def;
+                    *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
             }
         }
         

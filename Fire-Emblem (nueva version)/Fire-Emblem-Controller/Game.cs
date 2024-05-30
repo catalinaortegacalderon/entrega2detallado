@@ -78,11 +78,11 @@ public class Game
     {
         AskBothPlayersForTheChosenUnit();
         PrintRound();
-        _attackController.Attack(AttackType.FirstAttack , 
+        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack , 
             _currentUnitNumberOfPlayer1, 
             _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _attackController.Attack(AttackType.SecondAttack, 
+        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
             _currentUnitNumberOfPlayer1, 
             _currentUnitNumberOfPlayer2);
         FollowUp();
@@ -157,13 +157,13 @@ public class Game
         if (CanDoAFollowup( _currentUnitOfPlayer2, _currentUnitOfPlayer1))
         {
             _attackController.SetCurrentAttacker(1);
-            _attackController.Attack(AttackType.FollowUp, _currentUnitNumberOfPlayer1,
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1,
                 _currentUnitNumberOfPlayer2);
         }
         else if (CanDoAFollowup( _currentUnitOfPlayer1, _currentUnitOfPlayer2))
         {
             _attackController.SetCurrentAttacker(0);
-            _attackController.Attack(AttackType.FollowUp, _currentUnitNumberOfPlayer1, 
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
         }
         else if (ThereAreNoLoosers())
@@ -177,12 +177,12 @@ public class Game
         const int additionValueForFollowupCondition = 5;
         return ThereAreNoLoosers() &&
                defensiveUnit.Spd 
-               + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralization.Spd
-               + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralization.Spd 
+               + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizator.Spd
+               + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizator.Spd 
                + additionValueForFollowupCondition 
                <= attackingUnit.Spd 
-               + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralization.Spd
-               + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralization.Spd;
+               + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizator.Spd
+               + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizator.Spd;
     }
     
 

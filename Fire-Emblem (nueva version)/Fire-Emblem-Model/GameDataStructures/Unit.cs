@@ -17,24 +17,20 @@ public class Unit
     public int Def;
     public int Res;
     
-    public bool IsAttacking;
-    
-    public BonusPenaltiesAndNeutralizations ActiveBonus = 
-        DataStructuresFunctions.CreateStructure(0);
-    public BonusPenaltiesAndNeutralizations ActivePenalties = 
-        DataStructuresFunctions.CreateStructure(0);
-    public BonusPenaltiesAndNeutralizations ActiveBonusNeutralization = 
-        DataStructuresFunctions.CreateStructure(1);
-    public BonusPenaltiesAndNeutralizations ActivePenaltiesNeutralization = 
-        DataStructuresFunctions.CreateStructure(1);
-    public DataStructureDamageEffects DamageEffects = 
-        new DataStructureDamageEffects();
+    public SkillsList Skills = new SkillsList();
+
+    public BonusPenaltiesAndNeutralizators ActiveBonus = new BonusPenaltiesAndNeutralizators(0);
+    public BonusPenaltiesAndNeutralizators ActivePenalties = new BonusPenaltiesAndNeutralizators(0);
+    public BonusPenaltiesAndNeutralizators ActiveBonusNeutralizator = 
+        new BonusPenaltiesAndNeutralizators(1);
+    public BonusPenaltiesAndNeutralizators ActivePenaltiesNeutralizator = 
+        new BonusPenaltiesAndNeutralizators(1);
+    public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
     
     public string LastOpponentName = "";
     public bool HasStartedACombat = false;
     public bool HasBeenBeenInACombatStartedByTheOpponent = false;
     public bool StartedTheRound;
-    //public GameLogs GameLogs = new GameLogs();
-    public SkillsList Skills = new SkillsList();
-    //public Skill[] Skills = new Skill[] { new EmptySkill(), new EmptySkill() };
+    public bool IsAttacking;
+
 }

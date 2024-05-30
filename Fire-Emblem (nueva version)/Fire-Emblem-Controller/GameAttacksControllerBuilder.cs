@@ -46,9 +46,9 @@ public class GameAttacksControllerBuilder
     {
         string[] unitInfo = line.Split(new char[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
         string unitsName = unitInfo[0].Replace(" ", "");
-        string myJson = File.ReadAllText("characters.json");
-        var jsonUnits = JsonSerializer.Deserialize<List<JsonUnit>>(myJson);
-        foreach (var unit in jsonUnits)
+        string stringOfAllUnits = File.ReadAllText("characters.json");
+        var jsonOfAllUnits = JsonSerializer.Deserialize<List<JsonUnit>>(stringOfAllUnits);
+        foreach (var unit in jsonOfAllUnits)
         {
             if (unitsName == unit.Name)
             {
@@ -62,13 +62,13 @@ public class GameAttacksControllerBuilder
         return unitInfo;
     }
 
-    private static void CreateSkills( Unit[][] unitsList, int currentPlayer, 
+    private static void CreateSkills( Unit[][] listOfThePlayersUnits, int currentPlayer, 
         int[] unitCounters, string[] listOfSkillNames)
     {
         int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            SkillConstructor.Construct(unitsList, currentPlayer, unitCounters, skillName, skillsCounter);
+            SkillConstructor.Construct(listOfThePlayersUnits, currentPlayer, unitCounters, skillName, skillsCounter);
             skillsCounter++;
         }
     }

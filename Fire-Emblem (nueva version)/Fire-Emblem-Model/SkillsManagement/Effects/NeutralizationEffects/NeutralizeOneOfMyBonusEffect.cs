@@ -14,9 +14,9 @@ public class NeutralizeOneOfMyBonusEffect : Effect
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        if (_stat== StatType.Atk ) myUnit.ActiveBonusNeutralization.Attk  = 0;
-        else if (_stat == StatType.Def ) myUnit.ActiveBonusNeutralization.Def = 0;
-        else if (_stat == StatType.Res ) myUnit.ActiveBonusNeutralization.Res = 0;
-        else if (_stat == StatType.Spd ) myUnit.ActiveBonusNeutralization.Spd = 0;
+        if (_stat== StatType.Atk ) myUnit.ActiveBonusNeutralizator.Attk  = 0;
+        else if (_stat == StatType.Def ) myUnit.ActiveBonusNeutralizator.Def = 0;
+        else if (_stat == StatType.Res ) myUnit.ActiveBonusNeutralizator.Res = 0;
+        else if (_stat == StatType.Spd ) myUnit.ActiveBonusNeutralizator.Spd = 0;
     }
 }

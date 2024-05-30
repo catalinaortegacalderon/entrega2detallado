@@ -31,7 +31,7 @@ public class GameAttacksController
         this._view = view;
     }
 
-    public void Attack(AttackType typeOfCurrentAttack, 
+    public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, 
         int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (this._gameIsTerminated || this._roundIsTerminated) 
@@ -230,11 +230,11 @@ public class GameAttacksController
 
     private void ResetOnePlayersSkills(Unit unit)
     {
-        DataStructuresFunctions.SetStructureTo(unit.ActiveBonus, 0);
-        DataStructuresFunctions.SetStructureTo(unit.ActivePenalties, 0);
-        DataStructuresFunctions.SetStructureTo(unit.ActiveBonusNeutralization, 1);
-        DataStructuresFunctions.SetStructureTo(unit.ActivePenaltiesNeutralization, 1);
-        DataStructuresFunctions.ResetDamageStructure(unit.DamageEffects);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonus, 0);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenalties, 0);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonusNeutralizator, 1);
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenaltiesNeutralizator, 1);
+        DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
     }
 
     public bool IsGameTerminated()

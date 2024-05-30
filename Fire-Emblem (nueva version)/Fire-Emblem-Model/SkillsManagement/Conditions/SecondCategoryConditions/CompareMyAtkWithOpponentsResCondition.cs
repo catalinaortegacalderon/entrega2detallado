@@ -7,11 +7,11 @@ public class CompareMyAtkWithOpponentsResCondition : SecondCategoryCondition
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         int myTotalAtk =
-            myUnit.Atk + myUnit.ActiveBonus.Attk * myUnit.ActiveBonusNeutralization.Attk
-                       + myUnit.ActivePenalties.Attk * myUnit.ActivePenaltiesNeutralization.Attk;
+            myUnit.Atk + myUnit.ActiveBonus.Attk * myUnit.ActiveBonusNeutralizator.Attk
+                       + myUnit.ActivePenalties.Attk * myUnit.ActivePenaltiesNeutralizator.Attk;
         int opponentsTotalRes =
-            opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralization.Res
-                              + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralization.Res;
+            opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizator.Res
+                              + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizator.Res;
 
         if (myTotalAtk > opponentsTotalRes)
         {
