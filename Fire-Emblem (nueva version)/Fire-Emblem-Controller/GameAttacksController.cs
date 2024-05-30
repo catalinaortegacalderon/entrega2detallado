@@ -2,6 +2,7 @@ using ConsoleApp1;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 using Fire_Emblem_View;
 
 namespace Fire_Emblem;

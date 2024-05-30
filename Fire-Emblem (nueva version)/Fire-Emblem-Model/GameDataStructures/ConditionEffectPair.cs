@@ -2,6 +2,7 @@ using System.Diagnostics;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.GameDataStructures;
 

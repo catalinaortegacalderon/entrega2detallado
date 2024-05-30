@@ -124,10 +124,12 @@ public class GameAttacksControllerBuilder
         
         Player player1 = new Player();
         Player player2 = new Player();
+        
         player1.AmountOfUnits = unitCounters[0];
         player1.PlayerNumber = 0;
         player2.AmountOfUnits = unitCounters[1];
         player2.PlayerNumber = 1;
+        
         int unitCounterplayer1 = 0;
         foreach (var unit in units[0])
         {
@@ -140,6 +142,7 @@ public class GameAttacksControllerBuilder
             player2.Units.AddUnit(unitCounterplayer2, unit);
             unitCounterplayer2++;
         }
+        
         return new Player[]{player1, player2};
     }
 }

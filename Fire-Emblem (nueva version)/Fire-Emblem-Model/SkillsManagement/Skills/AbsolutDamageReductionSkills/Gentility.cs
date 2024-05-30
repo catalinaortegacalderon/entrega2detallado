@@ -3,6 +3,7 @@ using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.AbsolutDamageReductionSkills;
 
