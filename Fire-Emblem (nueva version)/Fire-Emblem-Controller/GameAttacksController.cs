@@ -79,7 +79,8 @@ public class GameAttacksController
             this._roundIsTerminated = true;
             SetDefensorsNewHp();
             ReduceUnitAmount();
-            return;
+            CheckIfGameIsTerminated();
+            //CheckOfThereIsAWinner();
         }
         else
         {
@@ -147,16 +148,17 @@ public class GameAttacksController
             player = _players[0];
         }
         player.AmountOfUnits -= 1;
-        if (player.AmountOfUnits == 0)
+    }
+
+    private void CheckIfGameIsTerminated()
+    {
+        if (_players[0].AmountOfUnits == 0){
+            this._winner = 1;
+            this._gameIsTerminated = true;
+        }
+        if (_players[1].AmountOfUnits == 0)
         {
-            if (player.PlayerNumber == 0)
-            {
-                this._winner = 1;
-            }
-            else
-            {
-                this._winner = 0;
-            }
+            this._winner = 0;
             this._gameIsTerminated = true;
         }
     }
@@ -240,6 +242,7 @@ public class GameAttacksController
             1);
         DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
     }
+    
 
     public bool IsGameTerminated()
     {
