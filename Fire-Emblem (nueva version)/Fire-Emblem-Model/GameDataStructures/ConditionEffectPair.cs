@@ -24,9 +24,16 @@ public class ConditionEffectPair
 
     private void ManageDivineRecreationsSpecialCase()
     {
-        if (Effect is DivineRecreationEffect && UnitThatHasThePair.StartedTheRound == true)
+        if (Effect is DivineRecreationEffect && UnitThatHasThePair.StartedTheRound)
         {
+            Console.WriteLine("maneje el caso especial, aumentando prioridad de " + UnitThatHasThePair.Name);
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(5);
+        }
+        if (Effect is DivineRecreationEffect && OpponentsUnit.StartedTheRound)
+        {
+            // aca en verdad la estoy reiniciando
+            Console.WriteLine("maneje el caso especial, aumentando prioridad de " + UnitThatHasThePair.Name);
+            Condition.ChangePriorityBecauseEffectPriorityIsBigger(4);
         }
     }
 }

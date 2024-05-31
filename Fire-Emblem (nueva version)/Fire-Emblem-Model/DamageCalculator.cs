@@ -33,8 +33,10 @@ public class DamageCalculator
     public int CalculateAttackForDivineRecreation()
     {
         var initialDamage = CalculateInitialDamage();
+        Console.WriteLine("calculando initial damage: " + initialDamage);
         double finalDamage = CalculateFinalDamageForDivineRecreation(initialDamage);
         if ((finalDamage) < 0) return 0;
+        Console.WriteLine("calculando final damage: " + finalDamage);
         return Convert.ToInt32(Math.Truncate(finalDamage));
     }
     
