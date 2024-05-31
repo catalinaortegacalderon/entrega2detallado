@@ -75,6 +75,11 @@ public class Game
         }
         _currentRound++;
     }
+    
+    private bool IsPlayer1TheRoundStarter()
+    {
+        return _currentRound % 2 == 1;
+    }
 
     private void StartRound()
     {
@@ -160,7 +165,6 @@ public class Game
         {
             return _currentUnitOfPlayer2.Name;
         }
-        
     }
     
     private void FollowUp()
@@ -200,12 +204,42 @@ public class Game
         return ThereAreNoLoosers() && doesTheFollowupConditionHold;
 
     }
+    
+    private bool ThereAreNoLoosers()
+    {
+        return _currentUnitOfPlayer2.CurrentHp != 0 && 
+               _currentUnitOfPlayer1.CurrentHp != 0;
+    }
 
     private void ResetUnitsBonus()
     {
         _attackController.ResetAllSkills();
     }
 
+    private void ShowLeftoverHp()
+    {
+        if (IsPlayer1TheRoundStarter())
+            _view.ShowHp( _currentUnitOfPlayer1, _currentUnitOfPlayer2 );
+        else
+            _view.ShowHp(_currentUnitOfPlayer2, _currentUnitOfPlayer1 );
+    }
+    
+    private void UpdateGameLogs()
+    {
+        _attackController.UpdateLastOpponents();
+        
+        if (IsPlayer1TheRoundStarter())
+        {
+            _currentUnitOfPlayer2.HasBeenBeenInACombatStartedByTheOpponent = true;
+            _currentUnitOfPlayer1.HasStartedACombat= true;
+        }
+        else
+        {
+            _currentUnitOfPlayer2.HasStartedACombat = true;
+            _currentUnitOfPlayer1.HasBeenBeenInACombatStartedByTheOpponent = true;
+        }
+    }
+    
     private void EliminateLooserUnit()
     {
         Player[] players = _attackController.GetPlayers();
@@ -228,40 +262,5 @@ public class Game
     {
         return unit.CurrentHp == 0;
     }
-
-
-    private bool ThereAreNoLoosers()
-    {
-        return _currentUnitOfPlayer2.CurrentHp != 0 && 
-               _currentUnitOfPlayer1.CurrentHp != 0;
-    }
-
-    private void UpdateGameLogs()
-    {
-        _attackController.UpdateLastOpponents();
-        
-        if (IsPlayer1TheRoundStarter())
-        {
-            _currentUnitOfPlayer2.HasBeenBeenInACombatStartedByTheOpponent = true;
-            _currentUnitOfPlayer1.HasStartedACombat= true;
-        }
-        else
-        {
-            _currentUnitOfPlayer2.HasStartedACombat = true;
-            _currentUnitOfPlayer1.HasBeenBeenInACombatStartedByTheOpponent = true;
-        }
-    }
-
-    private void ShowLeftoverHp()
-    {
-        if (IsPlayer1TheRoundStarter())
-            _view.ShowHp( _currentUnitOfPlayer1, _currentUnitOfPlayer2 );
-        else
-            _view.ShowHp(_currentUnitOfPlayer2, _currentUnitOfPlayer1 );
-    }
-
-    private bool IsPlayer1TheRoundStarter()
-    {
-        return _currentRound % 2 == 1;
-    }
+    
 }
