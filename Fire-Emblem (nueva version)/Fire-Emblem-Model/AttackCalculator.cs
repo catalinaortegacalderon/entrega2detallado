@@ -93,8 +93,10 @@ public class AttackCalculator
     {
         // todo: wtb 
         double wtb;
-        if (ThereIsNoAdvantage()) wtb = _wtbValueForNoAdvantage;
-        else if (AttackerHasAdvantage()) wtb = _wtbValueForAttackersAdvantage;
+        if (IsNoAdvantage(_currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon)) 
+            wtb = _wtbValueForNoAdvantage;
+        else if (DoesAttackerHaveAdvantage( _currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon)) 
+            wtb = _wtbValueForAttackersAdvantage;
         else
         {
             wtb = _wtbValueForDefensorsAdvantage;
@@ -209,19 +211,15 @@ public class AttackCalculator
     
     // todo: ESTOS DOS METODOS LOS REPITO EN GAMES ATTACK CONTROLLER
     
-    private bool AttackerHasAdvantage()
+    public static bool DoesAttackerHaveAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {
-        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
-        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
         return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || 
                (attackingWeapon == Weapon.Lance & defensiveWeapon == Weapon.Sword) || 
                (attackingWeapon == Weapon.Axe & defensiveWeapon == Weapon.Lance);
     }
 
-    private bool ThereIsNoAdvantage()
+    public static bool IsNoAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {
-        Weapon attackingWeapon = _currentAttackingUnit.Weapon;
-        Weapon defensiveWeapon = _currentDefensiveUnit.Weapon;
         return defensiveWeapon == attackingWeapon 
                || attackingWeapon == Weapon.Magic 
                || defensiveWeapon == Weapon.Magic 

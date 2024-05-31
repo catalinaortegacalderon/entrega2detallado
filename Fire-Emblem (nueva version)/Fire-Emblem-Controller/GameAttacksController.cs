@@ -203,25 +203,12 @@ public class GameAttacksController
         var attackingWeapon = _currentAttackingUnit.Weapon;
         var defensiveWeapon = _currentDefensiveUnit.Weapon;
 
-        if (ThereIsNoAdvantage(defensiveWeapon, attackingWeapon))
+        if (AttackCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
             _view.AnnounceThereIsNoAdvantage();
-        else if (AttackerHasAdvantage(attackingWeapon, defensiveWeapon)) 
+        else if (AttackCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon)) 
             _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
         else
             _view.AnnounceAdvantage(_currentDefensiveUnit, _currentAttackingUnit);
-    }
-
-    private static bool AttackerHasAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
-    {
-        return (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || (attackingWeapon == 
-            Weapon.Lance & defensiveWeapon == Weapon.Sword) || (attackingWeapon == Weapon.Axe & defensiveWeapon 
-            == Weapon.Lance);
-    }
-
-    private static bool ThereIsNoAdvantage(Weapon defensiveWeapon, Weapon attackingWeapon)
-    {
-        return defensiveWeapon == attackingWeapon || attackingWeapon == Weapon.Magic || defensiveWeapon == 
-            Weapon.Magic || defensiveWeapon == Weapon.Bow || attackingWeapon == Weapon.Bow;
     }
 
     public void ResetAllSkills()
