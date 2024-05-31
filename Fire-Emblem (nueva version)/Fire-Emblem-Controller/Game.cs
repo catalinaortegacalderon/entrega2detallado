@@ -98,12 +98,13 @@ public class Game
 
     private void AskBothPlayersForTheChosenUnit()
     {
-        // todo: arreglar trainwreck
+        
+        Player[] players = _attackController.GetPlayers();
+        var player1 = players[IdOfPlayer1];
+        var player2 = players[IdOfPlayer2];
+
         if (_attackController.GetCurrentAttacker() == IdOfPlayer1)
         {
-            Player[] players = _attackController.GetPlayers();
-            var player1 = players[IdOfPlayer1];
-            var player2 = players[IdOfPlayer2];
             
             _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer1, 
                 player1.Units);
@@ -113,10 +114,11 @@ public class Game
         else
         {
             _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer2, 
-                _attackController.GetPlayers()[IdOfPlayer2].Units);
+                player2.Units);
             _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer1, 
-                _attackController.GetPlayers()[IdOfPlayer1].Units);
+                player1.Units);
         }
+        
         SetUnits();
     }
 
@@ -202,17 +204,29 @@ public class Game
 
     private void EliminateLooserUnit()
     {
+        Player[] players = _attackController.GetPlayers();
+        
         // todo: trainwrecks
-        if (_currentUnitOfPlayer1.CurrentHp == 0)
+        if (IsUnitDead(_currentUnitOfPlayer1))
         {
-            _attackController.GetPlayers()[IdOfPlayer1].Units.EliminateUnit(_currentUnitNumberOfPlayer1);
+            var player1 = players[IdOfPlayer1];
+            var unitsOfPlayer1 = player1.Units;
+            unitsOfPlayer1.EliminateUnit(_currentUnitNumberOfPlayer1);
         }
-        if (_currentUnitOfPlayer2.CurrentHp == 0)
+        if (IsUnitDead(_currentUnitOfPlayer2))
         {
-            _attackController.GetPlayers()[IdOfPlayer2].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
+            var player2 = players[IdOfPlayer2];
+            var unitsOfPlayer2 = player2.Units;
+            unitsOfPlayer2.EliminateUnit(_currentUnitNumberOfPlayer2);
+            //_attackController.GetPlayers()[IdOfPlayer2].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
         }
     }
-    
+
+    private bool IsUnitDead(Unit unit)
+    {
+        return unit.CurrentHp == 0;
+    }
+
 
     private bool ThereAreNoLoosers()
     {
