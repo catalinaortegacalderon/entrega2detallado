@@ -25,20 +25,23 @@ public class GameAttacksControllerBuilder
 
     private static void CreateUnitsAndSkills(string file, Unit[][] units, int[] unitCounters)
     {
-        int currentPlayer = 0;
+        int currentPlayerNumber = 0;
         string[] allLines = File.ReadAllLines(file);
         foreach (string line in allLines)
         {
-            if (line == "Player 1 Team") currentPlayer = 0;
-            else if (line == "Player 2 Team") currentPlayer = 1;
+            if (line == "Player 1 Team") currentPlayerNumber = 0;
+            else if (line == "Player 2 Team") currentPlayerNumber = 1;
             else
             {
-                var unitsOfThePlayer = units[currentPlayer];
-                var playersUnitCounter = unitCounters[currentPlayer];
+                var unitsOfThePlayer = units[currentPlayerNumber];
+                var playersUnitCounter = unitCounters[currentPlayerNumber];
                 var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
                 
-                CreateSkills(units, currentPlayer, unitCounters, unitInfo);
-                unitCounters[currentPlayer]++;
+                var currentPlayersUnit = unitsOfThePlayer[playersUnitCounter];
+                var skills = currentPlayersUnit.Skills;
+                
+                CreateSkills(skills, unitInfo);
+                unitCounters[currentPlayerNumber]++;
             }
         }
     }
@@ -63,8 +66,7 @@ public class GameAttacksControllerBuilder
         return unitInfo;
     }
 
-    private static void CreateSkills( Unit[][] listOfThePlayersUnits, int currentPlayerNumber, 
-        int[] unitCounters, string[] unitInfo)
+    private static void CreateSkills( SkillsList skills, string[] unitInfo)
     {
         bool unitHasSkills = unitInfo.Length > 1;
         if (!unitHasSkills)
@@ -76,10 +78,7 @@ public class GameAttacksControllerBuilder
         int skillsCounter = 0;
         foreach (string skillName in listOfSkillNames)
         {
-            var currentPlayerListOfUnits = listOfThePlayersUnits[currentPlayerNumber];
-            var currentPlayersUnitNumber = unitCounters[currentPlayerNumber];
-            var currentPlayersUnit = currentPlayerListOfUnits[currentPlayersUnitNumber];
-            var skills = currentPlayersUnit.Skills;
+            
             SkillConstructor.Construct(skills, skillName, skillsCounter);
             skillsCounter++;
         }

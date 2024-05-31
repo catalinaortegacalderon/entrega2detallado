@@ -16,9 +16,9 @@ public class Game
     private Unit _currentUnitOfPlayer1;
     private Unit _currentUnitOfPlayer2;
     private int _currentRound;
-    private int _identificatorOfPlayer1 = 0;
-    private int _identificatorOfPlayer2 = 1;
-    
+    private const int IdOfPlayer1 = 0;
+    private const int IdOfPlayer2 = 1;
+
     public Game(GameView view, string teamsFolder)
     {
         _view = view;
@@ -65,12 +65,12 @@ public class Game
         _attackController.RestartRound();
         if (IsPlayer1TheRoundStarter())
         {
-            _attackController.SetCurrentAttacker(_identificatorOfPlayer1);
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
             StartRound();
         }
         else 
         {
-            _attackController.SetCurrentAttacker(_identificatorOfPlayer2);
+            _attackController.SetCurrentAttacker(IdOfPlayer2);
             StartRound();
         }
         _currentRound++;
@@ -92,27 +92,30 @@ public class Game
         ShowLeftoverHp();
         UpdateGameLogs();
         EliminateLooserUnit();
-        _attackController.SetCurrentAttacker(_identificatorOfPlayer2);
+        _attackController.SetCurrentAttacker(IdOfPlayer2);
     }
     
 
     private void AskBothPlayersForTheChosenUnit()
     {
         // todo: arreglar trainwreck
-        if (_attackController.GetCurrentAttacker() == _identificatorOfPlayer1)
+        if (_attackController.GetCurrentAttacker() == IdOfPlayer1)
         {
+            Player[] players = _attackController.GetPlayers();
+            var player1 = players[IdOfPlayer1];
+            var player2 = players[IdOfPlayer2];
             
-            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(_identificatorOfPlayer1, 
-                _attackController.GetPlayers()[_identificatorOfPlayer1].Units);
-            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(_identificatorOfPlayer2, 
-                _attackController.GetPlayers()[_identificatorOfPlayer2].Units);
+            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer1, 
+                player1.Units);
+            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer2, 
+                player2.Units);
         }
         else
         {
-            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(_identificatorOfPlayer2, 
-                _attackController.GetPlayers()[_identificatorOfPlayer2].Units);
-            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(_identificatorOfPlayer1, 
-                _attackController.GetPlayers()[_identificatorOfPlayer1].Units);
+            _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer2, 
+                _attackController.GetPlayers()[IdOfPlayer2].Units);
+            _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer1, 
+                _attackController.GetPlayers()[IdOfPlayer1].Units);
         }
         SetUnits();
     }
@@ -120,9 +123,9 @@ public class Game
     private void SetUnits()
     {
         // todo: ARREGLAR ESTE TRAINWRECJ
-        _currentUnitOfPlayer1 = _attackController.GetPlayers()[_identificatorOfPlayer1].Units
+        _currentUnitOfPlayer1 = _attackController.GetPlayers()[IdOfPlayer1].Units
             .GetUnitByIndex(_currentUnitNumberOfPlayer1);
-        _currentUnitOfPlayer2 = _attackController.GetPlayers()[_identificatorOfPlayer2].Units
+        _currentUnitOfPlayer2 = _attackController.GetPlayers()[IdOfPlayer2].Units
             .GetUnitByIndex(_currentUnitNumberOfPlayer2);
     }
 
@@ -137,7 +140,7 @@ public class Game
     {
         
         int playersNumber  = 
-            (_attackController.GetCurrentAttacker() == _identificatorOfPlayer1) ? 1 :  2;
+            (_attackController.GetCurrentAttacker() == IdOfPlayer1) ? 1 :  2;
         _view.ShowRoundInformation(_currentRound, GetCurrentAttackersName(), playersNumber);
     }
 
@@ -158,14 +161,14 @@ public class Game
     {
         if (CanDoAFollowup( _currentUnitOfPlayer2, _currentUnitOfPlayer1))
         {
-            _attackController.SetCurrentAttacker(_identificatorOfPlayer2);
+            _attackController.SetCurrentAttacker(IdOfPlayer2);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1,
                 _currentUnitNumberOfPlayer2);
         }
         else if (CanDoAFollowup( _currentUnitOfPlayer1, _currentUnitOfPlayer2))
         {
-            _attackController.SetCurrentAttacker(_identificatorOfPlayer1);
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
@@ -179,14 +182,17 @@ public class Game
     private bool CanDoAFollowup( Unit attackingUnit, Unit defensiveUnit)
     {
         const int additionValueForFollowupCondition = 5;
-        return ThereAreNoLoosers() &&
-               defensiveUnit.Spd 
-               + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizator.Spd
-               + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizator.Spd 
-               + additionValueForFollowupCondition 
-               <= attackingUnit.Spd 
-               + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizator.Spd
-               + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizator.Spd;
+        bool doesTheFollowupConditionHold = 
+            defensiveUnit.Spd 
+            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizator.Spd
+            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizator.Spd 
+            + additionValueForFollowupCondition 
+            <= attackingUnit.Spd 
+            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizator.Spd
+            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizator.Spd;
+
+        return ThereAreNoLoosers() && doesTheFollowupConditionHold;
+
     }
 
     private void ResetUnitsBonus()
@@ -199,11 +205,11 @@ public class Game
         // todo: trainwrecks
         if (_currentUnitOfPlayer1.CurrentHp == 0)
         {
-            _attackController.GetPlayers()[_identificatorOfPlayer1].Units.EliminateUnit(_currentUnitNumberOfPlayer1);
+            _attackController.GetPlayers()[IdOfPlayer1].Units.EliminateUnit(_currentUnitNumberOfPlayer1);
         }
         if (_currentUnitOfPlayer2.CurrentHp == 0)
         {
-            _attackController.GetPlayers()[_identificatorOfPlayer2].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
+            _attackController.GetPlayers()[IdOfPlayer2].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
         }
     }
     
