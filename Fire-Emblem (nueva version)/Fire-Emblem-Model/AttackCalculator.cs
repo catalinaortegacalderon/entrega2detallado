@@ -11,8 +11,6 @@ public class AttackCalculator
     private readonly double _wtbValueForNoAdvantage = 1;
     private readonly double _wtbValueForAttackersAdvantage = 1.2;
     private readonly double _wtbValueForDefensorsAdvantage = 0.8;
-    
-    // PONER WTB
 
     public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
@@ -23,20 +21,9 @@ public class AttackCalculator
     
     public int CalculateAttack()
     {
-        // CALCULAR INITIA DAMAAGE
-        // truncar
-        // calcular final damage
-        // truncar
-        //NO ESTA IMPLEMENTADO PARA DIVINE RECREATION
         var initialDamage = CalculateInitialDamage();
-        Console.WriteLine("initial damage");
-        Console.WriteLine(initialDamage);
         double finalDamage = CalculateFinalDamage(initialDamage);
         finalDamage = Convert.ToInt32(Math.Floor(finalDamage));
-        // ACA
-        Console.WriteLine("final damage");
-        Console.WriteLine(finalDamage);
-        
         
         if ((finalDamage) < 0) 
             return 0;
@@ -56,12 +43,9 @@ public class AttackCalculator
         int rivalsDefOrRes = CalculateOpponentsDefOrRes();
         double wtb = CalculateWtb();
         int unitsAtk = CalculateUnitsAtk();
-        //TRUNCAR TODO PARA ABAJO
+
         var initialDamage = Convert.ToInt32(Math.Floor(unitsAtk * wtb - rivalsDefOrRes));
-        Console.WriteLine("calculando initial damage dentro de calculadora");
-        Console.WriteLine("def or res" + rivalsDefOrRes);
-        Console.WriteLine("wtb" + wtb);
-        Console.WriteLine("units atack" + unitsAtk);
+
         return initialDamage;
     }
 
@@ -72,14 +56,14 @@ public class AttackCalculator
             + _currentAttackingUnit.ActivePenalties.Attk 
             * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         
-        if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
+        if (IsFirstOrSecondAttack())
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack 
                         * _currentAttackingUnit.ActiveBonusNeutralizator.Attk 
                         + _currentAttackingUnit.ActivePenalties.AtkFirstAttack 
                         * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         }
-        if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
+        if (IsFollowUp())
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup 
                         * _currentAttackingUnit.ActiveBonusNeutralizator.Attk
@@ -87,6 +71,16 @@ public class AttackCalculator
                         * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
         }
         return unitsAtk;
+    }
+
+    private bool IsFollowUp()
+    {
+        return _typeOfThisRoundsCurrentAttack == AttackType.FollowUp;
+    }
+
+    private bool IsFirstOrSecondAttack()
+    {
+        return _typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack;
     }
 
     private double CalculateWtb()
@@ -115,7 +109,7 @@ public class AttackCalculator
                 * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
                 + _currentDefensiveUnit.ActivePenalties.Res 
                 *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
-            if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
+            if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack 
                     * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
@@ -129,7 +123,7 @@ public class AttackCalculator
                 * _currentDefensiveUnit.ActiveBonusNeutralizator.Def
                 + _currentDefensiveUnit.ActivePenalties.Def 
                 *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
-            if (_typeOfThisRoundsCurrentAttack is AttackType.FirstAttack or AttackType.SecondAttack)
+            if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack 
                     * _currentDefensiveUnit.ActiveBonusNeutralizator.Def 
@@ -173,8 +167,8 @@ public class AttackCalculator
                 * _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFollowup 
                 + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
         }
-        var newDamage = Math . Round ( finalDamage , 9) ; // redondeamos al noveno decimal
-        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); // trun
+        var newDamage = Math . Round ( finalDamage , 9) ; 
+        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); 
         return damage;
     }
     
@@ -204,12 +198,10 @@ public class AttackCalculator
                  _currentAttackingUnit.DamageEffects.ExtraDamageFollowup);
 
         }
-        var newDamage = Math . Round ( finalDamage , 9) ; // redondeamos al noveno decimal
-        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); // trun
+        var newDamage = Math . Round ( finalDamage , 9) ; 
+        var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); 
         return damage;
     }
-    
-    // todo: ESTOS DOS METODOS LOS REPITO EN GAMES ATTACK CONTROLLER
     
     public static bool DoesAttackerHaveAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {

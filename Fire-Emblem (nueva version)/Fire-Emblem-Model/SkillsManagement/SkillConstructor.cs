@@ -290,7 +290,7 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new Gentility());
         }
-        else if (SkillStringContainsGuard(skillString))
+        else if (SkillStringContainsCertainSkillType(skillString, "Guard"))
         {
             CreateGuard(skillString, skillsCounter, skills);
         }
@@ -302,7 +302,8 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new ArmsShield());
         }
-        else if (SkillStringContainsStanceOrPosture(skillString))
+        else if (SkillStringContainsCertainSkillType(skillString, "Stance") || 
+                 SkillStringContainsCertainSkillType(skillString, "Posture"))
         {
             CreateStance(skillString, skillsCounter, skills);
         }
@@ -391,16 +392,10 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new DivineRecreationSkill());
         }
     }
-
-    private static bool SkillStringContainsStanceOrPosture(string skillString)
+    
+    private static bool SkillStringContainsCertainSkillType(string skillString, string name)
     {
-        return skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" 
-                                                      || skillString.Split(" ")[1] == "Posture");
-    }
-
-    private static bool SkillStringContainsGuard(string skillString)
-    {
-        return skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard";
+        return skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == name;
     }
 
     private static StatType GetStatFromString(string skillString, int statNumber)

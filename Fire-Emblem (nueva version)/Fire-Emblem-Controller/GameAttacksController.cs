@@ -34,7 +34,7 @@ public class GameAttacksController
     public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, 
         int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
-        if (this._gameIsTerminated || this._roundIsTerminated) 
+        if (RoundIsTerminated()) 
             return;
         SetAttacksParameters(firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         if (typeOfCurrentAttack == AttackType.FirstAttack)
@@ -49,6 +49,11 @@ public class GameAttacksController
         _attackValue = this._attackCalculator.CalculateAttack();
         ShowWhoAttacksWho();
         MakeTheDamage();
+    }
+
+    private bool RoundIsTerminated()
+    {
+        return this._gameIsTerminated || this._roundIsTerminated;
     }
 
     private void PrintStartingParameters()
