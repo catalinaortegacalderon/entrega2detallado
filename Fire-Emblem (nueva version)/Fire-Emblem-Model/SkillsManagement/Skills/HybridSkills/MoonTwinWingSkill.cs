@@ -19,7 +19,8 @@ public class MoonTwinWingSkill : Skill
         this.Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
         this.Conditions[2] = new AndCondition([new CompareTotalSpdCondition(), 
             new MyHpIsBiggerThanCondition(0.25)]);
-        this.Conditions[2].ChangePriorityBecauseEffectPriorityIsBigger(2);
+        this.Conditions[2].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+            .PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
         
         this.Effects = new Effect[3];
         this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);

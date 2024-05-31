@@ -4,6 +4,6 @@ public enum ConditionPriority
 { 
         PriorityOfBonusAndPenalties = 1,
         PriorityOfConditionsThatRequireBonusAndPenaltiesInformation = 2,
-        PriorityOfDivineRecreationWhenUnitBeginsCombat = 3,
-        PriorityOfDivineRecreationWhenOpponentBeginsCombat = 4,
+        PriorityOfDivineRecreationWhenOpponentBeginsCombat = 3,
+        PriorityOfDivineRecreationWhenUnitBeginsCombat = 4,
 }

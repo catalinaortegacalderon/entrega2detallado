@@ -85,7 +85,6 @@ public class GameAttacksController
             SetDefensorsNewHp();
             ReduceUnitAmount();
             CheckIfGameIsTerminated();
-            //CheckOfThereIsAWinner();
         }
         else
         {
@@ -123,7 +122,7 @@ public class GameAttacksController
     
     private List<ConditionEffectPair> PiorizeConditionSkillPairs(List<ConditionEffectPair> conditionEffectPairs){
         List<ConditionEffectPair> prioritizedList = conditionEffectPairs
-            .OrderBy(pair => pair.Condition.GetPriority())
+            .OrderBy(pair => (int)pair.Condition.GetPriority())
             .ToList();
         return prioritizedList;
     }

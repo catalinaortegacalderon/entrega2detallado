@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
@@ -7,7 +8,7 @@ public class SecondCategoryCondition: Condition
 {
     public SecondCategoryCondition() : base()
     {
-        this.Priority = 2;
+        this.Priority = ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation;
     }
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {

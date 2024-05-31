@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
@@ -26,11 +27,13 @@ public class ConditionEffectPair
     {
         if (Effect is DivineRecreationEffect && UnitThatHasThePair.StartedTheRound)
         {
-            Condition.ChangePriorityBecauseEffectPriorityIsBigger(4);
+            Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+                .PriorityOfDivineRecreationWhenUnitBeginsCombat);
         }
         if (Effect is DivineRecreationEffect && OpponentsUnit.StartedTheRound)
         {
-            Condition.ChangePriorityBecauseEffectPriorityIsBigger(3);
+            Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+                .PriorityOfDivineRecreationWhenOpponentBeginsCombat);
         }
     }
 }

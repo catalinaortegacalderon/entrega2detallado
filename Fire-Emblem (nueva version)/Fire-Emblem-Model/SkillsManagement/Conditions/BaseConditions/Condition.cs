@@ -1,26 +1,27 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
 public class Condition
 {
-    protected int Priority;
+    protected ConditionPriority Priority;
     
     protected Condition() : base()
     {
-        this.Priority = 1;
+        this.Priority = ConditionPriority.PriorityOfBonusAndPenalties;
     }
     public virtual bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return true;
     }
 
-    public int GetPriority()
+    public ConditionPriority GetPriority()
     {
         return this.Priority;
     }
     
-    public void ChangePriorityBecauseEffectPriorityIsBigger(int priority)
+    public void ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority priority)
     {
         this.Priority = priority;
     }

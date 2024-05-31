@@ -16,9 +16,12 @@ public class PoeticJusticeSkill : Skill
         this.Conditions = new Condition[2];
         this.Conditions[0] = new AlwaysTrueCondition();
         this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[1].ChangePriorityBecauseEffectPriorityIsBigger(2);
+        this.Conditions[1].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+            .PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
+        
         this.Effects = new Effect[2];
         this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd,-4);
-        this.Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( DamageEffectCategory.All,  StatType.Atk, 0.15);
+        this.Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( 
+            DamageEffectCategory.All,  StatType.Atk, 0.15);
     }
 }

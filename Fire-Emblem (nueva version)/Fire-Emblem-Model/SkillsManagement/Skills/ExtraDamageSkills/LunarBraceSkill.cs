@@ -15,7 +15,7 @@ public class LunarBraceSkill : Skill
         this.Conditions = new Condition[1];
         this.Conditions[0] = new  AndCondition([new MyUnitUsesCertainWeaponsCondition([Weapon.Sword, Weapon.Bow, 
             Weapon.Axe, Weapon.Lance]), new MyUnitStartsCombatCondition()]);
-        this.Conditions[0].ChangePriorityBecauseEffectPriorityIsBigger(2);
+        this.Conditions[0].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
         
         this.Effects = new Effect[1];
         this.Effects[0] = new LunarBraceEffect();
