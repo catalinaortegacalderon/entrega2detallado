@@ -290,7 +290,7 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new Gentility());
         }
-        else if (skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard")
+        else if (SkillStringContainsGuard(skillString))
         {
             CreateGuard(skillString, skillsCounter, skills);
         }
@@ -302,8 +302,7 @@ public class SkillConstructor
         {
             skills.AddSkill(skillsCounter, new ArmsShield());
         }
-        else if (skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" 
-                                                        || skillString.Split(" ")[1] == "Posture"))
+        else if (SkillStringContainsStanceOrPosture(skillString))
         {
             CreateStance(skillString, skillsCounter, skills);
         }
@@ -393,6 +392,17 @@ public class SkillConstructor
         }
     }
 
+    private static bool SkillStringContainsStanceOrPosture(string skillString)
+    {
+        return skillString.Split(" ").Length >= 2 && (skillString.Split(" ")[1] == "Stance" 
+                                                      || skillString.Split(" ")[1] == "Posture");
+    }
+
+    private static bool SkillStringContainsGuard(string skillString)
+    {
+        return skillString.Split(" ").Length >= 2 && skillString.Split(" ")[1] == "Guard";
+    }
+
     private static StatType GetStatFromString(string skillString, int statNumber)
     {
         var statAsString = skillString.Split(new char[] { ' ', '/' }, 
@@ -408,65 +418,75 @@ public class SkillConstructor
 
     private static void CreateStance(string skillString, int skillsCounter, SkillsList skills)
     {
-        if (skillString.Split(" ")[0] == "Fierce")
+        if (IsStanceType(skillString, "Fierce"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Atk, 
                 StatType.None, 8, 0));
         }
 
-        if (skillString.Split(" ")[0] == "Darting")
+        if (IsStanceType(skillString, "Darting"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Spd, 
                 StatType.None, 8, 0));
         }
 
-        if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Stance")
+        if (IsStanceType(skillString, "Steady"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Def, 
                 StatType.None, 8, 0));
         }
 
-        if (skillString.Split(" ")[0] == "Warding")
+        if (IsStanceType(skillString,  "Warding"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Res, 
                 StatType.None, 8, 0));
         }
 
-        if (skillString.Split(" ")[0] == "Kestrel")
+        if (IsStanceType(skillString,  "Kestrel"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Atk, 
                 StatType.Spd, 6, 6));
         }
 
-        if (skillString.Split(" ")[0] == "Sturdy")
+        if (IsStanceType(skillString,  "Sturdy"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Atk, 
                 StatType.Def, 6, 6));
         }
 
-        if (skillString.Split(" ")[0] == "Mirror")
+        if (IsStanceType(skillString,  "Mirror"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Atk, 
                 StatType.Res, 6, 6));
         }
 
-        if (skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture")
+        if (IsSteadyPosture(skillString))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Spd, 
                 StatType.Def, 6, 6));
         }
 
-        if (skillString.Split(" ")[0] == "Swift")
+        if (IsStanceType(skillString,  "Swift"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Spd, 
                 StatType.Res, 6, 6));
         }
 
-        if (skillString.Split(" ")[0] == "Bracing")
+        if (IsStanceType(skillString, "Bracing"))
         {
             skills.AddSkill(skillsCounter, new StanceSkill(StatType.Def, 
                 StatType.Res, 6, 6));
         }
+    }
+
+    private static bool IsSteadyPosture(string skillString)
+    {
+        return skillString.Split(" ")[0] == "Steady" && skillString.Split(" ")[1] == "Posture";
+    }
+
+    private static bool IsStanceType(string skillString, string type)
+    {
+        return skillString.Split(" ")[0] == type && skillString.Split(" ")[1] == "Stance";
     }
 
     private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
