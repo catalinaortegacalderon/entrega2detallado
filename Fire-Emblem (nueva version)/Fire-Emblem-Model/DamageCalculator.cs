@@ -8,9 +8,9 @@ public class DamageCalculator
     private readonly Unit _currentAttackingUnit;
     private readonly Unit _currentDefensiveUnit;
     private readonly AttackType _typeOfThisRoundsCurrentAttack;
-    private readonly double _wtbValueForNoAdvantage = 1;
-    private readonly double _wtbValueForAttackersAdvantage = 1.2;
-    private readonly double _wtbValueForDefensorsAdvantage = 0.8;
+    private const double WtbValueForNoAdvantage = 1;
+    private const double WtbValueForAttackersAdvantage = 1.2;
+    private const double WtbValueForDefensorsAdvantage = 0.8;
 
     public DamageCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
@@ -33,10 +33,9 @@ public class DamageCalculator
     public int CalculateAttackForDivineRecreation()
     {
         var initialDamage = CalculateInitialDamage();
-        Console.WriteLine("calculando initial damage: " + initialDamage);
         double finalDamage = CalculateFinalDamageForDivineRecreation(initialDamage);
-        if ((finalDamage) < 0) return 0;
-        Console.WriteLine("calculando final damage: " + finalDamage);
+        if ((finalDamage) < 0) 
+            return 0;
         return Convert.ToInt32(Math.Truncate(finalDamage));
     }
     
@@ -49,6 +48,7 @@ public class DamageCalculator
         var initialDamage = Convert.ToInt32(Math.Floor(unitsAtk * wtb - rivalsDefOrRes));
         if (initialDamage < 0)
             initialDamage = 0;
+        
         return initialDamage;
     }
 
@@ -90,12 +90,12 @@ public class DamageCalculator
     {
         double wtb;
         if (IsNoAdvantage(_currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon)) 
-            wtb = _wtbValueForNoAdvantage;
+            wtb = WtbValueForNoAdvantage;
         else if (DoesAttackerHaveAdvantage( _currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon)) 
-            wtb = _wtbValueForAttackersAdvantage;
+            wtb = WtbValueForAttackersAdvantage;
         else
         {
-            wtb = _wtbValueForDefensorsAdvantage;
+            wtb = WtbValueForDefensorsAdvantage;
         }
         return wtb;
     }
@@ -142,9 +142,9 @@ public class DamageCalculator
     
     private int CalculateFinalDamage(double initialDamage)
     {
-        // todo: arreglar codigo duplicado
         double finalDamage  = initialDamage;
-        if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
+        
+        if (IsFirstOrSecondAttack())
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage 
@@ -154,17 +154,7 @@ public class DamageCalculator
                 + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
             
         }
-        else if (_typeOfThisRoundsCurrentAttack == AttackType.SecondAttack)
-        {
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage 
-                               + _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack) 
-                * _currentDefensiveUnit.DamageEffects.PercentageReduction 
-                *  _currentDefensiveUnit.DamageEffects.PercentageReductionOpponentsFirstAttack 
-                + _currentDefensiveUnit.DamageEffects.AbsolutDamageReduction;
-            
-        }
-        else if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
+        else if (IsFollowUp())
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage 
@@ -181,22 +171,13 @@ public class DamageCalculator
     private int CalculateFinalDamageForDivineRecreation(double initialDamage)
     {
         double finalDamage  = initialDamage;
-        // todo: codigo duplicado
-        if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
+        if (IsFirstOrSecondAttack())
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
                  _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack);
-
         }
-        else if (_typeOfThisRoundsCurrentAttack == AttackType.SecondAttack)
-        {
-            finalDamage =
-                (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +
-                 _currentAttackingUnit.DamageEffects.ExtraDamageFirstAttack);
-
-        }
-        else if (_typeOfThisRoundsCurrentAttack == AttackType.FollowUp)
+        else if (IsFollowUp())
         {
             finalDamage =
                 (initialDamage + _currentAttackingUnit.DamageEffects.ExtraDamage +

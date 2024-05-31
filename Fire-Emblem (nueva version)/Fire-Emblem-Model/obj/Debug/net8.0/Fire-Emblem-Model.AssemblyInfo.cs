@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fire-Emblem-Model")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bb19122113060b5c6d4e609ef0e9b8f14b42022")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+785ce7c478f19e4c36a01f6ec37e69e74fae630e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fire-Emblem-Model")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fire-Emblem-Model")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
