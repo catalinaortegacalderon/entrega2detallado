@@ -19,7 +19,7 @@ public class GameAttacksController
     private int _firstPlayersCurrentUnitNumber;
     private int _secondPlayersCurrentUnitNumber;
     private int _attackValue;
-    private AttackCalculator _attackCalculator;
+    private DamageCalculator _damageCalculator;
     private GameView _view;
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
@@ -44,9 +44,9 @@ public class GameAttacksController
             ActivateSkills();
             PrintStartingParameters();
         }
-        this._attackCalculator = new AttackCalculator(_currentAttackingUnit, 
+        this._damageCalculator = new DamageCalculator(_currentAttackingUnit, 
             _currentDefensiveUnit, typeOfCurrentAttack);
-        _attackValue = this._attackCalculator.CalculateAttack();
+        _attackValue = this._damageCalculator.CalculateAttack();
         ShowWhoAttacksWho();
         MakeTheDamage();
     }
@@ -206,9 +206,9 @@ public class GameAttacksController
         var attackingWeapon = _currentAttackingUnit.Weapon;
         var defensiveWeapon = _currentDefensiveUnit.Weapon;
 
-        if (AttackCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
+        if (DamageCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
             _view.AnnounceThereIsNoAdvantage();
-        else if (AttackCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon)) 
+        else if (DamageCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon)) 
             _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
         else
             _view.AnnounceAdvantage(_currentDefensiveUnit, _currentAttackingUnit);

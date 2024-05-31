@@ -3,7 +3,7 @@ using ConsoleApp1.GameDataStructures;
 
 namespace ConsoleApp1;
 
-public class AttackCalculator
+public class DamageCalculator
 {
     private readonly Unit _currentAttackingUnit;
     private readonly Unit _currentDefensiveUnit;
@@ -12,7 +12,7 @@ public class AttackCalculator
     private readonly double _wtbValueForAttackersAdvantage = 1.2;
     private readonly double _wtbValueForDefensorsAdvantage = 0.8;
 
-    public AttackCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
+    public DamageCalculator(Unit attackingUnit, Unit defensiveUnit, AttackType attackType)
     {
         this._currentAttackingUnit = attackingUnit;
         this._currentDefensiveUnit = defensiveUnit;
@@ -45,7 +45,8 @@ public class AttackCalculator
         int unitsAtk = CalculateUnitsAtk();
 
         var initialDamage = Convert.ToInt32(Math.Floor(unitsAtk * wtb - rivalsDefOrRes));
-
+        if (initialDamage < 0)
+            initialDamage = 0;
         return initialDamage;
     }
 
@@ -108,6 +109,7 @@ public class AttackCalculator
                 * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
                 + _currentDefensiveUnit.ActivePenalties.Res 
                 *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
+            
             if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack 
@@ -118,10 +120,12 @@ public class AttackCalculator
         }
         else
         {
+
             rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def 
                 * _currentDefensiveUnit.ActiveBonusNeutralizator.Def
                 + _currentDefensiveUnit.ActivePenalties.Def 
-                *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
+                * _currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
+            
             if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack 
@@ -136,6 +140,7 @@ public class AttackCalculator
     
     private int CalculateFinalDamage(double initialDamage)
     {
+        // todo: arreglar codigo duplicado
         double finalDamage  = initialDamage;
         if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
         {
@@ -174,6 +179,7 @@ public class AttackCalculator
     private int CalculateFinalDamageForDivineRecreation(double initialDamage)
     {
         double finalDamage  = initialDamage;
+        // todo: codigo duplicado
         if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
         {
             finalDamage =

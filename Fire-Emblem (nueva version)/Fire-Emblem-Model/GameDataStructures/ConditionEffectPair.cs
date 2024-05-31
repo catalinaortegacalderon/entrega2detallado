@@ -19,7 +19,12 @@ public class ConditionEffectPair
         this.OpponentsUnit = opponentsUnit;
         this.Condition = skill.GetCondition(pairIndex);
         this.Effect = skill.GetEffect(pairIndex);
-        if (Effect is DivineRecreationEffect && unitThatHasThePair.StartedTheRound == true)
+        ManageDivineRecreationsSpecialCase();
+    }
+
+    private void ManageDivineRecreationsSpecialCase()
+    {
+        if (Effect is DivineRecreationEffect && UnitThatHasThePair.StartedTheRound == true)
         {
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(5);
         }

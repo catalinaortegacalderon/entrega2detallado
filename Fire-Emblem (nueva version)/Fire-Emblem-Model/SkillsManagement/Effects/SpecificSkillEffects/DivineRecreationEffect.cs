@@ -8,7 +8,7 @@ public class DivineRecreationEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
 
     {
-        AttackCalculator calculator = new AttackCalculator(opponentsUnit, myUnit, 
+        DamageCalculator calculator = new DamageCalculator(opponentsUnit, myUnit, 
             AttackType.FirstAttack);
         
         double initialDamage = calculator.CalculateAttackForDivineRecreation();
