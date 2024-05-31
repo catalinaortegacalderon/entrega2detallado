@@ -10,7 +10,7 @@ public class WrathEffect : Effect
     {
         int amount = myUnit.HpMax - myUnit.CurrentHp;
         if (amount > 30) amount = 30;
-        myUnit.ActiveBonus.Attk += amount;
+        myUnit.ActiveBonus.Atk += amount;
         myUnit.ActiveBonus.Spd += amount;
     }
 }

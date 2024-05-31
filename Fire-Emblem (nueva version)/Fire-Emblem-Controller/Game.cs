@@ -80,7 +80,7 @@ public class Game
     {
         return _currentRound % 2 == 1;
     }
-
+    // todo: pasar a una clase separada
     private void StartRound()
     {
         AskBothPlayersForTheChosenUnit();
@@ -99,7 +99,7 @@ public class Game
         EliminateLooserUnit();
     }
     
-
+    // todo: pasar a view
     private void AskBothPlayersForTheChosenUnit()
     {
         
@@ -109,7 +109,8 @@ public class Game
 
         if (_attackController.GetCurrentAttacker() == IdOfPlayer1)
         {
-            
+            // todo: pasar a funcion y quitar codigo repetido
+            // todo: el if debe tener una linea
             _currentUnitNumberOfPlayer1 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer1, 
                 player1.Units);
             _currentUnitNumberOfPlayer2 = _view.AskAPlayerForTheChosenUnit(IdOfPlayer2, 
@@ -191,15 +192,16 @@ public class Game
 
     private bool CanDoAFollowup( Unit attackingUnit, Unit defensiveUnit)
     {
+        // todo: pasar a funcion
         const int additionValueForFollowupCondition = 5;
         bool doesTheFollowupConditionHold = 
             defensiveUnit.Spd 
-            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizator.Spd
-            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizator.Spd 
+            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizer.Spd
+            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizer.Spd 
             + additionValueForFollowupCondition 
             <= attackingUnit.Spd 
-            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizator.Spd
-            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizator.Spd;
+            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
+            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
 
         return ThereAreNoLoosers() && doesTheFollowupConditionHold;
 

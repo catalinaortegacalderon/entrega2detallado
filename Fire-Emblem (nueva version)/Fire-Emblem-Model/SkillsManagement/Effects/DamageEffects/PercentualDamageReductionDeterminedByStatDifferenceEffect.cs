@@ -22,21 +22,21 @@ public class PercentualDamageReductionDeterminedByStatDifferenceEffect : Effect
         if (this.stat == StatType.Spd)
         {
             double myTotalSpd = 
-                myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizator.Spd 
-                           + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizator.Spd;
+                myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd 
+                           + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizer.Spd;
             double opponentsTotalSpd =
-                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizator.Spd
-                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizator.Spd;
+                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
+                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
             redutionPercentage =  1 - (((myTotalSpd - opponentsTotalSpd) * this.multiplicator)/100);
         }
         else if (this.stat == StatType.Res)
         {
             double myTotalRes =
-                myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizator.Res
-                           + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralizator.Res;
+                myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizer.Res
+                           + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralizer.Res;
             double opponentsTotalRes =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizator.Res
-                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizator.Res;
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizer.Res
+                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res;
             redutionPercentage =  1 - (((myTotalRes - opponentsTotalRes) * this.multiplicator)/100);
         }
         if (redutionPercentage < 0.6)

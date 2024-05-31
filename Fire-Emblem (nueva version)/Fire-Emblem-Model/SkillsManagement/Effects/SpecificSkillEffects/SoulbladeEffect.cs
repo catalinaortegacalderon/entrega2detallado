@@ -6,7 +6,7 @@ public class SoulbladeEffect : Effect
 {
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+        // todo: funcionnnn
     {
         double refDesAverage = (opponentsUnit.Def + opponentsUnit.Res) / 2;
         int refDesAverageInt = Convert.ToInt32(Math.Truncate(refDesAverage));

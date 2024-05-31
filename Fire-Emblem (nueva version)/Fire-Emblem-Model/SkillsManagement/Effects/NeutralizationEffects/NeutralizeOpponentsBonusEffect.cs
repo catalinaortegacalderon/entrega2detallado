@@ -8,11 +8,11 @@ public class NeutralizeOpponentsBonusEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         
     {
-        opponentsUnit.ActiveBonusNeutralizator.Attk = 0;
-        opponentsUnit.ActiveBonusNeutralizator.AtkFollowup = 0; 
-        opponentsUnit.ActiveBonusNeutralizator.AtkFirstAttack = 0; 
-        opponentsUnit.ActiveBonusNeutralizator.Spd = 0; 
-        opponentsUnit.ActiveBonusNeutralizator.Def = 0; 
-        opponentsUnit.ActiveBonusNeutralizator.Res = 0;
+        opponentsUnit.ActiveBonusNeutralizer.Atk = 0;
+        opponentsUnit.ActiveBonusNeutralizer.AtkFollowup = 0; 
+        opponentsUnit.ActiveBonusNeutralizer.AtkFirstAttack = 0; 
+        opponentsUnit.ActiveBonusNeutralizer.Spd = 0; 
+        opponentsUnit.ActiveBonusNeutralizer.Def = 0; 
+        opponentsUnit.ActiveBonusNeutralizer.Res = 0;
     }
 }

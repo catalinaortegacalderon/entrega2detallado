@@ -16,7 +16,8 @@ public class ConditionEffectPair
 
     public ConditionEffectPair(Unit unitThatHasThePair, Unit opponentsUnit, Skill skill,  int pairIndex)
     {
-        this.UnitThatHasThePair = unitThatHasThePair;
+        // todo: sacar this
+        UnitThatHasThePair = unitThatHasThePair;
         this.OpponentsUnit = opponentsUnit;
         this.Condition = skill.GetCondition(pairIndex);
         this.Effect = skill.GetEffect(pairIndex);

@@ -15,12 +15,12 @@ public class ChangeStatsInBasePercentageEffect : Effect
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+        // todo: codigo duplicado, solo cambia stat en varios archivos
     {
         if (_stat == StatType.Atk)
         {
-            if ( _percentage > 0) myUnit.ActiveBonus.Attk  += (int)(this._percentage * myUnit.Atk);
-            if ( _percentage < 0) myUnit.ActivePenalties.Attk  +=  (int)(this._percentage * myUnit.Atk);
+            if ( _percentage > 0) myUnit.ActiveBonus.Atk  += (int)(this._percentage * myUnit.Atk);
+            if ( _percentage < 0) myUnit.ActivePenalties.Atk  +=  (int)(this._percentage * myUnit.Atk);
         }
         else if (_stat == StatType.Def)
         {

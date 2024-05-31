@@ -9,11 +9,10 @@ public class MyUnitUsesCertainWeaponsCondition : Condition
     private Weapon[] _usedWeapon;
     public MyUnitUsesCertainWeaponsCondition(Weapon[] weapon) : base()
     {
-        this._usedWeapon = weapon;
+        _usedWeapon = weapon;
     }
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        if (this._usedWeapon.Contains(myUnit.Weapon)) return true;
-        return false;
+        return _usedWeapon.Contains(myUnit.Weapon);
     }
 }

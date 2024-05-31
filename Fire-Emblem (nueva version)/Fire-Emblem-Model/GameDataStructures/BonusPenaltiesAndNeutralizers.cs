@@ -1,8 +1,9 @@
 namespace ConsoleApp1.GameDataStructures;
 
-public class BonusPenaltiesAndNeutralizators
+public class BonusPenaltiesAndNeutralizers
 {
-    public int Attk;
+    // todo: sacar this
+    public int Atk;
     public int Spd;
     public int Def;
     public int Res;
@@ -12,9 +13,9 @@ public class BonusPenaltiesAndNeutralizators
     public int ResFirstAttack;
     public bool HpBonusActivated = false;
     
-    public BonusPenaltiesAndNeutralizators(int startValuesIn)
+    public BonusPenaltiesAndNeutralizers(int startValuesIn)
     {
-        this.Attk = startValuesIn;
+        this.Atk = startValuesIn;
         this.Spd = startValuesIn;
         this.Def = startValuesIn;
         this.Res = startValuesIn;

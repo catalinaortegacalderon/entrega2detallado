@@ -18,8 +18,8 @@ public class ChangeOpponentsStatsInEffect : Effect
     {
         if (_stat == StatType.Atk)
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.Attk  = opponentsUnit.ActiveBonus.Attk + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.Attk  = opponentsUnit.ActivePenalties.Attk + this.Amount;
+            if ( Amount > 0) opponentsUnit.ActiveBonus.Atk  = opponentsUnit.ActiveBonus.Atk + this.Amount;
+            if ( Amount < 0) opponentsUnit.ActivePenalties.Atk  = opponentsUnit.ActivePenalties.Atk + this.Amount;
         }
         else if (_stat == StatType.Def)
         {

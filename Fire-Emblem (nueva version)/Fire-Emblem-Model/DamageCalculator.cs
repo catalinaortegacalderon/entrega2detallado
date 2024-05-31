@@ -51,27 +51,27 @@ public class DamageCalculator
         
         return initialDamage;
     }
-
+// todo: codigo duplicado unidad y oponente
     private int CalculateUnitsAtk()
     {
-        int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Attk 
-            * _currentAttackingUnit.ActiveBonusNeutralizator.Attk 
-            + _currentAttackingUnit.ActivePenalties.Attk 
-            * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
+        int unitsAtk = _currentAttackingUnit.Atk + _currentAttackingUnit.ActiveBonus.Atk 
+            * _currentAttackingUnit.ActiveBonusNeutralizer.Atk 
+            + _currentAttackingUnit.ActivePenalties.Atk 
+            * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
         
         if (IsFirstOrSecondAttack())
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFirstAttack 
-                        * _currentAttackingUnit.ActiveBonusNeutralizator.Attk 
+                        * _currentAttackingUnit.ActiveBonusNeutralizer.Atk 
                         + _currentAttackingUnit.ActivePenalties.AtkFirstAttack 
-                        * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
+                        * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
         }
         if (IsFollowUp())
         {
             unitsAtk += _currentAttackingUnit.ActiveBonus.AtkFollowup 
-                        * _currentAttackingUnit.ActiveBonusNeutralizator.Attk
+                        * _currentAttackingUnit.ActiveBonusNeutralizer.Atk
                         + _currentAttackingUnit.ActivePenalties.AtkFollowup 
-                        * _currentAttackingUnit.ActivePenaltiesNeutralizator.Attk;
+                        * _currentAttackingUnit.ActivePenaltiesNeutralizer.Atk;
         }
         return unitsAtk;
     }
@@ -108,32 +108,32 @@ public class DamageCalculator
         if (attackingWeapon == Weapon.Magic)
         {
             rivalsDefOrRes = _currentDefensiveUnit.Res + _currentDefensiveUnit.ActiveBonus.Res 
-                * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
+                * _currentDefensiveUnit.ActiveBonusNeutralizer.Res 
                 + _currentDefensiveUnit.ActivePenalties.Res 
-                *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
+                *_currentDefensiveUnit.ActivePenaltiesNeutralizer.Res;
             
             if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.ResFirstAttack 
-                    * _currentDefensiveUnit.ActiveBonusNeutralizator.Res 
+                    * _currentDefensiveUnit.ActiveBonusNeutralizer.Res 
                     + _currentDefensiveUnit.ActivePenalties.ResFirstAttack 
-                    *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Res;
+                    *_currentDefensiveUnit.ActivePenaltiesNeutralizer.Res;
             }
         }
         else
         {
 
             rivalsDefOrRes = _currentDefensiveUnit.Def + _currentDefensiveUnit.ActiveBonus.Def 
-                * _currentDefensiveUnit.ActiveBonusNeutralizator.Def
+                * _currentDefensiveUnit.ActiveBonusNeutralizer.Def
                 + _currentDefensiveUnit.ActivePenalties.Def 
-                * _currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
+                * _currentDefensiveUnit.ActivePenaltiesNeutralizer.Def;
             
             if (IsFirstOrSecondAttack())
             {
                 rivalsDefOrRes += _currentDefensiveUnit.ActiveBonus.DefFirstAttack 
-                    * _currentDefensiveUnit.ActiveBonusNeutralizator.Def 
+                    * _currentDefensiveUnit.ActiveBonusNeutralizer.Def 
                     + _currentDefensiveUnit.ActivePenalties.DefFirstAttack 
-                    *_currentDefensiveUnit.ActivePenaltiesNeutralizator.Def;
+                    *_currentDefensiveUnit.ActivePenaltiesNeutralizer.Def;
             }
         }
         
@@ -143,7 +143,7 @@ public class DamageCalculator
     private int CalculateFinalDamage(double initialDamage)
     {
         double finalDamage  = initialDamage;
-        
+        // todo: separar en funciones
         if (IsFirstOrSecondAttack())
         {
             finalDamage =
@@ -184,6 +184,7 @@ public class DamageCalculator
                  _currentAttackingUnit.DamageEffects.ExtraDamageFollowup);
 
         }
+        // todo: sacar espacios
         var newDamage = Math . Round ( finalDamage , 9) ; 
         var damage = Convert . ToInt32 ( Math . Floor ( newDamage ) ); 
         return damage;

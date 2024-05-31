@@ -5,6 +5,7 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyHpIsBiggerThanCondition : Condition
 {
+    // todo: sacar this
     private double _amount;
     public MyHpIsBiggerThanCondition(double amount) : base()
     {
@@ -12,10 +13,6 @@ public class MyHpIsBiggerThanCondition : Condition
     }
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        if (Math.Round((double)myUnit.CurrentHp / myUnit.HpMax,2) >= this._amount)
-        {
-            return true;
-        }
-        return false;
+        return Math.Round((double)myUnit.CurrentHp / myUnit.HpMax,2) >= this._amount;
     }
 }

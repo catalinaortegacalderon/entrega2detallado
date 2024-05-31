@@ -12,7 +12,8 @@ public class MyUnitHasWeaponAdvantageCondition : Condition
         Weapon defensiveWeapon = opponentsUnit.Weapon;
         return HasWeaponAdvantage(attackingWeapon, defensiveWeapon);
     }
-
+    // todo: ver si hacer funcion con las 2 armas, son muchos casos
+    // capaz un switch
     private bool HasWeaponAdvantage(Weapon attackingWeapon, Weapon defensiveWeapon)
     {
         bool hasWeaponAdvantage = (attackingWeapon == Weapon.Sword & defensiveWeapon == Weapon.Axe) || 

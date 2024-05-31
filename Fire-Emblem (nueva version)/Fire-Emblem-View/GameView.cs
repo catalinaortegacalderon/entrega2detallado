@@ -62,6 +62,7 @@ public class GameView : IView
     
     public void AnnounceAdvantage(Unit unitWithAdvantage, Unit unitWithoutAdvantage)
     {
+        // todo: queda mejor $"{unit} ({weapon}) tiene ...}"
         _view.WriteLine(unitWithAdvantage.Name + " (" + unitWithAdvantage.Weapon + 
                         ") tiene ventaja con respecto a " + unitWithoutAdvantage.Name + " (" 
                         + unitWithoutAdvantage.Weapon + ")");

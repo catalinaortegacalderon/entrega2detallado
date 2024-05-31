@@ -13,7 +13,6 @@ public class OpponentUsesCertainWeaponCondition: Condition
     }
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        if (this._weapons.Contains(opponentsUnit.Weapon)) return true;
-        return false;
+        return this._weapons.Contains(opponentsUnit.Weapon);
     }
 }

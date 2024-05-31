@@ -17,38 +17,38 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect: 
         this._stat = stat;
         this._percentage = percentage;
     }
-
+// todo: += y codigo gris
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         int amount = 0;
         if (this._stat == StatType.Res)
         {
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizator.Res
-                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizator.Res;
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizer.Res
+                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res;
         }
         if (this._stat == StatType.Atk)
         {
             amount =
-                opponentsUnit.Atk + opponentsUnit.ActiveBonus.Attk * opponentsUnit.ActiveBonusNeutralizator.Attk
-                                  + opponentsUnit.ActivePenalties.Attk * opponentsUnit.ActivePenaltiesNeutralizator.Attk;
+                opponentsUnit.Atk + opponentsUnit.ActiveBonus.Atk * opponentsUnit.ActiveBonusNeutralizer.Atk
+                                  + opponentsUnit.ActivePenalties.Atk * opponentsUnit.ActivePenaltiesNeutralizer.Atk;
         }
         if (this._stat == StatType.Def)
         {
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizator.Def
-                                  + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizator.Def;
+                opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizer.Def
+                                  + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizer.Def;
         }
         if (this._stat == StatType.Spd)
         {
             amount =
-                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizator.Spd
-                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizator.Spd;
+                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
+                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
         }
         amount = Convert.ToInt32(Math.Truncate(amount * this._percentage));
         if (this._type == DamageEffectCategory.All)
         {
-            myUnit.DamageEffects.ExtraDamage = myUnit.DamageEffects.ExtraDamage + amount;
+            myUnit.DamageEffects.ExtraDamage += amount;
         }
         else if (this._type == DamageEffectCategory.FirstAttack)
         {

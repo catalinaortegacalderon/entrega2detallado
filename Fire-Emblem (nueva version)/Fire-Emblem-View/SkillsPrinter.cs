@@ -15,8 +15,8 @@ public class SkillsPrinter
 
     private static void PrintBonus(View view, Unit unit)
     {
-        if (unit.ActiveBonus.Attk > 0)
-            view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.Attk);
+        if (unit.ActiveBonus.Atk > 0)
+            view.WriteLine(unit.Name + " obtiene Atk+" + unit.ActiveBonus.Atk);
         if (unit.ActiveBonus.Spd > 0) 
             view.WriteLine(unit.Name + " obtiene Spd+" + unit.ActiveBonus.Spd);
         if (unit.ActiveBonus.Def > 0) 
@@ -39,8 +39,8 @@ public class SkillsPrinter
 
     private static void PrintPenalties(View view, Unit unit)
     {
-        if (unit.ActivePenalties.Attk < 0) 
-            view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.Attk);
+        if (unit.ActivePenalties.Atk < 0) 
+            view.WriteLine(unit.Name + " obtiene Atk" + unit.ActivePenalties.Atk);
         if (unit.ActivePenalties.Spd < 0) 
             view.WriteLine(unit.Name + " obtiene Spd" + unit.ActivePenalties.Spd);
         if (unit.ActivePenalties.Def < 0) 
@@ -63,25 +63,25 @@ public class SkillsPrinter
 
     private static void PrintBonusNetralization(View view, Unit unit)
     {
-        if (unit.ActiveBonusNeutralizator.Attk == 0) 
+        if (unit.ActiveBonusNeutralizer.Atk == 0) 
             view.WriteLine("Los bonus de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizator.Spd == 0) 
+        if (unit.ActiveBonusNeutralizer.Spd == 0) 
             view.WriteLine("Los bonus de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizator.Def == 0) 
+        if (unit.ActiveBonusNeutralizer.Def == 0) 
             view.WriteLine("Los bonus de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActiveBonusNeutralizator.Res == 0) 
+        if (unit.ActiveBonusNeutralizer.Res == 0) 
             view.WriteLine("Los bonus de Res de " + unit.Name + " fueron neutralizados");
     }
 
     private static void PrintPenaltyNetralization(View view, Unit unit)
     {
-        if (unit.ActivePenaltiesNeutralizator.Attk == 0) 
+        if (unit.ActivePenaltiesNeutralizer.Atk == 0) 
             view.WriteLine("Los penalty de Atk de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizator.Spd == 0) 
+        if (unit.ActivePenaltiesNeutralizer.Spd == 0) 
             view.WriteLine("Los penalty de Spd de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizator.Def == 0) 
+        if (unit.ActivePenaltiesNeutralizer.Def == 0) 
             view.WriteLine("Los penalty de Def de " + unit.Name + " fueron neutralizados");
-        if (unit.ActivePenaltiesNeutralizator.Res == 0) 
+        if (unit.ActivePenaltiesNeutralizer.Res == 0) 
             view.WriteLine("Los penalty de Res de " + unit.Name + " fueron neutralizados");
     }
 

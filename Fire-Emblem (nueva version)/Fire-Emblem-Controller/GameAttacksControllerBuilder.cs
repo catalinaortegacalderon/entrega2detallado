@@ -29,10 +29,12 @@ public class GameAttacksControllerBuilder
         string[] allLines = File.ReadAllLines(file);
         foreach (string line in allLines)
         {
+            // todo: pasar a funcion
             if (line == "Player 1 Team") currentPlayerNumber = 0;
             else if (line == "Player 2 Team") currentPlayerNumber = 1;
             else
             {
+                // todo: pasar a funcion
                 var unitsOfThePlayer = units[currentPlayerNumber];
                 var playersUnitCounter = unitCounters[currentPlayerNumber];
                 var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
@@ -56,7 +58,7 @@ public class GameAttacksControllerBuilder
         {
             if (unitsName == unit.Name)
             {
-                
+                // todo: pasar a funcion
                 unitsListOfTheCurrentPlayer[unitCounter] = new Unit(unit.Name,
                     unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
                     Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
@@ -96,6 +98,7 @@ public class GameAttacksControllerBuilder
         player2.PlayerNumber = 1;
         
         int unitCounterplayer1 = 0;
+        // todo: pasar a for
         foreach (var unit in units[0])
         {
             player1.Units.AddUnit(unitCounterplayer1, unit);

@@ -8,8 +8,7 @@ public class OpponentIsAManCondition: Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        if (opponentsUnit.Gender == Gender.Male) return true;
-        return false;
+        return opponentsUnit.Gender == Gender.Male;
     }
     
 }

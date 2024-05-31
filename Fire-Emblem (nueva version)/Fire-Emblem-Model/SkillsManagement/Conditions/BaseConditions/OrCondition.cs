@@ -15,10 +15,8 @@ public class OrCondition : Condition
     {
         foreach (Condition condition in this.conditions)
         {
-            if (condition.DoesItHold(myUnit, opponentsUnit) == true)
-            {
+            if (condition.DoesItHold(myUnit, opponentsUnit))
                 return true;
-            }
         } 
         return false;
     }

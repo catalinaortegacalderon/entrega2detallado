@@ -18,8 +18,8 @@ public class ChangeStatsInEffect : Effect
     {
         if (_stat == StatType.Atk)
         {
-            if ( Amount > 0) myUnit.ActiveBonus.Attk  = myUnit.ActiveBonus.Attk + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.Attk  = myUnit.ActivePenalties.Attk + this.Amount;
+            if ( Amount > 0) myUnit.ActiveBonus.Atk  = myUnit.ActiveBonus.Atk + this.Amount;
+            if ( Amount < 0) myUnit.ActivePenalties.Atk  = myUnit.ActivePenalties.Atk + this.Amount;
         }
         else if (_stat == StatType.Def)
         {

@@ -7,8 +7,9 @@ public class LunarBraceEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        int amount = opponentsUnit.Def + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizator.Def
-                                       + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizator.Def;
+        // todo: fn obtener valor
+        int amount = opponentsUnit.Def + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizer.Def
+                                       + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizer.Def;
         myUnit.DamageEffects.ExtraDamage += (int)Math.Truncate(0.3 * amount);
     }
 }

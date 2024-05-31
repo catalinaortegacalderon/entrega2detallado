@@ -24,6 +24,7 @@ public class GameAttacksController
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
     {
+        // todo: sacar los this
         this._currentAttacker = 0;
         this._players[0] = firstPlayer;
         this._players[1] = secondPlayer;
@@ -95,10 +96,11 @@ public class GameAttacksController
     private void ActivateSkills()
     {
         var conditionEffectPairs = GetAllConditionEffectPairs();
-        var prioritizedList = PiorizeConditionSkillPairs(conditionEffectPairs);
+        var prioritizedList = PrioritizeConditionSkillPairs(conditionEffectPairs);
         ApplyAllValidEffects(prioritizedList);
     }
     
+    // todo: encapsular lista
     private List<ConditionEffectPair> GetAllConditionEffectPairs(){
         List<ConditionEffectPair> conditionEffectPairs = new List<ConditionEffectPair> {};
         foreach (Skill skill in _currentAttackingUnit.Skills)
@@ -120,7 +122,7 @@ public class GameAttacksController
         return conditionEffectPairs;
     }
     
-    private List<ConditionEffectPair> PiorizeConditionSkillPairs(List<ConditionEffectPair> conditionEffectPairs){
+    private List<ConditionEffectPair> PrioritizeConditionSkillPairs(List<ConditionEffectPair> conditionEffectPairs){
         List<ConditionEffectPair> prioritizedList = conditionEffectPairs
             .OrderBy(pair => (int)pair.Condition.GetPriority())
             .ToList();
@@ -221,13 +223,13 @@ public class GameAttacksController
 
     private void ResetOnePlayersSkills(Unit unit)
     {
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonus,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonus,
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenalties,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenalties,
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActiveBonusNeutralizator, 
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonusNeutralizer, 
             1);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(unit.ActivePenaltiesNeutralizator,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer,
             1);
         DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
     }

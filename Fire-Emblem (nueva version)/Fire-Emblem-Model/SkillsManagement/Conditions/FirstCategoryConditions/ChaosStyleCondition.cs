@@ -9,6 +9,7 @@ public class ChaosStyleCondition : Condition
     
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
+        // todo: hacer funion que revisa las armas, isphysical ismagic
         
         if( myUnit.IsAttacking) 
         { 

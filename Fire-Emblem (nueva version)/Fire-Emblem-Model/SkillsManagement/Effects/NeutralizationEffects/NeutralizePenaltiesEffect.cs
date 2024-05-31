@@ -8,9 +8,9 @@ public class NeutralizePenaltiesEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
         
     {
-        myUnit.ActivePenaltiesNeutralizator.Attk = 0;
-        myUnit.ActivePenaltiesNeutralizator.Spd = 0;
-        myUnit.ActivePenaltiesNeutralizator.Def = 0;
-        myUnit.ActivePenaltiesNeutralizator.Res = 0;
+        myUnit.ActivePenaltiesNeutralizer.Atk = 0;
+        myUnit.ActivePenaltiesNeutralizer.Spd = 0;
+        myUnit.ActivePenaltiesNeutralizer.Def = 0;
+        myUnit.ActivePenaltiesNeutralizer.Res = 0;
     }
 }

@@ -18,13 +18,13 @@ public class Unit
     public int Res;
     
     public SkillsList Skills = new SkillsList();
-
-    public BonusPenaltiesAndNeutralizators ActiveBonus = new BonusPenaltiesAndNeutralizators(0);
-    public BonusPenaltiesAndNeutralizators ActivePenalties = new BonusPenaltiesAndNeutralizators(0);
-    public BonusPenaltiesAndNeutralizators ActiveBonusNeutralizator = 
-        new BonusPenaltiesAndNeutralizators(1);
-    public BonusPenaltiesAndNeutralizators ActivePenaltiesNeutralizator = 
-        new BonusPenaltiesAndNeutralizators(1);
+// todo: sacar texto negro-gris
+    public BonusPenaltiesAndNeutralizers ActiveBonus = new BonusPenaltiesAndNeutralizers(0);
+    public BonusPenaltiesAndNeutralizers ActivePenalties = new BonusPenaltiesAndNeutralizers(0);
+    public BonusPenaltiesAndNeutralizers ActiveBonusNeutralizer = 
+        new BonusPenaltiesAndNeutralizers(1);
+    public BonusPenaltiesAndNeutralizers ActivePenaltiesNeutralizer = 
+        new BonusPenaltiesAndNeutralizers(1);
     public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
     
     public string LastOpponentName = "";
@@ -60,27 +60,15 @@ public class Unit
 
     private static Weapon ConvertWeaponStringToWeaponType(string weapon)
     {
-        if (weapon == "Magic")
+        return weapon switch
         {
-            return Weapon.Magic;
-        }
-        if (weapon == "Axe")
-        {
-            return Weapon.Axe;
-        }
-        if (weapon == "Lance")
-        {
-            return Weapon.Lance;
-        }
-        if (weapon == "Bow")
-        {
-            return Weapon.Bow;
-        }
-        if (weapon == "Sword")
-        {
-            return Weapon.Sword;
-        }
-        return Weapon.Empty;
+            "Magic" => Weapon.Magic,
+            "Axe" => Weapon.Axe,
+            "Lance" => Weapon.Lance,
+            "Bow" => Weapon.Bow,
+            "Sword" => Weapon.Sword,
+            _ => Weapon.Empty
+        };
     }
 
 }
