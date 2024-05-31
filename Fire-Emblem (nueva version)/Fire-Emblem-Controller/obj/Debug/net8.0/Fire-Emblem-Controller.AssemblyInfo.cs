@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fire-Emblem-Controller")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d42e6483f640bd7df9c1ead5262550902e1460ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74876147b7a476a6d0e76b628743cd8089afc8be")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fire-Emblem-Controller")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fire-Emblem-Controller")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

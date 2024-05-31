@@ -92,7 +92,6 @@ public class Game
         ShowLeftoverHp();
         UpdateGameLogs();
         EliminateLooserUnit();
-        _attackController.SetCurrentAttacker(IdOfPlayer2);
     }
     
 
@@ -124,11 +123,16 @@ public class Game
 
     private void SetUnits()
     {
-        // todo: ARREGLAR ESTE TRAINWRECJ
-        _currentUnitOfPlayer1 = _attackController.GetPlayers()[IdOfPlayer1].Units
-            .GetUnitByIndex(_currentUnitNumberOfPlayer1);
-        _currentUnitOfPlayer2 = _attackController.GetPlayers()[IdOfPlayer2].Units
-            .GetUnitByIndex(_currentUnitNumberOfPlayer2);
+        var players = _attackController.GetPlayers();
+        
+        var player1 = players[IdOfPlayer1];
+        var player2 = players[IdOfPlayer2];
+
+        var unitsOfPlayer1 = player1.Units;
+        var unitsOfPlayer2 = player2.Units;
+        
+        _currentUnitOfPlayer1 = unitsOfPlayer1.GetUnitByIndex(_currentUnitNumberOfPlayer1);
+        _currentUnitOfPlayer2 = unitsOfPlayer2.GetUnitByIndex(_currentUnitNumberOfPlayer2);
     }
 
     private string[] ReadTeamsFiles()
@@ -206,7 +210,6 @@ public class Game
     {
         Player[] players = _attackController.GetPlayers();
         
-        // todo: trainwrecks
         if (IsUnitDead(_currentUnitOfPlayer1))
         {
             var player1 = players[IdOfPlayer1];
@@ -218,7 +221,6 @@ public class Game
             var player2 = players[IdOfPlayer2];
             var unitsOfPlayer2 = player2.Units;
             unitsOfPlayer2.EliminateUnit(_currentUnitNumberOfPlayer2);
-            //_attackController.GetPlayers()[IdOfPlayer2].Units.EliminateUnit(_currentUnitNumberOfPlayer2);
         }
     }
 
@@ -236,8 +238,8 @@ public class Game
 
     private void UpdateGameLogs()
     {
-        // todo: PONER ESTO MAS BONITO, CAMBIAR NOMBRE
         _attackController.UpdateLastOpponents();
+        
         if (IsPlayer1TheRoundStarter())
         {
             _currentUnitOfPlayer2.HasBeenBeenInACombatStartedByTheOpponent = true;
