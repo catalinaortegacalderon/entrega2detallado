@@ -3,8 +3,8 @@ namespace ConsoleApp1.GameDataStructures;
 public static class DataStructuresResetter
 {
     
-    public static void ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(BonusPenaltiesAndNeutralizators dataStructure, 
-        int valueToResetTo)
+    public static void ResetBonusPenaltiesAndNeutralizatorsToASpecificValue(BonusPenaltiesAndNeutralizators 
+        dataStructure, int valueToResetTo)
     {
         dataStructure.Attk = valueToResetTo;
         dataStructure.Spd = valueToResetTo;

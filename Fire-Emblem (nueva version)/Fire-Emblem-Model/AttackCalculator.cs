@@ -85,7 +85,6 @@ public class AttackCalculator
 
     private double CalculateWtb()
     {
-        // todo: wtb 
         double wtb;
         if (IsNoAdvantage(_currentAttackingUnit.Weapon, _currentDefensiveUnit.Weapon)) 
             wtb = _wtbValueForNoAdvantage;
@@ -174,8 +173,6 @@ public class AttackCalculator
     
     private int CalculateFinalDamageForDivineRecreation(double initialDamage)
     {
-        
-        // todo: ES SIN LA ABSOLUTA NI PORCENTUAL     si extra
         double finalDamage  = initialDamage;
         if (_typeOfThisRoundsCurrentAttack == AttackType.FirstAttack)
         {

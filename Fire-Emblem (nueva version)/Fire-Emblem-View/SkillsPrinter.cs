@@ -4,8 +4,6 @@ namespace Fire_Emblem_View;
 
 public class SkillsPrinter
 {
-    // tal vez no hacer estatico
-    // CONI IMPLEMENTO DICCIONARIOS, PARA NO TENER COSAS REPETIDAS
     public static void PrintAll(View view, Unit unit)
     {
         PrintBonus(view, unit);

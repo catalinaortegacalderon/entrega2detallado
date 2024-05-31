@@ -19,7 +19,6 @@ public class AndCondition : Condition
                 return false;
             }
         } 
-        Console.WriteLine(" SE CUMPLE LA CONDICION AND");
         return true;
     }
 }

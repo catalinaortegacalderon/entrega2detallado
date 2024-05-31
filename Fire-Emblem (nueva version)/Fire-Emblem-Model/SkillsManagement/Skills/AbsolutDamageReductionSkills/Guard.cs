@@ -14,6 +14,7 @@ public class Guard : Skill
     {
         this.Conditions = new Condition[1];
         this.Conditions[0] = new OpponentUsesCertainWeaponCondition([weapon]); 
+        
         this.Effects = new Effect[1];
         this.Effects[0] = new AbsolutDamageReductionEffect(5); 
     }

@@ -9,11 +9,6 @@ namespace ConsoleApp1.EncapsulatedLists;
 public class SkillsList : IEnumerable<Skill>
 {
     private List<Skill> _skills = new List<Skill> { new EmptySkill(), new EmptySkill(), new EmptySkill() };
-    
-    public void Construct()
-    {
-        // ver que hago aca 
-    }
 
     public Skill GetSkillByIndex(int index)
     {

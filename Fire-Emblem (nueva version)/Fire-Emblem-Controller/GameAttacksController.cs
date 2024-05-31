@@ -142,7 +142,6 @@ public class GameAttacksController
 
     private void ReduceUnitAmount()
     {
-        // TODO: ARREGLAR, HACE DOS COSAS
         Player player;
         if (_currentAttacker == 0)
         {
@@ -204,7 +203,6 @@ public class GameAttacksController
     private void ShowAdvantages()
     {
         
-        //todo: mejorar esto
         var attackingWeapon = _currentAttackingUnit.Weapon;
         var defensiveWeapon = _currentDefensiveUnit.Weapon;
 
