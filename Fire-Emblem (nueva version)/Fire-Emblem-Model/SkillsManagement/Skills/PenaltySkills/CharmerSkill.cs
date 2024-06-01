@@ -9,14 +9,14 @@ namespace ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 public class CharmerSkill : Skill
 {
-    public CharmerSkill() : base()
+    public CharmerSkill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
-        this.Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
-            
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -3); 
-        this.Effects[1] = new ChangeOpponentsStatsInEffect( StatType.Spd, -3); 
+        Conditions = new Condition[2];
+        Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
+        Conditions[1] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -3);
+        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Spd, -3);
     }
 }

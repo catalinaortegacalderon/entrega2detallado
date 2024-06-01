@@ -6,35 +6,36 @@ namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
 public class ChangeStatsInEffect : Effect
 {
-    private StatType _stat;
-    public ChangeStatsInEffect(StatType stat, int amount) : base()
+    private readonly StatType _stat;
+
+    public ChangeStatsInEffect(StatType stat, int amount)
     {
-        this.Amount = amount;
-        this._stat = stat;
+        Amount = amount;
+        _stat = stat;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+
     {
         if (_stat == StatType.Atk)
         {
-            if ( Amount > 0) myUnit.ActiveBonus.Atk  = myUnit.ActiveBonus.Atk + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.Atk  = myUnit.ActivePenalties.Atk + this.Amount;
+            if (Amount > 0) myUnit.ActiveBonus.Atk = myUnit.ActiveBonus.Atk + Amount;
+            if (Amount < 0) myUnit.ActivePenalties.Atk = myUnit.ActivePenalties.Atk + Amount;
         }
         else if (_stat == StatType.Def)
         {
-            if ( Amount > 0) myUnit.ActiveBonus.Def  = myUnit.ActiveBonus.Def + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.Def  = myUnit.ActivePenalties.Def + this.Amount;
+            if (Amount > 0) myUnit.ActiveBonus.Def = myUnit.ActiveBonus.Def + Amount;
+            if (Amount < 0) myUnit.ActivePenalties.Def = myUnit.ActivePenalties.Def + Amount;
         }
         else if (_stat == StatType.Res)
         {
-            if ( Amount > 0) myUnit.ActiveBonus.Res  = myUnit.ActiveBonus.Res + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.Res  = myUnit.ActivePenalties.Res + this.Amount;
+            if (Amount > 0) myUnit.ActiveBonus.Res = myUnit.ActiveBonus.Res + Amount;
+            if (Amount < 0) myUnit.ActivePenalties.Res = myUnit.ActivePenalties.Res + Amount;
         }
         else if (_stat == StatType.Spd)
         {
-            if ( Amount > 0) myUnit.ActiveBonus.Spd  = myUnit.ActiveBonus.Spd + this.Amount;
-            if ( Amount < 0) myUnit.ActivePenalties.Spd  = myUnit.ActivePenalties.Spd + this.Amount;
+            if (Amount > 0) myUnit.ActiveBonus.Spd = myUnit.ActiveBonus.Spd + Amount;
+            if (Amount < 0) myUnit.ActivePenalties.Spd = myUnit.ActivePenalties.Spd + Amount;
         }
     }
 }

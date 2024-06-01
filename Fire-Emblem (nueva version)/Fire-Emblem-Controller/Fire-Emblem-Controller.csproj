@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Fire-Emblem-Model\Fire-Emblem-Model.csproj" />
-      <ProjectReference Include="..\Fire-Emblem-View\Fire-Emblem-View.csproj" />
+        <ProjectReference Include="..\Fire-Emblem-Model\Fire-Emblem-Model.csproj"/>
+        <ProjectReference Include="..\Fire-Emblem-View\Fire-Emblem-View.csproj"/>
     </ItemGroup>
 
 </Project>

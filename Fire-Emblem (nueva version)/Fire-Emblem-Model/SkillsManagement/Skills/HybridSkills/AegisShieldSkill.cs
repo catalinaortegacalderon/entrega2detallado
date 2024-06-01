@@ -5,22 +5,20 @@ using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class AegisShieldSkill : Skill
 {
-    public AegisShieldSkill() : base()
+    public AegisShieldSkill()
     {
-        this.Conditions = new Condition[3];
-        this.Conditions[0] = new AlwaysTrueCondition();
-        this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[2] = new AlwaysTrueCondition();
-        this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
-        this.Effects[1] = new ChangeStatsInEffect(StatType.Res, 3);
-        this.Effects[2] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
+        Conditions = new Condition[3];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[2] = new AlwaysTrueCondition();
+        Effects = new Effect[3];
+        Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
+        Effects[1] = new ChangeStatsInEffect(StatType.Res, 3);
+        Effects[2] = new PercentualDamageReductionEffect(0.5, DamageEffectCategory.FirstAttack);
     }
-    
 }

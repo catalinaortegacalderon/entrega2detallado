@@ -3,19 +3,18 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class ResolveSkill : Skill
 {
-    public ResolveSkill() : base()
+    public ResolveSkill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new MyHpIsLessThanCondition(0.75); 
-        this.Conditions[1] = new MyHpIsLessThanCondition(0.75);
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect(StatType.Def, 7); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 7); 
+        Conditions = new Condition[2];
+        Conditions[0] = new MyHpIsLessThanCondition(0.75);
+        Conditions[1] = new MyHpIsLessThanCondition(0.75);
+        Effects = new Effect[2];
+        Effects[0] = new ChangeStatsInEffect(StatType.Def, 7);
+        Effects[1] = new ChangeStatsInEffect(StatType.Res, 7);
     }
 }

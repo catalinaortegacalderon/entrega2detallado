@@ -3,18 +3,17 @@ using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.AbsolutDamageReductionSkills;
 
 public class ArmsShield : Skill
 {
-    public ArmsShield() : base()
+    public ArmsShield()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new MyUnitHasWeaponAdvantageCondition(); 
-        
-        this.Effects = new Effect[1];
-        this.Effects[0] = new AbsolutDamageReductionEffect(7); 
+        Conditions = new Condition[1];
+        Conditions[0] = new MyUnitHasWeaponAdvantageCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new AbsolutDamageReductionEffect(7);
     }
 }

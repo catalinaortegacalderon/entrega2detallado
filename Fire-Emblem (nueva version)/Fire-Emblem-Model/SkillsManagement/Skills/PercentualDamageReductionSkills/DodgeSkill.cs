@@ -4,18 +4,17 @@ using ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
 
 public class DodgeSkill : Skill
-{ 
-    public DodgeSkill() : base() 
+{
+    public DodgeSkill()
     {
-    this.Conditions = new Condition[1];
-    this.Conditions[0] = new CompareTotalSpdCondition(); 
-    
-    this.Effects = new Effect[1];
-    this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4); 
+        Conditions = new Condition[1];
+        Conditions[0] = new CompareTotalSpdCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
     }
 }

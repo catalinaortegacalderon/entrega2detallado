@@ -6,35 +6,36 @@ namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
 public class ChangeOpponentsStatsInEffect : Effect
 {
-    private StatType _stat;
-    public ChangeOpponentsStatsInEffect(StatType stat, int amount) : base()
+    private readonly StatType _stat;
+
+    public ChangeOpponentsStatsInEffect(StatType stat, int amount)
     {
-        this.Amount = amount;
-        this._stat = stat;
+        Amount = amount;
+        _stat = stat;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+
     {
         if (_stat == StatType.Atk)
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.Atk  = opponentsUnit.ActiveBonus.Atk + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.Atk  = opponentsUnit.ActivePenalties.Atk + this.Amount;
+            if (Amount > 0) opponentsUnit.ActiveBonus.Atk = opponentsUnit.ActiveBonus.Atk + Amount;
+            if (Amount < 0) opponentsUnit.ActivePenalties.Atk = opponentsUnit.ActivePenalties.Atk + Amount;
         }
         else if (_stat == StatType.Def)
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.Def  = opponentsUnit.ActiveBonus.Def + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.Def  = opponentsUnit.ActivePenalties.Def + this.Amount;
+            if (Amount > 0) opponentsUnit.ActiveBonus.Def = opponentsUnit.ActiveBonus.Def + Amount;
+            if (Amount < 0) opponentsUnit.ActivePenalties.Def = opponentsUnit.ActivePenalties.Def + Amount;
         }
         else if (_stat == StatType.Res)
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.Res  = opponentsUnit.ActiveBonus.Res + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.Res  = opponentsUnit.ActivePenalties.Res + this.Amount;
+            if (Amount > 0) opponentsUnit.ActiveBonus.Res = opponentsUnit.ActiveBonus.Res + Amount;
+            if (Amount < 0) opponentsUnit.ActivePenalties.Res = opponentsUnit.ActivePenalties.Res + Amount;
         }
         else if (_stat == StatType.Spd)
         {
-            if ( Amount > 0) opponentsUnit.ActiveBonus.Spd  = opponentsUnit.ActiveBonus.Spd + this.Amount;
-            if ( Amount < 0) opponentsUnit.ActivePenalties.Spd  = opponentsUnit.ActivePenalties.Spd + this.Amount;
+            if (Amount > 0) opponentsUnit.ActiveBonus.Spd = opponentsUnit.ActiveBonus.Spd + Amount;
+            if (Amount < 0) opponentsUnit.ActivePenalties.Spd = opponentsUnit.ActivePenalties.Spd + Amount;
         }
     }
 }

@@ -2,17 +2,16 @@ namespace ConsoleApp1.GameDataStructures;
 
 public class BonusPenaltiesAndNeutralizers
 {
-    
     public int Atk;
-    public int Spd;
-    public int Def;
-    public int Res;
-    public int AtkFollowup;
     public int AtkFirstAttack;
+    public int AtkFollowup;
+    public int Def;
     public int DefFirstAttack;
-    public int ResFirstAttack;
     public bool HpBonusActivated = false;
-    
+    public int Res;
+    public int ResFirstAttack;
+    public int Spd;
+
     public BonusPenaltiesAndNeutralizers(int startValuesIn)
     {
         Atk = startValuesIn;

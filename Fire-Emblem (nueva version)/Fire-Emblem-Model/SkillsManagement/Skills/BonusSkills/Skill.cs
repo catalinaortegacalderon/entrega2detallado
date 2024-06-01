@@ -3,7 +3,6 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
-
 public abstract class Skill
 {
     protected Condition[] Conditions;
@@ -13,7 +12,7 @@ public abstract class Skill
     {
         return Conditions[index];
     }
-        
+
     public Effect GetEffect(int index)
     {
         return Effects[index];
@@ -23,5 +22,4 @@ public abstract class Skill
     {
         return Conditions.Length;
     }
-        
 }

@@ -8,12 +8,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class IgnisSkill : Skill
 {
-    public IgnisSkill() : base()
+    public IgnisSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new ChangeStatInPercentageOnlyForFirstAttackEffect( StatType.Atk, 0.5); 
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatInPercentageOnlyForFirstAttackEffect(StatType.Atk, 0.5);
     }
 }

@@ -5,13 +5,15 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyHpIsLessThanCondition : Condition
 {
-    private double _amount;
-    public MyHpIsLessThanCondition(double amount) : base()
+    private readonly double _amount;
+
+    public MyHpIsLessThanCondition(double amount)
     {
-        this._amount = amount;
+        _amount = amount;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return myUnit.CurrentHp <= myUnit.HpMax * this._amount;
+        return myUnit.CurrentHp <= myUnit.HpMax * _amount;
     }
 }

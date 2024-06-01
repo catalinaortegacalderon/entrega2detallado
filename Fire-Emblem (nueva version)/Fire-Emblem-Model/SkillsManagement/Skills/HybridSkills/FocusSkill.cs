@@ -9,14 +9,14 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class FocusSkill : Skill
 {
-    public FocusSkill(Weapon weapon) : base()
+    public FocusSkill(Weapon weapon)
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weapon]);
-        this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
-            
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,10); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Res, -10); 
+        Conditions = new Condition[2];
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weapon]);
+        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 10);
+        Effects[1] = new ChangeStatsInEffect(StatType.Res, -10);
     }
 }

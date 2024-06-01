@@ -5,8 +5,8 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class FireBoostSkill : BoostSkill
 {
-    public FireBoostSkill() : base()
+    public FireBoostSkill()
     {
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
     }
 }

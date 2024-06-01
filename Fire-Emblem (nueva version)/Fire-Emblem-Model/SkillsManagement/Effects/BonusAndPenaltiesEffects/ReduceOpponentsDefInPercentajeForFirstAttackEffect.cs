@@ -5,16 +5,17 @@ namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
 public class ReduceOpponentsDefInPercentajeForFirstAttackEffect : Effect
 {
-    private double _reductionPercentaje;
-    public ReduceOpponentsDefInPercentajeForFirstAttackEffect(double reduction) : base()
+    private readonly double _reductionPercentaje;
+
+    public ReduceOpponentsDefInPercentajeForFirstAttackEffect(double reduction)
     {
-        this._reductionPercentaje = reduction;
+        _reductionPercentaje = reduction;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+
     {
-        int reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * _reductionPercentaje));
-        opponentsUnit.ActivePenalties.DefFirstAttack  -= reduction;
+        var reduction = Convert.ToInt32(Math.Truncate(opponentsUnit.Def * _reductionPercentaje));
+        opponentsUnit.ActivePenalties.DefFirstAttack -= reduction;
     }
 }

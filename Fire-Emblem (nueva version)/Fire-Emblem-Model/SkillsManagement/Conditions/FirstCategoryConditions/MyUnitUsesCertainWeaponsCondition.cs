@@ -6,11 +6,13 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyUnitUsesCertainWeaponsCondition : Condition
 {
-    private Weapon[] _usedWeapon;
-    public MyUnitUsesCertainWeaponsCondition(Weapon[] weapon) : base()
+    private readonly Weapon[] _usedWeapon;
+
+    public MyUnitUsesCertainWeaponsCondition(Weapon[] weapon)
     {
         _usedWeapon = weapon;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return _usedWeapon.Contains(myUnit.Weapon);

@@ -1,18 +1,22 @@
 ﻿namespace Fire_Emblem_View;
 
-abstract class AbstractView
+internal abstract class AbstractView
 {
     private readonly Script _script = new();
-    
+
     public void WriteLine(object text)
-        => Write($"{text}\n");
+    {
+        Write($"{text}\n");
+    }
 
     protected virtual void Write(object text)
-        => _script.AddToScript(text.ToString());
+    {
+        _script.AddToScript(text.ToString());
+    }
 
     public string ReadLine()
     {
-        string nextInput = GetNextInput();
+        var nextInput = GetNextInput();
         _script.AddInput(nextInput);
         return nextInput;
     }
@@ -20,8 +24,12 @@ abstract class AbstractView
     protected abstract string GetNextInput();
 
     public void ExportScript(string path)
-        => _script.ExportScript(path);
+    {
+        _script.ExportScript(path);
+    }
 
     public string[] GetScript()
-        => _script.GetScript().Split('\n');
+    {
+        return _script.GetScript().Split('\n');
+    }
 }

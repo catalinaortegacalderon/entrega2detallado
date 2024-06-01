@@ -3,15 +3,17 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
-public class MyHpIsLessThanOpponentsHpPlusCondition: Condition
+public class MyHpIsLessThanOpponentsHpPlusCondition : Condition
 {
-    private int _increaseAmountIn;
-    public MyHpIsLessThanOpponentsHpPlusCondition(int increaseAmountIn) : base()
+    private readonly int _increaseAmountIn;
+
+    public MyHpIsLessThanOpponentsHpPlusCondition(int increaseAmountIn)
     {
-        this._increaseAmountIn = increaseAmountIn;
+        _increaseAmountIn = increaseAmountIn;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return myUnit.CurrentHp >= opponentsUnit.CurrentHp + this._increaseAmountIn;
+        return myUnit.CurrentHp >= opponentsUnit.CurrentHp + _increaseAmountIn;
     }
 }

@@ -5,13 +5,13 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class AbsolutDamageReductionEffect : Effect
 {
-    public AbsolutDamageReductionEffect(int amount) : base()
+    public AbsolutDamageReductionEffect(int amount)
     {
-        this.Amount = amount;
+        Amount = amount;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        myUnit.DamageEffects.AbsolutDamageReduction -= this.Amount;
+        myUnit.DamageEffects.AbsolutDamageReduction -= Amount;
     }
 }

@@ -9,14 +9,14 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class AgilitySkill : Skill
 {
-    public AgilitySkill(Weapon weapon) : base()
+    public AgilitySkill(Weapon weapon)
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weapon]);
-        this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
-            
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 12); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Atk, -6); 
+        Conditions = new Condition[2];
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([weapon]);
+        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([weapon]);
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeStatsInEffect(StatType.Spd, 12);
+        Effects[1] = new ChangeStatsInEffect(StatType.Atk, -6);
     }
 }

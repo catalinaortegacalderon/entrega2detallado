@@ -1,19 +1,19 @@
 ﻿namespace Fire_Emblem_View;
 
-class ManualTestingView:TestingView
+internal class ManualTestingView : TestingView
 {
     private const string EndOfFileString = "[EndOfFile]";
     private readonly string[] _expectedScript;
     private int _currentLine;
     private bool _isOutputCorrectSoFar = true;
-    
+
     public ManualTestingView(string pathTestScript) : base(pathTestScript)
     {
         Console.ForegroundColor = ConsoleColor.Blue;
         _expectedScript = File.ReadAllLines(pathTestScript);
         _currentLine = 0;
     }
-    
+
     protected override void Write(object text)
     {
         if (_isOutputCorrectSoFar)
@@ -24,29 +24,34 @@ class ManualTestingView:TestingView
 
     private void CheckIfCurrentOutputIsAsExpected(object text)
     {
-        string normalizedText = GetNormalizedTest(text.ToString());
-        string[] lines = normalizedText.Split("\n");
+        var normalizedText = GetNormalizedTest(text.ToString());
+        var lines = normalizedText.Split("\n");
         CheckThatLinesMatchTheExpectedOutput(lines);
     }
 
     private string GetNormalizedTest(string text)
-        => text.Remove(text.Length-1);
+    {
+        return text.Remove(text.Length - 1);
+    }
 
     private void CheckThatLinesMatchTheExpectedOutput(string[] lines)
     {
-        for (int i = 0; i < lines.Length; i++)
+        for (var i = 0; i < lines.Length; i++)
         {
             if (IsThisLineDifferentFromTheExpectedValue(lines[i]))
             {
                 IndicateThatThereIsAnErrorInThisLineAndChangeTheColorOfTheConsole();
                 break;
             }
+
             _currentLine++;
         }
     }
 
     private bool IsThisLineDifferentFromTheExpectedValue(string line)
-        => GetExpectedLine() != line;
+    {
+        return GetExpectedLine() != line;
+    }
 
     private string GetExpectedLine()
     {
@@ -56,15 +61,17 @@ class ManualTestingView:TestingView
     }
 
     private bool IsTheEndOfTheExpectedScript()
-        => _currentLine == _expectedScript.Length;
-    
+    {
+        return _currentLine == _expectedScript.Length;
+    }
+
     private void IndicateThatThereIsAnErrorInThisLineAndChangeTheColorOfTheConsole()
     {
         _isOutputCorrectSoFar = false;
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"[ERROR] el valor esperado acá era: \"{GetExpectedLine()}\"");
     }
-    
+
     protected override string GetNextInput()
     {
         try
@@ -79,7 +86,7 @@ class ManualTestingView:TestingView
 
     private string TryToGetInputFromTest()
     {
-        string nextInput = base.GetNextInput();
+        var nextInput = base.GetNextInput();
         CheckIfCurrentOutputIsAsExpected($"INPUT: {nextInput} ");
         if (!_isOutputCorrectSoFar)
             throw new InvalidInputRequestException("No se debía pedir un input en este momento");
@@ -90,7 +97,7 @@ class ManualTestingView:TestingView
 
     private string GetNextInputFromUser()
     {
-        Console.Write($"[INPUT MANUAL]: ");
+        Console.Write("[INPUT MANUAL]: ");
         return Console.ReadLine();
     }
 }

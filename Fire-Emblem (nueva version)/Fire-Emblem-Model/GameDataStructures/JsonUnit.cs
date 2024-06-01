@@ -1,8 +1,8 @@
-
 namespace ConsoleApp1.GameDataStructures;
+
 public class JsonUnit
 {
-    public string Name { get; set; } 
+    public string Name { get; set; }
     public string Weapon { get; set; }
     public string Gender { get; set; }
     public string DeathQuote { get; set; }

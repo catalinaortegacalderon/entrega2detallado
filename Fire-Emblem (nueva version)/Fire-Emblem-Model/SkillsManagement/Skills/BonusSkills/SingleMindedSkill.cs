@@ -8,11 +8,11 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class SingleMindedSkill : Skill
 {
-    public SingleMindedSkill() : base()
+    public SingleMindedSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
-        this.Effects = new Effect[1];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 8); 
+        Conditions = new Condition[1];
+        Conditions[0] = new MyCurrentOpponentIsAlsoTheLastOpponentCondition();
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 8);
     }
 }

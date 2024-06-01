@@ -9,16 +9,20 @@ namespace ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 public class BeliefInLoveSkill : Skill
 {
-    public BeliefInLoveSkill() : base()
+    public BeliefInLoveSkill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new OrCondition([new OpponentHasFullHpCondition(),
-            new OpponentStartsCombatCondition()] );
-        this.Conditions[1] = new OrCondition([new OpponentHasFullHpCondition(), 
-            new OpponentStartsCombatCondition()] );
-            
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -5); 
-        this.Effects[1] = new ChangeOpponentsStatsInEffect( StatType.Def, -5); 
+        Conditions = new Condition[2];
+        Conditions[0] = new OrCondition([
+            new OpponentHasFullHpCondition(),
+            new OpponentStartsCombatCondition()
+        ]);
+        Conditions[1] = new OrCondition([
+            new OpponentHasFullHpCondition(),
+            new OpponentStartsCombatCondition()
+        ]);
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
+        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);
     }
 }

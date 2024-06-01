@@ -5,23 +5,22 @@ using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class ExtraChivalrySkill : Skill
 {
-    public ExtraChivalrySkill() : base()
+    public ExtraChivalrySkill()
     {
-        this.Conditions = new Condition[4];
-        this.Conditions[0] = new OpponentHasHpGreaterThanCondition(0.5);
-        this.Conditions[1] = new OpponentHasHpGreaterThanCondition(0.5);
-        this.Conditions[2] = new OpponentHasHpGreaterThanCondition(0.5);
-        this.Conditions[3] = new AlwaysTrueCondition();
-        this.Effects = new Effect[4];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
-        this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);
-        this.Effects[2] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
-        this.Effects[3] = new PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory.All);
+        Conditions = new Condition[4];
+        Conditions[0] = new OpponentHasHpGreaterThanCondition(0.5);
+        Conditions[1] = new OpponentHasHpGreaterThanCondition(0.5);
+        Conditions[2] = new OpponentHasHpGreaterThanCondition(0.5);
+        Conditions[3] = new AlwaysTrueCondition();
+        Effects = new Effect[4];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
+        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -5);
+        Effects[2] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
+        Effects[3] = new PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory.All);
     }
 }

@@ -5,23 +5,22 @@ using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class PoeticJusticeSkill : Skill
 {
-    public PoeticJusticeSkill() : base()
+    public PoeticJusticeSkill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new AlwaysTrueCondition();
-        this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[1].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+        Conditions = new Condition[2];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[1].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
             .PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
-        
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd,-4);
-        this.Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect( 
-            DamageEffectCategory.All,  StatType.Atk, 0.15);
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -4);
+        Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect(
+            DamageEffectCategory.All, StatType.Atk, 0.15);
     }
 }

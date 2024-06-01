@@ -5,8 +5,8 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class EarthBoostSkill : BoostSkill
 {
-    public EarthBoostSkill() : base()
+    public EarthBoostSkill()
     {
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Def, 6); 
+        Effects[0] = new ChangeStatsInEffect(StatType.Def, 6);
     }
 }

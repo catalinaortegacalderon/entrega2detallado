@@ -7,12 +7,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class SandstormSkill : Skill
 {
-    public SandstormSkill() : base()
+    public SandstormSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new SandstormEffect();
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new SandstormEffect();
     }
 }

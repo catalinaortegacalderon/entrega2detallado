@@ -6,22 +6,23 @@ namespace ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 
 public class ChangeStatInPercentageOnlyForFirstAttackEffect : Effect
 {
-    private StatType _stat;
-    private double _percentage;
-    public ChangeStatInPercentageOnlyForFirstAttackEffect(StatType stat, Double percentage) : base()
+    private readonly double _percentage;
+    private readonly StatType _stat;
+
+    public ChangeStatInPercentageOnlyForFirstAttackEffect(StatType stat, double percentage)
     {
-        this._stat = stat;
-        this._percentage = percentage;
+        _stat = stat;
+        _percentage = percentage;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+
     {
         Amount = 0;
         if (_stat == StatType.Atk)
         {
-            Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * this._percentage));
-            myUnit.ActiveBonus.AtkFirstAttack  += Amount;
+            Amount = Convert.ToInt32(Math.Truncate(myUnit.Atk * _percentage));
+            myUnit.ActiveBonus.AtkFirstAttack += Amount;
         }
     }
 }

@@ -4,12 +4,13 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
-public class SecondCategoryCondition: Condition
+public class SecondCategoryCondition : Condition
 {
-    public SecondCategoryCondition() : base()
+    public SecondCategoryCondition()
     {
-        this.Priority = ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation;
+        Priority = ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return true;

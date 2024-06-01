@@ -9,18 +9,18 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class LifeAndDeathSkill : Skill
 {
-    public LifeAndDeathSkill() : base()
+    public LifeAndDeathSkill()
     {
-        this.Conditions = new Condition[4];
-        this.Conditions[0] = new AlwaysTrueCondition();
-        this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[2] = new AlwaysTrueCondition();
-        this.Conditions[3] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[4];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 6); 
-        this.Effects[2] = new ChangeStatsInEffect( StatType.Def, -5);
-        this.Effects[3] = new ChangeStatsInEffect( StatType.Res, -5);
+        Conditions = new Condition[4];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[2] = new AlwaysTrueCondition();
+        Conditions[3] = new AlwaysTrueCondition();
+
+        Effects = new Effect[4];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
+        Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6);
+        Effects[2] = new ChangeStatsInEffect(StatType.Def, -5);
+        Effects[3] = new ChangeStatsInEffect(StatType.Res, -5);
     }
 }

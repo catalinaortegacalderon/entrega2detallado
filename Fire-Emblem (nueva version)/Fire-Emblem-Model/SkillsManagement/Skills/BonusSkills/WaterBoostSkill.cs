@@ -5,8 +5,8 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class WaterBoostSkill : BoostSkill
 {
-    public WaterBoostSkill() : base()
+    public WaterBoostSkill()
     {
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Res, 6); 
+        Effects[0] = new ChangeStatsInEffect(StatType.Res, 6);
     }
 }

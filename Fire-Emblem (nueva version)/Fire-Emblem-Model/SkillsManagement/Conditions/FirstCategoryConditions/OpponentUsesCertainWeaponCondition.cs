@@ -4,15 +4,17 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
-public class OpponentUsesCertainWeaponCondition: Condition
+public class OpponentUsesCertainWeaponCondition : Condition
 {
-    private Weapon[] _weapons;
-    public OpponentUsesCertainWeaponCondition(Weapon[] weapons) : base()
+    private readonly Weapon[] _weapons;
+
+    public OpponentUsesCertainWeaponCondition(Weapon[] weapons)
     {
-        this._weapons = weapons;
+        _weapons = weapons;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return this._weapons.Contains(opponentsUnit.Weapon);
+        return _weapons.Contains(opponentsUnit.Weapon);
     }
 }

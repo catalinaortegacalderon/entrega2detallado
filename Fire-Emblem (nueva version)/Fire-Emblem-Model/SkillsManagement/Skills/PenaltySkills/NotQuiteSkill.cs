@@ -9,12 +9,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 public class NotQuiteSkill : Skill
 {
-    public NotQuiteSkill() : base()
+    public NotQuiteSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new OpponentStartsCombatCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -4); 
+        Conditions = new Condition[1];
+        Conditions[0] = new OpponentStartsCombatCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -4);
     }
 }

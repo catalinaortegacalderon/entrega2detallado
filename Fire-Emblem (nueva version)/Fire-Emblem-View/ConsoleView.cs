@@ -1,6 +1,6 @@
 ﻿namespace Fire_Emblem_View;
 
-class ConsoleView : AbstractView
+internal class ConsoleView : AbstractView
 {
     protected override void Write(object text)
     {
@@ -11,6 +11,6 @@ class ConsoleView : AbstractView
     protected override string GetNextInput()
     {
         Console.Write("INPUT: ");
-        return Console.ReadLine();   
+        return Console.ReadLine();
     }
 }

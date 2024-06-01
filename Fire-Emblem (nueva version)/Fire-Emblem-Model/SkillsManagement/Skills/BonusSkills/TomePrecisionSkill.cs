@@ -3,20 +3,19 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class TomePrecisionSkill : Skill
 {
-    public TomePrecisionSkill() : base()
+    public TomePrecisionSkill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
-        this.Conditions[1] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
-            
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk,6); 
-        this.Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6); 
+        Conditions = new Condition[2];
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
+        Conditions[1] = new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]);
+
+        Effects = new Effect[2];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
+        Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6);
     }
 }

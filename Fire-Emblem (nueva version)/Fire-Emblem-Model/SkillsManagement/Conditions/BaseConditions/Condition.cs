@@ -6,11 +6,12 @@ namespace ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 public class Condition
 {
     protected ConditionPriority Priority;
-    
-    protected Condition() : base()
+
+    protected Condition()
     {
-        this.Priority = ConditionPriority.PriorityOfBonusAndPenalties;
+        Priority = ConditionPriority.PriorityOfBonusAndPenalties;
     }
+
     public virtual bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
         return true;
@@ -18,11 +19,11 @@ public class Condition
 
     public ConditionPriority GetPriority()
     {
-        return this.Priority;
+        return Priority;
     }
-    
+
     public void ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority priority)
     {
-        this.Priority = priority;
+        Priority = priority;
     }
 }

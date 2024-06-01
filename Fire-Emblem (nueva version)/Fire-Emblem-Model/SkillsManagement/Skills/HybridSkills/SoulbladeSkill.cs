@@ -8,12 +8,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class SoulbladeSkill : Skill
 {
-    public SoulbladeSkill() : base()
+    public SoulbladeSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Sword]);
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new SoulbladeEffect();
+        Conditions = new Condition[1];
+        Conditions[0] = new MyUnitUsesCertainWeaponsCondition([Weapon.Sword]);
+
+        Effects = new Effect[1];
+        Effects[0] = new SoulbladeEffect();
     }
 }

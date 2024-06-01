@@ -8,12 +8,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.NeutralizationSkills;
 
 public class BeorcsBlessingSkill : Skill
 {
-    public BeorcsBlessingSkill() : base()
+    public BeorcsBlessingSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new NeutralizeOpponentsBonusEffect(); 
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new NeutralizeOpponentsBonusEffect();
     }
 }

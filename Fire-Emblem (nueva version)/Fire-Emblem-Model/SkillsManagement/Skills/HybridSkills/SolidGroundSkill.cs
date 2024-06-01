@@ -9,16 +9,16 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class SolidGroundSkill : Skill
 {
-    public SolidGroundSkill() : base()
+    public SolidGroundSkill()
     {
-        this.Conditions = new Condition[3];
-        this.Conditions[0] = new AlwaysTrueCondition();
-        this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[2] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Def, 6); 
-        this.Effects[2] = new ChangeStatsInEffect( StatType.Res, -5);
+        Conditions = new Condition[3];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[2] = new AlwaysTrueCondition();
+
+        Effects = new Effect[3];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
+        Effects[1] = new ChangeStatsInEffect(StatType.Def, 6);
+        Effects[2] = new ChangeStatsInEffect(StatType.Res, -5);
     }
 }

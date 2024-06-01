@@ -6,29 +6,25 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentualDamageReductionEffect : Effect
 {
-    private DamageEffectCategory Type;
-    private double percentaje;
-    
-    public PercentualDamageReductionEffect(double amount, DamageEffectCategory type) : base()
+    private readonly double percentaje;
+    private readonly DamageEffectCategory Type;
+
+    public PercentualDamageReductionEffect(double amount, DamageEffectCategory type)
     {
-        this.percentaje = amount;
-        this.Type = type;
+        percentaje = amount;
+        Type = type;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
         //poner el que queda no el reducido. ej: si se reduce en 10% el amount es 0.9
-        if (this.Type == DamageEffectCategory.All)
-        {
-            myUnit.DamageEffects.PercentageReduction = myUnit.DamageEffects.PercentageReduction * this.percentaje;
-        }
-        else if (this.Type == DamageEffectCategory.FirstAttack)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack = myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack * this.percentaje;
-        }
-        else if (this.Type == DamageEffectCategory.FollowUp)
-        {
-            myUnit.DamageEffects.PercentageReductionOpponentsFollowup = myUnit.DamageEffects.PercentageReductionOpponentsFollowup * this.percentaje;
-        }
+        if (Type == DamageEffectCategory.All)
+            myUnit.DamageEffects.PercentageReduction = myUnit.DamageEffects.PercentageReduction * percentaje;
+        else if (Type == DamageEffectCategory.FirstAttack)
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack =
+                myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack * percentaje;
+        else if (Type == DamageEffectCategory.FollowUp)
+            myUnit.DamageEffects.PercentageReductionOpponentsFollowup =
+                myUnit.DamageEffects.PercentageReductionOpponentsFollowup * percentaje;
     }
 }

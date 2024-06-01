@@ -10,18 +10,18 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class LullSkill : Skill
 {
-    public LullSkill(StatType firstStat, StatType secondStat) : base()
+    public LullSkill(StatType firstStat, StatType secondStat)
     {
-        this.Conditions = new Condition[4];
-        this.Conditions[0] = new AlwaysTrueCondition();
-        this.Conditions[1] = new AlwaysTrueCondition();
-        this.Conditions[2] = new AlwaysTrueCondition();
-        this.Conditions[3] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[4];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect( firstStat, -3); 
-        this.Effects[1] = new ChangeOpponentsStatsInEffect( secondStat, -3); 
-        this.Effects[2] = new NeutralizeOneOfOpponentsBonusEffect( firstStat); 
-        this.Effects[3] = new NeutralizeOneOfOpponentsBonusEffect( secondStat); 
+        Conditions = new Condition[4];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
+        Conditions[2] = new AlwaysTrueCondition();
+        Conditions[3] = new AlwaysTrueCondition();
+
+        Effects = new Effect[4];
+        Effects[0] = new ChangeOpponentsStatsInEffect(firstStat, -3);
+        Effects[1] = new ChangeOpponentsStatsInEffect(secondStat, -3);
+        Effects[2] = new NeutralizeOneOfOpponentsBonusEffect(firstStat);
+        Effects[3] = new NeutralizeOneOfOpponentsBonusEffect(secondStat);
     }
 }

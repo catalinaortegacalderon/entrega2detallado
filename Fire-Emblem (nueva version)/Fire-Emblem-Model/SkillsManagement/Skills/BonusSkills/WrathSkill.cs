@@ -6,12 +6,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class WrathSkill : Skill
 {
-    public WrathSkill() : base()
+    public WrathSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new AlwaysTrueCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new WrathEffect();
+        Conditions = new Condition[1];
+        Conditions[0] = new AlwaysTrueCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new WrathEffect();
     }
 }

@@ -5,13 +5,15 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class OpponentHasHpGreaterThanCondition : Condition
 {
-    private double _percentage;
-    public OpponentHasHpGreaterThanCondition(double percentage) : base()
+    private readonly double _percentage;
+
+    public OpponentHasHpGreaterThanCondition(double percentage)
     {
-        this._percentage = percentage;
+        _percentage = percentage;
     }
+
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
-        return opponentsUnit.CurrentHp >= opponentsUnit.HpMax * this._percentage;
+        return opponentsUnit.CurrentHp >= opponentsUnit.HpMax * _percentage;
     }
 }

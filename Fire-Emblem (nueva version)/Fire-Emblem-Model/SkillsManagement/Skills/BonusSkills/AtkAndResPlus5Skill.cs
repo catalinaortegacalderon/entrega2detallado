@@ -3,21 +3,19 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class AtkAndResPlus5Skill : Skill
 {
-    public AtkAndResPlus5Skill() : base()
+    public AtkAndResPlus5Skill()
     {
-        this.Conditions = new Condition[2];
-        this.Conditions[0] = new AlwaysTrueCondition(); 
-        this.Conditions[1] = new AlwaysTrueCondition(); 
+        Conditions = new Condition[2];
+        Conditions[0] = new AlwaysTrueCondition();
+        Conditions[1] = new AlwaysTrueCondition();
 
-        this.Effects = new Effect[2];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 5); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Res, 5);
-            
+        Effects = new Effect[2];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 5);
+        Effects[1] = new ChangeStatsInEffect(StatType.Res, 5);
     }
 }

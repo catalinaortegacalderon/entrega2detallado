@@ -6,7 +6,7 @@ namespace ConsoleApp1.SkillsManagement.Effects.NeutralizationEffects;
 public class NeutralizePenaltiesEffect : Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
-        
+
     {
         myUnit.ActivePenaltiesNeutralizer.Atk = 0;
         myUnit.ActivePenaltiesNeutralizer.Spd = 0;

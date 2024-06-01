@@ -6,30 +6,24 @@ namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
 public class PercentualDamageReductionConsideringOpponentsHpEffect : Effect
 {
-    private DamageEffectCategory Type;
-    
-    public PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory type) : base()
+    private readonly DamageEffectCategory Type;
+
+    public PercentualDamageReductionConsideringOpponentsHpEffect(DamageEffectCategory type)
     {
-        this.Type = type;
+        Type = type;
     }
 
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        double percentualReduction = (double)opponentsUnit.CurrentHp / (double)opponentsUnit.HpMax / 2;
+        var percentualReduction = opponentsUnit.CurrentHp / (double)opponentsUnit.HpMax / 2;
         percentualReduction = Math.Truncate(100.0 * percentualReduction) / 100.0;
-        double finalPercentage = 1 - percentualReduction;
-        
-        if (this.Type == DamageEffectCategory.All)
-        {
+        var finalPercentage = 1 - percentualReduction;
+
+        if (Type == DamageEffectCategory.All)
             myUnit.DamageEffects.PercentageReduction *= finalPercentage;
-        }
-        else if (this.Type == DamageEffectCategory.FirstAttack)
-        {
+        else if (Type == DamageEffectCategory.FirstAttack)
             myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= finalPercentage;
-        }
-        else if (this.Type == DamageEffectCategory.FollowUp)
-        {
+        else if (Type == DamageEffectCategory.FollowUp)
             myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= finalPercentage;
-        }
     }
 }

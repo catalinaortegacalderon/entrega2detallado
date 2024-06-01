@@ -9,12 +9,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 public class DisarmingSighSkill : Skill
 {
-    public DisarmingSighSkill() : base()
+    public DisarmingSighSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new OpponentIsAManCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect( StatType.Atk, -8); 
+        Conditions = new Condition[1];
+        Conditions[0] = new OpponentIsAManCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -8);
     }
 }

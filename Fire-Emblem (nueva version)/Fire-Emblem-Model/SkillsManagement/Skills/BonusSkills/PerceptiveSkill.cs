@@ -8,12 +8,12 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class PerceptiveSkill : Skill
 {
-    public PerceptiveSkill() : base()
+    public PerceptiveSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new MyUnitStartsCombatCondition();
-            
-        this.Effects = new Effect[1];
-        this.Effects[0] = new ChangeStatsInBasePlusOnePointForEveryEffect( StatType.Spd, 12, 4);
+        Conditions = new Condition[1];
+        Conditions[0] = new MyUnitStartsCombatCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new ChangeStatsInBasePlusOnePointForEveryEffect(StatType.Spd, 12, 4);
     }
 }

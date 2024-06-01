@@ -3,16 +3,15 @@ using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class ResistancePlus5Skill : Skill
 {
-    public ResistancePlus5Skill() : base()
+    public ResistancePlus5Skill()
     {
-        this.Conditions = new Condition[] { new AlwaysTrueCondition() };
-            
-        this.Effects = new Effect[] { new ChangeStatsInEffect( StatType.Res, 5) };
+        Conditions = new Condition[] { new AlwaysTrueCondition() };
+
+        Effects = new Effect[] { new ChangeStatsInEffect(StatType.Res, 5) };
     }
 }

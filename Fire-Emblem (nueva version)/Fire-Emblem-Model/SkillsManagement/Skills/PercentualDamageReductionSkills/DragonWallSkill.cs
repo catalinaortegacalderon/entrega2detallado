@@ -4,18 +4,17 @@ using ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
 
 public class DragonWallSkill : Skill
 {
-    public DragonWallSkill() : base()
+    public DragonWallSkill()
     {
-        this.Conditions = new Condition[1];
-        this.Conditions[0] = new CompareTotalResCondition(); 
-        
-        this.Effects = new Effect[1];
-        this.Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Res, 4); 
+        Conditions = new Condition[1];
+        Conditions[0] = new CompareTotalResCondition();
+
+        Effects = new Effect[1];
+        Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Res, 4);
     }
 }

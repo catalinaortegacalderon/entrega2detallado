@@ -2,8 +2,7 @@ namespace ConsoleApp1.GameDataStructures;
 
 public static class DataStructuresResetter
 {
-    
-    public static void ResetBonusPenaltiesAndNeutralizersToASpecificValue(BonusPenaltiesAndNeutralizers 
+    public static void ResetBonusPenaltiesAndNeutralizersToASpecificValue(BonusPenaltiesAndNeutralizers
         dataStructure, int valueToResetTo)
     {
         dataStructure.Atk = valueToResetTo;
@@ -15,7 +14,7 @@ public static class DataStructuresResetter
         dataStructure.DefFirstAttack = valueToResetTo;
         dataStructure.ResFirstAttack = valueToResetTo;
     }
-    
+
     public static void ResetDamageGameStructure(DataStructureDamageEffects dataStructure)
     {
         dataStructure.ExtraDamage = 0;
@@ -26,5 +25,4 @@ public static class DataStructuresResetter
         dataStructure.PercentageReductionOpponentsFollowup = 1;
         dataStructure.AbsolutDamageReduction = 0;
     }
-    
 }

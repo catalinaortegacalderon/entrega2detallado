@@ -6,26 +6,26 @@ using ConsoleApp1.SkillsManagement.Effects.BonusAndPenaltiesEffects;
 using ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
-using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 
 namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class MoonTwinWingSkill : Skill
 {
-    public MoonTwinWingSkill() : base()
+    public MoonTwinWingSkill()
     {
-        this.Conditions = new Condition[3];
-        this.Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        this.Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
-        this.Conditions[2] = new AndCondition([new CompareTotalSpdCondition(), 
-            new MyHpIsBiggerThanCondition(0.25)]);
-        this.Conditions[2].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
+        Conditions = new Condition[3];
+        Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[2] = new AndCondition([
+            new CompareTotalSpdCondition(),
+            new MyHpIsBiggerThanCondition(0.25)
+        ]);
+        Conditions[2].ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
             .PriorityOfConditionsThatRequireBonusAndPenaltiesInformation);
-        
-        this.Effects = new Effect[3];
-        this.Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
-        this.Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
-        this.Effects[2] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
 
+        Effects = new Effect[3];
+        Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -5);
+        Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Atk, -5);
+        Effects[2] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
     }
 }

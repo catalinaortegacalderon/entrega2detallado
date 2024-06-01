@@ -5,8 +5,8 @@ namespace ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 public class WindBoostSkill : BoostSkill
 {
-    public WindBoostSkill() : base()
+    public WindBoostSkill()
     {
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Spd, 6); 
+        Effects[0] = new ChangeStatsInEffect(StatType.Spd, 6);
     }
 }

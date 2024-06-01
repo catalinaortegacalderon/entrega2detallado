@@ -1,6 +1,6 @@
 ﻿namespace Fire_Emblem_View;
 
-class TestingView: AbstractView
+internal class TestingView : AbstractView
 {
     private const string InputKeyword = "INPUT: ";
     private readonly string[] _expectedScript;
@@ -14,18 +14,21 @@ class TestingView: AbstractView
 
     private void AddInputsFromUser()
     {
-        foreach (string line in _expectedScript)
-            if(IsInputFromUser(line))
+        foreach (var line in _expectedScript)
+            if (IsInputFromUser(line))
                 _inputsFromUser.Enqueue(line.Replace(InputKeyword, ""));
     }
 
     private bool IsInputFromUser(string line)
-        => line.StartsWith(InputKeyword);
+    {
+        return line.StartsWith(InputKeyword);
+    }
 
     protected override string GetNextInput()
     {
-        if(_inputsFromUser.Any()) 
+        if (_inputsFromUser.Any())
             return _inputsFromUser.Dequeue();
-        throw new ApplicationException("Tu programa pidió un input pero no hay más inputs del usuario en este test case!");
+        throw new ApplicationException(
+            "Tu programa pidió un input pero no hay más inputs del usuario en este test case!");
     }
 }

@@ -10,25 +10,35 @@ namespace ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 public class DragonSkinSkill : Skill
 {
-    public DragonSkinSkill() : base()
+    public DragonSkinSkill()
     {
-        this.Conditions = new Condition[5];
-        this.Conditions[0] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), 
-            new OpponentStartsCombatCondition()]);
-        this.Conditions[1] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), 
-            new OpponentStartsCombatCondition()]);
-        this.Conditions[2] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), 
-            new OpponentStartsCombatCondition()]);
-        this.Conditions[3] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), 
-            new OpponentStartsCombatCondition()]);
-        this.Conditions[4] = new OrCondition([new OpponentHasHpGreaterThanCondition(0.75), 
-            new OpponentStartsCombatCondition()]);
-            
-        this.Effects = new Effect[5];
-        this.Effects[0] = new ChangeStatsInEffect( StatType.Atk, 6); 
-        this.Effects[1] = new ChangeStatsInEffect( StatType.Spd, 6); 
-        this.Effects[2] = new ChangeStatsInEffect( StatType.Def, 6);
-        this.Effects[3] = new ChangeStatsInEffect( StatType.Res, 6);
-        this.Effects[4] = new NeutralizeOpponentsBonusEffect();
+        Conditions = new Condition[5];
+        Conditions[0] = new OrCondition([
+            new OpponentHasHpGreaterThanCondition(0.75),
+            new OpponentStartsCombatCondition()
+        ]);
+        Conditions[1] = new OrCondition([
+            new OpponentHasHpGreaterThanCondition(0.75),
+            new OpponentStartsCombatCondition()
+        ]);
+        Conditions[2] = new OrCondition([
+            new OpponentHasHpGreaterThanCondition(0.75),
+            new OpponentStartsCombatCondition()
+        ]);
+        Conditions[3] = new OrCondition([
+            new OpponentHasHpGreaterThanCondition(0.75),
+            new OpponentStartsCombatCondition()
+        ]);
+        Conditions[4] = new OrCondition([
+            new OpponentHasHpGreaterThanCondition(0.75),
+            new OpponentStartsCombatCondition()
+        ]);
+
+        Effects = new Effect[5];
+        Effects[0] = new ChangeStatsInEffect(StatType.Atk, 6);
+        Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6);
+        Effects[2] = new ChangeStatsInEffect(StatType.Def, 6);
+        Effects[3] = new ChangeStatsInEffect(StatType.Res, 6);
+        Effects[4] = new NeutralizeOpponentsBonusEffect();
     }
 }
