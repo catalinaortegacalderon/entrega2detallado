@@ -90,9 +90,7 @@ public class GameAttacksControllerBuilder
         var player2 = new Player();
 
         player1.AmountOfUnits = unitCounters[0];
-        player1.PlayerNumber = 0;
         player2.AmountOfUnits = unitCounters[1];
-        player2.PlayerNumber = 1;
 
         // todo: nose si dejarlo con i, arriba tambien esta con i
         for (var i = 0; i < units[0].Length; i++)

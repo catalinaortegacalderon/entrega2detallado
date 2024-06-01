@@ -20,7 +20,7 @@ public class PoeticJusticeSkill : Skill
 
         Effects = new Effect[2];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Spd, -4);
-        Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentajeEffect(
+        Effects[1] = new ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect(
             DamageEffectCategory.All, StatType.Atk, 0.15);
     }
 }

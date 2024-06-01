@@ -5,7 +5,6 @@ namespace ConsoleApp1.SkillsManagement.Conditions.FirstCategoryConditions;
 
 public class MyHpIsBiggerThanCondition : Condition
 {
-    // todo: sacar this
     private readonly double _amount;
 
     public MyHpIsBiggerThanCondition(double amount)

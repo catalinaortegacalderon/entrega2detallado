@@ -24,7 +24,6 @@ public class GameAttacksController
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
     {
-        // todo: sacar los this
         _currentAttackerId = 0;
         _players[0] = firstPlayer;
         _players[1] = secondPlayer;
