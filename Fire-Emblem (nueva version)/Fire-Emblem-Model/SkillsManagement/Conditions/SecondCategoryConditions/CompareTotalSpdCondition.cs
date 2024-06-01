@@ -12,7 +12,8 @@ public class CompareTotalSpdCondition : SecondCategoryCondition
             opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
                               + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
         
-        if (myTotalSpd > opponentsTotalSpd) return true;
+        if (myTotalSpd > opponentsTotalSpd) 
+            return true;
         return false;
     }
 }

@@ -3,29 +3,25 @@ using ConsoleApp1.EncapsulatedLists;
 
 namespace ConsoleApp1.GameDataStructures;
 
-
-
 public class Unit
 {
-    public string Name = "";
-    public Weapon Weapon;
-    public Gender Gender;
+    public readonly string Name = "";
+    public readonly Weapon Weapon;
+    public readonly Gender Gender;
     public int HpMax;
-    public int CurrentHp = 0;
-    public int Atk;
-    public int Spd;
-    public int Def;
-    public int Res;
+    public int CurrentHp;
+    public readonly int Atk;
+    public readonly int Spd;
+    public readonly int Def;
+    public readonly int Res;
     
-    public SkillsList Skills = new SkillsList();
-// todo: sacar texto negro-gris
-    public BonusPenaltiesAndNeutralizers ActiveBonus = new BonusPenaltiesAndNeutralizers(0);
-    public BonusPenaltiesAndNeutralizers ActivePenalties = new BonusPenaltiesAndNeutralizers(0);
-    public BonusPenaltiesAndNeutralizers ActiveBonusNeutralizer = 
-        new BonusPenaltiesAndNeutralizers(1);
-    public BonusPenaltiesAndNeutralizers ActivePenaltiesNeutralizer = 
-        new BonusPenaltiesAndNeutralizers(1);
-    public DataStructureDamageEffects DamageEffects = new DataStructureDamageEffects();
+    public readonly SkillsList Skills = new();
+
+    public readonly BonusPenaltiesAndNeutralizers ActiveBonus = new(0);
+    public readonly BonusPenaltiesAndNeutralizers ActivePenalties = new(0);
+    public readonly BonusPenaltiesAndNeutralizers ActiveBonusNeutralizer = new(1);
+    public readonly BonusPenaltiesAndNeutralizers ActivePenaltiesNeutralizer = new(1);
+    public readonly DataStructureDamageEffects DamageEffects = new();
     
     public string LastOpponentName = "";
     public bool HasStartedACombat = false;
@@ -38,24 +34,24 @@ public class Unit
     }
     
     public Unit(string name, string weapon, string gender, 
-        int currentHp,int maxHp, int attk, int spd, int def, int res)
+        int currentHp,int maxHp, int atk, int spd, int def, int res)
     {
-        this.Name = name;
-        this.Weapon = ConvertWeaponStringToWeaponType(weapon);
+        Name = name;
+        Weapon = ConvertWeaponStringToWeaponType(weapon);
         if (gender == "Male")
         {
-            this.Gender = Gender.Male;
+            Gender = Gender.Male;
         }
         else
         {
-            this.Gender = Gender.Female;
+            Gender = Gender.Female;
         }
-        this.HpMax = maxHp;
-        this.CurrentHp = currentHp;
-        this.Atk = attk;
-        this.Spd = spd;
-        this.Def = def;
-        this.Res = res;
+        HpMax = maxHp;
+        CurrentHp = currentHp;
+        Atk = atk;
+        Spd = spd;
+        Def = def;
+        Res = res;
     }
 
     private static Weapon ConvertWeaponStringToWeaponType(string weapon)

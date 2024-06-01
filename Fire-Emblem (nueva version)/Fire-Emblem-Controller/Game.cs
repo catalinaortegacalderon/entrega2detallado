@@ -42,13 +42,18 @@ public class Game
     {
         var teamFile = GetTeamFile();
         _attackController = GameAttacksControllerBuilder.BuildGameController(teamFile, _view);
-        while (_attackController.IsGameTerminated() == false)
+        while (IsGameNotTerminated())
         {
             PlayOneRound();
         }
         _view.AnnounceWinner(_attackController.GetWinner());
     }
-    
+
+    private bool IsGameNotTerminated()
+    {
+        return _attackController.IsGameTerminated() == false;
+    }
+
     private string GetTeamFile()
     {
         var files = ReadTeamsFiles();
