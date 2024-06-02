@@ -6,6 +6,8 @@ namespace Fire_Emblem_View;
 public class GameView : IView
 {
     private readonly View _view;
+    private const int IdOfPlayer1 = 0;
+    private const int IdOfPlayer2 = 1;
 
     public GameView(View view)
     {
@@ -21,6 +23,38 @@ public class GameView : IView
     public void AnnounceTeamsAreNotValid()
     {
         _view.WriteLine("Archivo de equipos no válido");
+    }
+
+    public int[] AskBothPlayersForTheChosenUnit(PlayersList players, int currentAttacker)
+    {
+        var player1 = players.GetPlayerById(IdOfPlayer1);
+        var player2 = players.GetPlayerById(IdOfPlayer2);
+
+        int currentUnitNumberOfPlayer1;
+        int currentUnitNumberOfPlayer2;
+
+        if (IsPlayer1TheCurrentAttacker(currentAttacker))
+        {
+            currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
+            currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
+        }
+        else
+        {
+            currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
+            currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
+        }
+
+        return [currentUnitNumberOfPlayer1, currentUnitNumberOfPlayer2];
+    }
+
+    private static bool IsPlayer1TheCurrentAttacker(int currentAttacker)
+    {
+        return currentAttacker == IdOfPlayer1;
+    }
+
+    private int AskPlayerForUnit(int playerId, UnitsList units)
+    {
+        return AskAPlayerForTheChosenUnit(playerId, units);
     }
 
     public int AskAPlayerForTheChosenUnit(int playerNumber, UnitsList units)

@@ -94,7 +94,7 @@ public class Game
 
     private void StartRound()
     {
-        AskBothPlayersForTheChosenUnit();
+        GetPlayersChosenUnit();
         PrintRound();
         ExecuteAttacks();
         FollowUp();
@@ -104,23 +104,15 @@ public class Game
         EliminateLooserUnit();
     }
 
-    private void AskBothPlayersForTheChosenUnit()
+    private void GetPlayersChosenUnit()
     {
-        var players = _attackController.GetPlayers();
-        var player1 = players.GetPlayerById(IdOfPlayer1);
-        var player2 = players.GetPlayerById(IdOfPlayer2);
 
-        if (_attackController.GetCurrentAttacker() == IdOfPlayer1)
-        {
-            _currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
-            _currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
-        }
-        else
-        {
-            _currentUnitNumberOfPlayer2 = AskPlayerForUnit(IdOfPlayer2, player2.Units);
-            _currentUnitNumberOfPlayer1 = AskPlayerForUnit(IdOfPlayer1, player1.Units);
-        }
+        int[] unitsNumber = _view.AskBothPlayersForTheChosenUnit(_attackController.GetPlayers(),
+            _attackController.GetCurrentAttacker());
 
+        _currentUnitNumberOfPlayer1 = unitsNumber[IdOfPlayer1];
+        _currentUnitNumberOfPlayer2 = unitsNumber[IdOfPlayer2];
+        
         SetUnits();
     }
 
