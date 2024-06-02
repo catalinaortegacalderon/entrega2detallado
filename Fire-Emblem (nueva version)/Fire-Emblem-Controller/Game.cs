@@ -132,8 +132,15 @@ namespace Fire_Emblem
         private void SetUnits()
         {
             var players = _attackController.GetPlayers();
-            _currentUnitOfPlayer1 = players.GetPlayerById(IdOfPlayer1).Units.GetUnitByIndex(_currentUnitNumberOfPlayer1);
-            _currentUnitOfPlayer2 = players.GetPlayerById(IdOfPlayer2).Units.GetUnitByIndex(_currentUnitNumberOfPlayer2);
+
+            var player1 = players.GetPlayerById(IdOfPlayer1);
+            var unitsOfPlayer1 = player1.Units;
+            
+            var player2 = players.GetPlayerById(IdOfPlayer2);
+            var unitsOfPlayer2 = player2.Units;
+            
+            _currentUnitOfPlayer1 = unitsOfPlayer1.GetUnitByIndex(_currentUnitNumberOfPlayer1);
+            _currentUnitOfPlayer2 = unitsOfPlayer2.GetUnitByIndex(_currentUnitNumberOfPlayer2);
         }
 
         private void PrintRound()
@@ -149,9 +156,13 @@ namespace Fire_Emblem
 
         private void ExecuteAttacks()
         {
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
             _attackController.ChangeAttacker();
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
+                _currentUnitNumberOfPlayer1,
+                _currentUnitNumberOfPlayer2);
         }
 
         private void FollowUp()
@@ -159,12 +170,16 @@ namespace Fire_Emblem
             if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
             {
                 _attackController.SetCurrentAttacker(IdOfPlayer2);
-                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                    _currentUnitNumberOfPlayer1, 
+                    _currentUnitNumberOfPlayer2);
             }
             else if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
             {
                 _attackController.SetCurrentAttacker(IdOfPlayer1);
-                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, _currentUnitNumberOfPlayer1, _currentUnitNumberOfPlayer2);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                    _currentUnitNumberOfPlayer1, 
+                    _currentUnitNumberOfPlayer2);
             }
             else if (ThereAreNoLoosers())
             {
@@ -231,12 +246,18 @@ namespace Fire_Emblem
 
             if (IsUnitDead(_currentUnitOfPlayer1))
             {
-                players.GetPlayerById(IdOfPlayer1).Units.EliminateUnit(_currentUnitNumberOfPlayer1);
+                var player1 = players.GetPlayerById(IdOfPlayer1);
+                var unitsOfPlayer1 = player1.Units;
+                
+                unitsOfPlayer1.EliminateUnit(_currentUnitNumberOfPlayer1);
             }
 
             if (IsUnitDead(_currentUnitOfPlayer2))
             {
-                players.GetPlayerById(IdOfPlayer2).Units.EliminateUnit(_currentUnitNumberOfPlayer2);
+                var player2 = players.GetPlayerById(IdOfPlayer2);
+                var unitsOfPlayer2 = player2.Units;
+                
+                unitsOfPlayer2.EliminateUnit(_currentUnitNumberOfPlayer2);
             }
         }
 
