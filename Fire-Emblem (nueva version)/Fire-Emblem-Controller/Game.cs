@@ -42,7 +42,7 @@ public class Game
     {
         var teamFile = GetTeamFile();
         var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
-        _attackController = gameAttacksControllerBuilder.BuildGameController(teamFile, _view);
+        _attackController = gameAttacksControllerBuilder.BuildGameController(File.ReadAllLines(teamFile), _view);
         while (IsGameNotTerminated()) PlayOneRound();
         _view.AnnounceWinner(_attackController.GetWinner());
     }

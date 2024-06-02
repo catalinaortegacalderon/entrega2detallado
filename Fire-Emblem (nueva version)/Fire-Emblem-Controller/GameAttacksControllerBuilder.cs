@@ -8,42 +8,42 @@ namespace Fire_Emblem;
 
 public class GameAttacksControllerBuilder
 {
-    private readonly int[] _unitCounters = new int[] { 0, 0 };
+    private readonly int[] _unitCounters = [0, 0];
     private readonly Unit[][] _units;
-    private int _currentPlayerNumber = 0;
+    private int _currentPlayerNumber;
+    private const int IdOfPlayer1 = 0;
+    private const int IdOfPlayer2 = 1;
 
     public GameAttacksControllerBuilder()
     {
         _units = new Unit[2][];
-        _units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
-        _units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        _units[0] = [new Unit(), new Unit(), new Unit()];
+        _units[1] = [new Unit(), new Unit(), new Unit()];
     }
     
-    public GameAttacksController BuildGameController(string file, GameView view)
+    public GameAttacksController BuildGameController(string[] fileLines, GameView view)
     {
-        ProcessFileToCreateUnitsAndSkills(file);
-
+        ProcessFileToCreateUnitsAndSkills(fileLines);
+        
         var players = CreatePlayers(_unitCounters, _units);
-
+        
         return new GameAttacksController(players[0], players[1], view);
     }
 
-    private void ProcessFileToCreateUnitsAndSkills(string file)
+    private void ProcessFileToCreateUnitsAndSkills(string[] fileLines)
     {
-        var allLines = File.ReadAllLines(file);
-        foreach (var line in allLines)
+        foreach (var line in fileLines)
             if (line == "Player 1 Team")
-            {
-                _currentPlayerNumber = 0;
-            }
+                SetCurrentPlayerNumber(IdOfPlayer1);
             else if (line == "Player 2 Team")
-            {
-                _currentPlayerNumber = 1;
-            }
+                SetCurrentPlayerNumber(IdOfPlayer2);
             else
-            {
                 CreateUnitsAndSkills(line);
-            }
+    }
+
+    private void SetCurrentPlayerNumber(int id)
+    {
+        _currentPlayerNumber = id;
     }
 
     private void CreateUnitsAndSkills(string line)
