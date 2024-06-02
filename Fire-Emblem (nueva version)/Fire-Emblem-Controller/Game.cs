@@ -1,9 +1,7 @@
 ﻿using ConsoleApp1;
 using ConsoleApp1.DataTypes;
-using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.Exceptions;
 using ConsoleApp1.GameDataStructures;
-using Fire_Emblem;
 using Fire_Emblem_View;
 
 namespace Fire_Emblem;
@@ -94,7 +92,7 @@ public class Game
 
     private void StartRound()
     {
-        GetPlayersChosenUnit();
+        GetAndSetPlayersChosenUnit();
         PrintRound();
         ExecuteAttacks();
         FollowUp();
@@ -104,22 +102,21 @@ public class Game
         EliminateLooserUnit();
     }
 
-    private void GetPlayersChosenUnit()
+    private void GetAndSetPlayersChosenUnit()
     {
+        GetChosenUnits();
+        SetUnits();
+    }
 
+    private void GetChosenUnits()
+    {
         int[] unitsNumber = _view.AskBothPlayersForTheChosenUnit(_attackController.GetPlayers(),
             _attackController.GetCurrentAttacker());
 
         _currentUnitNumberOfPlayer1 = unitsNumber[IdOfPlayer1];
         _currentUnitNumberOfPlayer2 = unitsNumber[IdOfPlayer2];
-        
-        SetUnits();
     }
 
-    private int AskPlayerForUnit(int playerId, UnitsList units)
-    {
-        return _view.AskAPlayerForTheChosenUnit(playerId, units);
-    }
 
     private void SetUnits()
     {
