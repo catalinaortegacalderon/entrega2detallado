@@ -104,8 +104,8 @@ public class Game
     private void AskBothPlayersForTheChosenUnit()
     {
         var players = _attackController.GetPlayers();
-        var player1 = players[IdOfPlayer1];
-        var player2 = players[IdOfPlayer2];
+        var player1 = players.GetPlayerById(IdOfPlayer1);
+        var player2 = players.GetPlayerById(IdOfPlayer2);
 
         if (_attackController.GetCurrentAttacker() == IdOfPlayer1)
         {
@@ -131,8 +131,8 @@ public class Game
     {
         var players = _attackController.GetPlayers();
 
-        var player1 = players[IdOfPlayer1];
-        var player2 = players[IdOfPlayer2];
+        var player1 = players.GetPlayerById(IdOfPlayer1);
+        var player2 = players.GetPlayerById(IdOfPlayer2);
 
         var unitsOfPlayer1 = player1.Units;
         var unitsOfPlayer2 = player2.Units;
@@ -241,14 +241,14 @@ public class Game
 
         if (IsUnitDead(_currentUnitOfPlayer1))
         {
-            var player1 = players[IdOfPlayer1];
+            var player1 = players.GetPlayerById(IdOfPlayer1);
             var unitsOfPlayer1 = player1.Units;
             unitsOfPlayer1.EliminateUnit(_currentUnitNumberOfPlayer1);
         }
 
         if (IsUnitDead(_currentUnitOfPlayer2))
         {
-            var player2 = players[IdOfPlayer2];
+            var player2 = players.GetPlayerById(IdOfPlayer2);
             var unitsOfPlayer2 = player2.Units;
             unitsOfPlayer2.EliminateUnit(_currentUnitNumberOfPlayer2);
         }

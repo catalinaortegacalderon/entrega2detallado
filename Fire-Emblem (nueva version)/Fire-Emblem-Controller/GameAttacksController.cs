@@ -8,7 +8,7 @@ namespace Fire_Emblem;
 
 public class GameAttacksController
 {
-    private readonly Player[] _players = new Player[2];
+    private readonly PlayersList _players = new PlayersList();
 
     private readonly GameView _view;
     private int _attackValue;
@@ -26,8 +26,8 @@ public class GameAttacksController
     public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
     {
         _currentAttackerId = 0;
-        _players[0] = firstPlayer;
-        _players[1] = secondPlayer;
+        _players.AddPlayer(firstPlayer);
+        _players.AddPlayer(secondPlayer);
         _gameIsTerminated = false;
         _view = view;
     }
@@ -75,13 +75,14 @@ public class GameAttacksController
     {
         if (_currentAttackerId == 0)
         {
-            _currentAttackingUnit = _players[0].Units.GetUnitByIndex(firstPlayersCurrentUnitNumber);
-            _currentDefensiveUnit = _players[1].Units.GetUnitByIndex(secondPlayersCurrentUnitNumber);
+            // todo: trainvreck
+            _currentAttackingUnit = _players.GetPlayerById(0).Units.GetUnitByIndex(firstPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = _players.GetPlayerById(1).Units.GetUnitByIndex(secondPlayersCurrentUnitNumber);
         }
         else
         {
-            _currentAttackingUnit = _players[1].Units.GetUnitByIndex(secondPlayersCurrentUnitNumber);
-            _currentDefensiveUnit = _players[0].Units.GetUnitByIndex(firstPlayersCurrentUnitNumber);
+            _currentAttackingUnit = _players.GetPlayerById(1).Units.GetUnitByIndex(secondPlayersCurrentUnitNumber);
+            _currentDefensiveUnit = _players.GetPlayerById(0).Units.GetUnitByIndex(firstPlayersCurrentUnitNumber);
         }
 
         _currentAttackingUnit.IsAttacking = true;
@@ -148,21 +149,22 @@ public class GameAttacksController
     {
         Player player;
         if (_currentAttackerId == 0)
-            player = _players[1];
+            player = _players.GetPlayerById(1);
         else
-            player = _players[0];
+            player = _players.GetPlayerById(0);
         player.AmountOfUnits -= 1;
     }
 
     private void CheckIfGameIsTerminated()
     {
-        if (_players[0].AmountOfUnits == 0)
+        // todo: encapsular
+        if (_players.GetPlayerById(0).AmountOfUnits == 0)
         {
             _winner = 1;
             _gameIsTerminated = true;
         }
 
-        if (_players[1].AmountOfUnits == 0)
+        if (_players.GetPlayerById(1).AmountOfUnits == 0)
         {
             _winner = 0;
             _gameIsTerminated = true;
@@ -258,7 +260,7 @@ public class GameAttacksController
         _currentDefensiveUnit.LastOpponentName = _currentAttackingUnit.Name;
     }
 
-    public Player[] GetPlayers()
+    public PlayersList GetPlayers()
     {
         return _players;
     }
