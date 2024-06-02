@@ -106,43 +106,7 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
-        ConditionEffectPairsList conditionEffectPairs = GetAllConditionEffectPairs();
-        conditionEffectPairs.Prioritize();
-        //var prioritizedList = PrioritizeConditionSkillPairs(conditionEffectPairs);
-        ApplyAllValidEffects(conditionEffectPairs);
-    }
-
-    // todo: encapsular lista
-    private ConditionEffectPairsList GetAllConditionEffectPairs()
-    {
-        var conditionEffectPairs = new ConditionEffectPairsList();
-        foreach (var skill in _currentAttackingUnit.Skills)
-            for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(_currentAttackingUnit,
-                    _currentDefensiveUnit, skill, i));
-        foreach (var skill in _currentDefensiveUnit.Skills)
-            for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(_currentDefensiveUnit,
-                    _currentAttackingUnit, skill, i));
-        return conditionEffectPairs;
-    }
-
-    private void PrioritizeConditionSkillPairs(ConditionEffectPairsList conditionEffectPairs)
-    {
-        var prioritizedList = conditionEffectPairs
-            .OrderBy(pair => (int)pair.Condition.GetPriority())
-            .ToList();
-        //return prioritizedList;
-    }
-
-    // todo: encapsular
-    private void ApplyAllValidEffects(ConditionEffectPairsList prioritizedList)
-    {
-        foreach (var conditionEffectPair in prioritizedList)
-            if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair,
-                    conditionEffectPair.OpponentsUnit))
-                conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair,
-                    conditionEffectPair.OpponentsUnit);
+        SkillsActivator.ActivateSkills(_currentAttackingUnit, _currentDefensiveUnit);
     }
 
     private void ReduceUnitAmount()
