@@ -3,40 +3,56 @@ using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem;
 
-public class SkillsActivator
+public static class SkillsActivator
 {
-    
-    public static void ActivateSkills(Unit atackingUnit, Unit defensiveUnit)
+    public static void ActivateSkills(Unit attackingUnit, Unit defensiveUnit)
     {
-        ConditionEffectPairsList conditionEffectPairs = GetAllConditionEffectPairs(atackingUnit, defensiveUnit);
+        var conditionEffectPairs = GetAllConditionEffectPairs(attackingUnit, defensiveUnit);
         conditionEffectPairs.Prioritize();
         ApplyAllValidEffects(conditionEffectPairs);
-        Unit hello;
     }
 
-    // todo: encapsular lista
     private static ConditionEffectPairsList GetAllConditionEffectPairs(Unit attackingUnit, Unit defensiveUnit)
     {
         var conditionEffectPairs = new ConditionEffectPairsList();
-        foreach (var skill in attackingUnit.Skills)
-            for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(attackingUnit,
-                    defensiveUnit, skill, i));
-        foreach (var skill in defensiveUnit.Skills)
-            for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(defensiveUnit,
-                    attackingUnit, skill, i));
+
+        AddConditionEffectPairs(attackingUnit, defensiveUnit, conditionEffectPairs);
+        AddConditionEffectPairs(defensiveUnit, attackingUnit, conditionEffectPairs);
+
         return conditionEffectPairs;
     }
-    
 
-    // todo: encapsular
+    private static void AddConditionEffectPairs(Unit sourceUnit, Unit opponentsUnit, ConditionEffectPairsList list)
+    {
+        foreach (var skill in sourceUnit.Skills)
+        {
+            for (int i = 0; i < skill.GetConditionLength(); i++)
+            {
+                list.AddConditionEffectPair(new ConditionEffectPair(sourceUnit, 
+                    opponentsUnit, skill, i));
+            }
+        }
+    }
+
     private static void ApplyAllValidEffects(ConditionEffectPairsList prioritizedList)
     {
         foreach (var conditionEffectPair in prioritizedList)
-            if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair,
-                    conditionEffectPair.OpponentsUnit))
-                conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair,
-                    conditionEffectPair.OpponentsUnit);
+        {
+            if (IsConditionValid(conditionEffectPair))
+                ApplyEffect(conditionEffectPair);
+        }
     }
+    
+    private static bool IsConditionValid(ConditionEffectPair conditionEffectPair)
+    {
+        return conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair, 
+            conditionEffectPair.OpponentsUnit);
+    }
+
+    private static void ApplyEffect(ConditionEffectPair conditionEffectPair)
+    {
+        conditionEffectPair.Effect.ApplyEffect(conditionEffectPair.UnitThatHasThePair, 
+            conditionEffectPair.OpponentsUnit);
+    }
+    
 }

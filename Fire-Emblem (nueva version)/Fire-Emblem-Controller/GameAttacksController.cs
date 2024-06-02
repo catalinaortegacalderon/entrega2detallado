@@ -8,18 +8,14 @@ namespace Fire_Emblem;
 
 public class GameAttacksController
 {
-    private readonly PlayersList _players = new PlayersList();
-
+    private readonly PlayersList _players = new();
     private readonly GameView _view;
-    private int _attackValue;
-
-    private int _currentAttackerId;
+    private DamageCalculator _damageCalculator;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
-
-    private DamageCalculator _damageCalculator;
+    private int _attackValue;
+    private int _currentAttackerId;
     private bool _gameIsTerminated;
-
     private bool _roundIsTerminated;
     private int _winner;
 
@@ -28,54 +24,33 @@ public class GameAttacksController
         _currentAttackerId = 0;
         _players.AddPlayer(firstPlayer);
         _players.AddPlayer(secondPlayer);
-        _gameIsTerminated = false;
         _view = view;
     }
 
-    public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack,
-        int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
+    public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, int firstPlayersCurrentUnitNumber, 
+        int secondPlayersCurrentUnitNumber)
     {
-        if (RoundIsTerminated())
+        if (RoundIsTerminated()) 
             return;
+
         SetAttackingAndDefensiveUnits(firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
+
         if (typeOfCurrentAttack == AttackType.FirstAttack)
         {
-            _currentAttackingUnit.StartedTheRound = true;
-            _currentDefensiveUnit.StartedTheRound = false;
-            ActivateSkills();
-            PrintStartingParameters();
+            InitializeRound();
         }
 
-        _damageCalculator = new DamageCalculator(_currentAttackingUnit,
-            _currentDefensiveUnit, typeOfCurrentAttack);
-        _attackValue = _damageCalculator.CalculateAttack();
+        CalculateAndApplyDamage(typeOfCurrentAttack);
         ShowWhoAttacksWho();
-        MakeTheDamage();
     }
 
-    private bool RoundIsTerminated()
-    {
-        return _gameIsTerminated || _roundIsTerminated;
-    }
+    private bool RoundIsTerminated() 
+        => _gameIsTerminated || _roundIsTerminated;
 
-    private void PrintStartingParameters()
-    {
-        ShowAdvantages();
-        PrintSkillsInfo();
-    }
-
-    private void ShowWhoAttacksWho()
-    {
-        _view.ShowAttack(_currentAttackingUnit.Name,
-            _currentDefensiveUnit.Name, _attackValue);
-    }
-
-    private void SetAttackingAndDefensiveUnits(int firstPlayersCurrentUnitNumber,
-        int secondPlayersCurrentUnitNumber)
+    private void SetAttackingAndDefensiveUnits(int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
         if (_currentAttackerId == 0)
         {
-            // todo: trainvreck
             _currentAttackingUnit = _players.GetPlayerById(0).Units.GetUnitByIndex(firstPlayersCurrentUnitNumber);
             _currentDefensiveUnit = _players.GetPlayerById(1).Units.GetUnitByIndex(secondPlayersCurrentUnitNumber);
         }
@@ -89,61 +64,42 @@ public class GameAttacksController
         _currentDefensiveUnit.IsAttacking = false;
     }
 
-    private void MakeTheDamage()
+    private void InitializeRound()
     {
-        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
-        {
-            _roundIsTerminated = true;
-            SetDefensorsNewHp();
-            ReduceUnitAmount();
-            CheckIfGameIsTerminated();
-        }
-        else
-        {
-            SetDefensorsNewHp();
-        }
+        _currentAttackingUnit.StartedTheRound = true;
+        _currentDefensiveUnit.StartedTheRound = false;
+        ActivateSkills();
+        PrintStartingParameters();
     }
-
+    
     private void ActivateSkills()
     {
         SkillsActivator.ActivateSkills(_currentAttackingUnit, _currentDefensiveUnit);
     }
-
-    private void ReduceUnitAmount()
+    
+    private void PrintStartingParameters()
     {
-        Player player;
-        if (_currentAttackerId == 0)
-            player = _players.GetPlayerById(1);
+        ShowAdvantages();
+        PrintSkillsInfo();
+    }
+    
+    private void ShowAdvantages()
+    {
+        var attackingWeapon = _currentAttackingUnit.Weapon;
+        var defensiveWeapon = _currentDefensiveUnit.Weapon;
+
+        if (DamageCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
+        {
+            _view.AnnounceThereIsNoAdvantage();
+        }
+        else if (DamageCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon))
+        {
+            _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
+        }
         else
-            player = _players.GetPlayerById(0);
-        player.AmountOfUnits -= 1;
-    }
-
-    private void CheckIfGameIsTerminated()
-    {
-        // todo: encapsular
-        if (_players.GetPlayerById(0).AmountOfUnits == 0)
         {
-            _winner = 1;
-            _gameIsTerminated = true;
+            _view.AnnounceAdvantage(_currentDefensiveUnit, _currentAttackingUnit);
         }
-
-        if (_players.GetPlayerById(1).AmountOfUnits == 0)
-        {
-            _winner = 0;
-            _gameIsTerminated = true;
-        }
-    }
-
-    private void SetDefensorsNewHp()
-    {
-        if (_currentDefensiveUnit.CurrentHp < _attackValue)
-        {
-            _currentDefensiveUnit.CurrentHp = 0;
-            return;
-        }
-
-        _currentDefensiveUnit.CurrentHp -= _attackValue;
     }
 
     private void PrintSkillsInfo()
@@ -152,71 +108,91 @@ public class GameAttacksController
         _view.ShowAllSkills(_currentDefensiveUnit);
     }
 
-    private void ShowAdvantages()
+    private void CalculateAndApplyDamage(AttackType typeOfCurrentAttack)
     {
-        var attackingWeapon = _currentAttackingUnit.Weapon;
-        var defensiveWeapon = _currentDefensiveUnit.Weapon;
+        _damageCalculator = new DamageCalculator(_currentAttackingUnit, _currentDefensiveUnit, typeOfCurrentAttack);
+        _attackValue = _damageCalculator.CalculateAttack();
 
-        if (DamageCalculator.IsNoAdvantage(defensiveWeapon, attackingWeapon))
-            _view.AnnounceThereIsNoAdvantage();
-        else if (DamageCalculator.DoesAttackerHaveAdvantage(attackingWeapon, defensiveWeapon))
-            _view.AnnounceAdvantage(_currentAttackingUnit, _currentDefensiveUnit);
+        if (_attackValue >= _currentDefensiveUnit.CurrentHp)
+        {
+            _roundIsTerminated = true;
+            _currentDefensiveUnit.CurrentHp = 0;
+            ReduceUnitAmount();
+            CheckIfGameIsTerminated();
+        }
         else
-            _view.AnnounceAdvantage(_currentDefensiveUnit, _currentAttackingUnit);
+        {
+            _currentDefensiveUnit.CurrentHp -= _attackValue;
+        }
+    }
+    
+    private void ReduceUnitAmount()
+    {
+        var opponentPlayerId = _currentAttackerId == 0 ? 1 : 0;
+        _players.GetPlayerById(opponentPlayerId).AmountOfUnits -= 1;
     }
 
+    private void CheckIfGameIsTerminated()
+    {
+        if (HasNoUnits(0))
+        {
+            _winner = 1;
+            _gameIsTerminated = true;
+        }
+        else if (HasNoUnits(1))
+        {
+            _winner = 0;
+            _gameIsTerminated = true;
+        }
+    }
+    
+    private bool HasNoUnits(int playerId)
+    {
+        var player = _players.GetPlayerById(playerId);
+        return player.AmountOfUnits == 0;
+    }
+    
+    private void ShowWhoAttacksWho()
+    {
+        _view.ShowAttack(_currentAttackingUnit.Name, _currentDefensiveUnit.Name, _attackValue);
+    }
+    
     public void ResetAllSkills()
     {
-        ResetOnePlayersSkills(_currentAttackingUnit);
-        ResetOnePlayersSkills(_currentDefensiveUnit);
+        ResetUnitSkills(_currentAttackingUnit);
+        ResetUnitSkills(_currentDefensiveUnit);
     }
 
-    private void ResetOnePlayersSkills(Unit unit)
+    private void ResetUnitSkills(Unit unit)
     {
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonus,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonus, 
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenalties,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenalties, 
             0);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonusNeutralizer,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActiveBonusNeutralizer, 
             1);
-        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer,
+        DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer, 
             1);
         DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
     }
 
+    public bool IsGameTerminated() 
+        => _gameIsTerminated;
 
-    public bool IsGameTerminated()
-    {
-        return _gameIsTerminated;
-    }
+    public void RestartRound() 
+        => _roundIsTerminated = false;
 
-    public void RestartRound()
-    {
-        _roundIsTerminated = false;
-    }
+    public int GetWinner() 
+        => _winner + 1;
 
-    public int GetWinner()
-    {
-        return _winner + 1;
-    }
+    public int GetCurrentAttacker() 
+        => _currentAttackerId;
 
-    public int GetCurrentAttacker()
-    {
-        return _currentAttackerId;
-    }
+    public void SetCurrentAttacker(int value) 
+        => _currentAttackerId = value;
 
-    public void SetCurrentAttacker(int value)
-    {
-        _currentAttackerId = value;
-    }
-
-    public void ChangeAttacker()
-    {
-        if (_currentAttackerId == 0)
-            _currentAttackerId = 1;
-        else
-            _currentAttackerId = 0;
-    }
+    public void ChangeAttacker() 
+        => _currentAttackerId = _currentAttackerId == 0 ? 1 : 0;
 
     public void UpdateLastOpponents()
     {
@@ -224,8 +200,6 @@ public class GameAttacksController
         _currentDefensiveUnit.LastOpponentName = _currentAttackingUnit.Name;
     }
 
-    public PlayersList GetPlayers()
-    {
-        return _players;
-    }
+    public PlayersList GetPlayers() 
+        => _players;
 }
