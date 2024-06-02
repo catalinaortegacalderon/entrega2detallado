@@ -8,111 +8,136 @@ namespace Fire_Emblem;
 
 public class GameAttacksControllerBuilder
 {
-    private readonly int[] _unitCounters = [0, 0];
-    private readonly Unit[][] _units;
+    private const int PlayerCount = 2;
+    private readonly int[] _unitCounters = new int[PlayerCount];
+    private readonly Unit[][] _units = new Unit[PlayerCount][];
     private int _currentPlayerNumber;
+
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
 
-    public GameAttacksControllerBuilder()
+    public GameAttacksControllerBuilder() 
+        => InitializeUnits();
+
+    private void InitializeUnits()
     {
-        _units = new Unit[2][];
-        _units[0] = [new Unit(), new Unit(), new Unit()];
-        _units[1] = [new Unit(), new Unit(), new Unit()];
+        for (int i = 0; i < PlayerCount; i++)
+        {
+            _units[i] = [new Unit(), new Unit(), new Unit()];
+        }
     }
-    
+
     public GameAttacksController BuildGameController(string[] fileLines, GameView view)
     {
         ProcessFileToCreateUnitsAndSkills(fileLines);
-        
-        var players = CreatePlayers(_unitCounters, _units);
-        
+
+        var players = CreatePlayers();
+
         return new GameAttacksController(players[0], players[1], view);
     }
 
     private void ProcessFileToCreateUnitsAndSkills(string[] fileLines)
     {
         foreach (var line in fileLines)
+        {
             if (line == "Player 1 Team")
                 SetCurrentPlayerNumber(IdOfPlayer1);
             else if (line == "Player 2 Team")
                 SetCurrentPlayerNumber(IdOfPlayer2);
             else
                 CreateUnitsAndSkills(line);
+        }
     }
 
-    private void SetCurrentPlayerNumber(int id)
-    {
-        _currentPlayerNumber = id;
-    }
+    private void SetCurrentPlayerNumber(int id) 
+        => _currentPlayerNumber = id;
 
     private void CreateUnitsAndSkills(string line)
     {
-        var unitsOfThePlayer = _units[_currentPlayerNumber];
-        var playersUnitCounter = _unitCounters[_currentPlayerNumber];
-        var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
+        var unitInfo = CreateUnits(line);
+        var currentPlayersUnitNumber = _unitCounters[_currentPlayerNumber];
+        var currentPlayersUnits = _units[_currentPlayerNumber];
+        var currentUnit = currentPlayersUnits[currentPlayersUnitNumber];
 
-        var currentPlayersUnit = unitsOfThePlayer[playersUnitCounter];
-        var skills = currentPlayersUnit.Skills;
+        CreateSkills(currentUnit.Skills, unitInfo);
 
-        CreateSkills(skills, unitInfo);
         _unitCounters[_currentPlayerNumber]++;
     }
 
-    private string[] CreateUnits(string line, Unit[] unitsListOfTheCurrentPlayer, int unitCounter)
+    private string[] CreateUnits(string line)
     {
         var unitInfo = line.Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
-        var unitsName = unitInfo[0].Replace(" ", "");
-        var stringOfAllUnits = File.ReadAllText("characters.json");
-        var jsonOfAllUnits = JsonSerializer.Deserialize<List<JsonUnit>>(stringOfAllUnits);
+        var unitName = unitInfo[0].Trim();
+        var jsonUnits = LoadJsonUnits();
 
-        foreach (var unit in jsonOfAllUnits)
-            if (unitsName == unit.Name)
-                // todo: pasar a funcion
-                unitsListOfTheCurrentPlayer[unitCounter] = new Unit(unit.Name,
-                    unit.Weapon, unit.Gender, Convert.ToInt32(unit.HP),
-                    Convert.ToInt32(unit.HP), Convert.ToInt32(unit.Atk), Convert.ToInt32(unit.Spd),
-                    Convert.ToInt32(unit.Def), Convert.ToInt32(unit.Res));
+        var jsonUnit = jsonUnits.FirstOrDefault(u => u.Name == unitName);
+        if (jsonUnit != null) 
+            CreateUnit(jsonUnit);
+
         return unitInfo;
+    }
+
+    private static List<JsonUnit> LoadJsonUnits()
+    {
+        var json = File.ReadAllText("characters.json");
+        return JsonSerializer.Deserialize<List<JsonUnit>>(json);
+    }
+
+    private void CreateUnit(JsonUnit jsonUnit)
+    {
+        var unitsOfPlayer = _units[_currentPlayerNumber];
+        var unitIndex = _unitCounters[_currentPlayerNumber];
+
+        unitsOfPlayer[unitIndex] = new Unit(
+            jsonUnit.Name,
+            jsonUnit.Weapon,
+            jsonUnit.Gender,
+            Convert.ToInt32(jsonUnit.HP),
+            Convert.ToInt32(jsonUnit.HP),
+            Convert.ToInt32(jsonUnit.Atk),
+            Convert.ToInt32(jsonUnit.Spd),
+            Convert.ToInt32(jsonUnit.Def),
+            Convert.ToInt32(jsonUnit.Res)
+        );
     }
 
     private static void CreateSkills(SkillsList skills, string[] unitInfo)
     {
-        var unitHasSkills = unitInfo.Length > 1;
-        if (!unitHasSkills)
+        if (DoesNotHaveSkills(unitInfo)) 
             return;
 
-        var listOfSkillNames = unitInfo[1].Split(new[] { ',' },
-            StringSplitOptions.RemoveEmptyEntries);
-
-        for (var i = 0; i < listOfSkillNames.Length; i++)
+        var skillNames = unitInfo[1].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < skillNames.Length; i++)
         {
-            var skillName = listOfSkillNames[i];
-            SkillConstructor.Construct(skills, skillName, i);
+            SkillConstructor.Construct(skills, skillNames[i].Trim(), i);
         }
     }
 
-    private static Player[] CreatePlayers(IReadOnlyList<int> unitCounters, IReadOnlyList<Unit[]> units)
+    private static bool DoesNotHaveSkills(string[] unitInfo) 
+        => unitInfo.Length <= 1;
+
+    private Player[] CreatePlayers()
     {
-        var player1 = new Player();
-        var player2 = new Player();
+        var players = new Player[PlayerCount];
+        
+        players[IdOfPlayer1] = CreatePlayer(IdOfPlayer1);
+        players[IdOfPlayer2] = CreatePlayer(IdOfPlayer2);
 
-        player1.AmountOfUnits = unitCounters[0];
-        player2.AmountOfUnits = unitCounters[1];
+        return players;
+    }
 
-        // todo: nose si dejarlo con i, arriba tambien esta con i
-        for (var i = 0; i < units[0].Length; i++)
+    private Player CreatePlayer(int playerId)
+    {
+        var player = new Player
         {
-            var unit = units[0][i];
-            player1.Units.AddUnit(i, unit);
+            AmountOfUnits = _unitCounters[playerId]
+        };
+
+        for (int i = 0; i < _units[playerId].Length; i++)
+        {
+            player.Units.AddUnit(i, _units[playerId][i]);
         }
 
-        for (var i = 0; i < units[1].Length; i++)
-        {
-            var unit = units[1][i];
-            player2.Units.AddUnit(i, unit);
-        }
-
-        return [player1, player2];
+        return player;
     }
 }
