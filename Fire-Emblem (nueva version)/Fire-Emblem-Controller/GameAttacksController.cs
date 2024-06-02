@@ -1,5 +1,6 @@
 using ConsoleApp1;
 using ConsoleApp1.DataTypes;
+using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 
@@ -104,35 +105,37 @@ public class GameAttacksController
 
     private void ActivateSkills()
     {
-        var conditionEffectPairs = GetAllConditionEffectPairs();
-        var prioritizedList = PrioritizeConditionSkillPairs(conditionEffectPairs);
-        ApplyAllValidEffects(prioritizedList);
+        ConditionEffectPairsList conditionEffectPairs = GetAllConditionEffectPairs();
+        conditionEffectPairs.Prioritize();
+        //var prioritizedList = PrioritizeConditionSkillPairs(conditionEffectPairs);
+        ApplyAllValidEffects(conditionEffectPairs);
     }
 
     // todo: encapsular lista
-    private List<ConditionEffectPair> GetAllConditionEffectPairs()
+    private ConditionEffectPairsList GetAllConditionEffectPairs()
     {
-        var conditionEffectPairs = new List<ConditionEffectPair>();
+        var conditionEffectPairs = new ConditionEffectPairsList();
         foreach (var skill in _currentAttackingUnit.Skills)
             for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.Add(new ConditionEffectPair(_currentAttackingUnit,
+                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(_currentAttackingUnit,
                     _currentDefensiveUnit, skill, i));
         foreach (var skill in _currentDefensiveUnit.Skills)
             for (var i = 0; i < skill.GetConditionLength(); i++)
-                conditionEffectPairs.Add(new ConditionEffectPair(_currentDefensiveUnit,
+                conditionEffectPairs.AddConditionEffectPair(new ConditionEffectPair(_currentDefensiveUnit,
                     _currentAttackingUnit, skill, i));
         return conditionEffectPairs;
     }
 
-    private List<ConditionEffectPair> PrioritizeConditionSkillPairs(List<ConditionEffectPair> conditionEffectPairs)
+    private void PrioritizeConditionSkillPairs(ConditionEffectPairsList conditionEffectPairs)
     {
         var prioritizedList = conditionEffectPairs
             .OrderBy(pair => (int)pair.Condition.GetPriority())
             .ToList();
-        return prioritizedList;
+        //return prioritizedList;
     }
 
-    private void ApplyAllValidEffects(List<ConditionEffectPair> prioritizedList)
+    // todo: encapsular
+    private void ApplyAllValidEffects(ConditionEffectPairsList prioritizedList)
     {
         foreach (var conditionEffectPair in prioritizedList)
             if (conditionEffectPair.Condition.DoesItHold(conditionEffectPair.UnitThatHasThePair,

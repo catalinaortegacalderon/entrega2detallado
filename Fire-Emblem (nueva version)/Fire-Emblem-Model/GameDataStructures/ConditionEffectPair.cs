@@ -1,3 +1,4 @@
+using System.Collections;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.SkillsManagement.Conditions.BaseConditions;
 using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
@@ -5,7 +6,7 @@ using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 
 namespace ConsoleApp1.GameDataStructures;
 
-public class ConditionEffectPair
+public class ConditionEffectPair : IEnumerable
 {
     public readonly Condition Condition;
     public readonly Effect Effect;
@@ -30,5 +31,10 @@ public class ConditionEffectPair
         if (Effect is DivineRecreationEffect && OpponentsUnit.StartedTheRound)
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
                 .PriorityOfDivineRecreationWhenOpponentBeginsCombat);
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        throw new NotImplementedException();
     }
 }
