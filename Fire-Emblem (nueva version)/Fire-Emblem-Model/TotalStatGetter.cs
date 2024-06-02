@@ -5,6 +5,8 @@ namespace Fire_Emblem
 {
     public class TotalStatGetter
     {
+        
+        // todo: IMPLEMENTAR ESTO
         public static int GetTotal(StatType stat, Unit unit)
         {
             if (stat == StatType.Atk)
