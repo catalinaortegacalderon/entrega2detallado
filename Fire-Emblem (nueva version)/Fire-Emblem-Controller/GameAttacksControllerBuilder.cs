@@ -8,50 +8,58 @@ namespace Fire_Emblem;
 
 public class GameAttacksControllerBuilder
 {
-    public static GameAttacksController BuildGameController(string file, GameView view)
+    private readonly int[] _unitCounters = new int[] { 0, 0 };
+    private readonly Unit[][] _units;
+    private int _currentPlayerNumber = 0;
+
+    public GameAttacksControllerBuilder()
     {
-        int[] unitCounters = [0, 0];
-        var units = new Unit[2][];
-        units[0] = [new Unit(), new Unit(), new Unit()];
-        units[1] = [new Unit(), new Unit(), new Unit()];
+        _units = new Unit[2][];
+        _units[0] = new Unit[] { new Unit(), new Unit(), new Unit() };
+        _units[1] = new Unit[] { new Unit(), new Unit(), new Unit() };
+    }
+    
+    public GameAttacksController BuildGameController(string file, GameView view)
+    {
+        ProcessFileToCreateUnitsAndSkills(file);
 
-        CreateUnitsAndSkills(file, units, unitCounters);
-
-        var players = CreatePlayers(unitCounters, units);
+        var players = CreatePlayers(_unitCounters, _units);
 
         return new GameAttacksController(players[0], players[1], view);
     }
 
-    private static void CreateUnitsAndSkills(string file, Unit[][] units, int[] unitCounters)
+    private void ProcessFileToCreateUnitsAndSkills(string file)
     {
-        var currentPlayerNumber = 0;
         var allLines = File.ReadAllLines(file);
         foreach (var line in allLines)
-            // todo: pasar a funcion
             if (line == "Player 1 Team")
             {
-                currentPlayerNumber = 0;
+                _currentPlayerNumber = 0;
             }
             else if (line == "Player 2 Team")
             {
-                currentPlayerNumber = 1;
+                _currentPlayerNumber = 1;
             }
             else
             {
-                // todo: pasar a funcion
-                var unitsOfThePlayer = units[currentPlayerNumber];
-                var playersUnitCounter = unitCounters[currentPlayerNumber];
-                var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
-
-                var currentPlayersUnit = unitsOfThePlayer[playersUnitCounter];
-                var skills = currentPlayersUnit.Skills;
-
-                CreateSkills(skills, unitInfo);
-                unitCounters[currentPlayerNumber]++;
+                CreateUnitsAndSkills(line);
             }
     }
 
-    private static string[] CreateUnits(string line, Unit[] unitsListOfTheCurrentPlayer, int unitCounter)
+    private void CreateUnitsAndSkills(string line)
+    {
+        var unitsOfThePlayer = _units[_currentPlayerNumber];
+        var playersUnitCounter = _unitCounters[_currentPlayerNumber];
+        var unitInfo = CreateUnits(line, unitsOfThePlayer, playersUnitCounter);
+
+        var currentPlayersUnit = unitsOfThePlayer[playersUnitCounter];
+        var skills = currentPlayersUnit.Skills;
+
+        CreateSkills(skills, unitInfo);
+        _unitCounters[_currentPlayerNumber]++;
+    }
+
+    private string[] CreateUnits(string line, Unit[] unitsListOfTheCurrentPlayer, int unitCounter)
     {
         var unitInfo = line.Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
         var unitsName = unitInfo[0].Replace(" ", "");

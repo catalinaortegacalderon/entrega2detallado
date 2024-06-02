@@ -41,7 +41,8 @@ public class Game
     private void TryToPlay()
     {
         var teamFile = GetTeamFile();
-        _attackController = GameAttacksControllerBuilder.BuildGameController(teamFile, _view);
+        var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
+        _attackController = gameAttacksControllerBuilder.BuildGameController(teamFile, _view);
         while (IsGameNotTerminated()) PlayOneRound();
         _view.AnnounceWinner(_attackController.GetWinner());
     }
