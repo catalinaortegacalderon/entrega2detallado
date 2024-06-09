@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj": {}
+    "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj": {}
   },
   "projects": {
-    "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj": {
+    "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj",
+        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj",
         "projectName": "Fire-Emblem-Controller",
-        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj",
+        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\Fire-Emblem-Controller.csproj",
         "packagesPath": "C:\\Users\\catal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\obj\\",
+        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Controller\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\catal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,11 +26,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
-                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
+              "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
+                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
               },
-              "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
-                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj"
+              "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
+                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj"
               }
             }
           }
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
+    "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj",
+        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj",
         "projectName": "Fire-Emblem-Model",
-        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj",
+        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj",
         "packagesPath": "C:\\Users\\catal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\obj\\",
+        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\catal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -117,14 +117,14 @@
         }
       }
     },
-    "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
+    "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
+        "projectUniqueName": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
         "projectName": "Fire-Emblem-View",
-        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
+        "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
         "packagesPath": "C:\\Users\\catal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\obj\\",
+        "outputPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-View\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\catal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -139,8 +139,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
-                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 3 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
+              "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj": {
+                "projectPath": "C:\\Users\\catal\\Desktop\\entrega 4 detallado\\entrega2detallado\\Fire-Emblem (nueva version)\\Fire-Emblem-Model\\Fire-Emblem-Model.csproj"
               }
             }
           }

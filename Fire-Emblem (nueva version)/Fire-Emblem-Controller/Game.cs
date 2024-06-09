@@ -95,7 +95,10 @@ public class Game
         GetAndSetPlayersChosenUnit();
         PrintRound();
         ExecuteAttacks();
-        FollowUp();
+        //FollowUp();
+        FollowUpProbando();
+        // todo: arreglar esto de abajo
+        //FollowUpForGuaranteedFollowup();
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
@@ -153,19 +156,23 @@ public class Game
             _currentUnitNumberOfPlayer1,
             _currentUnitNumberOfPlayer2);
     }
-
+    
     private void FollowUp()
     {
-        if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
+        //todo: AL PARECER, HASTA AHORA, SOLO UNO PODIA HACER FOLLOWUP, CAMBIE EL ORDEN DEL IF Y ELIF Y NO PASO NADA
+        
+        // SI AMBOS PUEDEN HACER FOLLOWUP, PARTE EL QUE ESTA ATACANDO (EL QUE INICIA COMBATE)
+        
+        if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
         {
-            _attackController.SetCurrentAttacker(IdOfPlayer2);
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
         }
-        else if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
+        else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
         {
-            _attackController.SetCurrentAttacker(IdOfPlayer1);
+            _attackController.SetCurrentAttacker(IdOfPlayer2);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
@@ -173,6 +180,147 @@ public class Game
         else if (ThereAreNoLoosers())
         {
             _view.AnnounceNoUnitCanDoAFollowup();
+        }
+    }
+    
+    // todo: hacer clase extra que maneje followup
+    
+    private void FollowUpProbando()
+    {
+        Unit unitThatStartedTheRound = _currentUnitOfPlayer1;
+        Unit unitThatDidNotStartTheRound = _currentUnitOfPlayer2;
+        
+        if (IsPlayer1TheRoundStarter())
+        {
+            unitThatStartedTheRound = _currentUnitOfPlayer1;
+            unitThatDidNotStartTheRound = _currentUnitOfPlayer2;
+        }
+        //todo: AL PARECER, HASTA AHORA, SOLO UNO PODIA HACER FOLLOWUP, CAMBIE EL ORDEN DEL IF Y ELIF Y NO PASO NADA
+        
+        // SI AMBOS PUEDEN HACER FOLLOWUP, PARTE EL QUE ESTA ATACANDO (EL QUE INICIA COMBATE)
+        
+        if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
+        {
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
+        }
+        else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
+        {
+            _attackController.SetCurrentAttacker(IdOfPlayer2);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
+        }
+        else if (ThereAreNoLoosers())
+        {
+            _view.AnnounceNoUnitCanDoAFollowup();
+        }
+    }
+
+    private void FollowUp2()
+    {
+        // todo: arreglar esto, ver orden de followups
+        
+        // flujo: antes, solo un followup. este followup lo hacía
+
+        if (!IsPlayer1TheRoundStarter())
+        { 
+            Console.WriteLine("paso por 1");
+            
+        if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
+        {
+            Console.WriteLine("paso por a");
+            _attackController.SetCurrentAttacker(IdOfPlayer2);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
+        }
+        else if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
+        {
+            Console.WriteLine("paso por b");
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
+        }
+        else if (_currentUnitOfPlayer1.CombatEffects.HasGuaranteedFollowUp)
+        {
+            Console.WriteLine("paso por b");
+            _attackController.SetCurrentAttacker(IdOfPlayer1);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _currentUnitNumberOfPlayer1, 
+                _currentUnitNumberOfPlayer2);
+            
+        }
+        else if (ThereAreNoLoosers())
+        {
+            _view.AnnounceNoUnitCanDoAFollowup();
+        }
+        }
+        else
+        {
+            Console.WriteLine("paso por 2");
+            if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
+            {
+                Console.WriteLine("paso por 2a");
+                _attackController.SetCurrentAttacker(IdOfPlayer1);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                    _currentUnitNumberOfPlayer1, 
+                    _currentUnitNumberOfPlayer2);
+            }
+            else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
+            {
+                Console.WriteLine("paso por 2b");
+                _attackController.SetCurrentAttacker(IdOfPlayer2);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                    _currentUnitNumberOfPlayer1, 
+                    _currentUnitNumberOfPlayer2);
+            }
+            else if (_currentUnitOfPlayer2.CombatEffects.HasGuaranteedFollowUp)
+            {
+                Console.WriteLine("paso por 2b");
+                _attackController.SetCurrentAttacker(IdOfPlayer2);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                    _currentUnitNumberOfPlayer1, 
+                    _currentUnitNumberOfPlayer2);
+            }
+            else if (ThereAreNoLoosers())
+            {
+                _view.AnnounceNoUnitCanDoAFollowup();
+            }
+            
+        }
+        
+        
+    }
+
+    private void FollowUpForGuaranteedFollowup()
+    {
+        // todo: arreglar esto, ver orden de followups
+
+        if (!IsPlayer1TheRoundStarter())
+        {
+            if (_currentUnitOfPlayer1.CombatEffects.HasGuaranteedFollowUp)
+            {
+                Console.WriteLine("paso por b");
+                _attackController.SetCurrentAttacker(IdOfPlayer1);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp,
+                    _currentUnitNumberOfPlayer1,
+                    _currentUnitNumberOfPlayer2);
+            }
+        }
+        else
+        {
+            if (_currentUnitOfPlayer2.CombatEffects.HasGuaranteedFollowUp)
+            {
+                Console.WriteLine("paso por 2b");
+                _attackController.SetCurrentAttacker(IdOfPlayer2);
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp,
+                    _currentUnitNumberOfPlayer1,
+                    _currentUnitNumberOfPlayer2);
+            }
         }
     }
 
@@ -187,8 +335,18 @@ public class Game
             <= attackingUnit.Spd
             + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
             + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
+        
+        // todo: poner el statement de abajo mejor encapsulado
+        
+        Console.WriteLine("imprimiendo lo que quieroo");
+        Console.WriteLine(attackingUnit.Name);
+        Console.WriteLine(attackingUnit.CombatEffects.HasGuaranteedFollowUp);
+        Console.WriteLine(ThereAreNoLoosers());
+        Console.WriteLine(doesFollowupConditionHold);
+        Console.WriteLine(ThereAreNoLoosers() && (doesFollowupConditionHold || attackingUnit.CombatEffects.HasGuaranteedFollowUp));
+        
 
-        return ThereAreNoLoosers() && doesFollowupConditionHold;
+        return ThereAreNoLoosers() && (doesFollowupConditionHold || attackingUnit.CombatEffects.HasGuaranteedFollowUp);
     }
 
     private bool ThereAreNoLoosers()

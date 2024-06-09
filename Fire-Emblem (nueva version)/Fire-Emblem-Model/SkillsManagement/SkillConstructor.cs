@@ -7,6 +7,7 @@ using ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 using ConsoleApp1.SkillsManagement.Skills.NeutralizationSkills;
 using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 using ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat;
 
 namespace ConsoleApp1.SkillsManagement;
 
@@ -204,7 +205,12 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new ExtraChivalrySkill());
         else if (skillString == "Guard Bearing")
             skills.AddSkill(skillsCounter, new GuardBearingSkill());
-        else if (skillString == "Divine Recreation") skills.AddSkill(skillsCounter, new DivineRecreationSkill());
+        else if (skillString == "Divine Recreation") 
+            skills.AddSkill(skillsCounter, new DivineRecreationSkill());
+        else if (skillString == "Quick Riposte") 
+            skills.AddSkill(skillsCounter, new QuickRiposteSkill());
+        else if (skillString == "Follow-Up Ring") 
+            skills.AddSkill(skillsCounter, new FollowUpRingSkill());
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)

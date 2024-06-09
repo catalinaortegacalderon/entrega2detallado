@@ -174,6 +174,8 @@ public class GameAttacksController
         DataStructuresResetter.ResetBonusPenaltiesAndNeutralizersToASpecificValue(unit.ActivePenaltiesNeutralizer, 
             1);
         DataStructuresResetter.ResetDamageGameStructure(unit.DamageEffects);
+        DataStructuresResetter.ResetCombatEffects(unit.CombatEffects);
+        
     }
 
     public bool IsGameTerminated() 
