@@ -42,6 +42,7 @@ public class GameAttacksController
 
         CalculateAndApplyDamage(typeOfCurrentAttack);
         ShowWhoAttacksWho();
+        ManageHpRecuperation();
     }
 
     private bool RoundIsTerminated() 
@@ -123,6 +124,26 @@ public class GameAttacksController
         else
         {
             _currentDefensiveUnit.CurrentHp -= _attackValue;
+        }
+    }
+
+    private void ManageHpRecuperation()
+    {
+        
+        // todo: esta funcion separarla en, calculate recuperation, apply, anounce
+        if (_currentAttackingUnit.CombatEffects.HpRecuperation > 0)
+        {
+            var amountOfHpRecuperated = (int)(_currentAttackingUnit.CombatEffects.HpRecuperation * _attackValue);
+            int finalAmountOfHpRecuperated = amountOfHpRecuperated;
+            if (_currentAttackingUnit.CurrentHp + amountOfHpRecuperated > _currentAttackingUnit.HpMax)
+            {
+                finalAmountOfHpRecuperated = _currentAttackingUnit.HpMax - _currentAttackingUnit.CurrentHp;
+            }
+            _currentAttackingUnit.CurrentHp += finalAmountOfHpRecuperated;
+            if (amountOfHpRecuperated > 0)
+            {
+                _view.AnnounceHpRecuperation(_currentAttackingUnit, amountOfHpRecuperated , _currentAttackingUnit.CurrentHp);
+            }
         }
     }
     

@@ -88,6 +88,12 @@ public class GameView : IView
         SkillsPrinter.PrintAll(_view, unit);
     }
 
+    public void AnnounceHpRecuperation(Unit unitThatRecuperatesHp, int amount, int finalHp)
+    {
+        _view.WriteLine(unitThatRecuperatesHp.Name + " recupera " + amount + " HP luego de atacar y queda con " +
+                        finalHp + " HP.");
+    }
+
     public void ShowAttack(string attackersName, string defensorsName, int damage)
     {
         _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
