@@ -214,6 +214,10 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new FollowUpRingSkill());
         else if (skillString == "Sol") 
             skills.AddSkill(skillsCounter, new SolSkill());
+        else if (skillString == "Nosferatu") 
+            skills.AddSkill(skillsCounter, new NosferatuSkill());
+        else if (skillString == "Solar Brace") 
+            skills.AddSkill(skillsCounter, new SolarBraceSkill());
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)
