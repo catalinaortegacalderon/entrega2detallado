@@ -29,7 +29,7 @@ public static class DataStructuresResetter
     public static void ResetCombatEffects(CombatEffects dataStructure)
     { 
         dataStructure.HpRecuperation = 0;
-        dataStructure.HasCounterattackDenial = false;
+        dataStructure.HasCounterAttackDenial = false;
         dataStructure.HasDenialOfCounterattackDenial = false;
         dataStructure.HasGuaranteedFollowUp = false;
         dataStructure.AmountOfEffectsThatGuaranteeFollowup = 0;

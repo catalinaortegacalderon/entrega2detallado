@@ -5,7 +5,7 @@ public class CombatEffects
 {
     public double HpRecuperation = 0;
     
-    public bool HasCounterattackDenial = false;
+    public bool HasCounterAttackDenial = false;
     public bool HasDenialOfCounterattackDenial = false;
     
     public bool HasGuaranteedFollowUp = false;

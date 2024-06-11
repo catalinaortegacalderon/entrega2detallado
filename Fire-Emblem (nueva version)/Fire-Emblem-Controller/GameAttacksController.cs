@@ -18,6 +18,9 @@ public class GameAttacksController
     private bool _gameIsTerminated;
     private bool _roundIsTerminated;
     private int _winner;
+    
+    // TODO: ideaa, aca manejar los tres casos, ataque contraataque y followup de manera diferente
+    // no en el deesarollo sino en como se "autorizan"
 
     public GameAttacksController(Player firstPlayer, Player secondPlayer, GameView view)
     {

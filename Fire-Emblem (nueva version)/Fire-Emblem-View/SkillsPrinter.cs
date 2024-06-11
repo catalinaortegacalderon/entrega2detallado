@@ -118,18 +118,25 @@ public class SkillsPrinter
     private static void PrintCombatEffects(View view, Unit unit)
     {
         if (unit.CombatEffects.HpRecuperation > 0)
-            view.WriteLine(unit.Name + " recuperará HP igual al " + (unit.CombatEffects.HpRecuperation * 100) + "% del daño realizado en cada ataque");
+            view.WriteLine(unit.Name + " recuperará HP igual al " + (unit.CombatEffects.HpRecuperation * 100) 
+                           + "% del daño realizado en cada ataque");
         if (unit.CombatEffects.HasDenialOfCounterattackDenial)
             view.WriteLine(unit.Name + " neutraliza los efectos que previenen sus contraataques");
         if (unit.CombatEffects.HasGuaranteedFollowUp)
             // todo: revisar esto
-            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup + " efecto(s) que garantiza(n) su follow up activo(s)");
+            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup 
+                           + " efecto(s) que garantiza(n) su follow up activo(s)");
         if (unit.CombatEffects.HasFollowUpDenial)
             // todo: revisar esto
-            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.HasGuaranteedFollowUp + " efecto (s) que neutraliza (n) su follow up activo (s)");
+            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.HasGuaranteedFollowUp 
+                           + " efecto (s) que neutraliza (n) su follow up activo (s)");
         if (unit.CombatEffects.HasDenialOfFollowUpDenial)
             view.WriteLine(unit.Name + " es inmune a los efectos que neutralizan su follow up");
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)
             view.WriteLine(unit.Name + " es inmune a los efectos que garantizan su follow up");
+        // TODO: VER ORDEN DE ESTE ÚLTIMO
+        if (unit.CombatEffects.HasCounterAttackDenial)
+            view.WriteLine(unit.Name + " no podrá contraatacar");
+        
     }
 }

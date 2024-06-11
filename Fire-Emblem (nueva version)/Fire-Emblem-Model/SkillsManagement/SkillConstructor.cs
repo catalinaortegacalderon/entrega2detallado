@@ -8,6 +8,7 @@ using ConsoleApp1.SkillsManagement.Skills.NeutralizationSkills;
 using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 using ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.CounterattackDenialSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.HealingSkills;
 
 namespace ConsoleApp1.SkillsManagement;
@@ -218,6 +219,12 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new NosferatuSkill());
         else if (skillString == "Solar Brace") 
             skills.AddSkill(skillsCounter, new SolarBraceSkill());
+        else if (skillString == "Windsweep")
+            skills.AddSkill(skillsCounter, new WindsweepSkill());
+        else if (skillString == "Surprise Attack")
+            skills.AddSkill(skillsCounter, new SurpriseAttackSkill());
+        else if (skillString == "Hliðskjálf")
+            skills.AddSkill(skillsCounter, new HlioskjalfSkill());
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)
