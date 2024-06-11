@@ -98,6 +98,11 @@ public class GameView : IView
     {
         _view.WriteLine(attackersName + " ataca a " + defensorsName + " con " + damage + " de daño");
     }
+    
+    public void AnnounceASpecificUnitCantDoAFollowup(String name)
+    {
+        _view.WriteLine(name + " no puede hacer un follow up");
+    }
 
     public void AnnounceNoUnitCanDoAFollowup()
     {

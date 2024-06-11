@@ -7,6 +7,6 @@ public class CounterAttackDenialEffect: Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        myUnit.CombatEffects.HasCounterAttackDenial = true;
+        opponentsUnit.CombatEffects.HasCounterAttackDenial = true;
     }
 }

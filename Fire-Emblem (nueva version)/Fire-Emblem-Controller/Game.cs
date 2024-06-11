@@ -149,32 +149,76 @@ public class Game
             _currentUnitNumberOfPlayer1, 
             _currentUnitNumberOfPlayer2);
         _attackController.ChangeAttacker();
-        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
-            _currentUnitNumberOfPlayer1,
-            _currentUnitNumberOfPlayer2);
+        if (IsTheDefensorAbleToCounterAttack())
+        {
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
+                _currentUnitNumberOfPlayer1,
+                _currentUnitNumberOfPlayer2);
+        }
+    }
+
+    private bool IsTheDefensorAbleToCounterAttack()
+    {
+        if (IsPlayer1TheRoundStarter())
+        {
+            return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial;
+        }
+        return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial;
     }
     
     private void FollowUp()
-    {
-        
-        if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2))
+    { 
+        if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2) &&
+            CanASpecificPlayerCounterAttack(IdOfPlayer1))
         {
             _attackController.SetCurrentAttacker(IdOfPlayer1);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
         }
-        else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1))
+        else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1) &&
+                 CanASpecificPlayerCounterAttack(IdOfPlayer2))
         {
             _attackController.SetCurrentAttacker(IdOfPlayer2);
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
                 _currentUnitNumberOfPlayer1, 
                 _currentUnitNumberOfPlayer2);
         }
+        else if ( AttackerCantDoFollowup() && !IsTheDefensorAbleToCounterAttack())
+        {
+            Console.WriteLine("IMPRIMIENDO");
+            Console.WriteLine(IsTheDefensorAbleToCounterAttack());
+            if (IsPlayer1TheRoundStarter())
+            {
+                _view.AnnounceASpecificUnitCantDoAFollowup(_currentUnitOfPlayer1.Name);
+            }
+            else
+            {
+                _view.AnnounceASpecificUnitCantDoAFollowup(_currentUnitOfPlayer2.Name);
+            }
+        }
         else if (ThereAreNoLoosers())
         {
             _view.AnnounceNoUnitCanDoAFollowup();
         }
+    }
+
+    private bool AttackerCantDoFollowup()
+    {
+        if (IsPlayer1TheRoundStarter())
+        {
+            return !CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2);
+        }
+        return !CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1);
+    }
+
+    private bool CanASpecificPlayerCounterAttack(int playerId)
+    {
+        if (playerId == IdOfPlayer1)
+        {
+            return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial;
+        }
+        return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial;
     }
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
@@ -190,15 +234,6 @@ public class Game
             + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
         
         // todo: poner el statement de abajo mejor encapsulado
-        
-        Console.WriteLine("imprimiendo lo que quieroo");
-        Console.WriteLine(attackingUnit.Name);
-        Console.WriteLine(attackingUnit.CombatEffects.HasGuaranteedFollowUp);
-        Console.WriteLine(ThereAreNoLoosers());
-        Console.WriteLine(doesFollowupConditionHold);
-        Console.WriteLine(ThereAreNoLoosers() && (doesFollowupConditionHold || attackingUnit.CombatEffects.HasGuaranteedFollowUp));
-        
-
         return ThereAreNoLoosers() && (doesFollowupConditionHold || attackingUnit.CombatEffects.HasGuaranteedFollowUp);
     }
 

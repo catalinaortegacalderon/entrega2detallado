@@ -13,10 +13,10 @@ public class SurpriseAttackSkill : Skill
     {
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([ new MyUnitStartsCombatCondition(), 
-            new MyUnitUsesCertainWeaponsCondition([Weapon.Magic]), 
+            new MyUnitUsesCertainWeaponsCondition([Weapon.Bow]), 
             new OpponentUsesCertainWeaponCondition([Weapon.Bow])]);
 
         Effects = new Effect[1];
-        Effects[0] = new HealingEffect(0.25);
+        Effects[0] = new CounterAttackDenialEffect();
     }
 }
