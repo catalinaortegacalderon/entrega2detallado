@@ -4,7 +4,8 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
-public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect : Effect
+
+public class ExtraDamageReductionConsideringMyTotalStatPercentageEffect : Effect
 {
     
     // todo: arreglar
@@ -12,7 +13,7 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect :
     private readonly StatType _stat;
     private readonly DamageEffectCategory _type;
 
-    public ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect(DamageEffectCategory type, 
+    public ExtraDamageReductionConsideringMyTotalStatPercentageEffect(DamageEffectCategory type, 
         StatType stat, double percentage)
     {
         _type = type;
@@ -26,20 +27,20 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect :
         
         if (_stat == StatType.Res)
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Res * opponentsUnit.ActiveBonusNeutralizer.Res
-                                  + opponentsUnit.ActivePenalties.Res * opponentsUnit.ActivePenaltiesNeutralizer.Res;
+                myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizer.Res
+                                  + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralizer.Res;
         if (_stat == StatType.Atk)
             amount =
-                opponentsUnit.Atk + opponentsUnit.ActiveBonus.Atk * opponentsUnit.ActiveBonusNeutralizer.Atk
-                                  + opponentsUnit.ActivePenalties.Atk * opponentsUnit.ActivePenaltiesNeutralizer.Atk;
+                myUnit.Atk + myUnit.ActiveBonus.Atk * myUnit.ActiveBonusNeutralizer.Atk
+                                  + myUnit.ActivePenalties.Atk * myUnit.ActivePenaltiesNeutralizer.Atk;
         if (_stat == StatType.Def)
             amount =
-                opponentsUnit.Res + opponentsUnit.ActiveBonus.Def * opponentsUnit.ActiveBonusNeutralizer.Def
-                                  + opponentsUnit.ActivePenalties.Def * opponentsUnit.ActivePenaltiesNeutralizer.Def;
+                myUnit.Res + myUnit.ActiveBonus.Def * myUnit.ActiveBonusNeutralizer.Def
+                                  + myUnit.ActivePenalties.Def * myUnit.ActivePenaltiesNeutralizer.Def;
         if (_stat == StatType.Spd)
             amount =
-                opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
-                                  + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
+                myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd
+                                  + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizer.Spd;
         
         amount = Convert.ToInt32(Math.Truncate(amount * _percentage));
         

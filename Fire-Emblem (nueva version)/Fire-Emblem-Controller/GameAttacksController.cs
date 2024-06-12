@@ -40,12 +40,12 @@ public class GameAttacksController
 
         if (typeOfCurrentAttack == AttackType.FirstAttack)
         {
-            InitializeRound();
+            //InitializeRound();
         }
 
         CalculateAndApplyDamage(typeOfCurrentAttack);
         ShowWhoAttacksWho();
-        ManageHpRecuperation();
+        ManageHpRecuperationInEveryAttack();
     }
 
     private bool RoundIsTerminated() 
@@ -69,8 +69,9 @@ public class GameAttacksController
         _currentDefensiveUnit.IsAttacking = false;
     }
 
-    private void InitializeRound()
+    public void InitializeRound(int firstPlayersCurrentUnitNumber, int secondPlayersCurrentUnitNumber)
     {
+        SetAttackingAndDefensiveUnits(firstPlayersCurrentUnitNumber, secondPlayersCurrentUnitNumber);
         _currentAttackingUnit.StartedTheRound = true;
         _currentDefensiveUnit.StartedTheRound = false;
         ActivateSkills();
@@ -131,7 +132,7 @@ public class GameAttacksController
         }
     }
 
-    private void ManageHpRecuperation()
+    private void ManageHpRecuperationInEveryAttack()
     {
         
         // todo: esta funcion separarla en, calculate recuperation, apply, anounce
@@ -223,6 +224,7 @@ public class GameAttacksController
 
     public void UpdateLastOpponents()
     {
+        // todo: tal vez esto deberia ir en game
         _currentAttackingUnit.LastOpponentName = _currentDefensiveUnit.Name;
         _currentDefensiveUnit.LastOpponentName = _currentAttackingUnit.Name;
     }

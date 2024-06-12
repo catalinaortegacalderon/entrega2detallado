@@ -31,6 +31,7 @@ public static class DataStructuresResetter
         // TODO: ORDENAR ESTO
         dataStructure.HpRecuperationAtEveryAttack = 0;
         dataStructure.HpLostAtTheBeginning = 0;
+        dataStructure.DamageBeforeCombat = 0;
         dataStructure.DamageAfterCombat = 0;
         dataStructure.DamageAfterCombatIfUnitAttacks = 0;
         dataStructure.HpRecuperationAtTheEndOfTheCombat = 0;

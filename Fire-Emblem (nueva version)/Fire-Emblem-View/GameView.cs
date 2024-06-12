@@ -94,6 +94,13 @@ public class GameView : IView
                         finalHp + " HP.");
     }
     
+    public void AnnounceDamageBeforeCombat(Unit unitThatRecievesDamage, int damage)
+    {
+        _view.WriteLine(unitThatRecievesDamage.Name + " recibe " + damage 
+                        + " de daño antes de iniciar el combate y queda con " + unitThatRecievesDamage.CurrentHp
+                        + " HP");
+    }
+    
     public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
     {
         _view.WriteLine(unitThatRecievesCuration.Name + " recupera " + recuperatedAmount + " HP despues del combate");

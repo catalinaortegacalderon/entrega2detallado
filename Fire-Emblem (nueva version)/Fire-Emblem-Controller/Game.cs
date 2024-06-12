@@ -17,6 +17,9 @@ public class Game
     private int _currentUnitNumberOfPlayer2;
     private Unit _currentUnitOfPlayer1;
     private Unit _currentUnitOfPlayer2;
+    
+    // todo: hacer un manager
+    // se encarga de cosas de game y de game attacks controler, todos los manage
 
     public Game(GameView view, string teamsFolder)
     {
@@ -95,8 +98,9 @@ public class Game
         // todo: ACA SE MANEJA TODO
         GetAndSetPlayersChosenUnit();
         PrintRound();
-        //ManageCurationAtTheBeginningOfTheCombat(); tal vez esta y la de abajo pueden ir juntas en una funcion
-        //ManageDamageAtTheBeginningOfTheCombat(); tal vez parecida al end of combat
+        //ManageCurationAtTheBeginningOfTheCombat(); tal vez esta y la de abajo pueden ir juntas en una funcion, tal vez parecida al end of combat
+        InitializeRound();
+        ManageDamageAtTheBeginningOfTheCombat(); 
         ExecuteAttacks();
         FollowUp();
         ManageCurationAtTheEndOfTheCombat();
@@ -146,6 +150,55 @@ public class Game
     private string GetCurrentAttackersName()
     {
         return IsPlayer1TheRoundStarter() ? _currentUnitOfPlayer1.Name : _currentUnitOfPlayer2.Name;
+    }
+    
+    private void InitializeRound()
+    {
+        _attackController.InitializeRound(_currentUnitNumberOfPlayer1, 
+            _currentUnitNumberOfPlayer2);
+        // TODO: MEJOR NOMBRE, nose si llamar a controller para que lo haga o hacerlo afuera
+        //el cacho era currentatackingunit y currentdefensiveunit que son cosas de controller
+        // SE IMRPIMEN LOS STARTING PARAMS, SE ACTIVAN LAS SKILLS, IMPRIME VENTAJAS Y SKILLS
+        // ACA LLAMAR A GAME ATTACKS CONTROLLER
+        //_currentAttackingUnit.StartedTheRound = true;
+        //_currentDefensiveUnit.StartedTheRound = false;
+        //ActivateSkills();
+        //PrintStartingParameters();
+    }
+   
+
+    private void ManageDamageAtTheBeginningOfTheCombat()
+    { 
+        // todo: hago esto mucho, pensar manera mas eficiente
+        if (IsPlayer1TheRoundStarter())
+        {
+            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer1);
+            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer2);
+        }
+        else
+        {
+            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer2);
+            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer1);
+        }
+        
+    }
+
+    private void ApplyDamageAtTheBeginningOfTheCombat(Unit unit)
+    {
+        if (unit.CombatEffects.DamageBeforeCombat > 0 )
+        {
+            Console.WriteLine("a");
+            if (unit.CurrentHp <= unit.CombatEffects.DamageBeforeCombat)
+            {Console.WriteLine("b");
+                _currentUnitOfPlayer1.CurrentHp = 1;
+            }
+            else
+            {
+                unit.CurrentHp -= unit.CombatEffects.DamageBeforeCombat;
+            }
+            _view.AnnounceDamageBeforeCombat(unit, 
+                unit.CombatEffects.DamageBeforeCombat);
+        }
     }
 
     private void ExecuteAttacks()
