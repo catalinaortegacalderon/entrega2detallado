@@ -16,6 +16,6 @@ public class BlueSkiesSkill : Skill
         Conditions[1] = new AlwaysTrueCondition();
         Effects = new Effect[2];
         Effects[0] = new AbsolutDamageReductionEffect(5);
-        Effects[1] = new ExtraDamageReductionEffect(5, DamageEffectCategory.All);
+        Effects[1] = new ExtraDamageEffect(5, DamageEffectCategory.All);
     }
 }

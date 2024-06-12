@@ -10,7 +10,6 @@ public class NullCDisruptSkill : Skill
 {
     public NullCDisruptSkill()
     {
-        Console.WriteLine("creando nullcdisrupt");
         Conditions = new Condition[1];
         Conditions[0] = new OpponentStartsCombatCondition();
 

@@ -41,7 +41,12 @@ public class ExtraDamageReductionConsideringOpponentsTotalStatPercentageEffect :
                 opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
                                   + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
         
+        Console.WriteLine(amount);
+        // todo: debuggear test 13 e41
+        
         amount = Convert.ToInt32(Math.Truncate(amount * _percentage));
+        
+        Console.WriteLine(amount);
         
         
         if (_type == DamageEffectCategory.All)

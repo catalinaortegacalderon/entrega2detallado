@@ -16,6 +16,6 @@ public class ChivalrySkill : Skill
         Conditions[1] = new AndCondition([new MyUnitStartsCombatCondition(), new OpponentHasFullHpCondition()]);
         Effects = new Effect[2];
         Effects[0] = new AbsolutDamageReductionEffect(2);
-        Effects[1] = new ExtraDamageReductionEffect(2, DamageEffectCategory.All);
+        Effects[1] = new ExtraDamageEffect(2, DamageEffectCategory.All);
     }
 }

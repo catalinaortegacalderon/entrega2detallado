@@ -15,6 +15,6 @@ public class BraverySkill : Skill
         Conditions[0] = new AlwaysTrueCondition();
 
         Effects = new Effect[1];
-        Effects[0] = new ExtraDamageReductionEffect(5, DamageEffectCategory.All);
+        Effects[0] = new ExtraDamageEffect(5, DamageEffectCategory.All);
     }
 }

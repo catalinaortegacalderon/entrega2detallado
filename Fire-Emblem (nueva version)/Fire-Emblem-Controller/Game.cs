@@ -187,9 +187,8 @@ public class Game
     {
         if (unit.CombatEffects.DamageBeforeCombat > 0 )
         {
-            Console.WriteLine("a");
             if (unit.CurrentHp <= unit.CombatEffects.DamageBeforeCombat)
-            {Console.WriteLine("b");
+            {
                 _currentUnitOfPlayer1.CurrentHp = 1;
             }
             else
@@ -246,8 +245,6 @@ public class Game
         }
         else if ( AttackerCantDoFollowup() && !IsTheDefensorAbleToCounterAttack())
         {
-            Console.WriteLine("IMPRIMIENDO");
-            Console.WriteLine(IsTheDefensorAbleToCounterAttack());
             if (IsPlayer1TheRoundStarter())
             {
                 _view.AnnounceASpecificUnitCantDoAFollowup(_currentUnitOfPlayer1.Name);

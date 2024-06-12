@@ -4,12 +4,12 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.DamageEffects;
 
-public class ExtraDamageReductionEffect : Effect
+public class ExtraDamageEffect : Effect
 {
     private readonly int _amount;
     private readonly DamageEffectCategory _type;
 
-    public ExtraDamageReductionEffect(int amount, DamageEffectCategory type)
+    public ExtraDamageEffect(int amount, DamageEffectCategory type)
     {
         _amount = amount;
         _type = type;
