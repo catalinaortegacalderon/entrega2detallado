@@ -65,6 +65,7 @@ public class GameAttacksController
         }
 
         _currentAttackingUnit.IsAttacking = true;
+        _currentAttackingUnit.HasAttackedThisRound = true;
         _currentDefensiveUnit.IsAttacking = false;
     }
 

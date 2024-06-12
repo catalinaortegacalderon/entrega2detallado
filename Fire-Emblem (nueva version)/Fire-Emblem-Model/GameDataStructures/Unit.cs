@@ -30,6 +30,7 @@ public class Unit
     public string LastOpponentName = "";
     public bool StartedTheRound;
     public bool IsAttacking;
+    public bool HasAttackedThisRound;
 
     public Unit()
     {

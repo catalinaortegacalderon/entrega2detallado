@@ -3,16 +3,16 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.CombatEffects;
 
-public class HealingEffect: Effect
+public class DamageAtTheEndOfTheCombatEffect : Effect
 {
-    private readonly double _percentage;
+    private readonly int _amount;
     
-    public HealingEffect(double percentage)
+    public DamageAtTheEndOfTheCombatEffect(int amount)
     {
-        this._percentage = percentage;
+        _amount = amount;
     }
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        myUnit.CombatEffects.HpRecuperationAtEveryAttack += _percentage;
+        myUnit.CombatEffects.DamageAfterCombat += _amount;
     }
 }

@@ -28,8 +28,12 @@ public static class DataStructuresResetter
     
     public static void ResetCombatEffects(CombatEffects dataStructure)
     { 
+        // TODO: ORDENAR ESTO
         dataStructure.HpRecuperationAtEveryAttack = 0;
         dataStructure.HpLostAtTheBeginning = 0;
+        dataStructure.DamageAfterCombat = 0;
+        dataStructure.DamageAfterCombatIfUnitAttacks = 0;
+        dataStructure.HpRecuperationAtTheEndOfTheCombat = 0;
         dataStructure.HasCounterAttackDenial = false;
         dataStructure.HasNeutralizationOfCounterattackDenial = false;
         dataStructure.HasGuaranteedFollowUp = false;

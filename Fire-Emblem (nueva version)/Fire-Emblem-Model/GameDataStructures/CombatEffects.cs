@@ -4,9 +4,13 @@ public class CombatEffects
 // todo: revisar este nombre
 {
     public double HpRecuperationAtEveryAttack = 0;
-    public double HpLostAtTheBeginning = 0;
     
-    public double DamageAfterCombat = 0;
+    public int HpRecuperationAtTheEndOfTheCombat = 0; // imp
+    
+    public double HpLostAtTheBeginning = 0; // implementar
+    
+    public int DamageAfterCombat = 0; 
+    public int DamageAfterCombatIfUnitAttacks = 0; // habra un contador para la unidad,  luego se suma a lo otro si se cumple
     
     public bool HasCounterAttackDenial = false;
     public bool HasNeutralizationOfCounterattackDenial = false;

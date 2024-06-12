@@ -93,6 +93,15 @@ public class GameView : IView
         _view.WriteLine(unitThatRecuperatesHp.Name + " recupera " + amount + " HP luego de atacar y queda con " +
                         finalHp + " HP.");
     }
+    
+    public void AnnounceCurationAfterCombat(Unit unitThatRecievesCuration, int recuperatedAmount)
+    {
+        _view.WriteLine(unitThatRecievesCuration.Name + " recupera " + recuperatedAmount + " HP despues del combate");
+    }
+    public void AnnounceDamageAfterCombat(Unit unitThatRecievesDamage, int damage)
+    {
+        _view.WriteLine(unitThatRecievesDamage.Name + " recibe " + damage + " de daño despues del combate");
+    }
 
     public void ShowAttack(string attackersName, string defensorsName, int damage)
     {

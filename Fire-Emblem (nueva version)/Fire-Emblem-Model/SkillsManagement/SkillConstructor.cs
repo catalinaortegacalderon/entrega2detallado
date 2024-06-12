@@ -231,6 +231,11 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new FlareSkill());
         else if (skillString == "Null C-Disrupt")
             skills.AddSkill(skillsCounter, new NullCDisruptSkill());
+        else if (skillString == "Fury")
+            skills.AddSkill(skillsCounter, new FurySkill());
+        else if (skillString == "Mystic Boost")
+            skills.AddSkill(skillsCounter, new MysticBoostSkill());
+        
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)
