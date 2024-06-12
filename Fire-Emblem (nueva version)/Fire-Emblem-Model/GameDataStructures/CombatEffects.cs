@@ -3,7 +3,9 @@ namespace ConsoleApp1.GameDataStructures;
 public class CombatEffects
 // todo: revisar este nombre
 {
-    public double HpRecuperation = 0;
+    public double HpRecuperationAtEveryAttack = 0;
+    
+    public double DamageAfterCombat = 0;
     
     public bool HasCounterAttackDenial = false;
     public bool HasDenialOfCounterattackDenial = false;

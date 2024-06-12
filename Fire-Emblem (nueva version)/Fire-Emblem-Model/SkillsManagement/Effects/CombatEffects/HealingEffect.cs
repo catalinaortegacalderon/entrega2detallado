@@ -13,6 +13,6 @@ public class HealingEffect: Effect
     }
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        myUnit.CombatEffects.HpRecuperation += percentage;
+        myUnit.CombatEffects.HpRecuperationAtEveryAttack += percentage;
     }
 }

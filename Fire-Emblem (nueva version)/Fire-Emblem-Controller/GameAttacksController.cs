@@ -134,9 +134,9 @@ public class GameAttacksController
     {
         
         // todo: esta funcion separarla en, calculate recuperation, apply, anounce
-        if (_currentAttackingUnit.CombatEffects.HpRecuperation > 0)
+        if (_currentAttackingUnit.CombatEffects.HpRecuperationAtEveryAttack > 0)
         {
-            var amountOfHpRecuperated = (int)(_currentAttackingUnit.CombatEffects.HpRecuperation * _attackValue);
+            var amountOfHpRecuperated = (int)(_currentAttackingUnit.CombatEffects.HpRecuperationAtEveryAttack * _attackValue);
             int finalAmountOfHpRecuperated = amountOfHpRecuperated;
             if (_currentAttackingUnit.CurrentHp + amountOfHpRecuperated > _currentAttackingUnit.HpMax)
             {

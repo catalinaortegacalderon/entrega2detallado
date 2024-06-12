@@ -225,6 +225,10 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new SurpriseAttackSkill());
         else if (skillString == "Hliðskjálf")
             skills.AddSkill(skillsCounter, new HlioskjalfSkill());
+        else if (skillString == "Laws of Sacae")
+            skills.AddSkill(skillsCounter, new LawsOfSacae());
+        else if (skillString == "Flare")
+            skills.AddSkill(skillsCounter, new FlareSkill());
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)
