@@ -307,84 +307,74 @@ public class Game
     
     private void ManageCurationAtTheEndOfTheCombat()
     {
-        // todo: revisar orden de esto, separar en funciones
-        // nota: sobrevive con al menos 1 hp    OJO SE IMPRIME EL ORIGINAL NO EL EFECTIVO
-        
-        // NO PUEDE REVIVIR NI DEJARLA CON MAS DE HP MAXIMO
-        
-        if (_currentUnitOfPlayer1.CombatEffects.HpRecuperationAtTheEndOfTheCombat > 0 
-            && _currentUnitOfPlayer1.CurrentHp > 0)
-        { 
-            if (_currentUnitOfPlayer1.CurrentHp + _currentUnitOfPlayer1.CombatEffects.HpRecuperationAtTheEndOfTheCombat
-                > _currentUnitOfPlayer1.HpMax)
-                _currentUnitOfPlayer1.CurrentHp = _currentUnitOfPlayer1.HpMax;
-            else
-            {
-                _currentUnitOfPlayer1.CurrentHp += _currentUnitOfPlayer1.CombatEffects.HpRecuperationAtTheEndOfTheCombat;
-            }
-            _view.AnnounceCurationAfterCombat(_currentUnitOfPlayer1, 
-                _currentUnitOfPlayer1.CombatEffects.HpRecuperationAtTheEndOfTheCombat);
-        }
-        if (_currentUnitOfPlayer2.CombatEffects.HpRecuperationAtTheEndOfTheCombat > 0 
-            && _currentUnitOfPlayer2.CurrentHp > 0)
+        if (IsPlayer1TheRoundStarter())
         {
-            if (_currentUnitOfPlayer2.CurrentHp + _currentUnitOfPlayer2.CombatEffects.HpRecuperationAtTheEndOfTheCombat
-                > _currentUnitOfPlayer2.HpMax)
-                _currentUnitOfPlayer2.CurrentHp = _currentUnitOfPlayer2.HpMax;
+            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer1);
+            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer2);
+        }
+        else
+        {
+            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer2);
+            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer1);
+        }
+        
+    }
+
+    private void ApplyCurationAtTheEndOfTheCombat(Unit unit)
+    {
+        if (unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat > 0 
+            && unit.CurrentHp > 0)
+        { 
+            if (unit.CurrentHp + unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat
+                > unit.HpMax)
+                unit.CurrentHp = unit.HpMax;
             else
             {
-                _currentUnitOfPlayer2.CurrentHp +=
-                    _currentUnitOfPlayer2.CombatEffects.HpRecuperationAtTheEndOfTheCombat;
+                unit.CurrentHp += unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat;
             }
-            _view.AnnounceCurationAfterCombat(_currentUnitOfPlayer2, 
-                _currentUnitOfPlayer2.CombatEffects.HpRecuperationAtTheEndOfTheCombat);
+            _view.AnnounceCurationAfterCombat(unit, 
+                unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat);
         }
-            
     }
 
 
     private void ManageDamageAtTheEndOfTheCombat()
     {
-        // todo: revisar orden de esto, separar en funciones
-        // nota: sobrevive con al menos 1 hp    OJO SE IMPRIME EL ORIGINAL NO EL EFECTIVO
-        // si la unidad muere no se anuncia
-        
-        if (_currentUnitOfPlayer1.HasAttackedThisRound)
-            _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat
-                += _currentUnitOfPlayer1.CombatEffects.DamageAfterCombatIfUnitAttacks;
-        if (_currentUnitOfPlayer2.HasAttackedThisRound)
-            _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat
-                += _currentUnitOfPlayer2.CombatEffects.DamageAfterCombatIfUnitAttacks;
-        
-        if (_currentUnitOfPlayer1.CombatEffects.DamageAfterCombat > 0 && _currentUnitOfPlayer1.CurrentHp > 0)
+        if (IsPlayer1TheRoundStarter())
         {
-            if (_currentUnitOfPlayer1.CurrentHp <= _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat)
-            {
-                _currentUnitOfPlayer1.CurrentHp = 1;
-            }
-            else
-            {
-                _currentUnitOfPlayer1.CurrentHp -= _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat;
-            }
-            _view.AnnounceDamageAfterCombat(_currentUnitOfPlayer1, 
-                _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat);
+            ApplyDamageAfterCombat(_currentUnitOfPlayer1);
+            ApplyDamageAfterCombat(_currentUnitOfPlayer2);
         }
-        if (_currentUnitOfPlayer2.CombatEffects.DamageAfterCombat > 0 && _currentUnitOfPlayer2.CurrentHp > 0)
+        else
         {
-            if (_currentUnitOfPlayer2.CurrentHp <= _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat)
-            {
-                _currentUnitOfPlayer2.CurrentHp = 1;
-            }
-            else
-            {
-                _currentUnitOfPlayer2.CurrentHp -= _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat;
-            }
-            _view.AnnounceDamageAfterCombat(_currentUnitOfPlayer2, 
-                _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat);
+            ApplyDamageAfterCombat(_currentUnitOfPlayer2);
+            ApplyDamageAfterCombat(_currentUnitOfPlayer1);
         }
-            
+        
+ 
     }
-    
+
+    private void ApplyDamageAfterCombat(Unit unit)
+    {
+        if (unit.HasAttackedThisRound)
+            unit.CombatEffects.DamageAfterCombat
+                += unit.CombatEffects.DamageAfterCombatIfUnitAttacks;
+        
+        if (unit.CombatEffects.DamageAfterCombat > 0 && unit.CurrentHp > 0)
+        {
+            if (unit.CurrentHp <= unit.CombatEffects.DamageAfterCombat)
+            {
+                unit.CurrentHp = 1;
+            }
+            else
+            {
+                unit.CurrentHp -= unit.CombatEffects.DamageAfterCombat;
+            }
+            _view.AnnounceDamageAfterCombat(unit, 
+                unit.CombatEffects.DamageAfterCombat);
+        }
+    }
+
 
     private void ResetUnitsBonus()
     {
