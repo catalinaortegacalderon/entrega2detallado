@@ -3,7 +3,7 @@ using ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
 namespace ConsoleApp1.SkillsManagement.Effects.CombatEffects;
 
-public class CounterAttackDenialEffect: Effect
+public class CounterAttackDenialOnOpponentEffect: Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {

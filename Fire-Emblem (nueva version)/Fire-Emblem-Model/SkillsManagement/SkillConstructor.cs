@@ -229,6 +229,8 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new LawsOfSacae());
         else if (skillString == "Flare")
             skills.AddSkill(skillsCounter, new FlareSkill());
+        else if (skillString == "Null C-Disrupt")
+            skills.AddSkill(skillsCounter, new NullCDisruptSkill());
     }
 
     private static bool SkillStringContainsCertainSkillType(string skillString, string name)

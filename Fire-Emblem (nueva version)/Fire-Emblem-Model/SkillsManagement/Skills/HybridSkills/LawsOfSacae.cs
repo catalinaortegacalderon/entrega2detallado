@@ -18,7 +18,8 @@ public class LawsOfSacae : Skill
         Conditions[1] = new MyUnitStartsCombatCondition();
         Conditions[2] = new MyUnitStartsCombatCondition();
         Conditions[3] = new MyUnitStartsCombatCondition();
-        Conditions[4] = new AndCondition([ new CompareTotalSpdAddingSpdToTheOpponent(5), 
+        Conditions[4] = new AndCondition([ new MyUnitStartsCombatCondition(),
+            new CompareTotalSpdAddingSpdToTheOpponent(5), 
             new OpponentUsesCertainWeaponCondition([Weapon.Sword, Weapon.Axe, Weapon.Lance])]); 
         
         Effects = new Effect[5];
@@ -26,6 +27,6 @@ public class LawsOfSacae : Skill
         Effects[1] = new ChangeStatsInEffect(StatType.Spd, 6);
         Effects[2] = new ChangeStatsInEffect(StatType.Res, 6);
         Effects[3] = new ChangeStatsInEffect(StatType.Def, 6);
-        Effects[4] = new CounterAttackDenialEffect();
+        Effects[4] = new CounterAttackDenialOnOpponentEffect();
     }
 }

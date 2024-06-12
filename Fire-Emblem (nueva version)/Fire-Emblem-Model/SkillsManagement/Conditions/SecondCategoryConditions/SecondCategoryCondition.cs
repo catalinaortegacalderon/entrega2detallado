@@ -6,7 +6,7 @@ namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
 public class SecondCategoryCondition : Condition
 {
-    public SecondCategoryCondition()
+    protected SecondCategoryCondition()
     {
         Priority = ConditionPriority.PriorityOfConditionsThatRequireBonusAndPenaltiesInformation;
     }

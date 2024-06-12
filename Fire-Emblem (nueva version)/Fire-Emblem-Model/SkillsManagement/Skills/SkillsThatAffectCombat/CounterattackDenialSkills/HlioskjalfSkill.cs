@@ -17,6 +17,6 @@ public class HlioskjalfSkill : Skill
             new OpponentUsesCertainWeaponCondition([Weapon.Magic])]);
 
         Effects = new Effect[1];
-        Effects[0] = new CounterAttackDenialEffect();
+        Effects[0] = new CounterAttackDenialOnOpponentEffect();
     }
 }

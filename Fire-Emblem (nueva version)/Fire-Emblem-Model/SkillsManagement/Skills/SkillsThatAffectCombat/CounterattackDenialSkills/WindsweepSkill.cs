@@ -17,6 +17,6 @@ public class WindsweepSkill : Skill
             new OpponentUsesCertainWeaponCondition([Weapon.Sword])]);
 
         Effects = new Effect[1];
-        Effects[0] = new CounterAttackDenialEffect();
+        Effects[0] = new CounterAttackDenialOnOpponentEffect();
     }
 }

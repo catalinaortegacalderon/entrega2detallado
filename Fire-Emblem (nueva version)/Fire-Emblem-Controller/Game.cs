@@ -79,7 +79,7 @@ public class Game
     private void PlayOneRound()
     {
         _attackController.RestartRound();
-
+        
         _attackController.SetCurrentAttacker(IsPlayer1TheRoundStarter() ? IdOfPlayer1 : IdOfPlayer2);
         StartRound();
         _currentRound++;
@@ -161,9 +161,11 @@ public class Game
     {
         if (IsPlayer1TheRoundStarter())
         {
-            return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial;
+            return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial || 
+                   _currentUnitOfPlayer2.CombatEffects.HasNeutralizationOfCounterattackDenial;
         }
-        return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial;
+        return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial || 
+               _currentUnitOfPlayer1.CombatEffects.HasNeutralizationOfCounterattackDenial;
     }
     
     private void FollowUp()
@@ -214,11 +216,14 @@ public class Game
 
     private bool CanASpecificPlayerCounterAttack(int playerId)
     {
+        // todo: este metodo y can defensor counteratack son muy similares
         if (playerId == IdOfPlayer1)
         {
-            return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial;
+            return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial || 
+                   _currentUnitOfPlayer1.CombatEffects.HasNeutralizationOfCounterattackDenial;;
         }
-        return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial;
+        return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial || 
+               _currentUnitOfPlayer2.CombatEffects.HasNeutralizationOfCounterattackDenial;;
     }
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)

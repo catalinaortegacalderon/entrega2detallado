@@ -17,6 +17,6 @@ public class SurpriseAttackSkill : Skill
             new OpponentUsesCertainWeaponCondition([Weapon.Bow])]);
 
         Effects = new Effect[1];
-        Effects[0] = new CounterAttackDenialEffect();
+        Effects[0] = new CounterAttackDenialOnOpponentEffect();
     }
 }

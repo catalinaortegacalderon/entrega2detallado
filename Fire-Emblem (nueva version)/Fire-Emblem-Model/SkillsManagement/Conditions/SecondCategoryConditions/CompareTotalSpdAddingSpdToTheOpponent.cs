@@ -6,11 +6,11 @@ namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 public class CompareTotalSpdAddingSpdToTheOpponent : SecondCategoryCondition
 {
     // todo: funcion
-    private int amountToAdd;
+    private readonly int _amountToAdd;
         
     public CompareTotalSpdAddingSpdToTheOpponent(int amountToAdd)
     {
-        this.amountToAdd = amountToAdd;
+        this._amountToAdd = amountToAdd;
     }
     
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
@@ -21,8 +21,6 @@ public class CompareTotalSpdAddingSpdToTheOpponent : SecondCategoryCondition
             opponentsUnit.Spd + opponentsUnit.ActiveBonus.Spd * opponentsUnit.ActiveBonusNeutralizer.Spd
                               + opponentsUnit.ActivePenalties.Spd * opponentsUnit.ActivePenaltiesNeutralizer.Spd;
 
-        if (myTotalSpd > opponentsTotalSpd + amountToAdd)
-            return true;
-        return false;
+        return myTotalSpd >= opponentsTotalSpd + _amountToAdd;
     }
 }
