@@ -235,6 +235,10 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new FurySkill());
         else if (skillString == "Mystic Boost")
             skills.AddSkill(skillsCounter, new MysticBoostSkill());
+        else if (skillString == "Mystic Boost")
+            skills.AddSkill(skillsCounter, new MysticBoostSkill());
+        else if (SkillStringContainsCertainSkillType(skillString, "Push"))
+            CreatePush(skillString, skillsCounter, skills);
         
     }
 
@@ -311,6 +315,8 @@ public class SkillConstructor
 
     private static void CreateGuard(string skillString, int skillsCounter, SkillsList skills)
     {
+        // todo: arreglar esto, tengo convertidor para stat pero no para weapon
+        
         var weapon = Weapon.Empty;
         var weaponString = skillString.Split(" ")[0];
         if (weaponString == "Magic") weapon = Weapon.Magic;
@@ -320,6 +326,13 @@ public class SkillConstructor
         if (weaponString == "Bow") weapon = Weapon.Bow;
         if (weaponString == "Sword") weapon = Weapon.Sword;
         skills.AddSkill(skillsCounter, new Guard(weapon));
+    }
+
+    private static void CreatePush(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var firstStat = GetStatFromString(skillString, 0);
+        var secondSatat = GetStatFromString(skillString, 1);
+        skills.AddSkill(skillsCounter, new PushSkill(firstStat, secondSatat));
     }
 
     private static StatType ConvertStatStringToStatType(string statString)

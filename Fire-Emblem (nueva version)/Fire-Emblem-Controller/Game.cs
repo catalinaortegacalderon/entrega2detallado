@@ -296,11 +296,15 @@ public class Game
         // nota: sobrevive con al menos 1 hp    OJO SE IMPRIME EL ORIGINAL NO EL EFECTIVO
         // si la unidad muere no se anuncia
         
+        if (_currentUnitOfPlayer1.HasAttackedThisRound)
+            _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat
+                += _currentUnitOfPlayer1.CombatEffects.DamageAfterCombatIfUnitAttacks;
+        if (_currentUnitOfPlayer2.HasAttackedThisRound)
+            _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat
+                += _currentUnitOfPlayer2.CombatEffects.DamageAfterCombatIfUnitAttacks;
+        
         if (_currentUnitOfPlayer1.CombatEffects.DamageAfterCombat > 0 && _currentUnitOfPlayer1.CurrentHp > 0)
         {
-            if (_currentUnitOfPlayer1.HasAttackedThisRound)
-                _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat
-                    += _currentUnitOfPlayer1.CombatEffects.DamageAfterCombatIfUnitAttacks;
             if (_currentUnitOfPlayer1.CurrentHp <= _currentUnitOfPlayer1.CombatEffects.DamageAfterCombat)
             {
                 _currentUnitOfPlayer1.CurrentHp = 1;
@@ -314,9 +318,6 @@ public class Game
         }
         if (_currentUnitOfPlayer2.CombatEffects.DamageAfterCombat > 0 && _currentUnitOfPlayer2.CurrentHp > 0)
         {
-            if (_currentUnitOfPlayer2.HasAttackedThisRound)
-                _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat
-                    += _currentUnitOfPlayer2.CombatEffects.DamageAfterCombatIfUnitAttacks;
             if (_currentUnitOfPlayer2.CurrentHp <= _currentUnitOfPlayer2.CombatEffects.DamageAfterCombat)
             {
                 _currentUnitOfPlayer2.CurrentHp = 1;

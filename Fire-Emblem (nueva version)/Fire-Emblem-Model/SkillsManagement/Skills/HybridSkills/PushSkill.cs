@@ -14,8 +14,8 @@ public class PushSkill : Skill
     {
         Conditions = new Condition[3];
         Conditions[0] = new MyHpIsBiggerThanCondition(0.25);
-        Conditions[1] = new MyUnitStartsCombatCondition();
-        Conditions[2] = new MyUnitStartsCombatCondition();
+        Conditions[1] = new MyHpIsBiggerThanCondition(0.25);
+        Conditions[2] = new MyHpIsBiggerThanCondition(0.25);
         
         Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(firstStat, 7);
