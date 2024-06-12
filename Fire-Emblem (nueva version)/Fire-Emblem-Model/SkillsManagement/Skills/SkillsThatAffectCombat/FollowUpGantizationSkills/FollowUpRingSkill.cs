@@ -11,7 +11,7 @@ public class FollowUpRingSkill: Skill
     public FollowUpRingSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new OrCondition([new MyHpIsBiggerThanCondition(0.5), new OpponentStartsCombatCondition()]);
+        Conditions[0] = new MyHpIsBiggerThanCondition(0.5);
 
         Effects = new Effect[1];
         Effects[0] = new GuaranteeFollowUpEffect();

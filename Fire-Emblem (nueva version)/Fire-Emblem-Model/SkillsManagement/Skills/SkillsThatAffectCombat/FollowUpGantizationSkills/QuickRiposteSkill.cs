@@ -11,7 +11,7 @@ public class QuickRiposteSkill: Skill
     public QuickRiposteSkill()
     {
         Conditions = new Condition[1];
-        Conditions[0] = new OrCondition([new MyHpIsBiggerThanCondition(0.6), new OpponentStartsCombatCondition()]);
+        Conditions[0] = new AndCondition([new MyHpIsBiggerThanCondition(0.6), new OpponentStartsCombatCondition()]);
 
         Effects = new Effect[1];
         Effects[0] = new GuaranteeFollowUpEffect();

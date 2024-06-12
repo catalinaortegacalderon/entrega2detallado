@@ -9,6 +9,9 @@ using ConsoleApp1.SkillsManagement.Skills.PenaltySkills;
 using ConsoleApp1.SkillsManagement.Skills.PercentualDamageReductionSkills;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.CounterattackDenialSkills;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.DenialOfFollowUpDenialSkills;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.DenialOfFollowUpGarantizationSkills;
+using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.FollowUpDenial;
 using ConsoleApp1.SkillsManagement.Skills.SkillsThatAffectCombat.HealingSkills;
 
 namespace ConsoleApp1.SkillsManagement;
@@ -239,6 +242,44 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new MysticBoostSkill());
         else if (SkillStringContainsCertainSkillType(skillString, "Push"))
             CreatePush(skillString, skillsCounter, skills);
+        else if (skillString == "Scendscale")
+            skills.AddSkill(skillsCounter, new ScendscaleSkill());
+        else if (skillString == "Eclipse Brace")
+            skills.AddSkill(skillsCounter, new EclipseBraceSkill());
+        else if (skillString == "Resonance")
+            skills.AddSkill(skillsCounter, new ResonanceSkill());
+        else if (skillString == "True Dragon Wall")
+            skills.AddSkill(skillsCounter, new TrueDragonWallSkill());
+        else if (skillString == "Mastermind")
+            skills.AddSkill(skillsCounter, new MastermindSkill());
+        else if (skillString == "Bewitching Tome")
+            skills.AddSkill(skillsCounter, new BewitchingTomeSkill());
+        else if (skillString == "Wary Fighter")
+            skills.AddSkill(skillsCounter, new WaryFighterSkill());
+        else if (skillString == "Piercing Tribute")
+            skills.AddSkill(skillsCounter, new PiercingTributeSkill());
+        else if (skillString == "Mjölnir")
+            skills.AddSkill(skillsCounter, new MjolnirSkill());
+        else if (skillString == "Brash Assault")
+            skills.AddSkill(skillsCounter, new BrashAssaultSkill());
+        else if (skillString == "Null Follow-Up")
+            skills.AddSkill(skillsCounter, new NullFollowUpSkill());
+        else if (skillString == "Binding Shield")
+            skills.AddSkill(skillsCounter, new BindingShieldSkill());
+        else if (skillString == "Sun-Twin Wing")
+            skills.AddSkill(skillsCounter, new SunTwinWingSkill());
+        else if (skillString == "Dragon’s Ire")
+            skills.AddSkill(skillsCounter, new DragonsIreSkill());
+        else if (skillString == "Black Eagle Rule")
+            skills.AddSkill(skillsCounter, new BlackEagleRuleSkill());
+        else if (skillString == "Blue Lion Rule")
+            skills.AddSkill(skillsCounter, new BlueLionRuleSkill());
+        else if (skillString == "New Divinity")
+            skills.AddSkill(skillsCounter, new NewDivinitySkill());
+        else if (skillString == "Phys. Null Follow")
+            skills.AddSkill(skillsCounter, new PhysNullFollowSkill());
+        else if (skillString == "Mag. Null Follow")
+            skills.AddSkill(skillsCounter, new MagNullFollowSkill());
         
     }
 

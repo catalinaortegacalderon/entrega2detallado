@@ -1,6 +1,7 @@
 using System.Collections;
 using ConsoleApp1.SkillsManagement.Skills.BaseSkills;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
+using ConsoleApp1.SkillsManagement.Skills.HybridSkills;
 
 namespace ConsoleApp1.EncapsulatedLists;
 
