@@ -161,14 +161,22 @@ public class Game
 
     private void CheckPlayerAlliesConditions(int playerId)
     {
+        // todo: aca queda desatualizado el param siempre, solo esta actualizado el de la unit actual
+        var playersUnitNumber = _currentUnitNumberOfPlayer2;
+        if (playerId == IdOfPlayer1)
+        {
+            playersUnitNumber = _currentUnitNumberOfPlayer1;
+        }
         var players = _attackController.GetPlayers();
         var player = players.GetPlayerById(playerId);
         var unitsOfThePlayer = player.Units;
         bool hasAllyWithMagic = false;
+        int counter = 0;
         foreach (var unit in unitsOfThePlayer)
         {
-            if (unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic)
+            if (unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic  && counter != playersUnitNumber)
                 hasAllyWithMagic = true;
+            counter++;
         }
         foreach (var unit in unitsOfThePlayer)
         {
