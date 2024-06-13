@@ -221,7 +221,7 @@ public class Game
         {
             if (unit.CurrentHp <= unit.CombatEffects.DamageBeforeCombat)
             {
-                _currentUnitOfPlayer1.CurrentHp = 1;
+                unit.CurrentHp = 1;
             }
             else
             {

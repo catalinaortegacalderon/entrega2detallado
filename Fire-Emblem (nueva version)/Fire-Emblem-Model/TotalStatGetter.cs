@@ -3,7 +3,7 @@ using ConsoleApp1.GameDataStructures;
 
 namespace Fire_Emblem
 {
-    public class TotalStatGetter
+    public static class TotalStatGetter
     {
         
         // todo: IMPLEMENTAR ESTO
