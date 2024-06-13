@@ -1,6 +1,8 @@
+using System.ComponentModel.Design.Serialization;
 using ConsoleApp1.DataTypes;
 using ConsoleApp1.EncapsulatedLists;
 using ConsoleApp1.SkillsManagement.Skills.AbsolutDamageReductionSkills;
+using ConsoleApp1.SkillsManagement.Skills.BaseSkills;
 using ConsoleApp1.SkillsManagement.Skills.BonusSkills;
 using ConsoleApp1.SkillsManagement.Skills.ExtraDamageSkills;
 using ConsoleApp1.SkillsManagement.Skills.HybridSkills;
@@ -280,6 +282,8 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new PhysNullFollowSkill());
         else if (skillString == "Mag. Null Follow")
             skills.AddSkill(skillsCounter, new MagNullFollowSkill());
+        else if (SkillStringContainsCertainSkillType(skillString, "Impact"))
+            CreateImpact(skillString, skillsCounter, skills);
         
     }
 
@@ -363,10 +367,27 @@ public class SkillConstructor
         if (weaponString == "Magic") weapon = Weapon.Magic;
         if (weaponString == "Axe") weapon = Weapon.Axe;
         if (weaponString == "Lance") weapon = Weapon.Lance;
-
         if (weaponString == "Bow") weapon = Weapon.Bow;
         if (weaponString == "Sword") weapon = Weapon.Sword;
         skills.AddSkill(skillsCounter, new Guard(weapon));
+    }
+    
+    private static void CreateImpact(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var impactType = skillString.Split(" ")[0];
+        Skill skill = new EmptySkill();
+
+        if (impactType == "Sturdy")
+            skill = new ImpactSkill(StatType.Atk, StatType.Def);
+        if (impactType == "Mirror")
+            Console.WriteLine("probando");
+            skill = new ImpactSkill(StatType.Atk, StatType.Res);
+        if (impactType == "Swift")
+            skill = new ImpactSkill(StatType.Spd, StatType.Res);
+        if (impactType == "Steady")
+            skill = new ImpactSkill(StatType.Spd, StatType.Def);
+        
+        skills.AddSkill(skillsCounter, skill);
     }
 
     private static void CreatePush(string skillString, int skillsCounter, SkillsList skills)

@@ -42,7 +42,7 @@ public static class DataStructuresResetter
         dataStructure.AmountOfEffectsThatGuaranteeFollowup = 0;
         dataStructure.HasDenialOfGuaranteedFollowUp = false;
         dataStructure.HasFollowUpDenial = false;
-        dataStructure.HasDenialOfFollowUpDenial = false;
+        dataStructure.HasNeutralizationOfFollowUpDenial = false;
     }
     
 }

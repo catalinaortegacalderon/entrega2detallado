@@ -91,6 +91,15 @@ public class FollowUpController
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
     {
+        if (!ThereAreNoLoosers())
+            return false;
+        if (attackingUnit.CombatEffects.HasFollowUpDenial
+            && ! attackingUnit.CombatEffects.HasNeutralizationOfFollowUpDenial)
+            return false;
+        if (attackingUnit.CombatEffects.HasGuaranteedFollowUp
+            && !attackingUnit.CombatEffects.HasDenialOfGuaranteedFollowUp)
+            return true;
+        
         // revisar, followup denial, condicion, guaranteed...
         const int additionValueForFollowupCondition = 5;
         bool doesFollowupConditionHold =
@@ -101,11 +110,8 @@ public class FollowUpController
             <= attackingUnit.Spd
             + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
             + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
-        
-        // todo: poner el statement de abajo mejor encapsulado
-        return ThereAreNoLoosers() && (doesFollowupConditionHold 
-                                       || attackingUnit.CombatEffects.HasGuaranteedFollowUp) 
-                                    && !attackingUnit.CombatEffects.HasFollowUpDenial;
+
+        return doesFollowupConditionHold;
     }
 
     private bool ThereAreNoLoosers()

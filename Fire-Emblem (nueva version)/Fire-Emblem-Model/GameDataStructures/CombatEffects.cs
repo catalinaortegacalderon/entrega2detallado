@@ -23,5 +23,5 @@ public class CombatEffects
     
     public bool HasFollowUpDenial = false;
     public int AmountOfEffectsThatDenyFollowup = 0;
-    public bool HasDenialOfFollowUpDenial = false;
+    public bool HasNeutralizationOfFollowUpDenial = false;
 }
