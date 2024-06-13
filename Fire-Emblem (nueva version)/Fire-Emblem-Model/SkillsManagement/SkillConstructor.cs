@@ -212,7 +212,7 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new GuardBearingSkill());
         else if (skillString == "Divine Recreation") 
             skills.AddSkill(skillsCounter, new DivineRecreationSkill());
-        else if (skillString == "Quick Riposte") 
+        else if (skillString == "Quick Riposte")
             skills.AddSkill(skillsCounter, new QuickRiposteSkill());
         else if (skillString == "Follow-Up Ring") 
             skills.AddSkill(skillsCounter, new FollowUpRingSkill());

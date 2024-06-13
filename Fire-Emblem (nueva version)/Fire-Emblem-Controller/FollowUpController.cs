@@ -1,3 +1,4 @@
+using ConsoleApp1.DataTypes;
 using ConsoleApp1.GameDataStructures;
 using Fire_Emblem_View;
 
@@ -5,13 +6,98 @@ namespace Fire_Emblem;
 
 public class FollowUpController
 {
-    // todo: arreglar esto
     
-    public FollowUpController(View view, Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound)
+    private const int IdOfPlayer1 = 0;
+    private const int IdOfPlayer2 = 1;
+    
+    private readonly GameAttacksController _attackController;
+    private readonly GameView _view;
+
+    private int _idOfTheRoundStarter;
+    private int _otherPlayersId;
+
+    private Unit _unitThatStartedTheRound;
+    private Unit _unitThatDidNotStartTheRound;
+    
+    public FollowUpController(GameAttacksController attackController, GameView view)
     {
-        
+        _attackController = attackController;
+        _view = view;
     }
-    public void ManageFollowup()
+    public void ManageFollowup(Unit unitThatStartedTheRound, Unit unitThatDidNotStartTheRound, 
+        int idOfTheRoundStarter)
     {
+        if (idOfTheRoundStarter == IdOfPlayer1)
+        {
+            _idOfTheRoundStarter = IdOfPlayer1;
+            _otherPlayersId = IdOfPlayer2;
+        }
+        else
+        {
+            _idOfTheRoundStarter = IdOfPlayer2;
+            // todo: cambiar este nombre
+            _otherPlayersId = IdOfPlayer1;
+        }
+
+        _unitThatStartedTheRound = unitThatStartedTheRound;
+        _unitThatDidNotStartTheRound = unitThatDidNotStartTheRound;
+        
+        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound))
+        {
+            _attackController.SetCurrentAttacker(_idOfTheRoundStarter);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _unitThatStartedTheRound, 
+                _unitThatDidNotStartTheRound);
+        }
+        else if (CanDoAFollowup(unitThatDidNotStartTheRound, unitThatStartedTheRound) &&
+                 CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
+        {
+            _attackController.SetCurrentAttacker(_otherPlayersId);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _unitThatDidNotStartTheRound, 
+                _unitThatStartedTheRound);
+        }
+        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
+        { 
+            _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
+        }
+        else if (ThereAreNoLoosers())
+        {
+            _view.AnnounceNoUnitCanDoAFollowup();
+        }
+    }
+    
+    private bool AttackerCantDoFollowup()
+    {
+        return !CanDoAFollowup(_unitThatStartedTheRound, _unitThatDidNotStartTheRound);
+    }
+
+    private bool CanASpecificPlayerCounterAttack(Unit unit)
+    {
+        return !unit.CombatEffects.HasCounterAttackDenial || 
+                   unit.CombatEffects.HasNeutralizationOfCounterattackDenial;;
+    }
+
+    private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
+    {
+        const int additionValueForFollowupCondition = 5;
+        bool doesFollowupConditionHold =
+            defensiveUnit.Spd
+            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizer.Spd
+            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizer.Spd
+            + additionValueForFollowupCondition
+            <= attackingUnit.Spd
+            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
+            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
+        
+        // todo: poner el statement de abajo mejor encapsulado
+        return ThereAreNoLoosers() && (doesFollowupConditionHold 
+                                       || attackingUnit.CombatEffects.HasGuaranteedFollowUp);
+    }
+
+    private bool ThereAreNoLoosers()
+    {
+        return _unitThatStartedTheRound.CurrentHp != 0 
+               && _unitThatDidNotStartTheRound.CurrentHp != 0;
     }
 }

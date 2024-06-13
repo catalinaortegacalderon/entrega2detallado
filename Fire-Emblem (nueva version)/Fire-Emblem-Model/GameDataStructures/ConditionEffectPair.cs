@@ -15,7 +15,6 @@ public class ConditionEffectPair : IEnumerable
 
     public ConditionEffectPair(Unit unitThatHasThePair, Unit opponentsUnit, Skill skill, int pairIndex)
     {
-        // todo: sacar this
         UnitThatHasThePair = unitThatHasThePair;
         OpponentsUnit = opponentsUnit;
         Condition = skill.GetCondition(pairIndex);

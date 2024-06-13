@@ -10,13 +10,18 @@ public class Game
     private const int IdOfPlayer1 = 0;
     private const int IdOfPlayer2 = 1;
     private readonly string _teamsFolder;
+    
     private readonly GameView _view;
-    private GameAttacksController _attackController;
+    
     private int _currentRound;
+    
     private int _currentUnitNumberOfPlayer1;
     private int _currentUnitNumberOfPlayer2;
     private Unit _currentUnitOfPlayer1;
     private Unit _currentUnitOfPlayer2;
+    
+    private GameAttacksController _attackController;
+    private FollowUpController _followUpController;
     
     // todo: hacer un manager
     // se encarga de cosas de game y de game attacks controler, todos los manage
@@ -45,6 +50,7 @@ public class Game
         var teamFile = GetTeamFile();
         var gameAttacksControllerBuilder = new GameAttacksControllerBuilder();
         _attackController = gameAttacksControllerBuilder.BuildGameController(File.ReadAllLines(teamFile), _view);
+        _followUpController = new FollowUpController(_attackController, _view);
 
         while (IsGameNotTerminated())
         {
@@ -186,8 +192,21 @@ public class Game
 
     private void InitializeRound()
     {
-        _attackController.InitializeRound(_currentUnitNumberOfPlayer1, 
-            _currentUnitNumberOfPlayer2);
+        Unit attackingUnit;
+        Unit defensiveUnit;
+        
+        if (IsPlayer1TheRoundStarter())
+        {
+            attackingUnit = _currentUnitOfPlayer1;
+            defensiveUnit = _currentUnitOfPlayer2;
+        }
+        else
+        {
+            attackingUnit = _currentUnitOfPlayer2;
+            defensiveUnit = _currentUnitOfPlayer1;
+        }
+        _attackController.InitializeRound(attackingUnit, defensiveUnit);
+        
         // TODO: MEJOR NOMBRE, nose si llamar a controller para que lo haga o hacerlo afuera
         //el cacho era currentatackingunit y currentdefensiveunit que son cosas de controller
         // SE IMRPIMEN LOS STARTING PARAMS, SE ACTIVAN LAS SKILLS, IMPRIME VENTAJAS Y SKILLS
@@ -234,15 +253,33 @@ public class Game
 
     private void ExecuteAttacks()
     {
-        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
-            _currentUnitNumberOfPlayer1, 
-            _currentUnitNumberOfPlayer2);
-        _attackController.ChangeAttacker();
-        if (IsTheDefensorAbleToCounterAttack())
+        // todo: arreglar
+        if (IsPlayer1TheRoundStarter())
         {
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
-                _currentUnitNumberOfPlayer1,
-                _currentUnitNumberOfPlayer2);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
+                _currentUnitOfPlayer1, 
+                _currentUnitOfPlayer2);
+            _attackController.ChangeAttacker();
+            if (IsTheDefensorAbleToCounterAttack())
+            {
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
+                    _currentUnitOfPlayer2,
+                    _currentUnitOfPlayer1);
+            }
+        }
+
+        else
+        {
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
+                _currentUnitOfPlayer2, 
+                _currentUnitOfPlayer1);
+            _attackController.ChangeAttacker();
+            if (IsTheDefensorAbleToCounterAttack())
+            {
+                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
+                    _currentUnitOfPlayer1,
+                    _currentUnitOfPlayer2);
+            }
         }
     }
 
@@ -258,80 +295,17 @@ public class Game
     }
     
     private void FollowUp()
-    { 
-        if (CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2) &&
-            CanASpecificPlayerCounterAttack(IdOfPlayer1))
-        {
-            _attackController.SetCurrentAttacker(IdOfPlayer1);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _currentUnitNumberOfPlayer1, 
-                _currentUnitNumberOfPlayer2);
-        }
-        else if (CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1) &&
-                 CanASpecificPlayerCounterAttack(IdOfPlayer2))
-        {
-            _attackController.SetCurrentAttacker(IdOfPlayer2);
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
-                _currentUnitNumberOfPlayer1, 
-                _currentUnitNumberOfPlayer2);
-        }
-        else if ( AttackerCantDoFollowup() && !IsTheDefensorAbleToCounterAttack())
-        {
-            if (IsPlayer1TheRoundStarter())
-            {
-                _view.AnnounceASpecificUnitCantDoAFollowup(_currentUnitOfPlayer1.Name);
-            }
-            else
-            {
-                _view.AnnounceASpecificUnitCantDoAFollowup(_currentUnitOfPlayer2.Name);
-            }
-        }
-        else if (ThereAreNoLoosers())
-        {
-            _view.AnnounceNoUnitCanDoAFollowup();
-        }
-    }
-
-    private bool AttackerCantDoFollowup()
     {
         if (IsPlayer1TheRoundStarter())
+            _followUpController.ManageFollowup(
+                _currentUnitOfPlayer1, _currentUnitOfPlayer2,
+                IdOfPlayer1);
+        else
         {
-            return !CanDoAFollowup(_currentUnitOfPlayer1, _currentUnitOfPlayer2);
+            _followUpController.ManageFollowup(  
+                _currentUnitOfPlayer2, _currentUnitOfPlayer1,
+                IdOfPlayer2);
         }
-        return !CanDoAFollowup(_currentUnitOfPlayer2, _currentUnitOfPlayer1);
-    }
-
-    private bool CanASpecificPlayerCounterAttack(int playerId)
-    {
-        // todo: este metodo y can defensor counteratack son muy similares
-        if (playerId == IdOfPlayer1)
-        {
-            return !_currentUnitOfPlayer1.CombatEffects.HasCounterAttackDenial || 
-                   _currentUnitOfPlayer1.CombatEffects.HasNeutralizationOfCounterattackDenial;;
-        }
-        return !_currentUnitOfPlayer2.CombatEffects.HasCounterAttackDenial || 
-               _currentUnitOfPlayer2.CombatEffects.HasNeutralizationOfCounterattackDenial;;
-    }
-
-    private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
-    {
-        const int additionValueForFollowupCondition = 5;
-        bool doesFollowupConditionHold =
-            defensiveUnit.Spd
-            + defensiveUnit.ActiveBonus.Spd * defensiveUnit.ActiveBonusNeutralizer.Spd
-            + defensiveUnit.ActivePenalties.Spd * defensiveUnit.ActivePenaltiesNeutralizer.Spd
-            + additionValueForFollowupCondition
-            <= attackingUnit.Spd
-            + attackingUnit.ActiveBonus.Spd * attackingUnit.ActiveBonusNeutralizer.Spd
-            + attackingUnit.ActivePenalties.Spd * attackingUnit.ActivePenaltiesNeutralizer.Spd;
-        
-        // todo: poner el statement de abajo mejor encapsulado
-        return ThereAreNoLoosers() && (doesFollowupConditionHold || attackingUnit.CombatEffects.HasGuaranteedFollowUp);
-    }
-
-    private bool ThereAreNoLoosers()
-    {
-        return _currentUnitOfPlayer2.CurrentHp != 0 && _currentUnitOfPlayer1.CurrentHp != 0;
     }
     
     private void ManageCurationAtTheEndOfTheCombat()
