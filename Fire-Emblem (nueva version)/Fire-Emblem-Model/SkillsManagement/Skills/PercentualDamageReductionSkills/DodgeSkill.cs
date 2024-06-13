@@ -15,6 +15,6 @@ public class DodgeSkill : Skill
         Conditions[0] = new CompareTotalSpdCondition();
 
         Effects = new Effect[1];
-        Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Spd, 4);
+        Effects[0] = new PercentualDamageReductionDeterminedBySpdDifferenceEffect(4, 0.6, DamageEffectCategory.All);
     }
 }

@@ -15,6 +15,7 @@ public class DragonWallSkill : Skill
         Conditions[0] = new CompareTotalResCondition();
 
         Effects = new Effect[1];
-        Effects[0] = new PercentualDamageReductionDeterminedByStatDifferenceEffect(StatType.Res, 4);
+        Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
+            4, 0.6, DamageEffectCategory.All);
     }
 }
