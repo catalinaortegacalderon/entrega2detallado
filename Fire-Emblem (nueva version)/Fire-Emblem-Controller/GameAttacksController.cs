@@ -12,6 +12,7 @@ public class GameAttacksController
     private readonly PlayersList _players = new();
     private readonly GameView _view;
     private DamageCalculator _damageCalculator;
+    private OutOfCombatDamageManager _outOfCombatDamageManager;
     private Unit _currentAttackingUnit;
     private Unit _currentDefensiveUnit;
     private int _attackValue;
@@ -29,6 +30,7 @@ public class GameAttacksController
         _players.AddPlayer(firstPlayer);
         _players.AddPlayer(secondPlayer);
         _view = view;
+        _outOfCombatDamageManager = new OutOfCombatDamageManager(view);
     }
 
     public void GenerateAnAttackBetweenTwoUnits(AttackType typeOfCurrentAttack, Unit atackingUnit, 
@@ -127,22 +129,9 @@ public class GameAttacksController
 
     private void ManageHpRecuperationInEveryAttack()
     {
+        _outOfCombatDamageManager.ManaManageHpRecuperationInEveryAttack(_currentAttackingUnit, _currentDefensiveUnit,
+            _attackValue);
         
-        // todo: esta funcion separarla en, calculate recuperation, apply, anounce
-        if (_currentAttackingUnit.CombatEffects.HpRecuperationAtEveryAttack > 0)
-        {
-            var amountOfHpRecuperated = (int)(_currentAttackingUnit.CombatEffects.HpRecuperationAtEveryAttack * _attackValue);
-            int finalAmountOfHpRecuperated = amountOfHpRecuperated;
-            if (_currentAttackingUnit.CurrentHp + amountOfHpRecuperated > _currentAttackingUnit.HpMax)
-            {
-                finalAmountOfHpRecuperated = _currentAttackingUnit.HpMax - _currentAttackingUnit.CurrentHp;
-            }
-            _currentAttackingUnit.CurrentHp += finalAmountOfHpRecuperated;
-            if (amountOfHpRecuperated > 0)
-            {
-                _view.AnnounceHpRecuperation(_currentAttackingUnit, amountOfHpRecuperated , _currentAttackingUnit.CurrentHp);
-            }
-        }
     }
     
     private void ReduceUnitAmount()

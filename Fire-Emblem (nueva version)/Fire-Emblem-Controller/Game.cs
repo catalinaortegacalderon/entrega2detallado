@@ -22,6 +22,7 @@ public class Game
     
     private GameAttacksController _attackController;
     private FollowUpController _followUpController;
+    private OutOfCombatDamageManager _outOfCombatDamageManager;
     
     // todo: hacer un manager
     // se encarga de cosas de game y de game attacks controler, todos los manage
@@ -31,6 +32,7 @@ public class Game
         _view = view;
         _teamsFolder = teamsFolder;
         _currentRound = 1;
+        _outOfCombatDamageManager = new OutOfCombatDamageManager(view);
     }
 
     public void Play()
@@ -105,17 +107,29 @@ public class Game
         GetAndSetPlayersChosenUnit();
         PrintRound();
         CheckAlliesConditionsForSkills();
-        //ManageCurationAtTheBeginningOfTheCombat(); tal vez esta y la de abajo pueden ir juntas en una funcion, tal vez parecida al end of combat
         InitializeRound();
-        ManageDamageAtTheBeginningOfTheCombat(); 
+        ManageHpChangeAtTheBeginningOfTheCombat(); 
         ExecuteAttacks();
         FollowUp();
-        ManageCurationAtTheEndOfTheCombat();
-        ManageDamageAtTheEndOfTheCombat();
+        ManageHpChangeAtTheEndOfTheCombat();
         ResetUnitsBonus();
         ShowLeftoverHp();
         UpdateGameLogs();
         EliminateLooserUnit();
+    }
+
+    private void ManageHpChangeAtTheEndOfTheCombat()
+    {
+        if (IsPlayer1TheRoundStarter())
+        {
+            _outOfCombatDamageManager.ManageHpChangeAtTheEndOfTheCombat(
+                _currentUnitOfPlayer1, _currentUnitOfPlayer2);
+        }
+        else
+        {
+            _outOfCombatDamageManager.ManageHpChangeAtTheEndOfTheCombat(
+                _currentUnitOfPlayer2, _currentUnitOfPlayer1);
+        }
     }
 
     private void GetAndSetPlayersChosenUnit()
@@ -205,49 +219,24 @@ public class Game
             attackingUnit = _currentUnitOfPlayer2;
             defensiveUnit = _currentUnitOfPlayer1;
         }
+        
         _attackController.InitializeRound(attackingUnit, defensiveUnit);
         
-        // TODO: MEJOR NOMBRE, nose si llamar a controller para que lo haga o hacerlo afuera
-        //el cacho era currentatackingunit y currentdefensiveunit que son cosas de controller
-        // SE IMRPIMEN LOS STARTING PARAMS, SE ACTIVAN LAS SKILLS, IMPRIME VENTAJAS Y SKILLS
-        // ACA LLAMAR A GAME ATTACKS CONTROLLER
-        //_currentAttackingUnit.StartedTheRound = true;
-        //_currentDefensiveUnit.StartedTheRound = false;
-        //ActivateSkills();
-        //PrintStartingParameters();
     }
-   
 
-    private void ManageDamageAtTheBeginningOfTheCombat()
-    { 
+
+    private void ManageHpChangeAtTheBeginningOfTheCombat()
+    {
         // todo: hago esto mucho, pensar manera mas eficiente
         if (IsPlayer1TheRoundStarter())
         {
-            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer1);
-            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer2);
+            _outOfCombatDamageManager.ManageDamageAtTheBeginningOfTheCombat(
+                _currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
         else
         {
-            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer2);
-            ApplyDamageAtTheBeginningOfTheCombat(_currentUnitOfPlayer1);
-        }
-        
-    }
-
-    private void ApplyDamageAtTheBeginningOfTheCombat(Unit unit)
-    {
-        if (unit.CombatEffects.DamageBeforeCombat > 0 )
-        {
-            if (unit.CurrentHp <= unit.CombatEffects.DamageBeforeCombat)
-            {
-                unit.CurrentHp = 1;
-            }
-            else
-            {
-                unit.CurrentHp -= unit.CombatEffects.DamageBeforeCombat;
-            }
-            _view.AnnounceDamageBeforeCombat(unit, 
-                unit.CombatEffects.DamageBeforeCombat);
+            _outOfCombatDamageManager.ManageDamageAtTheBeginningOfTheCombat(
+                _currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
     }
 
@@ -263,17 +252,17 @@ public class Game
         }
     }
 
-    private void ExecuteAtacksInOrder(Unit firstAtacker, Unit secondAtacker)
+    private void ExecuteAtacksInOrder(Unit firstAttacker, Unit secondAttacker)
     {
         _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
-            firstAtacker, 
-            secondAtacker);
+            firstAttacker, 
+            secondAttacker);
         _attackController.ChangeAttacker();
         if (IsTheDefensorAbleToCounterAttack())
         {
             _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
-                secondAtacker,
-                firstAtacker);
+                secondAttacker,
+                firstAttacker);
         }
         
     }
@@ -300,76 +289,6 @@ public class Game
             _followUpController.ManageFollowup(  
                 _currentUnitOfPlayer2, _currentUnitOfPlayer1,
                 IdOfPlayer2);
-        }
-    }
-    
-    private void ManageCurationAtTheEndOfTheCombat()
-    {
-        if (IsPlayer1TheRoundStarter())
-        {
-            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer1);
-            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer2);
-        }
-        else
-        {
-            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer2);
-            ApplyCurationAtTheEndOfTheCombat(_currentUnitOfPlayer1);
-        }
-        
-    }
-
-    private void ApplyCurationAtTheEndOfTheCombat(Unit unit)
-    {
-        if (unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat > 0 
-            && unit.CurrentHp > 0)
-        { 
-            if (unit.CurrentHp + unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat
-                > unit.HpMax)
-                unit.CurrentHp = unit.HpMax;
-            else
-            {
-                unit.CurrentHp += unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat;
-            }
-            _view.AnnounceCurationAfterCombat(unit, 
-                unit.CombatEffects.HpRecuperationAtTheEndOfTheCombat);
-        }
-    }
-
-
-    private void ManageDamageAtTheEndOfTheCombat()
-    {
-        if (IsPlayer1TheRoundStarter())
-        {
-            ApplyDamageAfterCombat(_currentUnitOfPlayer1);
-            ApplyDamageAfterCombat(_currentUnitOfPlayer2);
-        }
-        else
-        {
-            ApplyDamageAfterCombat(_currentUnitOfPlayer2);
-            ApplyDamageAfterCombat(_currentUnitOfPlayer1);
-        }
-        
- 
-    }
-
-    private void ApplyDamageAfterCombat(Unit unit)
-    {
-        if (unit.HasAttackedThisRound)
-            unit.CombatEffects.DamageAfterCombat
-                += unit.CombatEffects.DamageAfterCombatIfUnitAttacks;
-        
-        if (unit.CombatEffects.DamageAfterCombat > 0 && unit.CurrentHp > 0)
-        {
-            if (unit.CurrentHp <= unit.CombatEffects.DamageAfterCombat)
-            {
-                unit.CurrentHp = 1;
-            }
-            else
-            {
-                unit.CurrentHp -= unit.CombatEffects.DamageAfterCombat;
-            }
-            _view.AnnounceDamageAfterCombat(unit, 
-                unit.CombatEffects.DamageAfterCombat);
         }
     }
 
