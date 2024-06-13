@@ -13,14 +13,17 @@ public class TrueDragonWallSkill : Skill
 {
     public TrueDragonWallSkill()
     {
-        Conditions = new Condition[1];
+        Conditions = new Condition[3];
         Conditions[0] = new CompareTotalResCondition();
+        Conditions[1] = new CompareTotalResCondition();
+        Conditions[2] = new MyUnitHasAllyWithMagicCondition();
 
-        Effects = new Effect[1];
+        Effects = new Effect[3];
         Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
-             6, 0.6, DamageEffectCategory.All);
-        Effects[0] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
-            4, 0.4, DamageEffectCategory.FollowUp );
+             6, 0.4, DamageEffectCategory.FirstAttack);
+        Effects[1] = new PercentualDamageReductionDeterminedByResDifferenceEffect(
+            4, 0.6, DamageEffectCategory.FollowUp );
+        Effects[2] = new HealingAtTheEndOfTheCombatEffect(7);
     }
     
 }

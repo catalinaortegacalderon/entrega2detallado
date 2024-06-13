@@ -31,6 +31,7 @@ public class Unit
     public bool StartedTheRound;
     public bool IsAttacking;
     public bool HasAttackedThisRound;
+    public bool HasAnAllyWithMagic = false;
 
     public Unit()
     {

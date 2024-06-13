@@ -35,6 +35,8 @@ public class PercentualDamageReductionDeterminedByResDifferenceEffect : Effect
         
         if (_category == DamageEffectCategory.All)
             myUnit.DamageEffects.PercentageReduction *= redutionPercentage;
+        if (_category == DamageEffectCategory.FirstAttack)
+            myUnit.DamageEffects.PercentageReductionOpponentsFirstAttack *= redutionPercentage;
         if (_category == DamageEffectCategory.FollowUp)
             myUnit.DamageEffects.PercentageReductionOpponentsFollowup *= redutionPercentage;
     }

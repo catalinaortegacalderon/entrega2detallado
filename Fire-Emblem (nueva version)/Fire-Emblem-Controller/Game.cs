@@ -98,6 +98,7 @@ public class Game
         // todo: ACA SE MANEJA TODO
         GetAndSetPlayersChosenUnit();
         PrintRound();
+        CheckAlliesConditionsForSkills();
         //ManageCurationAtTheBeginningOfTheCombat(); tal vez esta y la de abajo pueden ir juntas en una funcion, tal vez parecida al end of combat
         InitializeRound();
         ManageDamageAtTheBeginningOfTheCombat(); 
@@ -151,7 +152,30 @@ public class Game
     {
         return IsPlayer1TheRoundStarter() ? _currentUnitOfPlayer1.Name : _currentUnitOfPlayer2.Name;
     }
-    
+
+    private void CheckAlliesConditionsForSkills()
+    {
+        CheckPlayerAlliesConditions(IdOfPlayer1);
+        CheckPlayerAlliesConditions(IdOfPlayer1);
+    }
+
+    private void CheckPlayerAlliesConditions(int playerId)
+    {
+        var players = _attackController.GetPlayers();
+        var player = players.GetPlayerById(playerId);
+        var unitsOfThePlayer = player.Units;
+        bool hasAllyWithMagic = false;
+        foreach (var unit in unitsOfThePlayer)
+        {
+            if (unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic)
+                hasAllyWithMagic = true;
+        }
+        foreach (var unit in unitsOfThePlayer)
+        {
+            unit.HasAnAllyWithMagic = hasAllyWithMagic;
+        }
+    }
+
     private void InitializeRound()
     {
         _attackController.InitializeRound(_currentUnitNumberOfPlayer1, 
