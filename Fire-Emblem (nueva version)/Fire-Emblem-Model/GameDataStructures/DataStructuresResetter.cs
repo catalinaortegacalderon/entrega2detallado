@@ -36,6 +36,7 @@ public static class DataStructuresResetter
         dataStructure.DamageAfterCombatIfUnitAttacks = 0;
         dataStructure.HpRecuperationAtTheEndOfTheCombat = 0;
         dataStructure.HasCounterAttackDenial = false;
+        dataStructure.AmountOfEffectsThatDenyFollowup = 0;
         dataStructure.HasNeutralizationOfCounterattackDenial = false;
         dataStructure.HasGuaranteedFollowUp = false;
         dataStructure.AmountOfEffectsThatGuaranteeFollowup = 0;

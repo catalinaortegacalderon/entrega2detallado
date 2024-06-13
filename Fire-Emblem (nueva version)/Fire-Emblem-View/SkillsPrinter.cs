@@ -128,8 +128,8 @@ public class SkillsPrinter
                            + " efecto(s) que garantiza(n) su follow up activo(s)");
         if (unit.CombatEffects.HasFollowUpDenial)
             // todo: revisar esto
-            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.HasGuaranteedFollowUp 
-                           + " efecto (s) que neutraliza (n) su follow up activo (s)");
+            view.WriteLine(unit.Name + " tiene " + unit.CombatEffects.AmountOfEffectsThatDenyFollowup 
+                           + " efecto(s) que neutraliza(n) su follow up activo(s)");
         if (unit.CombatEffects.HasDenialOfFollowUpDenial)
             view.WriteLine(unit.Name + " es inmune a los efectos que neutralizan su follow up");
         if (unit.CombatEffects.HasDenialOfGuaranteedFollowUp)

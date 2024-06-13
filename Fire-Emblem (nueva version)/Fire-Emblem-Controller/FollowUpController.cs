@@ -91,6 +91,7 @@ public class FollowUpController
 
     private bool CanDoAFollowup(Unit attackingUnit, Unit defensiveUnit)
     {
+        // revisar, followup denial, condicion, guaranteed...
         const int additionValueForFollowupCondition = 5;
         bool doesFollowupConditionHold =
             defensiveUnit.Spd
@@ -103,7 +104,8 @@ public class FollowUpController
         
         // todo: poner el statement de abajo mejor encapsulado
         return ThereAreNoLoosers() && (doesFollowupConditionHold 
-                                       || attackingUnit.CombatEffects.HasGuaranteedFollowUp);
+                                       || attackingUnit.CombatEffects.HasGuaranteedFollowUp) 
+                                    && !attackingUnit.CombatEffects.HasFollowUpDenial;
     }
 
     private bool ThereAreNoLoosers()
