@@ -200,14 +200,11 @@ public class GameAttacksController
 
     public void SetCurrentAttacker(int value)
     { 
-        Console.WriteLine("PASO POR SET CURRENT ATACKER");
         _currentAttackerId = value;
     }
 
     public void ChangeAttacker()
     {
-        Console.WriteLine("Paso por change atackker");
-        Console.WriteLine("atacker antes de cambairlo: " + _currentAttackerId);
         _currentAttackerId = _currentAttackerId == 0 ? 1 : 0;
     }
 

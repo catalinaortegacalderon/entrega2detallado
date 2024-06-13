@@ -7,6 +7,7 @@ public class GuaranteeFollowUpEffect: Effect
 {
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
+        Console.WriteLine("APLICANDO");
         myUnit.CombatEffects.HasGuaranteedFollowUp = true;
         myUnit.CombatEffects.AmountOfEffectsThatGuaranteeFollowup++;
     }

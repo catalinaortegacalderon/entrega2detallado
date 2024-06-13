@@ -10,7 +10,6 @@ public class QuickRiposteSkill: Skill
 {
     public QuickRiposteSkill()
     {
-        Console.WriteLine("creando");
         Conditions = new Condition[1];
         Conditions[0] = new AndCondition([new MyHpIsBiggerThanCondition(0.6), new OpponentStartsCombatCondition()]);
 

@@ -65,6 +65,17 @@ public class FollowUpController
         {
             _view.AnnounceNoUnitCanDoAFollowup();
         }
+        
+        // FIRST CHECK IF ROUND STARTED DID THE FOLLOWUP
+        if (CanDoAFollowup(unitThatStartedTheRound, unitThatDidNotStartTheRound) &&
+            _unitThatDidNotStartTheRound.CombatEffects.HasGuaranteedFollowUp)
+        {
+            Console.WriteLine("PASO POR AQUI");
+            _attackController.SetCurrentAttacker(_otherPlayersId);
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FollowUp, 
+                _unitThatDidNotStartTheRound, 
+                _unitThatStartedTheRound);
+        }
     }
     
     private bool AttackerCantDoFollowup()
