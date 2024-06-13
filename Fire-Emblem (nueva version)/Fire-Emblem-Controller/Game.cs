@@ -253,34 +253,29 @@ public class Game
 
     private void ExecuteAttacks()
     {
-        // todo: arreglar
         if (IsPlayer1TheRoundStarter())
         {
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
-                _currentUnitOfPlayer1, 
-                _currentUnitOfPlayer2);
-            _attackController.ChangeAttacker();
-            if (IsTheDefensorAbleToCounterAttack())
-            {
-                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
-                    _currentUnitOfPlayer2,
-                    _currentUnitOfPlayer1);
-            }
+            ExecuteAtacksInOrder(_currentUnitOfPlayer1, _currentUnitOfPlayer2);
         }
-
         else
         {
-            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
-                _currentUnitOfPlayer2, 
-                _currentUnitOfPlayer1);
-            _attackController.ChangeAttacker();
-            if (IsTheDefensorAbleToCounterAttack())
-            {
-                _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
-                    _currentUnitOfPlayer1,
-                    _currentUnitOfPlayer2);
-            }
+            ExecuteAtacksInOrder(_currentUnitOfPlayer2, _currentUnitOfPlayer1);
         }
+    }
+
+    private void ExecuteAtacksInOrder(Unit firstAtacker, Unit secondAtacker)
+    {
+        _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.FirstAttack, 
+            firstAtacker, 
+            secondAtacker);
+        _attackController.ChangeAttacker();
+        if (IsTheDefensorAbleToCounterAttack())
+        {
+            _attackController.GenerateAnAttackBetweenTwoUnits(AttackType.SecondAttack, 
+                secondAtacker,
+                firstAtacker);
+        }
+        
     }
 
     private bool IsTheDefensorAbleToCounterAttack()

@@ -147,8 +147,6 @@ public class GameAttacksController
     
     private void ReduceUnitAmount()
     {
-        Console.WriteLine("PASO POR REDUCE UNIT AMOUNT");
-        Console.WriteLine("_CURRENT ATACKER ID:"+ _currentAttackerId);
         var opponentPlayerId = _currentAttackerId == 0 ? 1 : 0;
         _players.GetPlayerById(opponentPlayerId).AmountOfUnits -= 1;
     }
