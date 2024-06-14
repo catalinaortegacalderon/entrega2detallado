@@ -7,6 +7,8 @@ public class MyUnitStartsCombatCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
+        Console.WriteLine(myUnit.Name);
+        Console.WriteLine("is atacking: " + myUnit.IsAttacking);
         return myUnit.IsAttacking;
     }
 }

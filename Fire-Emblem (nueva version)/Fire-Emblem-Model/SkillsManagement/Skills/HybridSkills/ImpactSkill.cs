@@ -12,14 +12,15 @@ public class ImpactSkill: Skill
 {
     public ImpactSkill(StatType firstStat, StatType secondStat)
     {
-        Conditions = new Condition[1];
+        Console.WriteLine("creando");
+        Conditions = new Condition[3];
         Conditions[0] = new MyUnitStartsCombatCondition();
-        Conditions[0] = new MyUnitStartsCombatCondition();
-        Conditions[0] = new MyUnitStartsCombatCondition();
+        Conditions[1] = new MyUnitStartsCombatCondition();
+        Conditions[2] = new MyUnitStartsCombatCondition();
 
-        Effects = new Effect[1];
+        Effects = new Effect[3];
         Effects[0] = new ChangeStatsInEffect(firstStat, 6);
-        Effects[0] = new ChangeStatsInEffect(secondStat, 10);
-        Effects[0] = new OpponentFollowUpDenialEffect();
+        Effects[1] = new ChangeStatsInEffect(secondStat, 10);
+        Effects[2] = new OpponentFollowUpDenialEffect();
     }
 }

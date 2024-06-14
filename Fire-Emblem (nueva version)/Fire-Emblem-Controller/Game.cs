@@ -193,13 +193,8 @@ public class Game
         bool hasAllyWithMagic = false;
         int counter = 0;
         
-        Console.WriteLine("players unit number :"+ playersUnitNumber);
         foreach (var unit in unitsOfThePlayer)
         {
-            Console.WriteLine(unit.Name);
-            Console.WriteLine(unit.Weapon);
-            Console.WriteLine("conter: "+counter);
-            Console.WriteLine(unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic  && counter != playersUnitNumber);
             if (unit.CurrentHp > 0 && unit.Weapon == Weapon.Magic  && counter != playersUnitNumber)
                 hasAllyWithMagic = true;
             counter++;

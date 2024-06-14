@@ -284,6 +284,8 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new MagNullFollowSkill());
         else if (SkillStringContainsCertainSkillType(skillString, "Impact"))
             CreateImpact(skillString, skillsCounter, skills);
+        else if (SkillStringContainsCertainSkillType(skillString, "Breaker"))
+            CreateBreaker(skillString, skillsCounter, skills);
         
     }
 
@@ -364,11 +366,15 @@ public class SkillConstructor
         
         var weapon = Weapon.Empty;
         var weaponString = skillString.Split(" ")[0];
-        if (weaponString == "Magic") weapon = Weapon.Magic;
-        if (weaponString == "Axe") weapon = Weapon.Axe;
-        if (weaponString == "Lance") weapon = Weapon.Lance;
-        if (weaponString == "Bow") weapon = Weapon.Bow;
-        if (weaponString == "Sword") weapon = Weapon.Sword;
+        weapon = weaponString switch
+        {
+            "Magic" => Weapon.Magic,
+            "Axe" => Weapon.Axe,
+            "Lance" => Weapon.Lance,
+            "Bow" => Weapon.Bow,
+            "Sword" => Weapon.Sword,
+            _ => weapon
+        };
         skills.AddSkill(skillsCounter, new Guard(weapon));
     }
     
@@ -377,18 +383,40 @@ public class SkillConstructor
         var impactType = skillString.Split(" ")[0];
         Skill skill = new EmptySkill();
 
-        if (impactType == "Sturdy")
-            skill = new ImpactSkill(StatType.Atk, StatType.Def);
-        if (impactType == "Mirror")
+        switch (impactType)
         {
-            Console.WriteLine("probando");
-            skill = new ImpactSkill(StatType.Atk, StatType.Res);
+            case "Sturdy":
+                skill = new ImpactSkill(StatType.Atk, StatType.Def);
+                break;
+            case "Mirror":
+                skill = new ImpactSkill(StatType.Atk, StatType.Res);
+                break;
+            case "Swift":
+                skill = new ImpactSkill(StatType.Spd, StatType.Res);
+                break;
+            case "Steady":
+                skill = new ImpactSkill(StatType.Spd, StatType.Def);
+                break;
         }
-        if (impactType == "Swift")
-            skill = new ImpactSkill(StatType.Spd, StatType.Res);
-        if (impactType == "Steady")
-            skill = new ImpactSkill(StatType.Spd, StatType.Def);
-        
+
+        skills.AddSkill(skillsCounter, skill);
+    }
+    
+    private static void CreateBreaker(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var impactType = skillString.Split(" ")[0];
+        Skill skill = new EmptySkill();
+
+        switch (impactType)
+        {
+            case "Melee":
+                skill = new BreakerSkill([Weapon.Sword, Weapon.Lance, Weapon.Axe]);
+                break;
+            case "Range":
+                skill = new BreakerSkill([Weapon.Magic, Weapon.Bow]);
+                break;
+        }
+
         skills.AddSkill(skillsCounter, skill);
     }
 
