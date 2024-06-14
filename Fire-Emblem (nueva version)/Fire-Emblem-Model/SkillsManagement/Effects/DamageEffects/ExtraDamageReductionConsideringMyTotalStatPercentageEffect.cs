@@ -23,25 +23,19 @@ public class ExtraDamageReductionConsideringMyTotalStatPercentageEffect : Effect
     
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
     {
-        var amount = 0;
-        
-        if (_stat == StatType.Res)
-            amount =
-                myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizer.Res
-                                  + myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralizer.Res;
-        if (_stat == StatType.Atk)
-            amount =
-                myUnit.Atk + myUnit.ActiveBonus.Atk * myUnit.ActiveBonusNeutralizer.Atk
-                                  + myUnit.ActivePenalties.Atk * myUnit.ActivePenaltiesNeutralizer.Atk;
-        if (_stat == StatType.Def)
-            amount =
-                myUnit.Res + myUnit.ActiveBonus.Def * myUnit.ActiveBonusNeutralizer.Def
-                                  + myUnit.ActivePenalties.Def * myUnit.ActivePenaltiesNeutralizer.Def;
-        if (_stat == StatType.Spd)
-            amount =
-                myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd
-                                  + myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizer.Spd;
-        
+        var amount = _stat switch
+        {
+            StatType.Res => myUnit.Res + myUnit.ActiveBonus.Res * myUnit.ActiveBonusNeutralizer.Res +
+                            myUnit.ActivePenalties.Res * myUnit.ActivePenaltiesNeutralizer.Res,
+            StatType.Atk => myUnit.Atk + myUnit.ActiveBonus.Atk * myUnit.ActiveBonusNeutralizer.Atk +
+                            myUnit.ActivePenalties.Atk * myUnit.ActivePenaltiesNeutralizer.Atk,
+            StatType.Def => myUnit.Def + myUnit.ActiveBonus.Def * myUnit.ActiveBonusNeutralizer.Def +
+                            myUnit.ActivePenalties.Def * myUnit.ActivePenaltiesNeutralizer.Def,
+            StatType.Spd => myUnit.Spd + myUnit.ActiveBonus.Spd * myUnit.ActiveBonusNeutralizer.Spd +
+                            myUnit.ActivePenalties.Spd * myUnit.ActivePenaltiesNeutralizer.Spd,
+            _ => 0
+        };
+
         amount = Convert.ToInt32(Math.Truncate(amount * _percentage));
         
         

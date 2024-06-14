@@ -7,6 +7,7 @@ public class MyUnitHasAllyWithMagicCondition : Condition
 {
     public override bool DoesItHold(Unit myUnit, Unit opponentsUnit)
     {
+        Console.WriteLine(myUnit.HasAnAllyWithMagic);
         return myUnit.HasAnAllyWithMagic;
     }
 }
