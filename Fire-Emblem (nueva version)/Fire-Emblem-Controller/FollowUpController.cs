@@ -57,7 +57,8 @@ public class FollowUpController
                 _unitThatDidNotStartTheRound, 
                 _unitThatStartedTheRound);
         }
-        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound))
+        else if ( AttackerCantDoFollowup() && !CanASpecificPlayerCounterAttack(unitThatDidNotStartTheRound)
+                 && ThereAreNoLoosers())
         { 
             _view.AnnounceASpecificUnitCantDoAFollowup(unitThatStartedTheRound.Name);
         }

@@ -380,8 +380,10 @@ public class SkillConstructor
         if (impactType == "Sturdy")
             skill = new ImpactSkill(StatType.Atk, StatType.Def);
         if (impactType == "Mirror")
+        {
             Console.WriteLine("probando");
             skill = new ImpactSkill(StatType.Atk, StatType.Res);
+        }
         if (impactType == "Swift")
             skill = new ImpactSkill(StatType.Spd, StatType.Res);
         if (impactType == "Steady")
