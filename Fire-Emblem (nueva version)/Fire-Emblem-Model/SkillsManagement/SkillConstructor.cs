@@ -294,6 +294,12 @@ public class SkillConstructor
             skills.AddSkill(skillsCounter, new WilyFighterSkill());
         else if (skillString == "Savvy Fighter")
             skills.AddSkill(skillsCounter, new SavyFighterSkill());
+        else if (skillString == "Flow Force")
+                    skills.AddSkill(skillsCounter, new FlowForceSkill());
+        else if (skillString == "Flow Refresh")
+            skills.AddSkill(skillsCounter, new FlowRefreshSkill());
+        else if (skillString == "Flow Feather")
+            skills.AddSkill(skillsCounter, new FlowFeatherSkill());
         
     }
 
