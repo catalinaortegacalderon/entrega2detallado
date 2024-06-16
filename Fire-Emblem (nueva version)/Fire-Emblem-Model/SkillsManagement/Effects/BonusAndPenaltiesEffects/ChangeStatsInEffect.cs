@@ -17,33 +17,40 @@ public class ChangeStatsInEffect : Effect
     public override void ApplyEffect(Unit myUnit, Unit opponentsUnit)
 
     {
-        if (_stat == StatType.Atk)
+        switch (_stat)
         {
-            if (Amount > 0) 
-                myUnit.ActiveBonus.Atk += Amount;
-            if (Amount < 0) 
-                myUnit.ActivePenalties.Atk += Amount;
-        }
-        else if (_stat == StatType.Def)
-        {
-            if (Amount > 0) 
-                myUnit.ActiveBonus.Def += Amount;
-            if (Amount < 0) 
-                myUnit.ActivePenalties.Def += Amount;
-        }
-        else if (_stat == StatType.Res)
-        {
-            if (Amount > 0) 
-                myUnit.ActiveBonus.Res += Amount;
-            if (Amount < 0) 
-                myUnit.ActivePenalties.Res += Amount;
-        }
-        else if (_stat == StatType.Spd)
-        {
-            if (Amount > 0) 
-                myUnit.ActiveBonus.Spd += Amount;
-            if (Amount < 0) 
-                myUnit.ActivePenalties.Spd += Amount;
+            case StatType.Atk:
+            {
+                if (Amount > 0) 
+                    myUnit.ActiveBonus.Atk += Amount;
+                if (Amount < 0) 
+                    myUnit.ActivePenalties.Atk += Amount;
+                break;
+            }
+            case StatType.Def:
+            {
+                if (Amount > 0) 
+                    myUnit.ActiveBonus.Def += Amount;
+                if (Amount < 0) 
+                    myUnit.ActivePenalties.Def += Amount;
+                break;
+            }
+            case StatType.Res:
+            {
+                if (Amount > 0) 
+                    myUnit.ActiveBonus.Res += Amount;
+                if (Amount < 0) 
+                    myUnit.ActivePenalties.Res += Amount;
+                break;
+            }
+            case StatType.Spd:
+            {
+                if (Amount > 0) 
+                    myUnit.ActiveBonus.Spd += Amount;
+                if (Amount < 0) 
+                    myUnit.ActivePenalties.Spd += Amount;
+                break;
+            }
         }
     }
 }

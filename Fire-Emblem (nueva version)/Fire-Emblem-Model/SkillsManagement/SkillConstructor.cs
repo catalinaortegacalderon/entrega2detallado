@@ -286,6 +286,8 @@ public class SkillConstructor
             CreateImpact(skillString, skillsCounter, skills);
         else if (SkillStringContainsCertainSkillType(skillString, "Breaker"))
             CreateBreaker(skillString, skillsCounter, skills);
+        else if (SkillStringContainsCertainSkillType(skillString, "Flight"))
+            CreateFlight(skillString, skillsCounter, skills);
         
     }
 
@@ -417,6 +419,26 @@ public class SkillConstructor
                 break;
         }
 
+        skills.AddSkill(skillsCounter, skill);
+    }
+    
+    // todo: arreglar orden
+    
+    private static void CreateFlight(string skillString, int skillsCounter, SkillsList skills)
+    {
+        var flightType = skillString.Split(" ")[0];
+        Skill skill = new EmptySkill();
+
+        switch (flightType)
+        {
+            case "Pegasus":
+                skill = new FlightSkill(StatType.Res);
+                break;
+            case "Wyvern":
+                skill = new FlightSkill(StatType.Def);
+                break;
+        }
+        
         skills.AddSkill(skillsCounter, skill);
     }
 
