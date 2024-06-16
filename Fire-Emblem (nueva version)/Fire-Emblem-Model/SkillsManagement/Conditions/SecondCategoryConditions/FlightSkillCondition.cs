@@ -4,10 +4,10 @@ using Fire_Emblem;
 
 namespace ConsoleApp1.SkillsManagement.Conditions.SecondCategoryConditions;
 
-public class PegasusFlightSkillCondition : SecondCategoryCondition
+public class FlightSkillCondition : SecondCategoryCondition
 {
     private readonly StatType _referenceStat;
-    public PegasusFlightSkillCondition(StatType referenceStat)
+    public FlightSkillCondition(StatType referenceStat)
     {
         _referenceStat = referenceStat;
     }

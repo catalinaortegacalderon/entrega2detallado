@@ -19,7 +19,7 @@ public class FlightSkill : Skill
         Conditions[2] = new CompareBaseStatsMinusAmountCondition(StatType.Spd, 10);
         Conditions[3] = new CompareBaseStatsMinusAmountCondition(StatType.Spd, 10);
         Conditions[4] = new AndCondition([
-            new PegasusFlightSkillCondition(referenceStat),
+            new FlightSkillCondition(referenceStat),
             new CompareBaseStatsMinusAmountCondition(StatType.Spd, 10)
         ]);
         
@@ -27,9 +27,9 @@ public class FlightSkill : Skill
         Effects = new Effect[5];
         Effects[0] = new ChangeOpponentsStatsInEffect(StatType.Atk, -4);
         Effects[1] = new ChangeOpponentsStatsInEffect(StatType.Def, -4);
-        Effects[2] = new ChangeOpponentsStatsInBaseStatDifferencePercentajeEffect(StatType.Def, 0.8,
+        Effects[2] = new ChangeOpponentsStatsInBaseStatDifferencePercentageEffect(StatType.Def, 0.8,
             referenceStat);
-        Effects[3] = new ChangeOpponentsStatsInBaseStatDifferencePercentajeEffect(StatType.Atk, 0.8,
+        Effects[3] = new ChangeOpponentsStatsInBaseStatDifferencePercentageEffect(StatType.Atk, 0.8,
             referenceStat);
         Effects[4] = new OpponentFollowUpDenialEffect();
     }
