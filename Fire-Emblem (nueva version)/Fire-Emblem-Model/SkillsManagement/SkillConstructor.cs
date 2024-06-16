@@ -288,6 +288,12 @@ public class SkillConstructor
             CreateBreaker(skillString, skillsCounter, skills);
         else if (SkillStringContainsCertainSkillType(skillString, "Flight"))
             CreateFlight(skillString, skillsCounter, skills);
+        else if (skillString == "Slick Fighter")
+            skills.AddSkill(skillsCounter, new SlickFighterSkill());
+        else if (skillString == "Wily Fighter")
+            skills.AddSkill(skillsCounter, new WilyFighterSkill());
+        else if (skillString == "Savvy Fighter")
+            skills.AddSkill(skillsCounter, new SavyFighterSkill());
         
     }
 
