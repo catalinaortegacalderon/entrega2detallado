@@ -4,10 +4,10 @@ using ConsoleApp1.GameDataStructures;
 
 namespace ConsoleApp1.SkillsManagement.Effects.SpecificSkillEffects;
 
-public class DivineRecreationEffect : Effect
+public class BrashAssaultEffect : Effect
 {
     private double _percentage;
-    public DivineRecreationEffect(double percentage)
+    public BrashAssaultEffect(double percentage)
     {
         _percentage = percentage;
     }
@@ -18,9 +18,8 @@ public class DivineRecreationEffect : Effect
             AttackType.FirstAttack);
 
         double initialDamage = calculator.CalculateAttackForDivineRecreation();
-        var finalDamage = calculator.CalculateAttack();
 
-        var amount = (int)((initialDamage - finalDamage) * _percentage);
+        var amount = (int)((initialDamage) * _percentage);
 
         if (myUnit.StartedTheRound)
             myUnit.DamageEffects.ExtraDamageFollowup += amount;

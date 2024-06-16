@@ -26,6 +26,6 @@ public class DivineRecreationSkill : Skill
         Effects[2] = new ChangeOpponentsStatsInEffect(StatType.Atk, -4);
         Effects[3] = new ChangeOpponentsStatsInEffect(StatType.Res, -4);
         Effects[4] = new PercentualDamageReductionEffect(0.7, DamageEffectCategory.FirstAttack);
-        Effects[5] = new DivineRecreationEffect();
+        Effects[5] = new DivineRecreationEffect(1);
     }
 }

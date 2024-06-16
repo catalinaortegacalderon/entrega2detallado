@@ -19,15 +19,18 @@ public class ConditionEffectPair : IEnumerable
         OpponentsUnit = opponentsUnit;
         Condition = skill.GetCondition(pairIndex);
         Effect = skill.GetEffect(pairIndex);
-        ManageDivineRecreationsSpecialCase();
+        ManageDivineRecreationsOrBrashAssaultSpecialCase();
     }
 
-    private void ManageDivineRecreationsSpecialCase()
+    private void ManageDivineRecreationsOrBrashAssaultSpecialCase()
     {
-        if (Effect is DivineRecreationEffect && UnitThatHasThePair.StartedTheRound)
+        // todo: encapsular
+        if ((Effect is DivineRecreationEffect || Effect is BrashAssaultEffect)
+            && UnitThatHasThePair.StartedTheRound)
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
                 .PriorityOfDivineRecreationWhenUnitBeginsCombat);
-        if (Effect is DivineRecreationEffect && OpponentsUnit.StartedTheRound)
+        if ((Effect is DivineRecreationEffect || Effect is BrashAssaultEffect)
+            && OpponentsUnit.StartedTheRound)
             Condition.ChangePriorityBecauseEffectPriorityIsBigger(ConditionPriority
                 .PriorityOfDivineRecreationWhenOpponentBeginsCombat);
     }
